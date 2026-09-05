@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAP 06.017 — Alteração de Exercício para Composição da Força de Trabalho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#1F3A2E;
+    --primary-dark:#122019;
+    --olive:#6B7A4F;
+    --gold:#C9A227;
+    --gold-light:#E4C765;
+    --bg:#FBFBF8;
+    --card:#F3F4EE;
+    --card-line:#E1E3D8;
+    --text:#20261F;
+    --muted:#5C6659;
+    --danger:#A6382F;
+    --danger-bg:#FBEFEC;
+    --danger-line:#E9CCC4;
+    --serif:'Lora', Georgia, serif;
+    --sans:'Inter', -apple-system, 'Segoe UI', Arial, sans-serif;
+    --mono:'JetBrains Mono', 'Courier New', monospace;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text); font-family:var(--sans);
+    font-size:16px; line-height:1.6;
+  }
+  a{color:inherit;}
+  ::selection{ background:var(--gold-light); color:var(--primary-dark); }
+
+  /* ---------- Focus visibility ---------- */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--gold); outline-offset:2px; border-radius:4px;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:60px; z-index:100;
+    background:var(--primary-dark); color:#fff; display:flex; align-items:center;
+    justify-content:space-between; padding:0 18px; box-shadow:0 2px 14px rgba(0,0,0,.18);
+  }
+  .topbar .brand{ display:flex; align-items:center; gap:10px; font-family:var(--serif); font-weight:600; font-size:1.02rem; }
+  .topbar .brand .tag{
+    font-family:var(--mono); font-size:.68rem; color:var(--gold); border:1px solid rgba(201,162,39,.55);
+    padding:2px 7px; border-radius:20px; letter-spacing:.06em;
+  }
+  .topbar a.home-link{ text-decoration:none; color:#fff; display:flex; align-items:center; gap:10px; }
+  .menu-btn{
+    display:none; background:none; border:1px solid rgba(255,255,255,.25); color:#fff;
+    width:38px; height:38px; border-radius:8px; cursor:pointer; font-size:1.1rem;
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{ display:flex; margin-top:60px; align-items:flex-start; }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width:296px; flex:none; position:sticky; top:60px; height:calc(100vh - 60px);
+    overflow-y:auto; background:#fff; border-right:1px solid var(--card-line);
+    padding:22px 14px 40px;
+  }
+  .sidebar::-webkit-scrollbar{ width:8px; }
+  .sidebar::-webkit-scrollbar-thumb{ background:var(--card-line); border-radius:8px; }
+
+  .side-group{ margin-bottom:20px; }
+  .side-group h4{
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 8px 10px; font-weight:700;
+  }
+  .side-group a{
+    display:flex; gap:10px; align-items:baseline; text-decoration:none; color:var(--text);
+    padding:7px 10px; border-radius:8px; font-size:.88rem; line-height:1.3;
+  }
+  .side-group a .n{ font-family:var(--mono); color:var(--olive); font-size:.78rem; flex:none; width:28px; }
+  .side-group a:hover{ background:var(--card); }
+  .side-group a.active{ background:var(--primary); color:#fff; }
+  .side-group a.active .n{ color:var(--gold); }
+  .side-group a.sub{ padding-left:22px; font-size:.83rem; color:var(--muted); }
+  .side-group a.sub .n{ width:22px; }
+  .side-group a.sub.active{ color:#fff; }
+
+  /* ---------- Main content ---------- */
+  main{ flex:1; min-width:0; }
+
+  /* ---------- Cover / Home ---------- */
+  .cover{
+    background:
+      radial-gradient(ellipse 700px 500px at 90% -10%, rgba(107,122,79,.35), transparent 60%),
+      radial-gradient(ellipse 500px 400px at -5% 105%, rgba(201,162,39,.12), transparent 60%),
+      var(--primary-dark);
+    color:#fff; padding:70px 8vw 60px; position:relative; overflow:hidden;
+  }
+  .cover .eyebrow{
+    font-family:var(--mono); color:var(--gold); letter-spacing:.18em; font-size:.78rem;
+    text-transform:uppercase; margin-bottom:18px;
+  }
+  .cover h1{
+    font-family:var(--serif); font-size:clamp(2rem, 4.2vw, 3.4rem); line-height:1.08; margin:0 0 18px;
+    font-weight:700; max-width:820px;
+  }
+  .cover p.lead{
+    max-width:640px; color:#D7DECB; font-size:1.08rem; margin:0 0 34px; line-height:1.55;
+  }
+  .cover .meta{ display:flex; gap:28px; flex-wrap:wrap; font-size:.85rem; color:#A9B49B; }
+  .cover .meta strong{ color:#fff; display:block; font-size:.98rem; font-family:var(--serif); }
+
+  /* ---------- Índice (signature element: dotted leader TOC) ---------- */
+  .toc-wrap{ padding:54px 8vw 20px; }
+  .toc-wrap h2{
+    font-family:var(--serif); font-size:1.7rem; margin:0 0 6px; color:var(--primary);
+  }
+  .toc-wrap .sub{ color:var(--muted); margin:0 0 30px; font-size:.95rem; }
+
+  .toc-columns{ display:grid; grid-template-columns:1fr 1fr; gap:0 56px; }
+  .toc-block{ margin-bottom:26px; break-inside:avoid; }
+  .toc-block h3{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--olive); margin:0 0 10px; border-bottom:1px solid var(--card-line); padding-bottom:8px;
+  }
+  .toc-line{
+    display:flex; align-items:baseline; gap:8px; text-decoration:none; color:var(--text);
+    padding:6px 2px; font-size:.96rem;
+  }
+  .toc-line .num{ font-family:var(--mono); color:var(--olive); flex:none; width:30px; font-size:.85rem; }
+  .toc-line .label{ white-space:nowrap; flex:none; }
+  .toc-line .dots{ flex:1; border-bottom:1.5px dotted #C7CBBB; transform:translateY(-4px); margin:0 4px; }
+  .toc-line .pg{ font-family:var(--mono); color:var(--muted); font-size:.82rem; flex:none; }
+  .toc-line:hover .label{ color:var(--primary); text-decoration:underline; text-underline-offset:3px; }
+  .toc-line:hover .pg{ color:var(--gold-light-text,var(--olive)); }
+
+  /* ---------- Legislation quick-links ---------- */
+  .legis-wrap{ padding:10px 8vw 60px; }
+  .legis-wrap h2{ font-family:var(--serif); font-size:1.5rem; color:var(--primary); margin:0 0 6px;}
+  .legis-wrap .sub{ color:var(--muted); margin:0 0 22px; font-size:.92rem; }
+  .legis-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:14px; }
+  .legis-card{
+    display:block; text-decoration:none; background:var(--card); border:1px solid var(--card-line);
+    border-radius:var(--radius); padding:16px 18px; color:var(--text); transition:box-shadow .15s, transform .15s;
+  }
+  .legis-card:hover{ box-shadow:0 8px 22px rgba(31,58,46,.12); transform:translateY(-2px); }
+  .legis-card .lt{ font-family:var(--serif); font-weight:600; color:var(--primary); font-size:1.02rem; margin-bottom:4px; }
+  .legis-card .ld{ font-size:.83rem; color:var(--muted); }
+  .legis-card .lu{ margin-top:10px; font-family:var(--mono); font-size:.72rem; color:var(--olive); }
+  .legis-card .lu::after{ content:" ↗"; }
+
+  /* ---------- Content sections ---------- */
+  .chapter{ padding:56px 8vw; border-top:1px solid var(--card-line); scroll-margin-top:72px; }
+  .chapter:nth-of-type(odd){ background:#fff; }
+  .chapter .kicker{
+    font-family:var(--mono); font-size:.75rem; letter-spacing:.1em; color:var(--olive);
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .chapter h2{
+    font-family:var(--serif); font-size:clamp(1.4rem,2.4vw,2rem); color:var(--primary); margin:0 0 8px;
+  }
+  .chapter .dek{ color:var(--muted); font-size:1rem; margin:0 0 28px; max-width:760px; }
+  .chapter h3.sub-h{
+    font-family:var(--serif); font-size:1.15rem; color:var(--primary); margin:32px 0 14px;
+  }
+
+  .prose{ max-width:820px; }
+  .prose p{ margin:0 0 14px; }
+
+  .callout{
+    display:flex; gap:14px; background:var(--card); border:1px solid var(--card-line);
+    border-radius:var(--radius); padding:16px 18px; margin:18px 0; max-width:820px;
+  }
+  .callout.warn{ background:#FDF6E8; border-color:#EDDDA8; }
+  .callout.danger{ background:var(--danger-bg); border-color:var(--danger-line); }
+  .callout .ic{ font-size:1.2rem; flex:none; }
+  .callout .body strong{ display:block; margin-bottom:3px; color:var(--primary); }
+  .callout.danger .body strong{ color:var(--danger); }
+  .callout p{ margin:0; font-size:.94rem; }
+
+  ul.clean{ margin:0 0 16px; padding:0; list-style:none; max-width:820px; }
+  ul.clean li{
+    position:relative; padding:8px 0 8px 24px; font-size:.96rem; border-bottom:1px dashed var(--card-line);
+  }
+  ul.clean li:last-child{ border-bottom:none; }
+  ul.clean li::before{ content:"▪"; position:absolute; left:0; color:var(--gold); top:9px; font-size:.7rem; }
+
+  ol.steps{ margin:0; padding:0; list-style:none; max-width:820px; counter-reset:step; }
+  ol.steps li{
+    counter-increment:step; position:relative; padding:12px 0 12px 46px; border-bottom:1px solid var(--card-line);
+  }
+  ol.steps li:last-child{ border-bottom:none; }
+  ol.steps li::before{
+    content:counter(step); position:absolute; left:0; top:10px; width:30px; height:30px;
+    background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:.82rem; font-weight:700;
+  }
+  ol.steps li strong{ display:block; color:var(--primary); font-family:var(--serif); font-size:1rem; margin-bottom:2px; }
+  ol.steps li span{ font-size:.9rem; color:var(--text); }
+
+  /* card grid for modalidades/prazos */
+  .grid3{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; max-width:1000px; margin:8px 0 20px; }
+  .cardbox{ background:var(--card); border:1px solid var(--card-line); border-radius:var(--radius); padding:18px 20px; }
+  .cardbox h4{ font-family:var(--serif); color:var(--primary); margin:0 0 8px; font-size:1.05rem; }
+  .cardbox p{ margin:0; font-size:.9rem; color:var(--text); }
+  .cardbox .badge{
+    display:inline-block; font-family:var(--mono); font-size:.68rem; color:#fff; background:var(--olive);
+    padding:2px 9px; border-radius:20px; margin-bottom:10px; letter-spacing:.05em;
+  }
+
+  table.doctable{ width:100%; max-width:1000px; border-collapse:collapse; margin:10px 0 24px; font-size:.88rem; }
+  table.doctable th{
+    background:var(--primary); color:#fff; text-align:left; padding:10px 14px; font-family:var(--serif);
+    font-weight:600; font-size:.88rem;
+  }
+  table.doctable td{ padding:10px 14px; border-bottom:1px solid var(--card-line); vertical-align:top; }
+  table.doctable tr:nth-child(even) td{ background:var(--card); }
+
+  .backlink{
+    display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--olive);
+    font-family:var(--mono); font-size:.78rem; margin-top:30px;
+  }
+  .backlink:hover{ color:var(--primary); }
+
+  .anexo-list{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; max-width:1000px; }
+  .anexo-card{ background:var(--card); border:1px solid var(--card-line); border-radius:var(--radius); padding:18px; }
+  .anexo-card .let{ font-family:var(--mono); color:var(--gold); font-weight:700; font-size:.85rem; }
+  .anexo-card h4{ font-family:var(--serif); color:var(--primary); margin:6px 0; font-size:1.02rem; }
+  .anexo-card p{ margin:0; font-size:.88rem; color:var(--muted); }
+
+  footer{
+    background:var(--primary-dark); color:#A9B49B; padding:34px 8vw; font-size:.85rem;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+  footer a{ color:var(--gold); text-decoration:none; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width:900px){
+    .menu-btn{ display:block; }
+    .sidebar{
+      position:fixed; left:0; top:60px; height:calc(100vh - 60px); z-index:90;
+      transform:translateX(-105%); transition:transform .22s ease; box-shadow:8px 0 24px rgba(0,0,0,.18);
+    }
+    .sidebar.open{ transform:translateX(0); }
+    .toc-columns{ grid-template-columns:1fr; }
+    .chapter, .toc-wrap, .legis-wrap, .cover{ padding-left:6vw; padding-right:6vw; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="#inicio" class="home-link">
+    <span class="brand">Caderno de Orientação DAP <span class="tag">06.017</span></span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="side-group">
+      <h4>Início</h4>
+      <a href="#inicio" data-nav><span class="n">＃</span>Índice geral</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Fundamentos</h4>
+      <a href="#legislacao" data-nav><span class="n">01</span>Legislação Básica</a>
+      <a href="#conceito" data-nav><span class="n">02</span>Conceitos e Características</a>
+      <a href="#direitos" data-nav><span class="n">03</span>Direitos e Vantagens</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Modalidades e Prazos</h4>
+      <a href="#modalidades" data-nav><span class="n">04</span>Modalidades de Movimentação</a>
+      <a href="#prazos" data-nav><span class="n">05</span>Prazos</a>
+      <a href="#impedimentos" data-nav><span class="n">06</span>Impedimentos</a>
+      <a href="#remuneracao" data-nav><span class="n">07</span>Remuneração e Reembolso</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Procedimentos</h4>
+      <a href="#requisitos-ic" data-nav><span class="n">08</span>Requisitos — Indicação Consensual</a>
+      <a href="#requisitos-rp" data-nav><span class="n">09</span>Requisitos — Realocação de Pessoal</a>
+      <a href="#dispensa" data-nav><span class="n">10</span>Dispensa das Modalidades</a>
+      <a href="#proporcionalidade" data-nav><span class="n">11</span>Da Proporcionalidade</a>
+      <a href="#edital" data-nav><span class="n">12</span>Do Edital</a>
+      <a href="#documentos" data-nav><span class="n">13</span>Documentos Necessários</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Tramitação</h4>
+      <a href="#tram-ic" data-nav><span class="n">14</span>Indicação Consensual</a>
+      <a href="#tram-rp" data-nav><span class="n">15</span>Realocação de Pessoal</a>
+      <a href="#tram-dm" data-nav><span class="n">16</span>Dispensa de Modalidade</a>
+    </div>
+
+    <div class="side-group">
+      <h4>Referência</h4>
+      <a href="#anexos" data-nav><span class="n">＋</span>Anexos A, B e C</a>
+      <a href="#fontes" data-nav><span class="n">🔗</span>Legislação e Fontes</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ============ HOME / COVER ============ -->
+    <section id="inicio" class="cover">
+      <div class="eyebrow">Sistema de Pessoal Civil · Exército Brasileiro</div>
+      <h1>Movimentação do Servidor: Alteração de Exercício para Composição da Força de Trabalho</h1>
+      <p class="lead">Aplicação de referência e navegação para o Caderno de Orientação DAP&nbsp;06.017 — organizada por capítulo, com acesso direto às seções do documento e à legislação citada.</p>
+      <div class="meta">
+        <div><strong>Elaboração</strong>Assessoria Técnica da SPC/DAP</div>
+        <div><strong>Publicação</strong>Maio de 2024</div>
+        <div><strong>Capítulos</strong>16 + Anexos</div>
+      </div>
+    </section>
+
+    <!-- ============ ÍNDICE (TOC) ============ -->
+    <section class="toc-wrap">
+      <h2>Índice</h2>
+      <p class="sub">Clique em qualquer item para ir direto à seção correspondente do caderno.</p>
+
+      <div class="toc-columns">
+        <div>
+          <div class="toc-block">
+            <h3>Fundamentos</h3>
+            <a class="toc-line" href="#legislacao"><span class="num">01</span><span class="label">Legislação Básica</span><span class="dots"></span><span class="pg">§1</span></a>
+            <a class="toc-line" href="#conceito"><span class="num">02</span><span class="label">Conceitos e Características</span><span class="dots"></span><span class="pg">§2</span></a>
+            <a class="toc-line" href="#direitos"><span class="num">03</span><span class="label">Direitos e Vantagens</span><span class="dots"></span><span class="pg">§3</span></a>
+          </div>
+          <div class="toc-block">
+            <h3>Modalidades e Prazos</h3>
+            <a class="toc-line" href="#modalidades"><span class="num">04</span><span class="label">Modalidades de Movimentação</span><span class="dots"></span><span class="pg">§4</span></a>
+            <a class="toc-line" href="#prazos"><span class="num">05</span><span class="label">Prazos</span><span class="dots"></span><span class="pg">§5</span></a>
+            <a class="toc-line" href="#impedimentos"><span class="num">06</span><span class="label">Impedimentos</span><span class="dots"></span><span class="pg">§6</span></a>
+            <a class="toc-line" href="#remuneracao"><span class="num">07</span><span class="label">Remuneração e Reembolso</span><span class="dots"></span><span class="pg">§7</span></a>
+          </div>
+        </div>
+        <div>
+          <div class="toc-block">
+            <h3>Procedimentos</h3>
+            <a class="toc-line" href="#requisitos-ic"><span class="num">08</span><span class="label">Requisitos — Indicação Consensual</span><span class="dots"></span><span class="pg">§8</span></a>
+            <a class="toc-line" href="#requisitos-rp"><span class="num">09</span><span class="label">Requisitos — Realocação de Pessoal</span><span class="dots"></span><span class="pg">§9</span></a>
+            <a class="toc-line" href="#dispensa"><span class="num">10</span><span class="label">Dispensa das Modalidades</span><span class="dots"></span><span class="pg">§10</span></a>
+            <a class="toc-line" href="#proporcionalidade"><span class="num">11</span><span class="label">Da Proporcionalidade</span><span class="dots"></span><span class="pg">§11</span></a>
+            <a class="toc-line" href="#edital"><span class="num">12</span><span class="label">Do Edital</span><span class="dots"></span><span class="pg">§12</span></a>
+            <a class="toc-line" href="#documentos"><span class="num">13</span><span class="label">Documentos Necessários</span><span class="dots"></span><span class="pg">§13</span></a>
+          </div>
+          <div class="toc-block">
+            <h3>Tramitação</h3>
+            <a class="toc-line" href="#tram-ic"><span class="num">14</span><span class="label">Tram. — Indicação Consensual</span><span class="dots"></span><span class="pg">§14</span></a>
+            <a class="toc-line" href="#tram-rp"><span class="num">15</span><span class="label">Tram. — Realocação de Pessoal</span><span class="dots"></span><span class="pg">§15</span></a>
+            <a class="toc-line" href="#tram-dm"><span class="num">16</span><span class="label">Tram. — Dispensa de Modalidade</span><span class="dots"></span><span class="pg">§16</span></a>
+          </div>
+          <div class="toc-block">
+            <h3>Referência</h3>
+            <a class="toc-line" href="#anexos"><span class="num">＋</span><span class="label">Anexos A, B e C</span><span class="dots"></span><span class="pg">Anexos</span></a>
+            <a class="toc-line" href="#fontes"><span class="num">🔗</span><span class="label">Legislação e Fontes</span><span class="dots"></span><span class="pg">Fontes</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LEGISLATION QUICK LINKS ============ -->
+    <section class="legis-wrap">
+      <h2>Legislação citada neste caderno</h2>
+      <p class="sub">Links diretos para o texto oficial de cada norma referenciada.</p>
+      <div class="legis-grid">
+        <a class="legis-card" href="https://www.planalto.gov.br/ccivil_03/leis/l8112compilado.htm" target="_blank" rel="noopener">
+          <div class="lt">Lei nº 8.112/1990</div>
+          <div class="ld">Regime Jurídico dos Servidores Públicos Civis da União</div>
+          <div class="lu">planalto.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/decreto/d10835.htm" target="_blank" rel="noopener">
+          <div class="lt">Decreto nº 10.835/2021</div>
+          <div class="ld">Cessões, requisições e alterações de exercício para composição da força de trabalho</div>
+          <div class="lu">planalto.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://legis.sigepe.gov.br/legis/detalhar/23679" target="_blank" rel="noopener">
+          <div class="lt">Portaria SEDGG/ME nº 8.471/2022</div>
+          <div class="ld">Regulamenta a alteração de exercício para composição da força de trabalho</div>
+          <div class="lu">legis.sigepe.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://legis.sigepe.gov.br/sigepe-bgp-ws-legis/legis-service/download/?id=0011165502-ALPDF/2022" target="_blank" rel="noopener">
+          <div class="lt">Instrução Normativa nº 70/2022</div>
+          <div class="ld">Procedimentos operacionais da alteração de exercício</div>
+          <div class="lu">legis.sigepe.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/decreto/d10620.htm" target="_blank" rel="noopener">
+          <div class="lt">Decreto nº 10.620/2021</div>
+          <div class="ld">Centralização de aposentadorias e pensões do RPPS (citado no §10)</div>
+          <div class="lu">planalto.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://legis.sigepe.gov.br/legis/pesquisa-avancada" target="_blank" rel="noopener">
+          <div class="lt">Pesquisa avançada SIGEPE Legis</div>
+          <div class="ld">Portal oficial para consultar toda a legislação de pessoal civil</div>
+          <div class="lu">legis.sigepe.gov.br</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ §1 LEGISLAÇÃO BÁSICA ============ -->
+    <section id="legislacao" class="chapter">
+      <div class="kicker">Capítulo 01</div>
+      <h2>Legislação Básica</h2>
+      <p class="dek">Normas que fundamentam o instituto da alteração de exercício para composição da força de trabalho.</p>
+
+      <div class="callout warn">
+        <div class="ic">📣</div>
+        <div class="body">
+          <strong>Atenção</strong>
+          <p>É dever do servidor/empregado público, da Organização Militar (OM) e da Região Militar (RM) ler e acompanhar a atualização da legislação referida neste Caderno de Orientação.</p>
+        </div>
+      </div>
+
+      <ul class="clean prose">
+        <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l8112compilado.htm" target="_blank" rel="noopener"><strong>Lei nº 8.112</strong></a>, de 11 de dezembro de 1990, e suas alterações.</li>
+        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/decreto/d10835.htm" target="_blank" rel="noopener"><strong>Decreto nº 10.835</strong></a>, de 14 de outubro de 2021.</li>
+        <li><a href="https://legis.sigepe.gov.br/legis/detalhar/23679" target="_blank" rel="noopener"><strong>Portaria SEDGG/ME nº 8.471</strong></a>, de 26 de setembro de 2022.</li>
+        <li><a href="https://legis.sigepe.gov.br/sigepe-bgp-ws-legis/legis-service/download/?id=0011165502-ALPDF/2022" target="_blank" rel="noopener"><strong>Instrução Normativa nº 70</strong></a>, de 27 de setembro de 2022.</li>
+      </ul>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §2 CONCEITOS E CARACTERÍSTICAS ============ -->
+    <section id="conceito" class="chapter">
+      <div class="kicker">Capítulo 02</div>
+      <h2>Conceitos e Características</h2>
+      <p class="dek">2.1. Alteração de Exercício para Composição da Força de Trabalho</p>
+
+      <div class="prose">
+        <p><em>"É o ato que determina a alteração da lotação ou do exercício do agente público para outro órgão ou entidade do Poder Executivo Federal."</em></p>
+      </div>
+
+      <h3 class="sub-h">2.2. Características</h3>
+      <ul class="clean prose">
+        <li><strong>a)</strong> É irrecusável.</li>
+        <li><strong>b)</strong> Não depende de anuência prévia do órgão ou entidade a que o agente público está vinculado, <strong>EXCETO</strong> empresas estatais não dependentes de recursos do Tesouro Nacional para o pagamento de despesas de pessoal ou para o custeio em geral.</li>
+        <li><strong>c)</strong> Salvo disposição em contrário, será concedida por tempo indeterminado.</li>
+        <li><strong>d)</strong> É ato de competência do órgão central do SIPEC (tanto o início quanto o encerramento).</li>
+        <li><strong>e)</strong> Não se aplica às movimentações para outros Poderes, órgãos constitucionalmente autônomos ou outros entes federativos.</li>
+      </ul>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §3 DIREITOS E VANTAGENS ============ -->
+    <section id="direitos" class="chapter">
+      <div class="kicker">Capítulo 03</div>
+      <h2>Direitos e Vantagens</h2>
+      <p class="dek">Asseguradas ao servidor/empregado público em alteração de exercício para composição da força de trabalho.</p>
+
+      <div class="grid3">
+        <div class="cardbox">
+          <span class="badge">Na origem</span>
+          <h4>Todos os direitos e vantagens</h4>
+          <p>A que faça jus no órgão ou na entidade de origem.</p>
+        </div>
+        <div class="cardbox">
+          <span class="badge">No destino</span>
+          <h4>Gratificações discricionárias</h4>
+          <p>Cuja concessão, designação, nomeação, retirada, dispensa ou exoneração possa ocorrer por ato discricionário da autoridade competente e que não componham a remuneração do cargo, emprego, posto ou graduação.</p>
+        </div>
+        <div class="cardbox">
+          <span class="badge">No destino</span>
+          <h4>Ações de desenvolvimento</h4>
+          <p>Participação assegurada em ações de desenvolvimento no órgão ou entidade de destino.</p>
+        </div>
+        <div class="cardbox">
+          <span class="badge">No destino</span>
+          <h4>Cargo em comissão ou FC</h4>
+          <p>Poderá ocupar cargo em comissão ou função de confiança de qualquer nível, com dispensa de ato de cessão, se: a efetivação for superior a 6 meses; a vaga surgiu após a efetivação; ou a nomeação ocorrer na mesma unidade que ensejou a composição da força de trabalho.</p>
+        </div>
+      </div>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §4 MODALIDADES ============ -->
+    <section id="modalidades" class="chapter">
+      <div class="kicker">Capítulo 04</div>
+      <h2>Modalidades de Movimentação</h2>
+      <p class="dek">Três formas de efetivar a alteração de exercício para composição da força de trabalho.</p>
+
+      <h3 class="sub-h">4.1. Indicação Consensual</h3>
+      <ul class="clean prose">
+        <li>Alinhamento entre os órgãos e entidades interessados.</li>
+        <li>Anuência do agente público federal.</li>
+        <li>Autorização expressa do dirigente de gestão de pessoas dos órgãos ou entidades interessados.</li>
+        <li>Solicitação direta ao órgão central do SIPEC.</li>
+      </ul>
+
+      <h3 class="sub-h">4.2. Realocação de Pessoal</h3>
+      <ul class="clean prose">
+        <li>Sequência estruturada de ações e procedimentos para selecionar candidatos para composição da força de trabalho.</li>
+        <li>Divulgação do edital de seleção nos sítios eletrônicos e no portal único do órgão central do SIPEC.</li>
+        <li>O C Ex, ao promover a seleção, concorda tacitamente em disponibilizar seus servidores civis a outros órgãos e entidades.</li>
+        <li>Deve ser observada a proporcionalidade entre o órgão solicitante e o de origem, aferida pelo órgão central do SIPEC.</li>
+      </ul>
+
+      <h3 class="sub-h">4.3. Por Determinação do Órgão Central do SIPEC</h3>
+      <ul class="clean prose">
+        <li>Mediante deliberação do Comitê de Movimentação (CMOV).</li>
+        <li>Em situações prioritárias e emergenciais do governo federal, sem tempo hábil para indicação consensual ou realocação de pessoal.</li>
+        <li>Para fins de centralização de serviços, nos termos do art. 5º do <a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/decreto/d10620.htm" target="_blank" rel="noopener">Decreto nº 10.620, de 05/02/2021</a>.</li>
+      </ul>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §5 PRAZOS ============ -->
+    <section id="prazos" class="chapter">
+      <div class="kicker">Capítulo 05</div>
+      <h2>Prazos</h2>
+      <p class="dek">Prazos de permanência, apresentação e retorno, por modalidade.</p>
+
+      <h3 class="sub-h">5.1. Indicação Consensual</h3>
+      <div class="grid3">
+        <div class="cardbox"><h4>Permanência no destino</h4><p>Regra: concedida por prazo indeterminado.</p></div>
+        <div class="cardbox"><h4>Apresentação no destino</h4><p>Até 10 dias da comunicação do ato pelo SIPEC (30 dias se houver deslocamento de sede). Permanece em exercício na origem até a apresentação.</p></div>
+        <div class="cardbox"><h4>Retorno à origem</h4><p>Até 10 dias da comunicação do encerramento pelo SIPEC (30 dias se deslocamento de sede). Só retorna após publicação do ato de encerramento.</p></div>
+      </div>
+
+      <h3 class="sub-h">5.2. Realocação de Pessoal</h3>
+      <div class="grid3">
+        <div class="cardbox"><h4>Permanência no destino</h4><p>Mínimo de 12 meses, contado do início do efetivo exercício. Exceção: dispensado se o encerramento decorrer de situação excepcional justificada.</p></div>
+        <div class="cardbox"><h4>Liberação pela origem</h4><p>Até 30 dias da comunicação do SIPEC. Até 10 dias para o órgão de origem justificar impossibilidade (senão, mantém-se 30 dias).</p></div>
+        <div class="cardbox"><h4>Apresentação e retorno</h4><p>Apresentação: até 10 dias da publicação da portaria no DOU (30 se deslocamento de sede). Retorno: até 10 dias da comunicação do encerramento.</p></div>
+      </div>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §6 IMPEDIMENTOS ============ -->
+    <section id="impedimentos" class="chapter">
+      <div class="kicker">Capítulo 06</div>
+      <h2>Impedimentos</h2>
+      <p class="dek">São impedidos de se movimentar para compor força de trabalho:</p>
+
+      <div class="callout danger">
+        <div class="ic">⛔</div>
+        <div class="body"><p>O servidor/empregado público em período de <strong>estágio probatório</strong>.</p></div>
+      </div>
+      <div class="callout danger">
+        <div class="ic">⛔</div>
+        <div class="body"><p>O servidor/empregado público em período de <strong>licença ou afastamento legal</strong>.</p></div>
+      </div>
+      <div class="callout danger">
+        <div class="ic">⛔</div>
+        <div class="body"><p>O servidor/empregado público integrante de carreira que possua <strong>instrumento de mobilidade autorizado em lei</strong>, conforme norma do respectivo órgão supervisor.</p></div>
+      </div>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §7 REMUNERAÇÃO E REEMBOLSO ============ -->
+    <section id="remuneracao" class="chapter">
+      <div class="kicker">Capítulo 07</div>
+      <h2>Remuneração e Reembolso</h2>
+
+      <h3 class="sub-h">7.1. Remuneração</h3>
+      <div class="prose"><p>O ônus do pagamento da remuneração do servidor/empregado público movimentado será do órgão ou entidade de <strong>ORIGEM</strong>.</p></div>
+
+      <h3 class="sub-h">7.2. Reembolso</h3>
+      <div class="prose">
+        <p>Ocorre quando o empregado público for proveniente de empresa pública ou sociedade de economia mista <strong>não dependente</strong> de recursos do Tesouro Nacional para o custeio de despesas de pessoal ou custeio em geral. Neste caso, é do órgão ou entidade de <strong>DESTINO</strong> a obrigação de reembolso da remuneração ou salário vinculado ao cargo ou emprego permanente do agente público federal.</p>
+      </div>
+
+      <div class="callout danger">
+        <div class="ic">⛔</div>
+        <div class="body"><p><strong>NÃO PODERÁ</strong> ser solicitada ou mantida a alteração de exercício para composição da força de trabalho em caso de indisponibilidade financeira e orçamentária do reembolso.</p></div>
+      </div>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §8 REQUISITOS - IC ============ -->
+    <section id="requisitos-ic" class="chapter">
+      <div class="kicker">Capítulo 08</div>
+      <h2>Requisitos para Solicitar ao C&nbsp;Ex</h2>
+      <p class="dek">Modalidade: Indicação Consensual</p>
+      <ol class="steps">
+        <li><strong>Identificação</strong><span>Identificação de servidor/empregado público passível de alteração e envio de ofício ao órgão de origem.</span></li>
+        <li><strong>Alinhamento</strong><span>Alinhamento entre os órgãos e entidades interessados (anuência em resposta ao ofício do C Ex).</span></li>
+        <li><strong>Anuência</strong><span>Anuência do servidor/empregado público interessado.</span></li>
+        <li><strong>Compatibilidade</strong><span>Comprovação da compatibilidade entre as atribuições do cargo e as atividades a serem exercidas.</span></li>
+        <li><strong>Instrução processual</strong><span>Juntada dos documentos descritos no item "Documentos Necessários" deste caderno.</span></li>
+      </ol>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §9 REQUISITOS - RP ============ -->
+    <section id="requisitos-rp" class="chapter">
+      <div class="kicker">Capítulo 09</div>
+      <h2>Requisitos para Solicitar ao C&nbsp;Ex</h2>
+      <p class="dek">Modalidade: Realocação de Pessoal</p>
+      <ol class="steps">
+        <li><strong>Edital</strong><span>Comprovação de publicação do edital e divulgação das etapas no site "Oportunidades" do órgão central do SIPEC.</span></li>
+        <li><strong>Proporcionalidade</strong><span>Entre os quantitativos de servidores/empregados públicos efetivamente movimentados e disponibilizados entre o C Ex e os demais órgãos/entidades.</span></li>
+        <li><strong>Concordância tácita</strong><span>O C Ex, ao promover a seleção, concorda tacitamente em disponibilizar seus servidores civis a outros órgãos/entidades.</span></li>
+        <li><strong>Compatibilidade</strong><span>Comprovação da compatibilidade entre as atribuições do cargo e as atividades a serem exercidas.</span></li>
+        <li><strong>Instrução processual</strong><span>Juntada dos documentos descritos no item "Documentos Necessários" deste caderno.</span></li>
+      </ol>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §10 DISPENSA ============ -->
+    <section id="dispensa" class="chapter">
+      <div class="kicker">Capítulo 10</div>
+      <h2>Requisitos de Dispensa das Modalidades de Seleção</h2>
+
+      <div class="prose">
+        <p>Solicitação, mediante ofício, do Diretor do DGP/DAP, por intermédio do Ministério da Defesa, ao órgão central do SIPEC — com instrução processual dos documentos indicados no item "Documentos Necessários".</p>
+      </div>
+
+      <div class="grid3">
+        <div class="cardbox">
+          <h4>Situações Emergenciais</h4>
+          <p>Justificativa clara e objetiva demonstrando que a movimentação atenderá situação emergencial com impacto na vida social, impondo agilidade na disponibilização de pessoal que possa contribuir para sanar situações que acarretem risco à vida, à saúde ou à integridade das pessoas.</p>
+        </div>
+        <div class="cardbox">
+          <h4>Centralização de Serviços</h4>
+          <p>Nos termos do art. 5º do <a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/decreto/d10620.htm" target="_blank" rel="noopener">Decreto nº 10.620/2021</a> — movimentação de agente público da área de gestão de pessoas para atendimento da centralização de serviços de concessão e manutenção de aposentadorias e pensões do RPPS, para atuação no órgão central do SIPEC.</p>
+        </div>
+      </div>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §11 PROPORCIONALIDADE ============ -->
+    <section id="proporcionalidade" class="chapter">
+      <div class="kicker">Capítulo 11</div>
+      <h2>Da Proporcionalidade</h2>
+      <p class="dek">Modalidade: Realocação de Pessoal</p>
+
+      <div class="callout warn">
+        <div class="ic">⚖️</div>
+        <div class="body">
+          <strong>Conceito</strong>
+          <p>Medida observada pelas unidades de gestão de pessoas dos órgãos solicitantes e de origem — relação entre a quantidade de agentes públicos solicitados para alteração de exercício e a quantidade efetivamente disponibilizada para outras unidades da Administração.</p>
+        </div>
+      </div>
+
+      <h3 class="sub-h">Critérios e características</h3>
+      <ul class="clean prose">
+        <li>Apresentada por meio do Quadro Demonstrativo de Proporcionalidade (Anexo A).</li>
+        <li>A análise do atendimento é realizada pelo órgão central do SIPEC.</li>
+        <li>Parâmetro de cálculo: um servidor/empregado solicitado para um servidor disponibilizado.</li>
+        <li>Se não atendido, o C Ex pode apresentar justificativas para subsidiar a deliberação do CMOV.</li>
+        <li>Atendido o critério (ou deferido pelo CMOV), o SIPEC notifica a liberação do agente selecionado.</li>
+        <li>Se não atendido e indeferido pelo CMOV, o processo é encerrado e o órgão solicitante é notificado.</li>
+        <li>Base de cálculo: todas as alterações de exercício efetivadas na unidade de vínculo a partir de 3/8/2020.</li>
+      </ul>
+
+      <h3 class="sub-h">Não se aplica em casos de</h3>
+      <ul class="clean prose">
+        <li>Indicação Consensual.</li>
+        <li>Dispensa de Modalidades.</li>
+      </ul>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §12 EDITAL ============ -->
+    <section id="edital" class="chapter">
+      <div class="kicker">Capítulo 12</div>
+      <h2>Do Edital — Realocação de Pessoal</h2>
+      <p class="dek">Deve ser divulgado nos sítios eletrônicos e no portal único do SIPEC.</p>
+
+      <h3 class="sub-h">Conteúdo mínimo</h3>
+      <ul class="clean prose">
+        <li>Identificação do C Ex.</li>
+        <li>Necessidade de participação de, no mínimo, três candidatos por oportunidade.</li>
+        <li>Quantitativo de oportunidades.</li>
+        <li>Atribuições, competências exigidas e nível de especialização.</li>
+        <li>Local de exercício.</li>
+        <li>Possibilidade de concessão de gratificações e confirmação de ausência de pendência quanto ao prazo mínimo de permanência.</li>
+        <li>Impedimentos do art. 13 da Portaria SEDGG/ME nº 8.471/2022.</li>
+        <li>Prazo mínimo de dez dias para inscrição.</li>
+      </ul>
+
+      <h3 class="sub-h">Responsabilidades do C Ex</h3>
+      <ul class="clean prose">
+        <li>Enviar o edital ao órgão central do SIPEC, com vistas à publicação no portal de oportunidades.</li>
+        <li>Publicar no sítio eletrônico do C Ex.</li>
+        <li>Comprovar a realização e divulgação da seleção.</li>
+        <li>Elaborar e assinar o Termo de Cumprimento dos Requisitos do Edital (Anexo C).</li>
+      </ul>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §13 DOCUMENTOS ============ -->
+    <section id="documentos" class="chapter">
+      <div class="kicker">Capítulo 13</div>
+      <h2>Documentos Necessários à Instrução do Processo</h2>
+      <p class="dek">Varia conforme a modalidade de movimentação escolhida.</p>
+
+      <table class="doctable">
+        <thead><tr><th>Documento</th><th>Responsável</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td>DIEx de solicitação</td><td>Unidade do C Ex</td><td>Ao identificar vaga(s) e/ou servidor interessado</td></tr>
+          <tr><td>Anuência / Edital de seleção</td><td>OM / Servidor</td><td>Anuência (indicação consensual) ou edital (realocação)</td></tr>
+          <tr><td>Ofício de solicitação ao SIPEC</td><td>DAP / DGP / Gab Cmt / MD</td><td>Encaminhado via cadeia de comando</td></tr>
+          <tr><td>Quadro de compatibilidade</td><td>OM</td><td>Anexo A, item IV</td></tr>
+          <tr><td>Formulário</td><td>OM</td><td>Anexo A</td></tr>
+          <tr><td>Termo de responsabilidade</td><td>OM</td><td>Anexo B</td></tr>
+          <tr><td>Demonstrativo cadastral</td><td>DAP</td><td>Relatório e-Siape em PDF</td></tr>
+          <tr><td>Declarações orçamentárias</td><td>Ordenador de despesas OM/SEF</td><td>Somente entidades não dependentes do Tesouro</td></tr>
+        </tbody>
+      </table>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §14 TRAMITAÇÃO - IC ============ -->
+    <section id="tram-ic" class="chapter">
+      <div class="kicker">Capítulo 14</div>
+      <h2>Tramitação — Indicação Consensual</h2>
+      <p class="dek">Fluxo simplificado de tramitação do processo.</p>
+      <ol class="steps">
+        <li><strong>OM</strong><span>Identifica servidor apto; instrui processo com currículo e anuência; encaminha à DAP.</span></li>
+        <li><strong>DAP</strong><span>Encaminha ofício ao órgão de origem, via Gab Cmt Ex/MD, solicitando anuência e atribuições do cargo.</span></li>
+        <li><strong>Órgão de Origem</strong><span>Responde autorizando (ou não) a movimentação e descreve as atribuições do cargo.</span></li>
+        <li><strong>MD</strong><span>Encaminha o processo ao Gab Cmt Ex, com vistas ao envio à DAP, via cadeia de comando.</span></li>
+        <li><strong>DAP</strong><span>Devolve o processo à OM para instrução com os documentos necessários.</span></li>
+        <li><strong>OM</strong><span>Instrui o processo e encaminha à DAP, via cadeia de comando.</span></li>
+        <li><strong>DAP → MD → SIPEC</strong><span>Encaminha o processo ao Ministério da Defesa, que o remete ao órgão central do SIPEC.</span></li>
+        <li><strong>Órgão Central SIPEC</strong><span>Delibera: se autorizado, publica portaria no DOU; se não, arquiva. Devolve à DAP.</span></li>
+      </ol>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §15 TRAMITAÇÃO - RP ============ -->
+    <section id="tram-rp" class="chapter">
+      <div class="kicker">Capítulo 15</div>
+      <h2>Tramitação — Realocação de Pessoal</h2>
+      <p class="dek">Fluxo simplificado de tramitação do processo.</p>
+      <ol class="steps">
+        <li><strong>OM</strong><span>Identifica a necessidade, elabora e publica o edital, seleciona candidatos e encaminha o pedido à DAP.</span></li>
+        <li><strong>DAP</strong><span>Inclui o demonstrativo cadastral e envia o processo ao MD, via Gab Cmt Ex.</span></li>
+        <li><strong>MD</strong><span>Confere o processo e encaminha ao órgão central do SIPEC.</span></li>
+        <li><strong>Órgão Central SIPEC</strong><span>Delibera: se autorizado, publica portarias no DOU; se não, arquiva. Devolve ao MD.</span></li>
+        <li><strong>MD</strong><span>Encaminha o processo ao Gab Cmt Ex, com vistas ao envio à DAP.</span></li>
+        <li><strong>DAP</strong><span>Devolve o processo à OM para realização dos procedimentos da movimentação.</span></li>
+        <li><strong>OM</strong><span>Solicita ao órgão de origem a liberação do servidor no SIAPE e faz a recepção no sistema.</span></li>
+      </ol>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ §16 TRAMITAÇÃO - DM ============ -->
+    <section id="tram-dm" class="chapter">
+      <div class="kicker">Capítulo 16</div>
+      <h2>Tramitação — Dispensa de Modalidade</h2>
+      <p class="dek">Fluxo simplificado de tramitação do processo.</p>
+      <ol class="steps">
+        <li><strong>OM</strong><span>Identifica situação prioritária/emergencial ou de centralização de serviços e os servidores aptos; instrui e encaminha o processo à DAP.</span></li>
+        <li><strong>DAP</strong><span>Envia o processo ao MD, via Gab Cmt Ex, para encaminhamento ao órgão central do SIPEC.</span></li>
+        <li><strong>MD</strong><span>Confere o processo e encaminha ao órgão central do SIPEC.</span></li>
+        <li><strong>Órgão Central SIPEC (CMOV)</strong><span>Delibera: se autorizado, publica portarias no DOU; se não, arquiva. Devolve ao MD.</span></li>
+        <li><strong>MD</strong><span>Encaminha o processo ao Gab Cmt Ex, com vistas ao envio à DAP.</span></li>
+        <li><strong>DAP</strong><span>Devolve o processo à OM para realização dos procedimentos da movimentação.</span></li>
+        <li><strong>OM</strong><span>Solicita ao órgão de origem a liberação do servidor no SIAPE e faz a recepção no sistema.</span></li>
+      </ol>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ ANEXOS ============ -->
+    <section id="anexos" class="chapter">
+      <div class="kicker">Referência</div>
+      <h2>Anexos</h2>
+      <p class="dek">Modelos oficiais citados ao longo do caderno original.</p>
+      <div class="anexo-list">
+        <div class="anexo-card">
+          <div class="let">Anexo A</div>
+          <h4>Formulário de Solicitação</h4>
+          <p>Formulário de Solicitação de Alteração de Exercício para Composição da Força de Trabalho de Agente Público, incluindo identificação do órgão, do agente público e o quadro de proporcionalidade.</p>
+        </div>
+        <div class="anexo-card">
+          <div class="let">Anexo B</div>
+          <h4>Termo de Responsabilidade</h4>
+          <p>Termo de Responsabilidade de Compatibilidade de Atividades para Agente Público a ser Movimentado, assinado pelo Diretor da DAP.</p>
+        </div>
+        <div class="anexo-card">
+          <div class="let">Anexo C</div>
+          <h4>Termo de Cumprimento do Edital</h4>
+          <p>Termo de Cumprimento dos Requisitos do Edital de Abertura de Seleção de Agentes Públicos, na modalidade Realocação de Pessoal.</p>
+        </div>
+      </div>
+      <a class="backlink" href="#inicio">← Voltar ao índice</a>
+    </section>
+
+    <!-- ============ FONTES (repeat legislation links, target of sidebar) ============ -->
+    <section id="fontes" class="chapter">
+      <div class="kicker">Referência</div>
+      <h2>Legislação e Fontes</h2>
+      <p class="dek">Para aprofundar o estudo, consulte o texto integral das normas citadas.</p>
+      <div class="legis-grid">
+        <a class="legis-card" href="https://www.planalto.gov.br/ccivil_03/leis/l8112compilado.htm" target="_blank" rel="noopener">
+          <div class="lt">Lei nº 8.112/1990</div>
+          <div class="ld">Regime Jurídico dos Servidores Públicos Civis da União</div>
+          <div class="lu">planalto.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/decreto/d10835.htm" target="_blank" rel="noopener">
+          <div class="lt">Decreto nº 10.835/2021</div>
+          <div class="ld">Cessões, requisições e alterações de exercício</div>
+          <div class="lu">planalto.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://legis.sigepe.gov.br/legis/detalhar/23679" target="_blank" rel="noopener">
+          <div class="lt">Portaria SEDGG/ME nº 8.471/2022</div>
+          <div class="ld">Regulamento da alteração de exercício</div>
+          <div class="lu">legis.sigepe.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://legis.sigepe.gov.br/sigepe-bgp-ws-legis/legis-service/download/?id=0011165502-ALPDF/2022" target="_blank" rel="noopener">
+          <div class="lt">Instrução Normativa nº 70/2022</div>
+          <div class="ld">Procedimentos operacionais</div>
+          <div class="lu">legis.sigepe.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/decreto/d10620.htm" target="_blank" rel="noopener">
+          <div class="lt">Decreto nº 10.620/2021</div>
+          <div class="ld">Centralização de aposentadorias e pensões</div>
+          <div class="lu">planalto.gov.br</div>
+        </a>
+        <a class="legis-card" href="https://legis.sigepe.gov.br/legis/pesquisa-avancada" target="_blank" rel="noopener">
+          <div class="lt">Pesquisa avançada SIGEPE Legis</div>
+          <div class="ld">Portal oficial de legislação de pessoal civil</div>
+          <div class="lu">legis.sigepe.gov.br</div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div>Caderno de Orientação DAP — 06.017 · Assessoria Técnica da SPC/DAP · Maio de 2024</div>
+      <div><a href="#inicio">Voltar ao topo ↑</a></div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  // Mobile sidebar toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebar = document.getElementById('sidebar');
+  menuBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
+  sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => sidebar.classList.remove('open')));
+
+  // Active nav highlighting via IntersectionObserver
+  const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+  const sections = navLinks
+    .map(l => document.querySelector(l.getAttribute('href')))
+    .filter(Boolean);
+
+  const setActive = (id) => {
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  sections.forEach(s => io.observe(s));
+</script>
+
+</body>
+</html>

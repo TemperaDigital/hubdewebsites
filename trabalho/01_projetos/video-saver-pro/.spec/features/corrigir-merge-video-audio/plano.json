@@ -1,0 +1,122 @@
+{
+  "runId": "video-saver-pro-corrigir-merge-video-audio-mtgutm9a",
+  "feature": "corrigir-merge-video-audio",
+  "agent": "claude",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-08-31 06:25",
+  "branchTrabalho": "spec/corrigir-merge-video-audio",
+  "baseDir": ".spec/features/corrigir-merge-video-audio",
+  "specDir": ".spec",
+  "repoName": "video-saver-pro",
+  "logsDir": "../onp-worktrees/video-saver-pro-corrigir-merge-video-audio-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/corrigir-merge-video-audio-faixa-1",
+      "worktree": "../onp-worktrees/video-saver-pro-corrigir-merge-video-audio-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-001",
+          "titulo": "Detectar o container real de um arquivo pelos bytes de assinatura",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/lib/container-signature.ts",
+            "src/lib/container-signature.test.ts"
+          ],
+          "refs": [
+            "US-001",
+            "AC-001"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/corrigir-merge-video-audio-faixa-2",
+      "worktree": "../onp-worktrees/video-saver-pro-corrigir-merge-video-audio-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-002",
+          "titulo": "Provar o defeito com teste de regressão sobre saída real do yt-dlp",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/fetch-args.js",
+            "extractor/fetch-args.test.js"
+          ],
+          "refs": [
+            "US-001",
+            "AC-001",
+            "AC-002",
+            "AC-003"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/corrigir-merge-video-audio-faixa-3",
+      "worktree": "../onp-worktrees/video-saver-pro-corrigir-merge-video-audio-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-003",
+          "titulo": "Implementar a estratégia de container escolhida",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/server.js"
+          ],
+          "refs": [
+            "US-001",
+            "AC-001",
+            "AC-002",
+            "AC-003"
+          ]
+        },
+        {
+          "id": "T-004",
+          "titulo": "Alinhar extensão e Content-Type ao container que sai de fato",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/server.js",
+            "src/lib/media-format.ts"
+          ],
+          "refs": [
+            "US-001",
+            "US-002",
+            "AC-001",
+            "AC-004"
+          ]
+        },
+        {
+          "id": "T-005",
+          "titulo": "Transformar divergência de container em erro visível",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/server.js"
+          ],
+          "refs": [
+            "US-002",
+            "AC-004"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

@@ -1,0 +1,81 @@
+{
+  "usuario": {
+    "nome": "Alexandre Guerra",
+    "cidade": "João Pessoa",
+    "uf": "PB",
+    "initials": "AG"
+  },
+  "contas": [
+    { "id": "c1", "nome": "BB Conta Corrente",  "tipo": "corrente",  "saldo": 3420.00,  "icon": "🏛️", "cor": "#f7d070" },
+    { "id": "c2", "nome": "Nubank",              "tipo": "digital",   "saldo": 1180.50,  "icon": "💜", "cor": "#8a2be2" },
+    { "id": "c3", "nome": "Caixa Econômica",     "tipo": "corrente",  "saldo": 650.00,   "icon": "🏦", "cor": "#007aff" }
+  ],
+  "cartoes": [
+    { "id": "k1", "nome": "Nubank Visa",    "limite": 8000,  "utilizado": 3240,  "fechamento": 20, "vencimento": 27, "cor": "#8a2be2" },
+    { "id": "k2", "nome": "Bradesco Visa",  "limite": 5000,  "utilizado": 1620,  "fechamento": 15, "vencimento": 22, "cor": "#e03535" }
+  ],
+  "transacoes": [
+    { "id":"t1",  "data":"2025-05-05", "descricao":"Salário SIAPE",              "valor": 7200.00, "tipo":"receita",  "categoria":"Salário",      "conta":"c1", "cartao":null, "parcelado":false, "status":"confirmado", "icon":"💰", "cor":"#e0f5f3" },
+    { "id":"t2",  "data":"2025-05-05", "descricao":"Aluguel",                    "valor":-1400.00, "tipo":"despesa",  "categoria":"Moradia",      "conta":"c1", "cartao":null, "parcelado":false, "status":"confirmado", "icon":"🏠", "cor":"#fdf0e8" },
+    { "id":"t3",  "data":"2025-05-10", "descricao":"Freelance edição de vídeo",  "valor": 1200.00, "tipo":"receita",  "categoria":"Freelance",    "conta":"c2", "cartao":null, "parcelado":false, "status":"confirmado", "icon":"🎬", "cor":"#e0f5f3" },
+    { "id":"t4",  "data":"2025-05-02", "descricao":"Farmácia Pague Menos",       "valor":  -89.50, "tipo":"despesa",  "categoria":"Saúde",        "conta":null, "cartao":"k1", "parcelado":false, "status":"confirmado", "icon":"💊", "cor":"#edf2fd" },
+    { "id":"t5",  "data":"2025-05-03", "descricao":"Magazine Luiza — TV 55\" · 3/10",   "valor": -320.00, "tipo":"despesa",  "categoria":"Eletrônicos", "conta":null, "cartao":"k1", "parcelado":true,  "parcela_atual":3, "total_parcelas":10, "status":"confirmado", "icon":"📺", "cor":"#fdedf1" },
+    { "id":"t6",  "data":"2025-05-13", "descricao":"Posto Shell",                "valor": -180.00, "tipo":"despesa",  "categoria":"Transporte",   "conta":"c2", "cartao":null, "parcelado":false, "status":"confirmado", "icon":"⛽", "cor":"#fdf6e3" },
+    { "id":"t7",  "data":"2025-05-14", "descricao":"Atacadão Supermercado",      "valor": -347.80, "tipo":"despesa",  "categoria":"Alimentação",  "conta":null, "cartao":"k1", "parcelado":false, "status":"confirmado", "icon":"🛒", "cor":"#e0f5f3" },
+    { "id":"t8",  "data":"2025-05-01", "descricao":"Internet fibra",             "valor":  -99.90, "tipo":"despesa",  "categoria":"Assinaturas",  "conta":"c1", "cartao":null, "parcelado":false, "status":"confirmado", "icon":"📶", "cor":"#edf2fd", "fixa":true },
+    { "id":"t9",  "data":"2025-06-01", "descricao":"Casas Bahia — Geladeira · 1/6",     "valor": -300.00, "tipo":"despesa",  "categoria":"Eletrodomésticos","conta":null,"cartao":"k1","parcelado":true,"parcela_atual":1,"total_parcelas":6,"status":"projetado","icon":"❄️","cor":"#fdedf1" },
+    { "id":"t10", "data":"2025-06-01", "descricao":"Magazine Luiza — TV 55\" · 4/10",   "valor": -320.00, "tipo":"despesa",  "categoria":"Eletrônicos", "conta":null,"cartao":"k1","parcelado":true,"parcela_atual":4,"total_parcelas":10,"status":"projetado","icon":"📺","cor":"#fdedf1" }
+  ],
+  "parcelamentos": [
+    { "id":"p1", "nome":"Smart TV 55\" 4K", "loja":"Magazine Luiza", "cartao":"k1", "valor_total":3200, "valor_parcela":320, "parcela_atual":3, "total_parcelas":10, "data_compra":"2025-02-03", "data_quitacao":"2026-02-01", "categoria":"Eletrônicos", "icon":"📺" },
+    { "id":"p2", "nome":"Geladeira Frost Free", "loja":"Casas Bahia", "cartao":"k1", "valor_total":1800, "valor_parcela":300, "parcela_atual":0, "total_parcelas":6, "data_compra":"2025-05-14", "data_quitacao":"2025-11-01", "categoria":"Eletrodomésticos", "icon":"❄️" },
+    { "id":"p3", "nome":"Notebook Dell Inspiron", "loja":"Amazon", "cartao":"k1", "valor_total":4500, "valor_parcela":450, "parcela_atual":8, "total_parcelas":10, "data_compra":"2024-09-01", "data_quitacao":"2025-07-01", "categoria":"Informática", "icon":"💻" }
+  ],
+  "metas": [
+    { "id":"m1", "nome":"Viagem para Fortaleza", "icon":"🏖️", "cor":"#e0f5f3", "valor_meta":4000, "valor_atual":2000, "prazo":"2025-12-01", "mensal":500, "status":"ok" },
+    { "id":"m2", "nome":"Reserva de emergência", "icon":"🚨", "cor":"#fdedf1", "valor_meta":6000, "valor_atual":3200, "prazo":"2025-06-01", "mensal":800, "status":"risco" },
+    { "id":"m3", "nome":"Upgrade servidor home", "icon":"🖥️", "cor":"#fdf6e3", "valor_meta":1800, "valor_atual":900,  "prazo":"2025-09-01", "mensal":300, "status":"atencao" }
+  ],
+  "faturas": [
+    { "id":"f1", "cartao":"k1", "nome":"Nubank Visa",   "vencimento":"2025-06-27", "valor":1247.00, "status":"a_vencer",  "transacoes":["t4","t5","t7"] },
+    { "id":"f2", "cartao":"k2", "nome":"Bradesco Visa", "vencimento":"2025-06-22", "valor":600.00,  "status":"a_vencer",  "transacoes":[] },
+    { "id":"f3", "cartao":"k1", "nome":"Nubank Visa",   "vencimento":"2025-07-27", "valor":780.00,  "status":"projetado", "transacoes":["t9","t10"] },
+    { "id":"f4", "cartao":"k1", "nome":"Nubank Visa",   "vencimento":"2025-05-27", "valor":1840.00, "status":"pago",      "transacoes":[] },
+    { "id":"f5", "cartao":"k2", "nome":"Bradesco Visa", "vencimento":"2025-05-22", "valor":1280.00, "status":"pago",      "transacoes":[] }
+  ],
+  "resumo_mensal": {
+    "mes": "Maio 2025",
+    "receitas": 8400.00,
+    "despesas_competencia": 5230.00,
+    "despesas_caixa": 3890.00,
+    "parcelas_futuras_6m": 5480.00,
+    "comprometimento_pct": 62,
+    "saldo_disponivel": 3170.00,
+    "despesas_fixas": 1949.90,
+    "despesas_variaveis": 2480.10,
+    "renda_livre": 1720.10
+  },
+  "historico_mensal": [
+    { "mes":"Jan", "receitas":7200, "despesas":4200 },
+    { "mes":"Fev", "receitas":7200, "despesas":5100 },
+    { "mes":"Mar", "receitas":8400, "despesas":4800 },
+    { "mes":"Abr", "receitas":8400, "despesas":4650 },
+    { "mes":"Mai", "receitas":8400, "despesas":5230 }
+  ],
+  "calendario_parcelas": [
+    { "mes":"Jun", "valor":620 },
+    { "mes":"Jul", "valor":620 },
+    { "mes":"Ago", "valor":320 },
+    { "mes":"Set", "valor":320 },
+    { "mes":"Out", "valor":320 },
+    { "mes":"Nov", "valor":320 }
+  ],
+  "categorias": ["Alimentação","Transporte","Moradia","Saúde","Educação","Lazer","Assinaturas","Investimentos","Salário","Freelance","Eletrônicos","Eletrodomésticos","Informática","Outros"],
+  "categorias_grafico": [
+    { "nome":"Moradia",      "pct":28, "cor":"#00a896" },
+    { "nome":"Alimentação",  "pct":22, "cor":"#e86c3a" },
+    { "nome":"Transporte",   "pct":18, "cor":"#c89b3c" },
+    { "nome":"Saúde",        "pct":15, "cor":"#9ba3b8" },
+    { "nome":"Outros",       "pct":17, "cor":"#4a7fe5" }
+  ]
+}

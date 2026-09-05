@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diagnostico da publicacao</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">sites_nextcloud</p>
+    <h1>Se voce esta lendo isto, o servidor esta no ar.</h1>
+    <p class="lead">Esta pagina testa os tres pontos que costumam falhar quando se publica HTML a partir de uma pasta sincronizada.</p>
+
+    <ul class="checks">
+      <li id="c-html" class="check ok">
+        <span class="dot"></span>
+        <div><strong>HTML servido</strong><span>O nginx encontrou o index.html desta subpasta.</span></div>
+      </li>
+      <li id="c-css" class="check fail">
+        <span class="dot"></span>
+        <div><strong>CSS aplicado</strong><span>Se este item estiver vermelho e sem estilo, o arquivo css/estilo.css nao foi servido.</span></div>
+      </li>
+      <li id="c-js" class="check fail">
+        <span class="dot"></span>
+        <div><strong>JavaScript executado</strong><span id="js-msg">Aguardando js/app.js...</span></div>
+      </li>
+      <li id="c-mime" class="check fail">
+        <span class="dot"></span>
+        <div><strong>Tipos MIME corretos</strong><span id="mime-msg">Verificando...</span></div>
+      </li>
+    </ul>
+
+    <p class="foot">Pode apague esta pasta depois que tudo estiver verde - Aindfa não apagou?
+    .</p>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

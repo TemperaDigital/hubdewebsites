@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPC — Seção de Pessoal Civil | 1º GptE</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css"></head><body>
+<header class="hero"><div class="wrap"><p style="color:#a7f3d0;font-size:.85rem;letter-spacing:2px">1º GRUPAMENTO DE ENGENHARIA</p>
+<h1>Seção de Pessoal Civil</h1><p>Portal de atendimento aos servidores civis</p></div></header>
+<nav><div class="wrap"><a href="#avisos">Avisos</a><a href="#noticias">Notícias</a><a href="#contato">Contato Rápido</a><a href="#mensagem">Enviar Mensagem</a><a href="#duvidas">Mural de Dúvidas</a><a href="#faq">FAQ</a><a href="paginas/ferramentas.html">Ferramentas</a></div></nav>
+
+<section id="contato"><div class="wrap"><h2>Contato rápido</h2><p class="muted">Escolha o tipo de atendimento — abre WhatsApp ou e-mail com mensagem pronta.</p>
+<div class="quick">
+<button class="btn-wa" onclick="quickWA('ferias')">📱 WhatsApp · Férias</button>
+<button class="btn-wa" onclick="quickWA('licenca')">📱 WhatsApp · Licença</button>
+<button class="btn-wa" onclick="quickWA('lts')">📱 WhatsApp · LTS/Atestado</button>
+<button class="btn-wa" onclick="quickWA('frequencia')">📱 WhatsApp · Frequência</button>
+<button class="btn-wa" onclick="quickWA('outro')">📱 WhatsApp · Outro</button>
+</div><div class="quick">
+<button class="btn-mail" onclick="quickMail('ferias')">✉️ E-mail · Férias</button>
+<button class="btn-mail" onclick="quickMail('licenca')">✉️ E-mail · Licença</button>
+<button class="btn-mail" onclick="quickMail('lts')">✉️ E-mail · LTS</button>
+<button class="btn-mail" onclick="quickMail('frequencia')">✉️ E-mail · Frequência</button>
+<button class="btn-mail" onclick="quickMail('outro')">✉️ E-mail · Outro</button>
+</div></div></section>
+
+<section id="avisos"><div class="wrap"><h2>Avisos internos</h2><div id="notices" class="grid"></div></div></section>
+<section id="noticias"><div class="wrap"><h2>Notícias</h2><div id="news" class="grid"></div></div></section>
+
+<section id="mensagem"><div class="wrap"><h2>Enviar mensagem / documento</h2>
+<form id="form-msg" class="card" style="display:grid;gap:12px;max-width:700px" enctype="multipart/form-data">
+<input name="nome" placeholder="Seu nome" required maxlength="100">
+<input name="email" type="email" placeholder="Seu e-mail" required>
+<input name="assunto" placeholder="Assunto" required maxlength="200">
+<textarea name="corpo" placeholder="Mensagem" rows="4" required maxlength="5000"></textarea>
+<label class="muted">Anexo (PDF/DOC/XLS/JPG/PNG · até 5MB)<input name="arquivo" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.odt,.ods,.txt,.jpg,.jpeg,.png"></label>
+<button type="submit">Enviar</button><div id="msg-out"></div></form></div></section>
+
+<section id="duvidas"><div class="wrap"><h2>Mural de dúvidas</h2>
+<form id="form-duv" class="card" style="display:grid;gap:12px;max-width:700px;margin-bottom:20px">
+<input name="autor" placeholder="Seu nome (opcional)" maxlength="100">
+<input name="categoria" placeholder="Categoria (ex.: Férias, Pagamento)" value="Geral" maxlength="50">
+<textarea name="pergunta" placeholder="Sua dúvida" rows="3" required maxlength="2000"></textarea>
+<button type="submit">Enviar dúvida</button><div id="duv-out"></div></form>
+<div id="duvidas" class="grid"></div></div></section>
+
+<section id="faq"><div class="wrap"><h2>FAQ — Perguntas frequentes</h2>
+<input id="faq-search" placeholder="Buscar..." style="max-width:400px;margin-bottom:16px">
+<div id="faq-list"></div></div></section>
+
+<footer><div class="wrap">
+<p><strong>SPC · 1º Grupamento de Engenharia</strong></p>
+<p>E-mail: <a href="mailto:spc@1gpte.eb.mil.br">spc@1gpte.eb.mil.br</a></p>
+<p style="margin-top:10px">📷 <a href="https://www.instagram.com/1gpte_exercito/" target="_blank">@1gpte_exercito</a></p>
+<p class="muted" style="margin-top:12px">Portal interno · Acesso de servidores civis</p>
+</div></footer>
+<script src="js/config.js"></script><script src="js/main.js"></script></body></html>

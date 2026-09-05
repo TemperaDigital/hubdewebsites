@@ -1,0 +1,132 @@
+/* Estilos da Base de Conhecimento */
+
+/* Estiliza o corpo (body) da página inteira */
+body {
+    font-family: sans-serif; /* Define a fonte padrão para uma fonte sem serifa, comum em navegadores */
+    margin: 0; /* Remove a margem padrão do navegador para que o conteúdo ocupe toda a tela */
+    padding: 0; /* Remove o preenchimento padrão do navegador */
+    background-color: antiquewhite; /* Cor de fundo solicitada: antiquewhite */
+    color: #333; /* Define a cor padrão do texto para um cinza escuro, melhorando a legibilidade */
+}
+
+/* Define um layout comum para o cabeçalho, conteúdo principal e rodapé */
+header, main, footer {
+    padding: 20px; /* Adiciona um espaçamento interno de 20 pixels em todos os lados */
+    max-width: 900px; /* Limita a largura máxima desses elementos para 900 pixels */
+    margin: 0 auto; /* Centraliza os elementos na página horizontalmente */
+}
+
+/* Estiliza o cabeçalho (header) */
+header {
+    background-color: #007bff; /* Define a cor de fundo do cabeçalho como azul */
+    color: white; /* Define a cor do texto dentro do cabeçalho como branco */
+    text-align: center; /* Centraliza o texto do cabeçalho */
+    border-radius: 0 0 10px 10px; /* Arredonda os cantos inferiores do cabeçalho */
+}
+
+/* Estiliza o título principal (h1) */
+h1 {
+    text-align: center; /* Garante que o título esteja centralizado */
+    margin-top: 0; /* Remove a margem superior padrão do h1 */
+    margin-bottom: 30px; /* Adiciona uma margem inferior para separar do conteúdo abaixo */
+}
+
+/* Estiliza o container que agrupa o campo de busca e o botão */
+#busca-container {
+    display: flex; /* Usa o modelo Flexbox para alinhar os itens (campo e botão) lado a lado */
+    gap: 10px; /* Cria um espaço de 10 pixels entre o campo de busca e o botão */
+    justify-content: center; /* Centraliza o conjunto (campo e botão) na horizontal */
+    margin-bottom: 40px; /* Adiciona uma margem inferior para separar da lista de artigos */
+}
+
+/* Estiliza o campo de input da busca */
+#campo-busca {
+    padding: 10px; /* Adiciona espaçamento interno para o texto não ficar colado nas bordas */
+    border: 2px solid #ccc; /* Define uma borda cinza clara */
+    border-radius: 5px; /* Arredonda os cantos do campo */
+    flex-grow: 1; /* Permite que o campo cresça para ocupar o espaço disponível no container */
+    max-width: 400px; /* Limita a largura máxima do campo de busca */
+}
+
+/* Estiliza o botão de busca */
+#botao-busca {
+    padding: 10px 20px; /* Adiciona espaçamento interno (10px em cima/baixo, 20px nos lados) */
+    background-color: #28a745; /* Define a cor de fundo como verde */
+    color: white; /* Define a cor do texto como branco */
+    border: none; /* Remove a borda padrão do botão */
+    border-radius: 5px; /* Arredonda os cantos do botão */
+    cursor: pointer; /* Muda o cursor para uma "mãozinha" ao passar o mouse, indicando que é clicável */
+    transition: background-color 0.3s; /* Adiciona uma transição suave na cor de fundo ao passar o mouse */
+}
+
+/* Efeito ao passar o mouse sobre o botão de busca */
+#botao-busca:hover {
+    background-color: #218838; /* Escurece a cor de fundo do botão para dar um feedback visual */
+}
+
+/* Estilos para a seção de resultados e os cartões */
+#resultados {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaçamento entre os cartões */
+    justify-content: center;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 250px; /* Largura fixa para cada cartão */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+
+/* Estiliza o rodapé (footer) */
+footer {
+    margin-top: 50px; /* Adiciona uma margem no topo para separar do conteúdo principal */
+    padding: 20px; /* Adiciona espaçamento interno */
+    border-top: 1px solid #ddd; /* Adiciona uma linha cinza no topo do rodapé */
+    text-align: center; /* Centraliza todo o conteúdo do rodapé */
+    font-size: 0.9em; /* Deixa a fonte um pouco menor que o texto padrão */
+    background-color: #e9ecef; /* Define uma cor de fundo cinza clara */
+    border-radius: 10px 10px 0 0; /* Arredonda os cantos superiores do rodapé */
+}
+
+/* Estiliza os links (tag <a>) dentro do rodapé */
+footer a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+footer a:hover {
+    text-decoration: underline; /* Adiciona um sublinhado ao passar o mouse sobre o link */
+}
+
+/* Estilos para a lista no rodapé (links de contato) */
+#contato-links {
+    list-style: none; /* Remove as bolinhas da lista */
+    padding: 0;
+    margin: 10px 0;
+    display: flex; /* Alinha os itens na horizontal */
+    justify-content: center; /* Centraliza os itens */
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+    gap: 15px; /* Espaçamento entre os links */
+}
+
+/* Estiliza cada item da lista de contatos */
+#contato-links li {
+    margin: 0 5px; /* Adiciona uma pequena margem horizontal para garantir espaçamento caso a linha quebre */
+}

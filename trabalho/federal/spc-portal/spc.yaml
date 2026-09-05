@@ -1,0 +1,10 @@
+name: spc-portal
+services:
+  spc-portal:
+    image: nginx:alpine
+    container_name: spc-portal
+    restart: unless-stopped
+    ports:
+      - "8088:80"
+    volumes:
+      - /DATA/AppData/spc-portal:/usr/share/nginx/html:ro

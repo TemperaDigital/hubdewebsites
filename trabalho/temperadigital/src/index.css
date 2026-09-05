@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --background: 210 33% 99%;
+    --foreground: 222 22% 16%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 22% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 22% 16%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --primary-soft: 217 91% 96%;
+
+    --secondary: 214 32% 95%;
+    --secondary-foreground: 222 22% 16%;
+
+    --muted: 214 32% 95%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 217 91% 96%;
+    --accent-foreground: 217 70% 35%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 25% 90%;
+    --input: 214 25% 90%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(199 89% 56%) 100%);
+
+    --sidebar-background: 222 25% 13%;
+    --sidebar-foreground: 214 20% 82%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 20% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 222 18% 22%;
+    --sidebar-ring: 217 91% 60%;
+  }
+
+  .dark {
+    --background: 222 28% 9%;
+    --foreground: 214 20% 92%;
+
+    --card: 222 24% 12%;
+    --card-foreground: 214 20% 92%;
+
+    --popover: 222 24% 12%;
+    --popover-foreground: 214 20% 92%;
+
+    --primary: 217 91% 62%;
+    --primary-foreground: 0 0% 100%;
+
+    --primary-soft: 222 24% 18%;
+
+    --secondary: 222 18% 18%;
+    --secondary-foreground: 214 20% 92%;
+
+    --muted: 222 18% 18%;
+    --muted-foreground: 215 16% 60%;
+
+    --accent: 222 24% 18%;
+    --accent-foreground: 214 20% 92%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 16% 22%;
+    --input: 222 16% 22%;
+    --ring: 217 91% 62%;
+
+    --sidebar-background: 222 28% 7%;
+    --sidebar-foreground: 214 20% 82%;
+    --sidebar-primary: 217 91% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 20% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 222 18% 18%;
+    --sidebar-ring: 217 91% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Outfit', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+  }
+}

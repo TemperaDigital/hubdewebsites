@@ -1,0 +1,15 @@
+:root { color-scheme: light dark; --ok: #1a8f5a; --fail: #c0392b; --line: color-mix(in srgb, CanvasText 14%, transparent); }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.6; background: Canvas; color: CanvasText; }
+.wrap { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.25rem 4rem; }
+.eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; opacity: .6; margin: 0 0 .5rem; }
+h1 { font-size: clamp(1.5rem, 4vw, 2.1rem); line-height: 1.25; margin: 0 0 .75rem; }
+.lead { opacity: .8; margin: 0 0 2rem; }
+.checks { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.check { display: flex; gap: .85rem; align-items: flex-start; padding: 1rem .25rem; border-bottom: 1px solid var(--line); }
+.check div { display: flex; flex-direction: column; }
+.check span:not(.dot) { font-size: .88rem; opacity: .72; }
+.dot { width: .7rem; height: .7rem; border-radius: 50%; margin-top: .5rem; flex: none; background: var(--fail); }
+.check.ok .dot { background: var(--ok); }
+#c-css .dot { background: var(--ok); }
+.foot { margin-top: 2.5rem; font-size: .82rem; opacity: .55; }

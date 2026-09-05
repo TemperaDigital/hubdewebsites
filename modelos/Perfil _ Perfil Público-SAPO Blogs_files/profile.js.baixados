@@ -1,0 +1,94 @@
+Ink.createModule( 'Ink.Blogs.Profile', 1, [ 'Ink.Net.Ajax_1', 'Ink.Dom.Event_1', 'Ink.Dom.Element_1', 'Ink.Dom.Css_1', 'Ink.Util.Json_1', 'Ink.Blogs.Utils_1', 'Ink.UI.DatePicker_1', 'Ink.Util.Array_1' ],
+  function (Ajax, Event, Element, CSS, JSON, BlogsUtils, DatePicker,Array) {
+    this.endpoint = ".";
+    this.wchal    = '';
+
+    var subscriptionList        = Ink.s('.blogger_subscriptions > ul');
+    var moreSubscriptionsButton = Ink.s('.more_subscriptions');
+    
+    this.init = function (e, w) {
+      let self = this;
+
+      self.endpoint = e;
+      self.wchal    = w;
+
+      Event.observeMulti('.subscribe_blogger', 'click', function (event) {
+        Event.stopDefault(event);
+        var button   = event.currentTarget;
+        var data  = Element.data( button );
+        self.addRemoveBlog( data.name, data.action );
+      });
+
+      Event.observe(moreSubscriptionsButton, 'click', function (event) {
+        Event.stopDefault(event);
+        var button = event.currentTarget;
+        var data   = Element.data( button );
+        self.getMoreSubscriptions( data.name, data.startat );
+      });
+    };
+
+    this.getMoreSubscriptions = function ( name, startat ) {
+      let self = this;
+      CSS.setStyle(moreSubscriptionsButton, "pointer-events:none;");
+
+      new Ajax(self.endpoint, {
+        method: 'post',
+        parameters: {
+          action: 'more',
+          user: name,
+          startat: startat,
+          wchal:  wchal
+        },
+        onSuccess: function (ajax, response) {
+          Element.setHTML(subscriptionList, subscriptionList.innerHTML + response.list);
+
+          if ( response.startat != 0 ) {
+            moreSubscriptionsButton.setAttribute('data-startat', response.startat);
+            CSS.setStyle(moreSubscriptionsButton, "pointer-events:auto;");
+          } else {
+            Element.remove( moreSubscriptionsButton );
+          }
+        },
+        onFailure: function (ajax, error) {
+          BlogsUtils.printMessage( 'profile', 'error', error, Ink.s('h2') );
+        }
+      });
+    };
+
+    this.addRemoveBlog = function ( name , action) {
+      let self = this;
+
+      self.action = action;
+
+      new Ajax(self.endpoint, {
+        method: 'post',
+        parameters: {
+          action: action,
+          user: name,
+          wchal:  wchal
+        },
+        onSuccess: function (ajax, response) {
+          var type = 'error';
+          if (response.success == 1) {
+            type = 'success';
+            if (self.action =='del') {
+              Array.forEach(Ink.ss(".subscribe_blogger.add"),    function (o){ CSS.removeClassName(o,"hidden"); } );
+              Array.forEach(Ink.ss(".subscribe_blogger.delete"), function (o){ CSS.addClassName(o,"hidden");    } );
+            } else {
+              Array.forEach(Ink.ss(".subscribe_blogger.delete"), function (o){ CSS.removeClassName(o,"hidden"); } );
+              Array.forEach(Ink.ss(".subscribe_blogger.add"),    function (o){ CSS.addClassName(o,"hidden");    } );
+            }
+          }
+
+          BlogsUtils.printMessage( 'profile', type, response.message, Ink.s('h2') );
+        },
+        onFailure: function (ajax, error) {
+          BlogsUtils.printMessage( 'profile', 'error', error, Ink.s('h2') );
+        }
+      });
+
+    };
+
+    return this;
+  }
+);

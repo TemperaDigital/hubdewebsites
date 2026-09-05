@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Guia das orientacoes do DGP/DAP para inclusao de acao de desenvolvimento no PDP.">
+<title>Guia do Afastamento para Capacitação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&display=swap">
+<style>
+:root{
+  --ink:#17201A; --ink-soft:#4A574E; --ink-faint:#77837B;
+  --paper:#FAFBF8; --surface:#EDF1EA; --surface-2:#E3E9DF;
+  --line:#D3DCCE; --line-soft:#E5EADF;
+  --accent:#3D6B4E; --accent-deep:#2C5039; --accent-wash:#E6EFE7;
+  --gold:#8A6A2F; --gold-wash:#F5EFE1;
+  --critical:#A6392C; --critical-wash:#FBEAE7;
+  --warn:#8A5F0E; --warn-wash:#FAF1DE;
+  --shadow:0 1px 2px rgba(23,32,26,.06), 0 8px 24px -12px rgba(23,32,26,.18);
+  --radius:6px;
+  --maxw:68ch;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#E4EBE1; --ink-soft:#AEBAAF; --ink-faint:#8A968C;
+    --paper:#131813; --surface:#1B211B; --surface-2:#232A23;
+    --line:#333B33; --line-soft:#282F28;
+    --accent:#86B593; --accent-deep:#A5CBAF; --accent-wash:#1D2A20;
+    --gold:#C7A05A; --gold-wash:#2A2417;
+    --critical:#E08375; --critical-wash:#2E1A17;
+    --warn:#D6A343; --warn-wash:#2A2113;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E4EBE1; --ink-soft:#AEBAAF; --ink-faint:#8A968C;
+  --paper:#131813; --surface:#1B211B; --surface-2:#232A23;
+  --line:#333B33; --line-soft:#282F28;
+  --accent:#86B593; --accent-deep:#A5CBAF; --accent-wash:#1D2A20;
+  --gold:#C7A05A; --gold-wash:#2A2417;
+  --critical:#E08375; --critical-wash:#2E1A17;
+  --warn:#D6A343; --warn-wash:#2A2113;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Zilla Slab",Georgia,serif; text-wrap:balance; margin:0; line-height:1.2}
+p{margin:0}
+a{color:var(--accent-deep); text-underline-offset:3px; text-decoration-thickness:1px}
+a:hover{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* ---------- estrutura ---------- */
+.wrap{max-width:1180px; margin:0 auto; padding:0 24px}
+.layout{display:grid; grid-template-columns:236px minmax(0,1fr); gap:56px; align-items:start}
+@media (max-width:900px){ .layout{grid-template-columns:1fr; gap:0} }
+
+/* ---------- cabeçalho ---------- */
+.hero{border-bottom:1px solid var(--line); background:var(--surface)}
+.hero-inner{max-width:1180px; margin:0 auto; padding:52px 24px 44px}
+.crest{display:flex; align-items:center; gap:12px; margin-bottom:26px}
+.crest svg{flex:none}
+.crest-txt{font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-faint); font-weight:600; line-height:1.5}
+h1{font-size:clamp(30px,4.6vw,46px); font-weight:700; letter-spacing:-.015em; max-width:20ch}
+.sub{margin-top:16px; max-width:60ch; color:var(--ink-soft); font-size:17px}
+.meta{margin-top:26px; display:flex; flex-wrap:wrap; gap:8px}
+.chip{font-family:"IBM Plex Mono",monospace; font-size:11.5px; padding:5px 10px;
+  border:1px solid var(--line); border-radius:100px; color:var(--ink-soft); background:var(--paper)}
+
+/* ---------- índice ---------- */
+.toc{position:sticky; top:24px; padding:24px 0 40px}
+.toc-h{font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-faint); font-weight:600; margin-bottom:14px}
+.toc ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.toc a{display:flex; gap:10px; padding:7px 10px; border-radius:var(--radius);
+  text-decoration:none; color:var(--ink-soft); font-size:14px; line-height:1.35;
+  border-left:2px solid transparent; transition:background .15s, color .15s}
+.toc a:hover{background:var(--surface); color:var(--ink)}
+.toc a.on{background:var(--accent-wash); color:var(--accent-deep);
+  border-left-color:var(--accent); font-weight:600}
+.toc .n{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-faint);
+  padding-top:2px; font-variant-numeric:tabular-nums}
+.toc a.on .n{color:var(--accent)}
+
+.toc-mobile{display:none}
+@media (max-width:900px){
+  .toc{position:static; padding:16px 0}
+  .toc-mobile{display:block; border-bottom:1px solid var(--line); background:var(--paper);
+    position:sticky; top:0; z-index:30}
+  .toc-btn{width:100%; display:flex; justify-content:space-between; align-items:center;
+    padding:14px 24px; background:none; border:0; color:var(--ink); cursor:pointer;
+    font-family:inherit; font-size:14px; font-weight:600}
+  .toc-panel{display:none; padding:0 14px 16px}
+  .toc-panel.open{display:block}
+  .toc-desktop{display:none}
+}
+
+/* ---------- seções ---------- */
+main{padding-bottom:88px}
+section{padding:52px 0 8px; scroll-margin-top:16px}
+@media (max-width:900px){ section{scroll-margin-top:64px} }
+.sec-head{display:flex; gap:14px; align-items:baseline; margin-bottom:8px}
+.sec-n{font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.06em; padding-top:4px; flex:none}
+h2{font-size:clamp(23px,2.9vw,31px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:18px; font-weight:600; margin-top:30px; margin-bottom:8px}
+.lead{color:var(--ink-soft); max-width:var(--maxw); margin-top:10px}
+section p{max-width:var(--maxw); margin-top:12px}
+section > p:first-of-type{margin-top:14px}
+
+/* ---------- analogia ---------- */
+.analogy{margin-top:22px; padding:20px 22px; border-radius:var(--radius);
+  background:var(--gold-wash); border:1px solid color-mix(in srgb, var(--gold) 26%, transparent);
+  max-width:var(--maxw); display:flex; gap:14px}
+.analogy svg{flex:none; margin-top:2px; color:var(--gold)}
+.analogy-l{display:block; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  font-weight:700; color:var(--gold); margin-bottom:5px}
+.analogy p{margin:0; font-size:15px; color:var(--ink)}
+
+/* ---------- alertas ---------- */
+.alert{margin-top:20px; padding:16px 18px; border-radius:var(--radius);
+  display:flex; gap:13px; max-width:var(--maxw); border:1px solid; font-size:15px}
+.alert svg{flex:none; margin-top:2px}
+.alert .t{font-weight:700; display:block; margin-bottom:3px; font-size:14px;
+  letter-spacing:.02em}
+.alert p{margin:0; max-width:none; font-size:14.5px; line-height:1.55}
+.alert.crit{background:var(--critical-wash); border-color:color-mix(in srgb,var(--critical) 32%,transparent)}
+.alert.crit svg,.alert.crit .t{color:var(--critical)}
+.alert.warn{background:var(--warn-wash); border-color:color-mix(in srgb,var(--warn) 34%,transparent)}
+.alert.warn svg,.alert.warn .t{color:var(--warn)}
+.alert.info{background:var(--accent-wash); border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
+.alert.info svg,.alert.info .t{color:var(--accent-deep)}
+
+/* ---------- fases ---------- */
+.phases{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:26px}
+@media (max-width:720px){ .phases{grid-template-columns:1fr} }
+.phase{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:18px 18px 20px; position:relative}
+.phase .p-n{font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
+  color:var(--gold); letter-spacing:.1em}
+.phase h4{font-size:16px; margin:7px 0 6px; font-weight:600}
+.phase p{font-size:14px; color:var(--ink-soft); margin:0; max-width:none}
+
+/* ---------- comparador 30 dias ---------- */
+.cmp{margin-top:26px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden}
+.cmp-tabs{display:grid; grid-template-columns:1fr 1fr}
+.cmp-tab{padding:15px 16px; background:var(--surface); border:0; cursor:pointer;
+  font-family:"Zilla Slab",Georgia,serif; font-size:17px; font-weight:600; color:var(--ink-faint);
+  border-bottom:3px solid transparent; transition:background .15s,color .15s}
+.cmp-tab:first-child{border-right:1px solid var(--line)}
+.cmp-tab[aria-selected="true"]{background:var(--paper); color:var(--ink)}
+.cmp-tab.a[aria-selected="true"]{border-bottom-color:var(--accent)}
+.cmp-tab.b[aria-selected="true"]{border-bottom-color:var(--critical)}
+.cmp-body{padding:22px; background:var(--paper)}
+.cmp-row{display:flex; gap:12px; padding:11px 0; border-bottom:1px dashed var(--line-soft);
+  align-items:flex-start}
+.cmp-row:last-child{border-bottom:0}
+.cmp-row .k{font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:600;
+  color:var(--ink-faint); width:118px; flex:none; padding-top:3px}
+.cmp-row .v{font-size:15px; font-weight:500}
+.cmp-row .v.neg{color:var(--critical); font-weight:600}
+.cmp-row .v.pos{color:var(--accent-deep); font-weight:600}
+
+/* ---------- tipos de afastamento ---------- */
+.types{margin-top:24px; display:flex; flex-direction:column; gap:10px}
+.type{border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
+  overflow:hidden}
+.type-btn{width:100%; display:flex; align-items:center; gap:13px; padding:15px 17px;
+  background:none; border:0; cursor:pointer; text-align:left; font-family:inherit; color:var(--ink)}
+.type-btn:hover{background:var(--surface-2)}
+.type-tag{font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
+  padding:3px 7px; border-radius:3px; flex:none; letter-spacing:.04em}
+.type-tag.com{background:var(--critical-wash); color:var(--critical)}
+.type-tag.sem{background:var(--accent-wash); color:var(--accent-deep)}
+.type-name{font-family:"Zilla Slab",Georgia,serif; font-size:17px; font-weight:600; flex:1}
+.type-art{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-faint); flex:none}
+.type-chev{flex:none; color:var(--ink-faint); transition:transform .2s}
+.type[open] .type-chev{transform:rotate(180deg)}
+.type-panel{display:none; padding:2px 17px 19px; background:var(--paper);
+  border-top:1px solid var(--line)}
+.type[open] .type-panel{display:block}
+.type-panel p{max-width:none; font-size:15px}
+
+/* ---------- calculadora ---------- */
+.calc{margin-top:24px; border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--surface); padding:22px}
+.calc-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+@media (max-width:620px){ .calc-grid{grid-template-columns:1fr} }
+.field label{display:block; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  font-weight:600; color:var(--ink-faint); margin-bottom:7px}
+.field input{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--paper); color:var(--ink); font-family:"IBM Plex Mono",monospace;
+  font-size:16px; font-variant-numeric:tabular-nums}
+.field input:focus{border-color:var(--accent)}
+.calc-out{margin-top:20px; padding-top:18px; border-top:1px solid var(--line)}
+.verdict{display:flex; gap:11px; align-items:flex-start; padding:14px 16px; border-radius:var(--radius);
+  border:1px solid}
+.verdict.ok{background:var(--accent-wash); border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
+.verdict.ok .vt{color:var(--accent-deep)}
+.verdict.no{background:var(--critical-wash); border-color:color-mix(in srgb,var(--critical) 32%,transparent)}
+.verdict.no .vt{color:var(--critical)}
+.verdict svg{flex:none; margin-top:1px}
+.vt{font-weight:700; font-size:14.5px; display:block; margin-bottom:4px}
+.verdict ul{margin:6px 0 0; padding-left:18px; font-size:14px; color:var(--ink)}
+.verdict li{margin-top:3px}
+.calc-note{margin-top:12px; font-size:13px; color:var(--ink-faint); max-width:none}
+
+/* ---------- tabelas ---------- */
+.tw{overflow-x:auto; margin-top:22px; border:1px solid var(--line); border-radius:var(--radius)}
+table{width:100%; border-collapse:collapse; font-size:15px; min-width:400px}
+th{text-align:left; padding:12px 16px; background:var(--surface); font-size:11px;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:600;
+  border-bottom:1px solid var(--line)}
+td{padding:12px 16px; border-bottom:1px solid var(--line-soft)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-weight:500}
+
+/* ---------- checklist ---------- */
+.ck-bar{margin-top:22px; display:flex; align-items:center; gap:14px}
+.ck-track{flex:1; height:7px; background:var(--surface-2); border-radius:100px; overflow:hidden}
+.ck-fill{height:100%; width:0; background:var(--accent); border-radius:100px;
+  transition:width .3s ease}
+.ck-count{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--ink-soft);
+  font-variant-numeric:tabular-nums; flex:none}
+.ck-reset{background:none; border:1px solid var(--line); border-radius:var(--radius);
+  padding:5px 10px; font-family:inherit; font-size:12px; color:var(--ink-soft); cursor:pointer}
+.ck-reset:hover{background:var(--surface); color:var(--ink)}
+.ck-group{margin-top:22px}
+.ck-gh{font-size:11px; letter-spacing:.11em; text-transform:uppercase; font-weight:600;
+  color:var(--ink-faint); margin-bottom:9px}
+.ck{display:flex; gap:12px; padding:11px 13px; border:1px solid var(--line-soft);
+  border-radius:var(--radius); margin-bottom:6px; cursor:pointer; background:var(--paper);
+  align-items:flex-start; transition:background .15s,border-color .15s}
+.ck:hover{border-color:var(--line); background:var(--surface)}
+.ck input{margin:3px 0 0; width:17px; height:17px; accent-color:var(--accent); flex:none; cursor:pointer}
+.ck-txt{font-size:15px; line-height:1.5}
+.ck-ref{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-faint);
+  display:block; margin-top:2px}
+.ck.done .ck-txt{color:var(--ink-faint); text-decoration:line-through;
+  text-decoration-color:var(--line)}
+
+/* ---------- busca de temas ---------- */
+.search{margin-top:24px}
+.search-in{position:relative}
+.search-in svg{position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  color:var(--ink-faint); pointer-events:none}
+.search input{width:100%; padding:13px 15px 13px 42px; border:1px solid var(--line);
+  border-radius:var(--radius); background:var(--surface); color:var(--ink);
+  font-family:inherit; font-size:15px}
+.search input:focus{border-color:var(--accent); background:var(--paper)}
+.search-meta{margin-top:11px; font-size:13px; color:var(--ink-faint);
+  font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+.themes{margin-top:14px; max-height:340px; overflow-y:auto; border:1px solid var(--line);
+  border-radius:var(--radius); background:var(--paper)}
+.themes ul{list-style:none; margin:0; padding:6px}
+.themes li{padding:7px 11px; font-size:14.5px; border-radius:4px; line-height:1.4}
+.themes li:nth-child(odd){background:var(--surface)}
+.themes mark{background:color-mix(in srgb,var(--gold) 30%,transparent); color:inherit;
+  border-radius:2px; padding:0 1px}
+.themes .none{padding:22px; text-align:center; color:var(--ink-faint); font-size:14px}
+
+/* ---------- links ---------- */
+.links{margin-top:24px; display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:12px}
+.lk{display:block; padding:17px 18px; border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--surface); text-decoration:none; color:var(--ink); transition:border-color .15s,transform .15s}
+.lk:hover{border-color:var(--accent); transform:translateY(-1px); color:var(--ink)}
+.lk .lk-n{font-family:"Zilla Slab",Georgia,serif; font-weight:600; font-size:16px;
+  display:flex; align-items:center; gap:7px}
+.lk .lk-n svg{flex:none; color:var(--ink-faint)}
+.lk:hover .lk-n svg{color:var(--accent)}
+.lk .lk-d{font-size:13.5px; color:var(--ink-soft); margin-top:5px; line-height:1.5}
+.lk .lk-u{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-faint);
+  margin-top:8px; word-break:break-all}
+.lk.hero-lk{background:var(--accent-wash); border-color:color-mix(in srgb,var(--accent) 34%,transparent)}
+
+.laws{margin-top:22px; display:flex; flex-direction:column; gap:1px}
+.law{display:flex; gap:14px; padding:13px 15px; border:1px solid var(--line-soft);
+  border-radius:var(--radius); margin-bottom:6px; text-decoration:none; color:var(--ink);
+  align-items:baseline; background:var(--paper)}
+.law:hover{border-color:var(--accent); background:var(--surface); color:var(--ink)}
+.law .law-id{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600;
+  color:var(--accent-deep); flex:none; width:132px}
+.law .law-t{font-size:14.5px; color:var(--ink-soft)}
+@media (max-width:620px){
+  .law{flex-direction:column; gap:3px}
+  .law .law-id{width:auto}
+}
+
+/* ---------- rodapé ---------- */
+footer{border-top:1px solid var(--line); background:var(--surface); margin-top:40px}
+.foot{max-width:1180px; margin:0 auto; padding:32px 24px 44px; font-size:13.5px;
+  color:var(--ink-soft)}
+.foot p{max-width:78ch; margin-top:9px}
+.foot strong{color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important; scroll-behavior:auto !important}
+}
+html{scroll-behavior:smooth}
+@media print{
+  .toc-mobile,.toc,.ck-reset,.search input{display:none}
+  .themes{max-height:none}
+  body{font-size:11pt}
+  .type-panel{display:block !important}
+}
+
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="crest">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="color:var(--accent)">
+        <path d="M12 2 3 6v6c0 5 3.8 9.1 9 10 5.2-.9 9-5 9-10V6l-9-4Z"/>
+        <path d="M9 12.5l2 2 4-4.5"/>
+      </svg>
+      <div class="crest-txt">
+        Ministério da Defesa · Exército Brasileiro<br>
+        Departamento Geral do Pessoal · Diretoria de Assistência ao Pessoal
+      </div>
+    </div>
+    <h1>Afastamento para capacitação: como pedir sem tropeçar</h1>
+    <p class="sub">
+      Guia de leitura das orientações para preencher o formulário de <strong>Solicitação de
+      Inclusão de Ação de Desenvolvimento no Plano de Desenvolvimento de Pessoas (PDP)</strong>.
+      Os prazos, as regras e o que o processo precisa conter — na ordem em que você vai precisar deles.
+    </p>
+    <div class="meta">
+      <span class="chip">Lei nº 8.112/1990</span>
+      <span class="chip">Decreto nº 9.991/2019</span>
+      <span class="chip">Decreto nº 10.506/2020</span>
+      <span class="chip">IN SGP-ENAP/SEDGG/ME nº 21/2021</span>
+      <span class="chip">IN nº 69/2021 · IN nº 46/2022</span>
+    </div>
+  </div>
+</div>
+
+<nav class="toc-mobile" aria-label="Índice">
+  <button class="toc-btn" id="tocBtn" aria-expanded="false">
+    <span>Índice do guia</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+  <div class="toc-panel" id="tocPanel"></div>
+</nav>
+
+<div class="wrap">
+  <div class="layout">
+    <nav class="toc toc-desktop" aria-label="Índice do guia">
+      <div class="toc-h">Neste guia</div>
+      <div id="tocDesktop"></div>
+    </nav>
+
+    <main>
+      <!-- 1 -->
+      <section id="s1">
+        <div class="sec-head"><span class="sec-n">01</span><h2>Primeiro: entenda o que é o PDP</h2></div>
+        <p class="lead">Antes de falar em afastamento, é preciso entender por que quase tudo depende
+        de uma coisa só: a ação estar prevista no PDP do órgão.</p>
+
+        <div class="analogy">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+            <path d="M9 21V9a3 3 0 0 1 6 0v12"/><path d="M3 21h18"/><path d="M5 21V10l7-6 7 6v11"/>
+          </svg>
+          <div>
+            <span class="analogy-l">Pense assim</span>
+            <p>O PDP é a <strong>lista de compras anual</strong> do órgão para capacitação. Ele é
+            montado uma vez por ano, com antecedência. Se o curso que você quer fazer não entrou
+            na lista quando ela foi escrita, não há como “passar no caixa” depois: não sai
+            afastamento, não sai custeio. É por isso que este formulário existe — ele é o pedido
+            para <em>incluir um item na lista</em>, e não o pedido de afastamento em si.</p>
+          </div>
+        </div>
+
+        <div class="phases">
+          <div class="phase">
+            <div class="p-n">FASE 1</div>
+            <h4>Incluir no PDP</h4>
+            <p>Você preenche o formulário solicitando que a ação de desenvolvimento entre no
+            planejamento do órgão.</p>
+          </div>
+          <div class="phase">
+            <div class="p-n">FASE 2</div>
+            <h4>Publicação do PDP</h4>
+            <p>O órgão consolida e publica o plano. Só o que foi publicado pode virar processo.</p>
+          </div>
+          <div class="phase">
+            <div class="p-n">FASE 3</div>
+            <h4>Instruir o processo</h4>
+            <p>Com a ação no PDP publicado, abre-se o processo de afastamento com os documentos
+            do art. 28.</p>
+          </div>
+        </div>
+
+        <div class="alert crit">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 9v4"/><path d="M12 17h.01"/>
+            <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
+          </svg>
+          <div>
+            <span class="t">Ponto crítico — sem PDP, não há afastamento</span>
+            <p>Um dos documentos obrigatórios do processo é a <strong>cópia do trecho do PDP onde
+            aquela necessidade está indicada</strong> (art. 28, IV). Sem ela, o processo não se
+            sustenta. Perder o prazo de inclusão no PDP significa esperar o ciclo seguinte.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section id="s2">
+        <div class="sec-head"><span class="sec-n">02</span><h2>A linha dos 30 dias</h2></div>
+        <p class="lead">É a divisão que mais pega servidor de surpresa. Passar de trinta dias
+        consecutivos não muda só o tamanho do afastamento — muda o seu contracheque e o seu cargo.</p>
+
+        <div class="cmp">
+          <div class="cmp-tabs" role="tablist" aria-label="Comparação por duração do afastamento">
+            <button class="cmp-tab a" role="tab" id="tabA" aria-controls="panA" aria-selected="true">Até 30 dias</button>
+            <button class="cmp-tab b" role="tab" id="tabB" aria-controls="panB" aria-selected="false">Superior a 30 dias</button>
+          </div>
+          <div class="cmp-body" id="panA" role="tabpanel" aria-labelledby="tabA">
+            <div class="cmp-row"><span class="k">Remuneração</span><span class="v">Mantém a remuneração básica</span></div>
+            <div class="cmp-row"><span class="k">Cargo / função</span><span class="v pos">Mantém o cargo em comissão ou função de confiança</span></div>
+            <div class="cmp-row"><span class="k">Gratificações</span><span class="v pos">Mantém as gratificações</span></div>
+          </div>
+          <div class="cmp-body" id="panB" role="tabpanel" aria-labelledby="tabB" hidden>
+            <div class="cmp-row"><span class="k">Remuneração</span><span class="v">Mantém apenas a remuneração básica</span></div>
+            <div class="cmp-row"><span class="k">Cargo / função</span><span class="v neg">Exoneração do cargo em comissão ou dispensa da função</span></div>
+            <div class="cmp-row"><span class="k">Gratificações</span><span class="v neg">Suspensas durante todo o período do afastamento</span></div>
+            <div class="cmp-row"><span class="k">Adicionais</span><span class="v neg">Não recebe adicionais vinculados à atividade ou ao local de trabalho</span></div>
+          </div>
+        </div>
+
+        <div class="alert crit">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 9v4"/><path d="M12 17h.01"/>
+            <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
+          </svg>
+          <div>
+            <span class="t">Ponto crítico — a exoneração é sua responsabilidade</span>
+            <p>Quem ocupa cargo em comissão ou função de confiança <strong>deve requerer a
+            exoneração ou a dispensa</strong>, com efeito a contar da data de início do
+            afastamento. Não é automático: é um pedido que parte de você, e precisa estar no
+            processo (art. 28, VII).</p>
+          </div>
+        </div>
+
+        <p>O que permanece nos dois casos é a <strong>remuneração básica</strong>. O que muda é
+        tudo que está por cima dela: cargo, função, gratificações e adicionais ligados à atividade
+        ou ao local de trabalho, que não fazem parte da estrutura remuneratória básica do cargo
+        efetivo.</p>
+      </section>
+
+      <!-- 3 -->
+      <section id="s3">
+        <div class="sec-head"><span class="sec-n">03</span><h2>Os cinco caminhos possíveis</h2></div>
+        <p class="lead">O formulário pede que você escolha a modalidade. Quatro geram afastamento;
+        uma acontece dentro do expediente. Clique para ver as condições de cada uma.</p>
+
+        <div class="types" id="types">
+          <details class="type">
+            <summary class="type-btn">
+              <span class="type-tag com">COM AFASTAMENTO</span>
+              <span class="type-name">Licença para capacitação</span>
+              <span class="type-art">art. 87</span>
+              <svg class="type-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="type-panel">
+              <p>Afastamento para cursos e ações de capacitação, com prazo acumulado a cada
+              cinco anos de efetivo exercício. É a modalidade mais usada — e a que tem a regra
+              de carga horária mais fácil de esquecer.</p>
+              <div class="alert warn">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/>
+                </svg>
+                <div>
+                  <span class="t">Atenção — mínimo de 30 horas semanais</span>
+                  <p>A licença só pode ser concedida quando a carga horária total da ação
+                  <strong>ou do conjunto de ações</strong> for igual ou superior a
+                  <strong>trinta horas semanais</strong> (art. 26 do Decreto nº 9.991/2019, com
+                  redação do Decreto nº 10.506/2020). Um curso leve, de poucas horas por semana,
+                  não sustenta a licença sozinho.</p>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="type">
+            <summary class="type-btn">
+              <span class="type-tag com">COM AFASTAMENTO</span>
+              <span class="type-name">Pós-graduação stricto sensu no País</span>
+              <span class="type-art">art. 96-A</span>
+              <svg class="type-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="type-panel">
+              <p>Para <strong>mestrado, doutorado ou pós-doutorado</strong> realizados no Brasil.</p>
+              <div class="alert warn">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/>
+                </svg>
+                <div>
+                  <span class="t">Atenção — há processo seletivo</span>
+                  <p>Este afastamento exige participação em <strong>Processo Seletivo realizado
+                  pela Região Militar</strong>, caso haja demanda. Ou seja: além de estar no PDP,
+                  depende de uma etapa competitiva que não está sob seu controle.</p>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="type">
+            <summary class="type-btn">
+              <span class="type-tag com">COM AFASTAMENTO</span>
+              <span class="type-name">Estudo no exterior</span>
+              <span class="type-art">art. 95</span>
+              <svg class="type-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="type-panel">
+              <p>Afastamento para estudo ou missão fora do País.</p>
+              <div class="alert warn">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/>
+                </svg>
+                <div>
+                  <span class="t">Atenção — depende de parecer</span>
+                  <p>Deverá ser emitido <strong>parecer favorável ou não pelas unidades
+                  competentes</strong>. Reserve tempo para essa tramitação no seu planejamento.</p>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="type">
+            <summary class="type-btn">
+              <span class="type-tag com">COM AFASTAMENTO</span>
+              <span class="type-name">Programa de treinamento regularmente instituído</span>
+              <span class="type-art">—</span>
+              <svg class="type-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="type-panel">
+              <p>Participação em programa de treinamento regularmente instituído pela
+              Administração.</p>
+            </div>
+          </details>
+
+          <details class="type">
+            <summary class="type-btn">
+              <span class="type-tag sem">SEM AFASTAMENTO</span>
+              <span class="type-name">Ação de desenvolvimento em serviço</span>
+              <span class="type-art">art. 31, §2º</span>
+              <svg class="type-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="type-panel">
+              <p>Ação realizada <strong>durante a jornada de trabalho</strong>, sem afastar o
+              servidor.</p>
+              <div class="alert info">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/>
+                </svg>
+                <div>
+                  <span class="t">Mesmo sem afastamento, entra no PDP</span>
+                  <p>Ainda que não gere afastamento, a ação <strong>deve constar no PDP</strong>
+                  para fins de planejamento e registro do desenvolvimento de necessidades e
+                  competências (art. 31, § 2º da IN SGP-ENAP/SEDGG/ME nº 21/2021). É um erro
+                  comum deixar essas ações de fora.</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section id="s4">
+        <div class="sec-head"><span class="sec-n">04</span><h2>Quanto tempo você pode ficar</h2></div>
+
+        <h3>Licença para capacitação</h3>
+        <div class="analogy">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+            <rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/>
+          </svg>
+          <div>
+            <span class="analogy-l">Pense assim</span>
+            <p>É uma <strong>poupança de tempo</strong>: a cada cinco anos de serviço você acumula
+            um saldo de três meses. Pode sacar tudo de uma vez ou parcelar — em até seis retiradas,
+            respeitando um valor mínimo por saque e um intervalo obrigatório entre eles.</p>
+          </div>
+        </div>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Regra</th><th>Limite</th></tr></thead>
+            <tbody>
+              <tr><td>Saldo acumulado</td><td class="num">3 meses a cada 5 anos de serviço</td></tr>
+              <tr><td>Divisão em períodos</td><td class="num">até 6 períodos</td></tr>
+              <tr><td>Duração mínima de cada período</td><td class="num">15 dias</td></tr>
+              <tr><td>Intervalo entre períodos</td><td class="num">60 dias</td></tr>
+              <tr><td>Carga horária das ações</td><td class="num">≥ 30 horas semanais</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Confira o seu parcelamento</h3>
+        <p>Informe como pretende dividir a licença. A verificação abaixo aplica as quatro regras
+        do quadro — é uma conferência rápida, não uma decisão da Administração.</p>
+
+        <div class="calc">
+          <div class="calc-grid">
+            <div class="field">
+              <label for="cDias">Dias por período</label>
+              <input type="number" id="cDias" value="15" min="1" max="90" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="cPer">Quantidade de períodos</label>
+              <input type="number" id="cPer" value="6" min="1" max="12" inputmode="numeric">
+            </div>
+          </div>
+          <div class="calc-out" id="calcOut" aria-live="polite"></div>
+          <p class="calc-note">Base de cálculo: 3 meses = 90 dias. O intervalo de 60 dias entre
+          períodos não entra na soma, mas alonga bastante o calendário — planeje com folga.</p>
+        </div>
+
+        <h3>Pós-graduação e exterior</h3>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Modalidade</th><th>Prazo máximo</th></tr></thead>
+            <tbody>
+              <tr><td>Mestrado</td><td class="num">até 24 meses</td></tr>
+              <tr><td>Doutorado</td><td class="num">até 48 meses</td></tr>
+              <tr><td>Pós-doutorado</td><td class="num">até 12 meses</td></tr>
+              <tr><td>Estudo no exterior</td><td class="num">até 4 anos</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section id="s5">
+        <div class="sec-head"><span class="sec-n">05</span><h2>O requisito que trava processos</h2></div>
+        <p class="lead">Antes de pensar em documentos, resolva este: o currículo no Banco de
+        Talentos.</p>
+
+        <div class="alert warn">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/>
+          </svg>
+          <div>
+            <span class="t">Atenção — currículo no SIGEPE é documento do processo</span>
+            <p>Cadastre e mantenha atualizado o seu currículo no <strong>SIGEPE — Banco de
+            Talentos</strong>. Não é recomendação: o currículo extraído do sistema é um dos
+            itens obrigatórios da instrução processual (art. 28, inciso II da IN
+            SGP-ENAP/SEDGG/ME nº 21/2021). Currículo desatualizado é processo devolvido.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 -->
+      <section id="s6">
+        <div class="sec-head"><span class="sec-n">06</span><h2>Monte o processo sem esquecer nada</h2></div>
+        <p class="lead">Depois da publicação do PDP, o processo de afastamento precisa ser
+        instruído com os itens abaixo. Marque conforme for reunindo — o navegador guarda o
+        progresso neste dispositivo.</p>
+
+        <div class="ck-bar">
+          <div class="ck-track"><div class="ck-fill" id="ckFill"></div></div>
+          <span class="ck-count" id="ckCount">0 / 15</span>
+          <button class="ck-reset" id="ckReset">Limpar</button>
+        </div>
+
+        <div class="ck-group">
+          <div class="ck-gh">Documentos de abertura</div>
+          <div id="ckA"></div>
+        </div>
+        <div class="ck-group">
+          <div class="ck-gh">Sobre a ação de desenvolvimento — art. 28, I</div>
+          <div id="ckB"></div>
+        </div>
+        <div class="ck-group">
+          <div class="ck-gh">Demais itens — art. 28, II a IX</div>
+          <div id="ckC"></div>
+        </div>
+
+        <div class="alert info">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/>
+          </svg>
+          <div>
+            <span class="t">Documentos comprobatórios: quando não são exigidos</span>
+            <p>Para informar o período do afastamento, incluído o trânsito, a norma
+            <strong>dispensa a apresentação prévia de documentos comprobatórios</strong>
+            (art. 28, I, “c”). A previsão basta na instrução inicial.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 -->
+      <section id="downloads">
+        <div class="sec-head"><span class="sec-n">07</span><h2>Baixe os documentos</h2></div>
+        <p class="lead">O formulário e os quatro anexos citados no DIEx da DAP, mais os dois
+        expedientes que deram origem ao levantamento. Os PDFs abrem para leitura em nova
+        aba; o formulário baixa direto, para você preencher no Word.</p>
+
+        <div class="links">
+          <a class="lk hero-lk" href="https://sites.fguerra.ia.br/trabalhos/federal/guia-pdp-afastamento/downloads/PDP_2027_-_Formul_rio_-_Anexo_2.docx" download>
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M4 21h16"/></svg>
+              Anexo 2 — Formulário
+            </span>
+            <span class="lk-d"><strong>É este que você preenche.</strong> “Solicitação de Inclusão
+            de Ação de Desenvolvimento no PDP”, com os campos de identificação, a ação pretendida
+            e o tema geral da seção 08. Documento editável do Word.</span>
+            <span class="lk-u">DOCX · 58 KB</span>
+          </a>
+
+          <a class="lk" href="https://sites.fguerra.ia.br/trabalhos/federal/guia-pdp-afastamento/downloads/orientacaoes.pdf" target="_blank" rel="noopener">
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+              Anexo 1 — Orientações
+            </span>
+            <span class="lk-d">O documento de origem deste guia: orientações do DGP/DAP quanto ao
+            preenchimento do formulário, informações gerais sobre afastamento e a lista completa
+            dos temas gerais.</span>
+            <span class="lk-u">PDF · 5 páginas · 1,8 MB</span>
+          </a>
+
+          <a class="lk" href="https://sites.fguerra.ia.br/trabalhos/federal/guia-pdp-afastamento/downloads/guia%20do%20usuario.pdf" target="_blank" rel="noopener">
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+              Anexo 4 — Guia do usuário
+            </span>
+            <span class="lk-d">Manual da plataforma DesenvolveGOV para os perfis <strong>Usuário</strong>
+            e <strong>Usuário PDP</strong> — as telas que o servidor e a chefia usam para informar
+            e validar a necessidade de desenvolvimento.</span>
+            <span class="lk-u">PDF · 16 páginas · 1,2 MB</span>
+          </a>
+
+          <a class="lk" href="https://sites.fguerra.ia.br/trabalhos/federal/guia-pdp-afastamento/downloads/sistema%20desenvolve%20gov.pdf" target="_blank" rel="noopener">
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+              Anexo 3 — Sistema DesenvolveGOV
+            </span>
+            <span class="lk-d">Apresentação do sistema da Enap e do MGI que substitui o
+            preenchimento manual do PDP: o que é, por que foi criado e o que muda no ciclo de
+            desenvolvimento de pessoas.</span>
+            <span class="lk-u">PDF · 4 páginas · 107 KB</span>
+          </a>
+
+          <a class="lk" href="https://sites.fguerra.ia.br/trabalhos/federal/guia-pdp-afastamento/downloads/DIEX%20da%20DAP.pdf" target="_blank" rel="noopener">
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+              DIEx nº 4988 — DAP
+            </span>
+            <span class="lk-d">Expediente que abre o levantamento do PDP/2027, de 14 AGO 26. Traz a
+            <strong>tabela de etapas e perfis</strong> — quem informa, quem valida e quem cadastra
+            na plataforma.</span>
+            <span class="lk-u">PDF · 2 páginas · 117 KB</span>
+          </a>
+
+          <a class="lk" href="https://sites.fguerra.ia.br/trabalhos/federal/guia-pdp-afastamento/downloads/DIEx-7RM-pdp2027.pdf" target="_blank" rel="noopener">
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+              DIEx nº 10811 — 7ª RM
+            </span>
+            <span class="lk-d">Difusão do expediente da DAP na 7ª Região Militar, de 25 AGO 26.
+            É o documento que <strong>fixa o prazo</strong> e indica o contato da DRPC/7 para
+            esclarecimentos.</span>
+            <span class="lk-u">PDF · 1 página · 78 KB</span>
+          </a>
+        </div>
+
+        <div class="alert warn">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/>
+          </svg>
+          <div>
+            <span class="t">Prazo: 3 de setembro de 2026</span>
+            <p>O DIEx nº 10811-DRPC/Esc Pes/Ch EM, da 7ª RM, determina que o formulário preenchido
+            seja remetido ao Grande Comando Territorial <strong>até 3 de setembro de 2026,
+            impreterivelmente</strong>, para que o planejamento seja implantado na plataforma
+            DesenvolveGOV. Confirme com a sua seção de pessoal o prazo interno, que é anterior a
+            esse.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 -->
+      <section id="s7">
+        <div class="sec-head"><span class="sec-n">08</span><h2>Escolha o tema geral</h2></div>
+        <p class="lead">O formulário pede <strong>um</strong> tema geral para responder à pergunta
+        IFS3. A lista oficial é longa; use a busca em vez de percorrer as três páginas do
+        documento.</p>
+
+        <div class="search">
+          <div class="search-in">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+            </svg>
+            <input type="search" id="q" placeholder="Digite parte do tema — ex.: pessoas, direito, tecnologia" aria-label="Buscar tema geral">
+          </div>
+          <div class="search-meta" id="qMeta"></div>
+          <div class="themes"><ul id="qList"></ul></div>
+        </div>
+
+        <div class="alert info">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/>
+          </svg>
+          <div>
+            <span class="t">Escolha apenas um</span>
+            <p>A instrução é explícita: <strong>escolher um tema</strong> para responder à
+            pergunta. Se a ação parecer encaixar em dois, prefira aquele que descreve a
+            competência que você vai desenvolver, não o assunto do curso.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9 -->
+      <section id="s8">
+        <div class="sec-head"><span class="sec-n">09</span><h2>Onde consultar e onde estudar</h2></div>
+        <p class="lead">As fontes citadas no documento original, mais uma sugestão de ponto de
+        partida para quem ainda está escolhendo a ação de desenvolvimento.</p>
+
+        <div class="links">
+          <a class="lk hero-lk" href="https://www.escolavirtual.gov.br/" target="_blank" rel="noopener">
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+              Escola Virtual.Gov
+            </span>
+            <span class="lk-d"><strong>Sugestão.</strong> Catálogo gratuito de cursos on-line do
+            Governo Federal, com certificado. Boa origem para ações de desenvolvimento em serviço
+            e para compor carga horária.</span>
+            <span class="lk-u">escolavirtual.gov.br</span>
+          </a>
+
+          <a class="lk" href="https://www.gov.br/servidor/pt-br/acesso-a-informacao/gestao-de-pessoas/desempenho-e-desenvolvimento-de-pessoas/central-de-conteudos/conteudos-PNDP" target="_blank" rel="noopener">
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+              Central de Conteúdos da PNDP
+            </span>
+            <span class="lk-d">Guias, manuais e orientações para elaborar o PDP e usar o Portal
+            SIPEC. É a “Central de conteúdos” citada no documento.</span>
+            <span class="lk-u">gov.br/servidor › central-de-conteudos › conteudos-PNDP</span>
+          </a>
+
+          <a class="lk" href="https://www.gov.br/servidor/pt-br/acesso-a-informacao/gestao-de-pessoas/desempenho-e-desenvolvimento-de-pessoas/pndp-1/assuntos-pndp/plano-de-desenvolvimento-de-pessoas" target="_blank" rel="noopener">
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+              Plano de Desenvolvimento de Pessoas
+            </span>
+            <span class="lk-d">Página oficial do PDP no Portal do Servidor: fluxo, ciclos, prazos
+            de envio e perguntas frequentes.</span>
+            <span class="lk-u">gov.br/servidor › pndp › plano-de-desenvolvimento-de-pessoas</span>
+          </a>
+
+          <div class="lk" style="cursor:default">
+            <span class="lk-n">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Intranet DCIPAS
+            </span>
+            <span class="lk-d">Seleção, capacitação e benefícios. Citada no documento original,
+            mas acessível <strong>apenas pela rede interna</strong> — não há endereço público
+            para vincular aqui.</span>
+            <span class="lk-u">acesso restrito · rede interna</span>
+          </div>
+        </div>
+
+        <div class="alert info">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/>
+          </svg>
+          <div>
+            <span class="t">Se os guias não aparecerem, não é erro seu</span>
+            <p>Parte dos guias e manuais da Central de Conteúdos fica
+            <strong>temporariamente indisponível durante o defeso eleitoral</strong>, voltando ao ar
+            depois do período. Os normativos seguem acessíveis.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 -->
+      <section id="s9">
+        <div class="sec-head"><span class="sec-n">10</span><h2>Base legal</h2></div>
+        <p class="lead">As normas citadas no documento, com link para o texto oficial.</p>
+
+        <div class="laws">
+          <a class="law" href="https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm" target="_blank" rel="noopener">
+            <span class="law-id">Lei nº 8.112/1990</span>
+            <span class="law-t">Regime jurídico dos servidores públicos federais — arts. 87
+            (licença capacitação), 95 (estudo no exterior) e 96-A (pós-graduação)</span>
+          </a>
+          <a class="law" href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/decreto/D9991.htm" target="_blank" rel="noopener">
+            <span class="law-id">Decreto nº 9.991/2019</span>
+            <span class="law-t">Institui a Política Nacional de Desenvolvimento de Pessoas —
+            art. 26 (carga horária mínima)</span>
+          </a>
+          <a class="law" href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/decreto/D10506.htm" target="_blank" rel="noopener">
+            <span class="law-id">Decreto nº 10.506/2020</span>
+            <span class="law-t">Altera o Decreto nº 9.991/2019, dando nova redação ao art. 26</span>
+          </a>
+          <a class="law" href="https://www.gov.br/servidor/pt-br/acesso-a-informacao/gestao-de-pessoas/desempenho-e-desenvolvimento-de-pessoas/pndp-1/assuntos-pndp/normativos" target="_blank" rel="noopener">
+            <span class="law-id">IN nº 21/2021</span>
+            <span class="law-t">SGP-ENAP/SEDGG/ME — prazos, condições, critérios e procedimentos
+            da PNDP. Art. 28 (instrução do processo) e art. 31, §2º</span>
+          </a>
+          <a class="law" href="https://www.gov.br/servidor/pt-br/acesso-a-informacao/gestao-de-pessoas/desempenho-e-desenvolvimento-de-pessoas/pndp-1/assuntos-pndp/normativos" target="_blank" rel="noopener">
+            <span class="law-id">IN nº 69/2021</span>
+            <span class="law-t">Altera a IN SGP-ENAP/SEDGG/ME nº 21/2021</span>
+          </a>
+          <a class="law" href="https://www.gov.br/servidor/pt-br/acesso-a-informacao/gestao-de-pessoas/desempenho-e-desenvolvimento-de-pessoas/pndp-1/assuntos-pndp/normativos" target="_blank" rel="noopener">
+            <span class="law-id">IN nº 46/2022</span>
+            <span class="law-t">Altera a IN SGP-ENAP/SEDGG/ME nº 21/2021</span>
+          </a>
+        </div>
+
+        <div class="alert warn">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/>
+          </svg>
+          <div>
+            <span class="t">Atenção — confira a redação vigente antes de citar</span>
+            <p>A IN nº 21/2021 continua sendo alterada depois das INs listadas no documento
+            original — há, por exemplo, alteração posterior pela <strong>IN Conjunta
+            SGP-ENAP/MGI nº 244/2025</strong>. Ao instruir um processo, consulte a página de
+            normativos da PNDP para confirmar a redação em vigor, em vez de se apoiar apenas
+            neste guia ou no PDF de origem.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="foot">
+    <p><strong>Sobre este guia.</strong> Reorganiza, em formato navegável, as “Orientações quanto
+    ao preenchimento do formulário — Solicitação de Inclusão de Ação de Desenvolvimento no Plano
+    de Desenvolvimento de Pessoas (PDP)”, do Departamento Geral do Pessoal / Diretoria de
+    Assistência ao Pessoal.</p>
+    <p>É material de apoio à leitura. <strong>Em caso de divergência, prevalecem o documento
+    oficial, o formulário vigente e a legislação</strong> — especialmente quanto a prazos e à
+    redação atualizada das instruções normativas. A lista de temas gerais foi extraída do
+    documento de origem, onde parte dos nomes aparece quebrada entre colunas; confira o termo
+    escolhido no formulário antes de enviar.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- índice ---------- */
+  var secs = [
+    ["s1","Primeiro: entenda o que é o PDP"],
+    ["s2","A linha dos 30 dias"],
+    ["s3","Os cinco caminhos possíveis"],
+    ["s4","Quanto tempo você pode ficar"],
+    ["s5","O requisito que trava processos"],
+    ["s6","Monte o processo sem esquecer nada"],
+    ["downloads","Baixe os documentos"],
+    ["s7","Escolha o tema geral"],
+    ["s8","Onde consultar e onde estudar"],
+    ["s9","Base legal"]
+  ];
+  function buildToc(host){
+    var ol = document.createElement("ol");
+    secs.forEach(function(s,i){
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = "#" + s[0];
+      a.dataset.t = s[0];
+      a.innerHTML = '<span class="n">' + String(i+1).padStart(2,"0") + '</span><span>' + s[1] + '</span>';
+      li.appendChild(a); ol.appendChild(li);
+    });
+    host.appendChild(ol);
+  }
+  buildToc(document.getElementById("tocDesktop"));
+  buildToc(document.getElementById("tocPanel"));
+
+  var tocBtn = document.getElementById("tocBtn"), tocPanel = document.getElementById("tocPanel");
+  tocBtn.addEventListener("click", function(){
+    var open = tocPanel.classList.toggle("open");
+    tocBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  tocPanel.addEventListener("click", function(e){
+    if (e.target.closest("a")) { tocPanel.classList.remove("open"); tocBtn.setAttribute("aria-expanded","false"); }
+  });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        var id = en.target.id;
+        links.forEach(function(a){ a.classList.toggle("on", a.dataset.t === id); });
+      });
+    }, { rootMargin: "-12% 0px -70% 0px", threshold: 0 });
+    secs.forEach(function(s){
+      var el = document.getElementById(s[0]);
+      if (el) io.observe(el);
+    });
+  }
+
+  /* ---------- comparador 30 dias ---------- */
+  var tabA = document.getElementById("tabA"), tabB = document.getElementById("tabB"),
+      panA = document.getElementById("panA"), panB = document.getElementById("panB");
+  function pick(which){
+    var a = which === "a";
+    tabA.setAttribute("aria-selected", a ? "true" : "false");
+    tabB.setAttribute("aria-selected", a ? "false" : "true");
+    panA.hidden = !a; panB.hidden = a;
+  }
+  tabA.addEventListener("click", function(){ pick("a"); });
+  tabB.addEventListener("click", function(){ pick("b"); });
+
+  /* ---------- calculadora da licença ---------- */
+  var TOTAL = 90, MAX_PER = 6, MIN_DIAS = 15;
+  var cD = document.getElementById("cDias"), cP = document.getElementById("cPer"),
+      out = document.getElementById("calcOut");
+  var icOk = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>';
+  var icNo = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+
+  function calc(){
+    var d = parseInt(cD.value, 10), p = parseInt(cP.value, 10);
+    if (!isFinite(d) || !isFinite(p) || d < 1 || p < 1) {
+      out.innerHTML = '<div class="verdict no">' + icNo +
+        '<div><span class="vt">Preencha os dois campos</span>' +
+        '<p style="margin:0;font-size:14px">Informe quantos dias por período e quantos períodos.</p></div></div>';
+      return;
+    }
+    var soma = d * p, probs = [];
+    if (p > MAX_PER) probs.push("São <strong>" + p + " períodos</strong>, e o limite é <strong>6</strong>.");
+    if (d < MIN_DIAS) probs.push("Cada período tem <strong>" + d + " dias</strong>, abaixo do mínimo de <strong>15 dias</strong>.");
+    if (soma > TOTAL) probs.push("O total dá <strong>" + soma + " dias</strong>, acima dos <strong>90 dias</strong> (3 meses) do saldo.");
+
+    if (probs.length) {
+      out.innerHTML = '<div class="verdict no">' + icNo +
+        '<div><span class="vt">Esse parcelamento não fecha</span><ul><li>' +
+        probs.join("</li><li>") + '</li></ul></div></div>';
+    } else {
+      var sobra = TOTAL - soma;
+      var meses = Math.floor(soma / 30), dias = soma % 30;
+      var dur = meses ? (meses + (meses > 1 ? " meses" : " mês") + (dias ? " e " + dias + " dias" : "")) : (soma + " dias");
+      var extra = sobra > 0
+        ? "Sobram <strong>" + sobra + " dias</strong> do saldo de 90."
+        : "Usa o saldo inteiro de 90 dias.";
+      var cal = p > 1
+        ? " Com os <strong>60 dias de intervalo</strong> obrigatórios entre períodos, o calendário se estende por cerca de <strong>" +
+          (soma + 60 * (p - 1)) + " dias</strong> do primeiro ao último dia."
+        : "";
+      out.innerHTML = '<div class="verdict ok">' + icOk +
+        '<div><span class="vt">Dentro das regras</span>' +
+        '<p style="margin:0;font-size:14px">' + p + (p > 1 ? " períodos" : " período") + " de " + d +
+        " dias = <strong>" + soma + " dias</strong> (" + dur + "). " + extra + cal + "</p></div></div>";
+    }
+  }
+  cD.addEventListener("input", calc);
+  cP.addEventListener("input", calc);
+  calc();
+
+  /* ---------- checklist do processo ---------- */
+  var GRUPOS = {
+    ckA: [
+      ["Requerimento", "documento de abertura"],
+      ["Informação", "documento de abertura"],
+      ["Documentos previstos nas Normas Técnicas da DCIPAS", "documento de abertura"]
+    ],
+    ckB: [
+      ["Local em que a ação será realizada", "art. 28, I, a"],
+      ["Carga horária prevista", "art. 28, I, b"],
+      ["Período do afastamento, incluído o trânsito", "art. 28, I, c"],
+      ["Instituição promotora, quando houver", "art. 28, I, d"],
+      ["Despesas com inscrição e mensalidade, se houver", "art. 28, I, e"],
+      ["Despesas com diárias e passagens, se houver", "art. 28, I, f"]
+    ],
+    ckC: [
+      ["Currículo atualizado extraído do SIGEPE — Banco de Talentos", "art. 28, II"],
+      ["Justificativa do interesse da administração pública", "art. 28, III"],
+      ["Cópia do trecho do PDP onde a necessidade está indicada", "art. 28, IV"],
+      ["Manifestação da chefia imediata, com concordância", "art. 28, V"],
+      ["Manifestação da unidade de gestão de pessoas", "art. 28, VI"],
+      ["Pedido de exoneração do cargo ou dispensa da função, se for o caso", "art. 28, VII"],
+      ["Anuência da autoridade máxima", "art. 28, VIII"],
+      ["Publicação do ato de concessão do afastamento", "art. 28, IX"]
+    ]
+  };
+  var KEY = "pdp-checklist-v1", estado = {};
+  try { estado = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { estado = {}; }
+
+  var total = 0;
+  Object.keys(GRUPOS).forEach(function(gid){
+    var host = document.getElementById(gid);
+    GRUPOS[gid].forEach(function(item, idx){
+      var id = gid + "-" + idx; total++;
+      var lab = document.createElement("label");
+      lab.className = "ck"; lab.htmlFor = id;
+      lab.innerHTML = '<input type="checkbox" id="' + id + '">' +
+        '<span class="ck-txt">' + item[0] + '<span class="ck-ref">' + item[1] + '</span></span>';
+      host.appendChild(lab);
+      var cb = lab.querySelector("input");
+      cb.checked = !!estado[id];
+      lab.classList.toggle("done", cb.checked);
+      cb.addEventListener("change", function(){
+        estado[id] = cb.checked;
+        lab.classList.toggle("done", cb.checked);
+        save(); paint();
+      });
+    });
+  });
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(estado)); } catch (e) {} }
+  function paint(){
+    var n = document.querySelectorAll(".ck input:checked").length;
+    document.getElementById("ckFill").style.width = (n / total * 100) + "%";
+    document.getElementById("ckCount").textContent = n + " / " + total;
+  }
+  document.getElementById("ckReset").addEventListener("click", function(){
+    estado = {}; save();
+    document.querySelectorAll(".ck input").forEach(function(cb){
+      cb.checked = false; cb.closest(".ck").classList.remove("done");
+    });
+    paint();
+  });
+  paint();
+
+  /* ---------- busca de temas ---------- */
+  var TEMAS = ["Accountability (Prestação Pública de Contas)","Administração de Empresas","Administração de Setores Específicos","Administração Educacional","Administração Estadual","Administração Federal","Administração Municipal","Administração Pública da América do Norte","Administração Pública da América Latina","Administração Pública da Europa","Administração Pública da África","Administração Pública da Ásia e Oceania","Administração Pública do Brasil","Administração Regional","Aerodinâmica","Agrometeorologia","Alta Administração Pública","Anatomia","Anatomia Patológica e Patologia Clínica","Antropologia das Populações Afro-Brasileiras","Antropologia Rural","Antropologia Urbana","Análise","Análise e Controle e Medicamentos","Análise Nutricional de População","Análise Toxicológica","Aplicações de Radioisotopos","Aquicultura","Arqueologia Histórica","Arqueologia Pré-Histórica","Arquivologia","Artes do Vídeo","Artes Plásticas","Astrofísica do Meio Interestelar","Astrofísica do Sistema Solar","Astrofísica Estelar","Astrofísica Extragaláctica","Astronomia de Posição e Mecânica Celeste","Atendimento ao Público","Auditoria","Avaliação de Desempenho (Setor Público)","Biblioteconomia","Bioengenharia","Biofísica Celular","Biofísica de Processos e Sistemas","Biofísica Molecular","Biologia e Fisiologia dos Microorganismos","Biologia Geral","Biologia Molecular","Bioquímica da Nutrição","Bioquímica dos Microorganismos","Botânica Aplicada","Bromatologia","Capacitação Profissional no Setor Público","Cinema","Circuitos Elétricos, Magnéticos e Eletrônicos","Cirurgia","Cirurgia Buco-Maxilo-Facial","Citologia e Biologia Celular","Ciência de Alimentos","Ciência do Solo","Ciências Contábeis","Clínica e Cirurgia Animal","Clínica Médica","Clínica Odontológica","Combustível Nuclear","Componentes da Dinâmica Demográfica","Comportamento Animal","Comportamento Político","Compras Governamentais","Comunicação Visual","Concessão de Serviços Públicos","Conservação da Natureza","Construção Civil","Construções Rurais e Ambiência","Consórcio Público","Contrato de gestão","Controle de Gestão","Controle Social","Cooperação Internacional","Corrupção Administrativa","Crescimento, Flutuações e Planejamento Econômico","Currículo","Código de Conduta","Dança","Demografia Histórica","Desburocratização","Desenho de Produto","Desnutrição e Desenvolvimento Fisiológico","Dietética","Dinâmica de Voo","Direito Privado","Direito Público","Direitos Especiais","Distribuição Espacial","Ecologia Aplicada","Ecologia de Ecossistemas","Ecologia dos Animais Domésticos e Etologia","Ecologia Teórica","Economia do Bem-Estar Social","Economia Doméstica","Economia dos Recursos Humanos","Economia Industrial","Economia Internacional","Economia Monetária e Fiscal","Economia Regional e Urbana","Economias Agrária e dos Recursos Naturais","Educação Artística","Educação Física","Eletrônica Industrial, Sistemas e Controles Eletrônicos Embriologia","Empresa Pública","Endodontia","Energia de Biomassa Florestal","Energização Rural","Engenharia de Alimentos","Engenharia de Pesca","Engenharia de Processamento de Produtos Agrícolas","Engenharia de Água e Solo","Engenharia do Produto","Engenharia Econômica","Engenharia Hidráulica","Engenharia Médica","Engenharia Térmica","Ensino-Aprendizagem","Entomologia e Malacologia de Parasitos e Vetores","Enzimologia","Epidemiologia","Epistemologia","Estado e Governo","Estatística","Estruturas","Estruturas Aeroespaciais","Estruturas Navais e Oceânicas","Etnofarmacologia","Etnologia Indígena","Extensão Rural","Farmacognosia","Farmacologia Autonômica","Farmacologia Bioquímica e Molecular","Farmacologia Cardiorenal","Farmacologia Clínica","Farmacologia Geral","Farmacotecnia","Fenômenos de Transporte","Filosofia Brasileira","Fiscalização da Moralidade Pública","Fisico-Química","Fisiologia Comparada","Fisiologia da Linguagem","Fisiologia de Órgaos e Sistemas","Fisiologia do Esforço","Fisiologia dos Grupos Recentes","Fisiologia Geral","Fisiologia Vegetal","Fisioterapia e Terapia Ocupacional","Fitogeografia","Fitossanidade","Fitotecnia","Floricultura, Parques e Jardins","Fonoaudiologia","Fontes de Dados Demográficos","Fotografia","Fundamentos da Educação","Fundamentos da Sociologia","Fundamentos de Arquitetura e Urbanismo","Fundamentos do Planejamento Urbano e Regional Liderança","Fundamentos do Serviço Social","Fundamentos e Crítica das Artes","Fundamentos e Medidas da Psicologia","Função Pública","Fusão Controlada","Física Atômica e Molecular","Física da Matéria Condensada","Física das Partículas Elementares e Campos","Física dos Fluidos, Física de Plasmas e Descargas Elétricas","Física Geral","Física Nuclear","Genética Animal","Genética e Melhoramento dos Animais Domésticos","Genética Humana e Médica","Genética Molecular e de Microorganismos","Genética Quantitativa","Genética Vegetal","Geodesia","Geofísica","Geografia Física","Geografia Humana","Geografia Regional","Geologia","Geometria e Topologia","Geotécnica","Gerência de Produção","Gestor Público","Gestão de Pessoas no Setor Público","Governança e Gestão de Riscos","Governo Eletrônico / Digital","Helmintologia de Parasitos","Hidrodinâmica de Navios e Sistemas Oceânicos","Histologia","História Antiga e Medieval","História da América","História da Filosofia","História da Teologia","História das Ciências","História do Brasil","História Moderna e Contemporânea","Imunogenética","Imunologia Aplicada","Imunologia Celular","Imunoquímica","Indicador de Desempenho (Setor Público)","Infra-Estrutura de Transportes","Inovação na Gestão Pública","Inspeção de Produtos de Origem Animal","Instalações e Equipamentos Metalúrgicos","Instrumentação Astronômica","Jornalismo e Editoração","Lavra","Linguística Aplicada","Linguística Histórica","Literatura Brasileira","Literatura Comparada","Literaturas Clássicas","Literaturas Estrangeiras Modernas","Língua Portuguesa","Línguas Clássicas","Línguas Estrangeiras Modernas","Línguas Indígenas","Lógica","Manejo Florestal","Matemática Aplicada","Matemática da Computação","Materiais e Processos para Engenharia Aeronáutica","Materiais Elétricos","Materiais não Metálicos","Materiais Odontológicos","Mecânica dos Sólidos","Medicina Legal e Deontologia","Medicina Preventiva","Medicina Veterinária Preventiva","Medidas Elétricas, Magnéticas e Eletrônicas Instrumentação","Metabolismo e Bioenergética","Metafísica","Metalurgia de Transformação","Metalurgia Extrativa","Metalurgia Física","Meteorologia","Metodologia e Técnicas da Computação","Microbiologia Aplicada","Modernização Administrativa","Morfologia dos Grupos Recentes","Morfologia Vegetal","Museologia","Mutagênese","Máquinas e Implementos Agrícolas","Máquinas Marítimas","Métodos e Técnicas do Planejamento Urbano Regional","Métodos Quantitativos em Economia","Música","Neuropsicofarmacologia","Nupcialidade e Família","Nutrição e Alimentação Animal","Oceanografia Biológica","Oceanografia Física","Oceanografia Geológica","Oceanografia Química","Odontologia Social e Preventiva","Odontopediatria","Operações de Transportes","Operações Industriais e Equipamentos para Engenharia Química","Orientação e Aconselhamento","Ortodontia","Outras Literaturas Vernáculas","Outras não especificadas","Outras Sociologias Específicas","Ouvidoria","Paisagismo","Paleobotânica","Paleozoologia","Parcerias no Setor Público","Parcerias Público-Privadas","Pastagem e Forragicultura","Patologia Animal","Periodontia","Pesquisa Mineral","Pesquisa Operacional","Planejamento de Transportes","Planejamento e Avaliação Educacional","Política Internacional","Política Pública e População","Políticas Públicas","Políticas Públicas e Uso de Evidências","Previdência","Probabilidade","Probabilidade e Estatística Aplicadas","Processos de Fabricação","Processos Industriais de Engenharia Química","Produtividade","Produção Animal","Programação Visual","Projeto de Arquitetura e Urbanismo","Projeto de Navios e de Sistemas Oceânicos","Projetos de Máquinas","Propulsão Aeroespacial","Protozoologia de Parasitos","Psicolinguística","Psicologia Cognitiva","Psicologia Comparativa","Psicologia do Desenvolvimento Humano","Psicologia do Ensino e da Aprendizagem","Psicologia do Trabalho e Organizacional","Psicologia Experimental","Psicologia Fisiológica","Psicologia Social","Psiquiatria","Química Analítica","Química de Macromoléculas","Química Inorgânica","Química Orgânica","Radiologia e Fotobiologia","Radiologia Médica","Radiologia Odontológica","Recursos Hídricos","Recursos Pesqueiros de Águas Interiores","Recursos Pesqueiros Marinhos","Reforma Administrativa","Regulação – Agência Reguladora","Relações de Trabalho no Setor Público","Relações Públicas e Propaganda","Reprodução Animal","Rádio e Televisão","Saneamento Ambiental","Saneamento Básico","Satisfação do Usuário","Saúde Materno-Infantil","Saúde Publica","Serviço Social Aplicado","Serviços Urbanos e Regionais","Silvicultura","Sistemas Aeroespaciais","Sistemas de Computação","Sistemas Elétricos de Potência","Sociolinguística e Dialetologia","Sociologia da Saúde","Sociologia do Conhecimento","Sociologia do Desenvolvimento","Sociologia Rural","Sociologia Urbana","Taxonomia dos Grupos Recentes","Taxonomia Vegetal","Teatro","Tecnologia","Tecnologia da Informação","Tecnologia de Alimentos","Tecnologia de Arquitetura e Urbanismo","Tecnologia de Construção Naval e de Sistemas Oceânicas dos Reatores","Tecnologia e Utilização de Produtos Florestais","Tecnologia Química","Telecomunicações","Tendência Populacional","Teologia Moral","Teologia Pastoral","Teologia Sistemática","Teoria Antropológica","Teoria da Administração Pública","Teoria da Computação","Teoria da Comunicação","Teoria da Informação","Teoria do Direito","Teoria e Análise Linguística","Teoria e Filosofia da História","Teoria e Método em Arqueologia","Teoria Econômica","Teoria Literária","Teoria Política","Terceirização","Terceiro Setor – ONG’s – OSCIP","Toxicologia","Tratamento de Minérios","Tratamento de Águas de Abastecimento Residuárias","Tratamento e Prevenção Psicológica","Técnicas e Operações Florestais","Técnicas Gerenciais no Setor Público","Tópicos Específicos de Educação","Veículos e Equipamentos de Controle","Zoologia Aplicada","Álgebra","Áreas Clássicas de Fenomenologia e suas Aplicações","Ética","Ética no Setor Público","Ópera"];
+  var q = document.getElementById("q"), qList = document.getElementById("qList"),
+      qMeta = document.getElementById("qMeta");
+  function norm(s){ return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+  var IDX = TEMAS.map(norm);
+  function esc(s){ return s.replace(/[&<>]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]; }); }
+
+  function render(){
+    var termo = q.value.trim();
+    var alvo = norm(termo);
+    var hits = [];
+    for (var i = 0; i < TEMAS.length; i++) {
+      if (!alvo || IDX[i].indexOf(alvo) !== -1) hits.push(i);
+    }
+    qMeta.textContent = termo
+      ? hits.length + " de " + TEMAS.length + " temas"
+      : TEMAS.length + " temas na lista oficial";
+    if (!hits.length) {
+      qList.innerHTML = '<li class="none">Nenhum tema com “' + esc(termo) + '”. Tente uma palavra mais curta.</li>';
+      return;
+    }
+    var mostra = hits.slice(0, 300);
+    qList.innerHTML = mostra.map(function(i){
+      var t = esc(TEMAS[i]);
+      if (alvo) {
+        var pos = IDX[i].indexOf(alvo);
+        if (pos !== -1) {
+          t = esc(TEMAS[i].slice(0, pos)) + "<mark>" + esc(TEMAS[i].slice(pos, pos + termo.length)) +
+              "</mark>" + esc(TEMAS[i].slice(pos + termo.length));
+        }
+      }
+      return "<li>" + t + "</li>";
+    }).join("");
+    if (hits.length > mostra.length) {
+      qList.innerHTML += '<li class="none">+ ' + (hits.length - mostra.length) +
+        " outros. Refine a busca para ver todos.</li>";
+    }
+  }
+  q.addEventListener("input", render);
+  render();
+})();
+
+</script>
+</body>
+</html>

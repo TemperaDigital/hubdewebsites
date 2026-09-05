@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intranet FGuerra — Portal Interno</title>
+  <meta name="description" content="Portal interno da Intranet FGuerra." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <main class="container">
+    <!-- Logo -->
+    <header class="logo">
+      <div class="eyebrow">
+        <span class="line"></span>
+        Portal Interno
+        <span class="line"></span>
+      </div>
+      <h1 class="title">
+        <span class="muted">//</span>
+        <span class="gold-grad italic">Intranet</span>
+        <span class="bold">FGuerra</span>
+        <span class="muted">//</span>
+      </h1>
+      <div class="divider"></div>
+    </header>
+
+    <!-- Relógio -->
+    <section class="clock-wrap">
+      <div class="card glass clock">
+        <p class="eyebrow-sm" id="weekday">—</p>
+        <p class="date-text" id="date">—</p>
+        <p class="time-text gold-grad" id="time">--:--:--</p>
+      </div>
+    </section>
+
+    <!-- Portais -->
+    <section class="section">
+      <h2 class="section-title">Meus Sites</h2>
+      <div class="portals">
+        <a href="pages/pessoal.html" class="card glass portal">
+          <div class="icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Pessoal</h3>
+          <p>Espaço pessoal</p>
+          <span class="cta">Acessar →</span>
+        </a>
+
+        <a href="pages/trabalho.html" class="card glass portal">
+          <div class="icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3>Trabalho</h3>
+          <p>Projetos e tarefas</p>
+          <span class="cta">Acessar →</span>
+        </a>
+
+        <a href="pages/estudos.html" class="card glass portal">
+          <div class="icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <h3>Estudos</h3>
+          <p>Conhecimento e cursos</p>
+          <span class="cta">Acessar →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Redes -->
+    <section class="section social-section">
+      <h2 class="section-title">Redes &amp; Comunicação</h2>
+      <div class="social">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-btn glass">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer" aria-label="Gmail" class="social-btn glass">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-btn glass">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="footer-domain">intranet.fguerra.ia.br</p>
+    <p class="footer-copy">© <span id="year"></span> Intranet FGuerra — Servidor ZimaOS</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

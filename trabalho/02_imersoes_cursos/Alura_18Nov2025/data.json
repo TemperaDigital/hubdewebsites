@@ -1,0 +1,32 @@
+[
+  {
+    "nome": "JavaScript",
+    "descricao": "JavaScript (JS) é uma linguagem de programação interpretada de alto nível, comumente usada para criar páginas web interativas.",
+    "ano": 1995,
+    "link": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript"
+  },
+  {
+    "nome": "Python",
+    "descricao": "Python é uma linguagem de programação de alto nível, conhecida por sua sintaxe clara e legibilidade, amplamente utilizada em desenvolvimento web, ciência de dados e automação.",
+    "ano": 1991,
+    "link": "https://www.python.org/"
+  },
+  {
+    "nome": "Java",
+    "descricao": "Java é uma linguagem de programação orientada a objetos, popular para o desenvolvimento de aplicações empresariais, aplicativos Android e sistemas de grande escala.",
+    "ano": 1995,
+    "link": "https://www.java.com/pt-BR/"
+  },
+  {
+    "nome": "C#",
+    "descricao": "C# (pronuncia-se 'C sharp') é uma linguagem moderna e orientada a objetos desenvolvida pela Microsoft, principalmente para a construção de aplicações Windows e jogos com a engine Unity.",
+    "ano": 2000,
+    "link": "https://docs.microsoft.com/pt-br/dotnet/csharp/"
+  },
+  {
+    "nome": "Go",
+    "descricao": "Go (ou Golang) é uma linguagem de programação criada pelo Google, focada em simplicidade, eficiência e concorrência, ideal para serviços de backend e microsserviços.",
+    "ano": 2009,
+    "link": "https://go.dev/"
+  }
+]

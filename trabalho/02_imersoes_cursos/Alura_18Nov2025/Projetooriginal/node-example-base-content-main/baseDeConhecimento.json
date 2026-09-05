@@ -1,0 +1,177 @@
+[
+  {
+    "nome": "TypeScript",
+    "descricao": "Um superset tipado de JavaScript que compila para JavaScript puro, adicionando tipos estáticos opcionais.",
+    "data_criacao": "2012",
+    "link": "https://www.typescriptlang.org/",
+    "tags": ["linguagem de programação", "frontend", "backend", "superset"]
+  },
+  {
+    "nome": "Go",
+    "descricao": "Uma linguagem de programação compilada e de tipagem estática projetada no Google para sistemas eficientes e escaláveis.",
+    "data_criacao": "2009",
+    "link": "https://golang.org/",
+    "tags": ["linguagem de programação", "backend", "concorrência", "google"]
+  },
+  {
+    "nome": "Rust",
+    "descricao": "Uma linguagem de programação focada em segurança, velocidade e concorrência, com ênfase em sistemas de baixo nível.",
+    "data_criacao": "2010",
+    "link": "https://www.rust-lang.org/",
+    "tags": ["linguagem de programação", "sistemas", "segurança", "performance"]
+  },
+  {
+    "nome": "Kotlin",
+    "descricao": "Uma linguagem de programação moderna e estaticamente tipada, totalmente interoperável com Java e focada em desenvolvimento Android e backend.",
+    "data_criacao": "2011",
+    "link": "https://kotlinlang.org/",
+    "tags": ["linguagem de programação", "android", "mobile", "jvm"]
+  },
+  {
+    "nome": "Swift",
+    "descricao": "Uma linguagem de programação poderosa e intuitiva para macOS, iOS, watchOS e tvOS, criada pela Apple.",
+    "data_criacao": "2014",
+    "link": "https://developer.apple.com/swift/",
+    "tags": ["linguagem de programação", "ios", "mobile", "apple"]
+  },
+  {
+    "nome": "Elixir",
+    "descricao": "Uma linguagem dinâmica e funcional baseada na máquina virtual Erlang (BEAM), projetada para construir aplicações escaláveis e tolerantes a falhas.",
+    "data_criacao": "2012",
+    "link": "https://elixir-lang.org/",
+    "tags": ["linguagem de programação", "funcional", "backend", "concorrência"]
+  },
+  {
+    "nome": "Dart",
+    "descricao": "Uma linguagem de programação otimizada para cliente para construir aplicações rápidas em qualquer plataforma, frequentemente usada com Flutter.",
+    "data_criacao": "2011",
+    "link": "https://dart.dev/",
+    "tags": ["linguagem de programação", "mobile", "web", "flutter"]
+  },
+  {
+    "nome": "C#",
+    "descricao": "Uma linguagem de programação moderna, orientada a objetos e de tipo seguro, desenvolvida pela Microsoft, base do framework .NET.",
+    "data_criacao": "2000",
+    "link": "https://docs.microsoft.com/en-us/dotnet/csharp/",
+    "tags": ["linguagem de programação", "backend", "microsoft", ".net"]
+  },
+  {
+    "nome": "JavaScript",
+    "descricao": "A principal linguagem para desenvolvimento web frontend, também usada amplamente no backend via Node.js.",
+    "data_criacao": "1995",
+    "link": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+    "tags": ["linguagem de programação", "frontend", "backend", "web"]
+  },
+  {
+    "nome": "Python",
+    "descricao": "Uma linguagem de programação de alto nível, interpretada, de propósito geral, conhecida por sua legibilidade e uso em data science.",
+    "data_criacao": "1991",
+    "link": "https://www.python.org/",
+    "tags": ["linguagem de programação", "backend", "data science", "scripting"]
+  },
+  {
+    "nome": "Java",
+    "descricao": "Uma linguagem de programação orientada a objetos, baseada em classes, projetada para ter o mínimo de dependências de implementação (write once, run anywhere).",
+    "data_criacao": "1995",
+    "link": "https://www.java.com/",
+    "tags": ["linguagem de programação", "backend", "jvm", "enterprise"]
+  },
+  {
+    "nome": "C++",
+    "descricao": "Uma extensão da linguagem C que adicionou recursos de orientação a objetos, usada em jogos, sistemas operacionais e software embarcado.",
+    "data_criacao": "1985",
+    "link": "https://isocpp.org/",
+    "tags": ["linguagem de programação", "sistemas", "performance", "jogos"]
+  },
+  {
+    "nome": "PHP",
+    "descricao": "Uma linguagem de script do lado do servidor projetada para desenvolvimento web, mas também usada como linguagem de programação de propósito geral.",
+    "data_criacao": "1994",
+    "link": "https://www.php.net/",
+    "tags": ["linguagem de programação", "backend", "web", "scripting"]
+  },
+  {
+    "nome": "Ruby",
+    "descricao": "Uma linguagem dinâmica, de código aberto, com foco na simplicidade e produtividade. É a base do popular framework Ruby on Rails.",
+    "data_criacao": "1995",
+    "link": "https://www.ruby-lang.org/",
+    "tags": ["linguagem de programação", "backend", "web", "dinâmica"]
+  },
+  {
+    "nome": "Scala",
+    "descricao": "Uma linguagem que combina recursos de linguagens orientadas a objetos e funcionais, executada na JVM.",
+    "data_criacao": "2003",
+    "link": "https://www.scala-lang.org/",
+    "tags": ["linguagem de programação", "funcional", "jvm", "big data"]
+  },
+  {
+    "nome": "Haskell",
+    "descricao": "Uma linguagem de programação puramente funcional, de tipagem estática, conhecida por seu forte sistema de tipos e avaliação preguiçosa (lazy evaluation).",
+    "data_criacao": "1990",
+    "link": "https://www.haskell.org/",
+    "tags": ["linguagem de programação", "funcional", "acadêmica", "teórica"]
+  },
+  {
+    "nome": "Lua",
+    "descricao": "Uma linguagem de script leve, poderosa e incorporável, projetada para ser estendida em C, muito usada em desenvolvimento de jogos.",
+    "data_criacao": "1993",
+    "link": "https://www.lua.org/",
+    "tags": ["linguagem de programação", "scripting", "jogos", "embarcado"]
+  },
+  {
+    "nome": "R",
+    "descricao": "Uma linguagem e ambiente para computação estatística e gráficos, amplamente utilizada por estatísticos e mineradores de dados.",
+    "data_criacao": "1993",
+    "link": "https://www.r-project.org/",
+    "tags": ["linguagem de programação", "data science", "estatística", "gráficos"]
+  },
+  {
+    "nome": "Prolog",
+    "descricao": "Uma linguagem de programação lógica, associada à inteligência artificial e linguística computacional.",
+    "data_criacao": "1972",
+    "link": "https://www.learnprolognow.org/",
+    "tags": ["linguagem de programação", "lógica", "ai", "acadêmica"]
+  },
+  {
+    "nome": "Shell Script (Bash)",
+    "descricao": "Um interpretador de comandos de sistema Unix, usado para automatizar tarefas administrativas e operacionais (não é uma linguagem de propósito geral, mas essencial).",
+    "data_criacao": "1989 (Bash)",
+    "link": "https://www.gnu.org/software/bash/",
+    "tags": ["scripting", "sistemas", "linux", "devops"]
+  },
+  {
+    "nome": "HTML",
+    "descricao": "Linguagem de Marcação de Hipertexto, o bloco de construção fundamental da Web (não é uma linguagem de programação, mas fundamental para o desenvolvimento).",
+    "data_criacao": "1993",
+    "link": "https://developer.mozilla.org/pt-BR/docs/Web/HTML",
+    "tags": ["marcação", "frontend", "web", "estrutura"]
+  },
+  {
+    "nome": "CSS",
+    "descricao": "Folhas de Estilo em Cascata, usadas para descrever a apresentação de um documento escrito em uma linguagem de marcação como HTML (não é uma linguagem de programação).",
+    "data_criacao": "1996",
+    "link": "https://developer.mozilla.org/pt-BR/docs/Web/CSS",
+    "tags": ["estilo", "frontend", "web", "design"]
+  },
+  {
+    "nome": "SQL",
+    "descricao": "Structured Query Language, uma linguagem de domínio específico usada para gerenciar dados em sistemas de gerenciamento de banco de dados relacionais (SGBDR).",
+    "data_criacao": "1974",
+    "link": "https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/index.html",
+    "tags": ["linguagem de consulta", "banco de dados", "relacional", "data"]
+  },
+  {
+    "nome": "Erlang",
+    "descricao": "Uma linguagem de programação funcional e concorrente para construir sistemas distribuídos, tolerantes a falhas e de alta disponibilidade.",
+    "data_criacao": "1986",
+    "link": "https://www.erlang.org/",
+    "tags": ["linguagem de programação", "funcional", "telecom", "concorrência"]
+  },
+  {
+    "nome": "Lisp",
+    "descricao": "A segunda linguagem de programação de alto nível mais antiga (depois de Fortran), conhecida por sua sintaxe de parênteses e uso em IA.",
+    "data_criacao": "1958",
+    "link": "https://common-lisp.net/",
+    "tags": ["linguagem de programação", "ai", "funcional", "acadêmica"]
+  }
+]

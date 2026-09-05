@@ -1,0 +1,33 @@
+---
+title: "Next.js App Router: primeiras impressões e lições aprendidas"
+date: "2025-02-01"
+description: "Minhas experiências usando o App Router do Next.js 14 em projetos reais — o que mudou, o que melhorou, e onde ainda tropeço."
+tags: ["nextjs", "react", "desenvolvimento"]
+---
+
+O App Router do Next.js trouxe mudanças significativas na forma como construímos aplicações React. Depois de usar em dois projetos reais, compartilho minhas impressões.
+
+## O que mudou
+
+A principal diferença é o modelo mental. Com o Pages Router, tudo era client-side por padrão. Com o App Router, tudo é server-side por padrão. Essa inversão muda muita coisa.
+
+## Server Components são poderosos
+
+Buscar dados diretamente no componente, sem useEffect ou getServerSideProps? É elegante. O código fica mais limpo e a performance melhora — menos JavaScript no cliente.
+
+## Mas a transição tem curva
+
+### O erro clássico
+Tentar usar `useState` num Server Component. O Next.js reclama, você adiciona `'use client'`, e de repente metade do app é client-side de novo.
+
+### Layouts são compartilhados
+Os layouts não re-renderizam quando você navega entre páginas filhas. Isso é ótimo para performance, mas pode confundir no início.
+
+### Loading e Error states
+Os arquivos `loading.tsx` e `error.tsx` são convenientes, mas requerem planejamento na organização de pastas.
+
+## Meu veredito
+
+O App Router é o futuro do Next.js, sem dúvida. A experiência de desenvolvimento é superior quando você entende o modelo. Mas leva tempo para dominar — e a documentação, embora boa, poderia ter mais exemplos práticos.
+
+Recomendo migrar gradualmente. Comece projetos novos com App Router e migre os antigos quando fizer sentido.

@@ -1,0 +1,287 @@
+  Ink.createModule( 'Ink.Blogs.Utils', 1, [ 'Ink.Dom.Event_1', 'Ink.Dom.Element_1', 'Ink.Dom.Css_1', 'Ink.UI.Common_1', 'Ink.UI.Modal_1', 'Ink.UI.Animate_1', 'Ink.Util.String', 'Ink.UI.LazyLoad_1', 'Ink.Util.Array_1', 'Ink.UI.Sticky_1', 'Ink.Util.Url_1' ],
+  function (Event, Element, Css, Common, Modal, Animate, InkString, InkLazyLoad, InkArray, InkSticky, InkURL) {
+
+    // Selectores
+    var modalElement = Ink.s('#confirm-modal');
+    var modalConfirmButton = Ink.i('modal-confirm-button');
+    var modalConfirmTitle = Ink.i('modal_confirm_title');
+    var modalConfirmMessage = Ink.i('modal_confirm_message');
+    var mrecDiv = Ink.i('mrec');
+    var mobileDiv = Ink.i('small_pub');
+
+    var defaultMessage = {
+      id: '1',
+      text: 'Aconteceu um erro',
+      type: 'error',
+      where: 'main > section > :first-child',
+      prepend: true,
+      disableAutoclose: true
+    };
+
+    var setCookie = function (c_name, value, expire_days) {
+      var exdate = new Date();
+      exdate.setDate(exdate.getDate() + expire_days);
+      document.cookie = c_name + "=" + escape(value) + ((expire_days == null) ? "" : ";expires=" + exdate.toGMTString());
+    };
+
+    var delCookie = function (c_name) {
+      setCookie(c_name, '', -1);
+    };
+
+    var getCookie = function (c_name) {
+      if (document.cookie.length>0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length+1;
+            c_end=document.cookie.indexOf(";",c_start);
+            if (c_end==-1) c_end=document.cookie.length;
+            return unescape(document.cookie.substring(c_start,c_end));
+        }
+      }
+      return "";
+    };
+
+    var confirm = function ( title, message, cb ) {
+      var modalConfirm = Common.getInstance( modalElement )[0] ? Common.getInstance( modalElement )[0] : new Modal(modalElement);
+      if(cb){
+        Event.off(modalConfirmButton, 'click');
+        Event.on(modalConfirmButton, 'click', cb);
+      }
+
+      modalConfirmTitle.innerHTML = title;
+      modalConfirmMessage.innerHTML = message;
+      modalConfirm.open();
+    };
+
+    var message = function ( id, type, text, targetElem, prepend, disableAutoclose ) {
+      var messageId = 'message-' + id;
+      Element.remove(  messageId );
+      var elem = Element.create('div', {
+        id:            messageId,
+        appendHTML:   '<button class="ink-dismiss">×</button>' + SB.t(text),
+        className:    'ink-alert basic ' + type
+      });
+
+      if(prepend){
+        Element.insertBefore(elem, targetElem);
+      }else{
+        Element.insertAfter(elem, targetElem);
+      }
+
+      if(!disableAutoclose){
+        setTimeout(function(){
+          removeMessages('#' + messageId);
+        }, 8000);
+      }
+      return elem;
+    };
+
+    var animationCallback = function(endData) {
+      var self  = this;
+
+      if(endData && endData.target){
+        Element.remove(endData.target);
+      }else{
+        Element.remove(self);
+      }
+    };
+
+    var removeMessages = function(selector) {
+      selector = selector || '.flash-message';
+      var messages = Ink.ss(selector);
+      for(var i = 0; i < messages.length; i++){
+        var messageElem = messages[i];
+        new Animate(messageElem, { animation: 'fadeOut', onEnd: Ink.bind(animationCallback, messageElem)});
+      }
+    };
+
+    var printServerMessages = function(){
+
+      for (var i = 0; i < SB.messages.length; i++) {
+        var currentMessage = Ink.extendObj({}, defaultMessage, SB.messages[i]);
+        var where = Ink.s(currentMessage.where);
+        if(!where) {
+          SB.log("Can't place message with id: " + currentMessage.id);
+          continue;
+        }
+        message(currentMessage.id, currentMessage.type, currentMessage.text, where, currentMessage.prepend, currentMessage.disableAutoclose);
+      }
+    };
+
+    var charCount = function ( target ) {
+      var data = Element.data( target );
+
+      if ( target.value.length > 0 ) {
+        data.limit = data.limit || 1024;
+
+        var text      = target.value;
+        var tempText  = InkString.htmlEntitiesEncode( text );
+        var remaining = data.limit - tempText.length;
+
+        if ( remaining < 0 ) {
+
+          do {
+            text = text.substring(0, (text.length - 1));
+            tempText = InkString.htmlEntitiesEncode( text );
+            remaining = data.limit - tempText.length;
+          } while ( remaining < 0 );
+
+          target.value = text;
+        }
+
+        Ink.i(data.target).innerHTML = remaining + ' caracteres dispon&iacute;veis';
+      }
+      else {
+        Ink.i(data.target).innerHTML = 'M&aacute;ximo de '+ data.limit +' caracteres';
+      }
+    };
+
+    var mrecPub = function (parent) {
+      var iframe = document.createElement('iframe');
+      iframe.setAttribute('class', 'lazyload-item');
+      iframe.setAttribute('data-src', '/pub/mrec');
+      iframe.setAttribute('id', 'iframe_mrec');
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('frameBorder', '0');
+      iframe.setAttribute('marginwidth', '0');
+      iframe.setAttribute('marginheight', '0');
+      iframe.setAttribute('width', '300');
+      iframe.setAttribute('height', '250');
+      iframe.setAttribute('scrolling', 'no');
+      iframe.setAttribute('style', 'border:none;');
+      iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+      parent.appendChild(iframe);
+      new InkLazyLoad( parent );
+    };
+
+    var mobilePub = function (parent) {
+      var iframe = document.createElement('iframe');
+      iframe.setAttribute('class', 'lazyload-item');
+      iframe.setAttribute('data-src', '/pub/mobile');
+      iframe.setAttribute('id', 'iframe_mobile');
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('frameBorder', '0');
+      iframe.setAttribute('marginwidth', '0');
+      iframe.setAttribute('marginheight', '0');
+      iframe.setAttribute('width', '320');
+      iframe.setAttribute('height', '50');
+      iframe.setAttribute('scrolling', 'no');
+      iframe.setAttribute('style', 'border:none;');
+      iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+      parent.appendChild(iframe);
+      new InkLazyLoad( parent );
+    };
+
+    var initUtils = function(){
+
+      printServerMessages();
+
+      //remove flash messages created in template
+      setTimeout(function(){
+        removeMessages();
+      }, 5000);
+
+      InkArray.each(Ink.ss('.pub-square'), function (div) {
+        mrecPub( div );
+      });
+      if (mrecDiv)   mrecPub( mrecDiv );
+      if (mobileDiv) mobilePub( mobileDiv );
+
+      InkArray.forEach(Ink.ss('.ink-dismiss'), function( item ) {
+        var data = Element.data( item );
+
+        Event.observe(item, 'click', function () {
+          setCookie('_dismiss' + data.name, 1, 10);
+        });
+
+        if (getCookie('_dismiss' + data.name) != 1) {
+          Css.removeClassName(item.parentNode, 'hide-all');
+        }
+      });
+
+      InkArray.forEach(Ink.ss('.bo-sticky'), function( item ) { new InkSticky( item, { offsetTop: 25, bottomElement: Ink.s('footer') } ); });
+      var links = Ink.ss( '#posts-content a.title').concat( Ink.ss('.goto_blog') );
+      InkArray.forEach(links, function( item ) {
+        var r = /\//gi;
+        Event.observe(item, 'click', function (e) {
+          var urlObj  = InkURL.parseUrl(item.href);
+          var newHref = urlObj.scheme + '://' + urlObj.host + urlObj.path;
+          item.href = InkURL.genQueryString(newHref, {
+            'tc' : (Date.now() - 1550000000000)
+          })
+        });
+      });
+    };
+
+    var noop = function() {};
+    var translate = function(a) { return a; };
+
+    var defaults = {
+      // Propriedades
+
+      // A 'view' onde estamos
+      slug: '',
+      // Os endpoints para a página
+      endpoints: {
+        get: '.',
+        post: '.'
+      },
+      // O crsf token
+      wchal: '',
+      // Qual o locale da página [ISO639]_[ISO3166]
+      locale: 'pt_PT',
+
+      // Array com mensagens server-side
+      messages: [/*
+        {
+          id: '1',
+          text: 'Hello World',
+          type: 'error',
+          where: 'main > section',
+          prepend: true,
+          disableAutoclose: true
+        }
+        */
+      ],
+
+      // Métodos
+
+      // Abre uma message box
+      message: noop,
+      // Shortcut para mensagem com type de alert
+      alert: noop,
+      // Shortcut para mensagem com type de error
+      error: noop,
+      // Abre uma confirm modal
+      confirm: noop,
+      // console.log ou fallback
+      log: Ink.log,
+      // Traduz uma key para uma linguagem
+      translate: translate,
+      // Alias para translate
+      t: translate,
+      // Função que inicializa a classe da página atual
+      init: noop
+    };
+
+    // Transition API
+    defaults.confirmModal = confirm;
+    defaults.printMessage = message;
+    defaults.initUtils = initUtils;
+
+
+
+    // New API to be defined here
+    defaults.setCookie = setCookie;
+    defaults.delCookie = delCookie;
+    defaults.getCookie = getCookie;
+    defaults.confirm = confirm;
+    defaults.message = message;
+    defaults.charCount = charCount;
+    defaults.printServerMessages = printServerMessages;
+
+    window.SB = Ink.extendObj({}, defaults, window.SB );
+
+    return SB;
+  }
+);

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>sites.fguerra.ia.br</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #161b26;
+    --surface-2: #1d2333;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: rgba(148, 163, 184, 0.14);
+    --accent: #be185d;
+    --accent-bright: #ec4899;
+    --accent-soft: rgba(190, 24, 93, 0.16);
+    --font-body: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1100px 480px at 12% -10%, rgba(190,24,93,.12), transparent 60%),
+      radial-gradient(900px 420px at 90% 0%, rgba(59,130,246,.08), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px 80px; }
+
+  header { padding: 72px 0 40px; }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin: 0 0 12px;
+  }
+
+  h1 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .lead {
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-size: .78rem;
+    font-family: var(--font-mono);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin: 48px 0 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-note {
+    color: var(--text-muted);
+    font-size: .86rem;
+    margin: 12px 0 20px;
+    line-height: 1.5;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+
+  .card:hover, .card:focus-visible {
+    background: var(--surface-2);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .card h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: .88rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .card .path {
+    margin-top: auto;
+    padding-top: 10px;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--accent-bright);
+    opacity: .8;
+    word-break: break-all;
+  }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: .82rem;
+    line-height: 1.6;
+  }
+
+  footer code {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="kicker">sites.fguerra.ia.br</p>
+    <h1>Painel dos meus sites</h1>
+    <p class="lead">
+      Hub dos projetos web que mantenho na pasta <code>sites</code>. Cada card abre
+      um projeto independente, com seu próprio conteúdo. Organizado em três frentes:
+      nichos pessoais, trabalho e experimentos.
+    </p>
+  </header>
+
+  <h2>Pessoais</h2>
+  <p class="section-note">Sites dos nichos que desenvolvo por interesse próprio.</p>
+  <div class="grid">
+
+    <a class="card" href="/pessoais/devalexandre/">
+      <h3>Blog Pessoal</h3>
+      <p>Alexandre Guerra — gestão, contabilidade e IA.</p>
+      <span class="path">/pessoais/devalexandre/</span>
+    </a>
+
+    <a class="card" href="/pessoais/INTRANET/">
+      <h3>Intranet de Casa</h3>
+      <p>Portal interno FGuerra, com as áreas de estudos, pessoal e trabalho.</p>
+      <span class="path">/pessoais/INTRANET/</span>
+    </a>
+
+    <a class="card" href="/pessoais/estantedevideos/">
+      <h3>Estante de Vídeos</h3>
+      <p>Meus vídeos separados para assistir depois.</p>
+      <span class="path">/pessoais/estantedevideos/</span>
+    </a>
+
+    <a class="card" href="/pessoais/aprendizdeia/">
+      <h3>Aprendiz de Programação</h3>
+      <p>Blog dos meus estudos de programação e IA.</p>
+      <span class="path">/pessoais/aprendizdeia/</span>
+    </a>
+
+    <a class="card" href="/pessoais/contabilidade/Alexandre%20Contabilidade_files/Alexandre_Contabilidade.html">
+      <h3>Alexandre Contabilidade</h3>
+      <p>Área de contabilidade. Ainda é uma página avulsa, sem index próprio.</p>
+      <span class="path">/pessoais/contabilidade/</span>
+    </a>
+
+  </div>
+
+  <h2>Trabalho</h2>
+  <p class="section-note">Projetos ligados ao serviço público federal, ao condomínio e à empresa.</p>
+  <div class="grid">
+
+    <a class="card" href="/trabalho/federal/guia-pdp-afastamento/">
+      <h3>Guia do PDP e Afastamento</h3>
+      <p>Guia do afastamento para capacitação, com os anexos e formulários.</p>
+      <span class="path">/trabalho/federal/guia-pdp-afastamento/</span>
+    </a>
+
+    <a class="card" href="/trabalho/federal/spc-portal/">
+      <h3>Portal SPC</h3>
+      <p>Seção de Pessoal Civil — 1º GptE.</p>
+      <span class="path">/trabalho/federal/spc-portal/</span>
+    </a>
+
+    <a class="card" href="/trabalho/site-cmcr/">
+      <h3>Site do Condomínio</h3>
+      <p>Site do condomínio CMCR.</p>
+      <span class="path">/trabalho/site-cmcr/</span>
+    </a>
+
+    <a class="card" href="/trabalho/temperadigital/">
+      <h3>Têmpera Digital</h3>
+      <p>Forjamos inteligência. Temperamos resultados.</p>
+      <span class="path">/trabalho/temperadigital/</span>
+    </a>
+
+    <a class="card" href="/trabalho/01_projetos/controler/">
+      <h3>Gerente Financeiro</h3>
+      <p>Controle financeiro em desenvolvimento.</p>
+      <span class="path">/trabalho/01_projetos/controler/</span>
+    </a>
+
+    <a class="card" href="/trabalho/01_projetos/planejador-tarefas/">
+      <h3>Planejador de Tarefas</h3>
+      <p>Planejador de tarefas diárias.</p>
+      <span class="path">/trabalho/01_projetos/planejador-tarefas/</span>
+    </a>
+
+    <a class="card" href="/trabalho/02_imersoes_cursos/">
+      <h3>Base de Conhecimento</h3>
+      <p>Notas e materiais dos cursos e imersões que acompanho.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/</span>
+    </a>
+
+  </div>
+
+  <h2>Experimentos</h2>
+  <p class="section-note">Protótipos e testes. Podem quebrar ou mudar sem aviso.</p>
+  <div class="grid">
+
+    <a class="card" href="/trabalho/03_experimentos/catalogo-assistir-mais-tarde/">
+      <h3>Catálogo Ver Mais Tarde</h3>
+      <p>Catálogo pessoal de conteúdo para assistir depois.</p>
+      <span class="path">/trabalho/03_experimentos/catalogo-assistir-mais-tarde/</span>
+    </a>
+
+    <a class="card" href="/trabalho/03_experimentos/gemini/gerente_financeiro_ia.html">
+      <h3>Gerente Financeiro IA</h3>
+      <p>Protótipo de gerente financeiro assistido por IA.</p>
+      <span class="path">/trabalho/03_experimentos/gemini/</span>
+    </a>
+
+    <a class="card" href="/trabalho/03_experimentos/modelo-base/">
+      <h3>Modelo Base</h3>
+      <p>Esqueleto que uso para começar um site novo.</p>
+      <span class="path">/trabalho/03_experimentos/modelo-base/</span>
+    </a>
+
+    <a class="card" href="/trabalho/03_experimentos/exemplo-boas-vindas/">
+      <h3>Diagnóstico da Publicação</h3>
+      <p>Página de teste que confirma se a publicação está funcionando.</p>
+      <span class="path">/trabalho/03_experimentos/exemplo-boas-vindas/</span>
+    </a>
+
+  </div>
+
+  <footer>
+    <p>
+      Servido por nginx a partir da pasta <code>sites</code>, somente leitura.
+      A escrita é feita pelo Nextcloud ou pelo compartilhamento de rede.
+      Pastas de apoio — <code>modelos</code>, material de curso e dependências —
+      não são publicadas.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

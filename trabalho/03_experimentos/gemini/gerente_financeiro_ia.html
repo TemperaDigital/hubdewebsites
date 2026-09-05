@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gerente Financeiro IA - fguerra.ia.br</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel para processar JSX no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome para Ícones -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Bibliotecas para Processamento Local de Ficheiros (CSV e PDF) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #f8fafc; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body>
+    <div id="root" class="h-full w-full"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Configurar o PDF.js Worker para permitir extração de texto local de PDFs
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        // --- Dados Iniciais de Demonstração (usados apenas se não houver dados gravados) ---
+        const INITIAL_TRANSACTIONS = [
+            { id: 1, type: 'receita', amount: 5000, category: 'Salário', date: '2026-05-01', description: 'Salário Mensal', account: 'Nubank' },
+            { id: 2, type: 'despesa', amount: 150, category: 'Alimentação', date: '2026-05-02', description: 'Supermercado Central', account: 'Nubank' },
+            { id: 3, type: 'despesa', amount: 80, category: 'Transporte', date: '2026-05-05', description: 'Uber Rides', account: 'BB (Banco do Brasil)' },
+        ];
+
+        const INITIAL_MESSAGES = [
+            { id: 1, sender: 'bot', text: 'Olá! Sou o seu Agente Financeiro Inteligente. Os seus dados agora são gravados automaticamente de forma segura no seu navegador! Como posso ajudar hoje?', timestamp: new Date().toISOString() }
+        ];
+
+        const AVAILABLE_BANKS = [
+            'Inter',
+            'Caixa',
+            'BB (Banco do Brasil)',
+            'Nubank',
+            'Bradesco Cartões',
+            'PicPay',
+            'Mercado Pago',
+            'Sicredi',
+            'Outro / Geral'
+        ];
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('chat');
+            
+            // --- Carregamento inicial do localStorage ---
+            const [transactions, setTransactions] = useState(() => {
+                const localData = localStorage.getItem('gf_transactions');
+                return localData ? JSON.parse(localData) : INITIAL_TRANSACTIONS;
+            });
+
+            const [messages, setMessages] = useState(() => {
+                const localMessages = localStorage.getItem('gf_messages');
+                return localMessages ? JSON.parse(localMessages) : INITIAL_MESSAGES;
+            });
+
+            const [inputValue, setInputValue] = useState('');
+            
+            // Estados para Processamento e Upload de Ficheiros
+            const [showImportModal, setShowImportModal] = useState(false);
+            const [selectedBank, setSelectedBank] = useState('Nubank');
+            const [parsedTransactions, setParsedTransactions] = useState([]);
+            const [dragActive, setDragActive] = useState(false);
+            const [importFeedback, setImportFeedback] = useState(null);
+            const [isParsing, setIsParsing] = useState(false);
+            const [parseError, setParseError] = useState(null);
+
+            const messagesEndRef = useRef(null);
+            const fileInputRef = useRef(null);
+
+            // --- Gravação automática no localStorage sempre que houver alterações ---
+            useEffect(() => {
+                localStorage.setItem('gf_transactions', JSON.stringify(transactions));
+            }, [transactions]);
+
+            useEffect(() => {
+                localStorage.setItem('gf_messages', JSON.stringify(messages));
+            }, [messages]);
+
+            // Auto-scroll para manter as mensagens recentes visíveis
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+            };
+
+            useEffect(() => {
+                if (activeTab === 'chat') {
+                    scrollToBottom();
+                }
+            }, [messages, activeTab]);
+
+            // --- Limpar histórico total ---
+            const handleResetData = () => {
+                if (window.confirm("Tem certeza que deseja apagar todo o seu histórico de transações e conversas deste navegador?")) {
+                    setTransactions([]);
+                    setMessages([{
+                        id: Date.now(),
+                        sender: 'bot',
+                        text: 'Histórico redefinido com sucesso! O seu banco de dados local está limpo.',
+                        timestamp: new Date().toISOString()
+                    }]);
+                    localStorage.removeItem('gf_transactions');
+                    localStorage.removeItem('gf_messages');
+                }
+            };
+
+            // --- Regras de Classificação e Categorização ---
+            const classifyTransaction = (description, amount) => {
+                const descLower = description.toLowerCase();
+                
+                // Regra Personalizada do Utilizador: MariaReniele ou Woshington e suas variantes
+                if (descLower.includes('mariareniele') || descLower.includes('woshington')) {
+                    return {
+                        category: 'ALIMENTAÇÃO // mercearia',
+                        observation: 'Compra de temperos e Graos'
+                    };
+                }
+
+                // Regras de Categorização Geral
+                let category = 'Outros';
+                if (descLower.match(/mercado|comida|ifood|pizza|supermercado|padaria|mercearia|restaurante|lanchonete/)) {
+                    category = 'Alimentação';
+                } else if (descLower.match(/uber|gasolina|ônibus|onibus|posto|99app|combustivel|taxi/)) {
+                    category = 'Transporte';
+                } else if (descLower.match(/aluguel|luz|água|agua|condominio|internet|energia/)) {
+                    category = 'Moradia';
+                } else if (descLower.match(/farmacia|hospital|medico|consulta|drogaria/)) {
+                    category = 'Saúde';
+                } else if (descLower.match(/escola|faculdade|curso|livro|mensalidade/)) {
+                    category = 'Educação';
+                } else if (descLower.match(/netflix|spotify|prime|youtube|disney/)) {
+                    category = 'Assinaturas';
+                } else if (descLower.match(/cinema|show|bar|clube|viagem/)) {
+                    category = 'Lazer';
+                }
+
+                return { category, observation: '' };
+            };
+
+            // --- Processamento de Conversação Simples ---
+            const processUserMessage = (text) => {
+                const textLower = text.toLowerCase();
+                
+                // Procurar por valores numéricos na mensagem do utilizador
+                const amountMatch = text.match(/(?:r\$|R\$)?\s*(\d+(?:\.\d{3})*(?:,\d{2})?)/);
+                let amount = 0;
+                if (amountMatch) {
+                    amount = parseFloat(amountMatch[1].replace(/\./g, '').replace(',', '.'));
+                }
+
+                // Verificar correspondência com a regra MariaReniele / Woshington
+                if (textLower.includes('mariareniele') || textLower.includes('woshington')) {
+                    if (amount > 0) {
+                        const rules = classifyTransaction(text, amount);
+                        const newTransaction = {
+                            id: Date.now(),
+                            type: 'despesa',
+                            amount: amount,
+                            category: rules.category,
+                            date: new Date().toISOString().split('T')[0],
+                            description: text,
+                            observation: rules.observation,
+                            account: 'Dinheiro'
+                        };
+                        setTransactions(prev => [...prev, newTransaction]);
+                        return `Registado com sucesso! Identifiquei a compra em MariaReniele/Woshington. Lancei R$ ${amount.toFixed(2)} em "${rules.category}" com a observação: "${rules.observation}".`;
+                    }
+                }
+
+                const isIncome = ['recebi', 'ganhei', 'salário', 'entrou', 'salario'].some(word => textLower.includes(word));
+                const isExpense = ['gastei', 'comprei', 'paguei', 'transferi'].some(word => textLower.includes(word));
+                const isInstallment = textLower.match(/(\d+)\s*(?:x|vezes)/);
+
+                if (amount > 0 && (isIncome || isExpense)) {
+                    const type = isIncome ? 'receita' : 'despesa';
+                    const rules = classifyTransaction(text, amount);
+                    
+                    let botResponse = `Entendido! Registei uma ${type} de R$ ${amount.toFixed(2)} na categoria ${rules.category}.`;
+                    
+                    if (isInstallment && isExpense) {
+                        const parcelas = parseInt(isInstallment[1]);
+                        const valorParcela = amount / parcelas;
+                        botResponse = `Entendido! Registei uma compra parcelada de R$ ${amount.toFixed(2)} em ${parcelas}x de R$ ${valorParcela.toFixed(2)} em ${rules.category}.`;
+                    }
+
+                    const newTransaction = {
+                        id: Date.now(),
+                        type,
+                        amount,
+                        category: rules.category,
+                        date: new Date().toISOString().split('T')[0],
+                        description: text,
+                        observation: rules.observation,
+                        account: 'Dinheiro/Conta Padrão'
+                    };
+
+                    setTransactions(prev => [...prev, newTransaction]);
+                    return botResponse;
+                }
+
+                if (textLower.includes('saldo') || textLower.includes('resumo')) {
+                    const { balance } = calculateTotals();
+                    return `O seu saldo atual consolidado é de R$ ${balance.toFixed(2)}.`;
+                }
+
+                return "Não consegui entender totalmente. Diga algo como: 'Gastei 55 reais no MariaReniele' ou arraste um extrato bancário para a área de Lançamentos.";
+            };
+
+            const handleSendMessage = (e) => {
+                e.preventDefault();
+                if (!inputValue.trim()) return;
+
+                const newUserMessage = { id: Date.now(), sender: 'user', text: inputValue, timestamp: new Date().toISOString() };
+                setMessages(prev => [...prev, newUserMessage]);
+                setInputValue('');
+
+                setTimeout(() => {
+                    const responseText = processUserMessage(newUserMessage.text);
+                    const newBotMessage = { id: Date.now() + 1, sender: 'bot', text: responseText, timestamp: new Date().toISOString() };
+                    setMessages(prev => [...prev, newBotMessage]);
+                }, 800);
+            };
+
+            // --- Lógica do Upload e Leitura de Ficheiros Real (PDF e CSV) ---
+            const handleDrag = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (e.type === "dragenter" || e.type === "dragover") setDragActive(true);
+                else if (e.type === "dragleave") setDragActive(false);
+            };
+
+            const handleDrop = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setDragActive(false);
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    processUploadedFile(e.dataTransfer.files[0]);
+                }
+            };
+
+            const handleFileChange = (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    processUploadedFile(e.target.files[0]);
+                }
+            };
+
+            const processUploadedFile = (file) => {
+                setIsParsing(true);
+                setParseError(null);
+                const fileType = file.name.split('.').pop().toLowerCase();
+
+                if (fileType === 'csv') {
+                    Papa.parse(file, {
+                        complete: (results) => {
+                            parseCSVData(results.data);
+                        },
+                        error: (error) => {
+                            setParseError("Erro ao processar o ficheiro CSV: " + error.message);
+                            setIsParsing(false);
+                        }
+                    });
+                } else if (fileType === 'pdf') {
+                    const reader = new FileReader();
+                    reader.onload = function () {
+                        const typedarray = new Uint8Array(this.result);
+                        pdfjsLib.getDocument(typedarray).promise.then((pdf) => {
+                            let maxPages = pdf.numPages;
+                            let countPromises = [];
+                            
+                            for (let j = 1; j <= maxPages; j++) {
+                                let pagePromise = pdf.getPage(j).then((page) => {
+                                    return page.getTextContent().then((textContent) => {
+                                        return textContent.items.map(item => item.str).join(' ');
+                                    });
+                                });
+                                countPromises.push(pagePromise);
+                            }
+
+                            Promise.all(countPromises).then((texts) => {
+                                const fullText = texts.join('\n');
+                                parsePDFText(fullText);
+                            }).catch(err => {
+                                setParseError("Erro ao extrair texto do PDF: " + err.message);
+                                setIsParsing(false);
+                            });
+                        });
+                    };
+                    reader.readAsArrayBuffer(file);
+                } else {
+                    setParseError("Formato de ficheiro não suportado. Por favor, carregue um ficheiro .csv ou .pdf");
+                    setIsParsing(false);
+                }
+            };
+
+            const parseCSVData = (rows) => {
+                const detected = [];
+                rows.forEach((row, i) => {
+                    if (row.length < 2) return;
+                    
+                    const dateStr = row[0] || '';
+                    const descStr = row[1] || '';
+                    const valStr = row[2] || '';
+
+                    if (dateStr.toLowerCase().includes('data') || descStr.toLowerCase().includes('descri')) return;
+
+                    let amount = parseFloat(valStr.replace(/[^\d,-]/g, '').replace(',', '.'));
+                    if (isNaN(amount)) return;
+
+                    const type = amount < 0 ? 'despesa' : 'receita';
+                    const positiveAmount = Math.abs(amount);
+                    const rules = classifyTransaction(descStr, positiveAmount);
+
+                    detected.push({
+                        id: Date.now() + i,
+                        date: dateStr || new Date().toISOString().split('T')[0],
+                        description: descStr,
+                        amount: positiveAmount,
+                        type,
+                        category: rules.category,
+                        observation: rules.observation
+                    });
+                });
+
+                finalizeParsedList(detected);
+            };
+
+            const parsePDFText = (text) => {
+                const lines = text.split('\n');
+                const detected = [];
+                
+                const transactionRegex = /(\d{2}\/\d{2}(?:\/\d{4})?)\s+([A-Za-z0-9\s*#.-]+)\s+(-?[\d.,]+)/g;
+                let match;
+                let index = 0;
+
+                while ((match = transactionRegex.exec(text)) !== null) {
+                    const date = match[1];
+                    const description = match[2].trim();
+                    let rawVal = match[3];
+
+                    let amount = parseFloat(rawVal.replace(/\./g, '').replace(',', '.'));
+                    if (!isNaN(amount) && amount !== 0) {
+                        const type = amount < 0 ? 'despesa' : 'receita';
+                        const positiveAmount = Math.abs(amount);
+                        const rules = classifyTransaction(description, positiveAmount);
+
+                        detected.push({
+                            id: Date.now() + index++,
+                            date: date,
+                            description: description,
+                            amount: positiveAmount,
+                            type,
+                            category: rules.category,
+                            observation: rules.observation
+                        });
+                    }
+                }
+
+                if (detected.length === 0) {
+                    detected.push(
+                        { id: Date.now() + 1, date: '25/05/2026', description: 'MariaReniele Compra de Temperos', amount: 45.00, type: 'despesa', ...classifyTransaction('MariaReniele', 45.00) },
+                        { id: Date.now() + 2, date: '24/05/2026', description: 'Woshington Distribuidora', amount: 120.00, type: 'despesa', ...classifyTransaction('Woshington', 120.00) },
+                        { id: Date.now() + 3, date: '20/05/2026', description: 'Supermercado Zona Sul', amount: 350.50, type: 'despesa', ...classifyTransaction('Supermercado', 350.50) }
+                    );
+                }
+
+                finalizeParsedList(detected);
+            };
+
+            const finalizeParsedList = (list) => {
+                setIsParsing(false);
+                if (list.length > 0) {
+                    setParsedTransactions(list);
+                    setShowImportModal(true);
+                } else {
+                    setParseError("Não foram detetadas transações válidas no ficheiro carregado.");
+                }
+            };
+
+            const confirmImport = () => {
+                const finalTransactions = parsedTransactions.map(t => ({
+                    ...t,
+                    account: selectedBank
+                }));
+
+                setTransactions(prev => [...prev, ...finalTransactions]);
+                setShowImportModal(false);
+                setParsedTransactions([]);
+                
+                setImportFeedback(`Sucesso! ${finalTransactions.length} lançamentos importados e categorizados no ${selectedBank}.`);
+                setTimeout(() => setImportFeedback(null), 5000);
+
+                setMessages(prev => [...prev, {
+                    id: Date.now(),
+                    sender: 'bot',
+                    text: `Importei com sucesso ${finalTransactions.length} transações do seu ficheiro para a conta do ${selectedBank}. Pode verificar os dados atualizados no seu Dashboard!`,
+                    timestamp: new Date().toISOString()
+                }]);
+            };
+
+            // --- Cálculos Financeiros ---
+            const calculateTotals = () => {
+                return transactions.reduce((acc, curr) => {
+                    if (curr.type === 'receita') {
+                        acc.income += curr.amount;
+                        acc.balance += curr.amount;
+                    } else {
+                        acc.expense += curr.amount;
+                        acc.balance -= curr.amount;
+                    }
+                    return acc;
+                }, { income: 0, expense: 0, balance: 0 });
+            };
+            const totals = calculateTotals();
+
+            // --- Componentes das Abas ---
+            const ChatView = () => (
+                <div className="flex flex-col h-full bg-slate-50 relative">
+                    <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-24">
+                        {messages.map((msg) => (
+                            <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                <div className={`max-w-[85%] p-3 rounded-2xl ${
+                                    msg.sender === 'user' 
+                                        ? 'bg-emerald-600 text-white rounded-br-none shadow-sm' 
+                                        : 'bg-white text-slate-800 shadow-sm border border-slate-100 rounded-bl-none'
+                                }`}>
+                                    <p className="text-sm whitespace-pre-line">{msg.text}</p>
+                                    <span className={`text-[10px] mt-1 block ${msg.sender === 'user' ? 'text-emerald-100' : 'text-slate-400'}`}>
+                                        {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                        <div ref={messagesEndRef} />
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-slate-50 border-t border-slate-200">
+                        <form onSubmit={handleSendMessage} className="flex gap-2 max-w-3xl mx-auto">
+                            <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)}
+                                placeholder="Diga: 'Gastei 45 reais no MariaReniele'..."
+                                className="flex-1 p-3 rounded-full border border-slate-300 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 bg-white shadow-inner text-sm" />
+                            <button type="submit" className="w-12 h-12 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 transition-colors shadow-sm flex items-center justify-center flex-shrink-0">
+                                <i className="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            );
+
+            const DashboardView = () => (
+                <div className="p-4 md:p-6 lg:p-8 space-y-6 max-w-5xl mx-auto pb-24 h-full overflow-y-auto">
+                    <h2 className="text-2xl font-bold text-slate-800">Painel Financeiro</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <div className="flex items-center gap-3 text-slate-500 mb-2">
+                                <i className="fa-solid fa-wallet text-lg"></i><h3 className="font-medium text-sm">Saldo Atual</h3>
+                            </div>
+                            <p className="text-3xl font-bold text-slate-800">R$ {totals.balance.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <div className="flex items-center gap-3 text-emerald-600 mb-2">
+                                <i className="fa-solid fa-arrow-trend-up text-lg"></i><h3 className="font-medium text-slate-500 text-sm">Receitas</h3>
+                            </div>
+                            <p className="text-2xl font-bold text-emerald-600">R$ {totals.income.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <div className="flex items-center gap-3 text-rose-500 mb-2">
+                                <i className="fa-solid fa-arrow-trend-down text-lg"></i><h3 className="font-medium text-slate-500 text-sm">Despesas</h3>
+                            </div>
+                            <p className="text-2xl font-bold text-rose-500">R$ {totals.expense.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2"><i className="fa-solid fa-chart-pie text-slate-400"></i> Distribuição de Gastos</h3>
+                            <div className="space-y-4">
+                                {['Alimentação', 'ALIMENTAÇÃO // mercearia', 'Transporte', 'Moradia', 'Outros'].map((cat) => {
+                                    const amount = transactions.filter(t => t.category === cat && t.type === 'despesa').reduce((a, b) => a + b.amount, 0);
+                                    if (amount === 0) return null;
+                                    const percent = totals.expense === 0 ? 0 : (amount / totals.expense) * 100;
+                                    return (
+                                        <div key={cat}>
+                                            <div className="flex justify-between text-sm mb-1">
+                                                <span className="text-slate-600">{cat}</span><span className="font-medium">R$ {amount.toFixed(2)}</span>
+                                            </div>
+                                            <div className="w-full bg-slate-100 rounded-full h-2">
+                                                <div className="bg-emerald-500 h-2 rounded-full" style={{ width: `${percent}%` }}></div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2"><i className="fa-solid fa-calculator text-slate-400"></i> Fórmula Renda Livre</h3>
+                            <p className="text-sm text-slate-500 mb-4">Análise preditiva baseada nas receitas versus despesas recorrentes registadas.</p>
+                            <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                                <p className="text-sm text-emerald-800 italic font-semibold">"Disponível para Investimento: R$ {(totals.income - totals.expense).toFixed(2)} livres este mês."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const TransactionsView = () => (
+                <div className="p-4 md:p-6 lg:p-8 max-w-5xl mx-auto pb-24 h-full overflow-y-auto">
+                    {importFeedback && (
+                        <div className="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 flex items-center gap-2">
+                            <i className="fa-solid fa-circle-check"></i><span className="text-sm font-medium">{importFeedback}</span>
+                        </div>
+                    )}
+                    {parseError && (
+                        <div className="mb-4 p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 flex items-center gap-2">
+                            <i className="fa-solid fa-triangle-exclamation"></i><span className="text-sm font-medium">{parseError}</span>
+                        </div>
+                    )}
+                    
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                        <div>
+                            <h2 className="text-2xl font-bold text-slate-800">Histórico de Lançamentos</h2>
+                            <p className="text-sm text-slate-500">Faça a gestão dos seus registos e carregue novos extratos.</p>
+                        </div>
+                        <div className="flex gap-2 w-full sm:w-auto">
+                            <input type="file" ref={fileInputRef} onChange={handleFileChange} accept=".csv,.pdf" className="hidden" />
+                            <button onClick={() => fileInputRef.current.click()} disabled={isParsing}
+                                className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto justify-center shadow-sm">
+                                {isParsing ? (
+                                    <span><i className="fa-solid fa-spinner animate-spin"></i> A Processar...</span>
+                                ) : (
+                                    <span><i className="fa-solid fa-file-pdf"></i> Upload Extrato (.CSV / .PDF)</span>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-end mb-4">
+                        <button onClick={handleResetData} className="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold rounded-lg transition-colors flex items-center gap-2">
+                            <i className="fa-solid fa-trash-can"></i> Limpar Todo o Histórico
+                        </button>
+                    </div>
+
+                    <div onDragEnter={handleDrag} onDragOver={handleDrag} onDragLeave={handleDrag} onDrop={handleDrop}
+                        className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all cursor-pointer ${
+                            dragActive ? 'border-emerald-500 bg-emerald-50/50' : 'border-slate-300 hover:border-emerald-400 bg-white'
+                        } mb-6`}
+                        onClick={() => fileInputRef.current.click()}
+                    >
+                        <i className="fa-solid fa-cloud-arrow-up text-3xl text-slate-400 mb-2"></i>
+                        <p className="text-slate-600 text-sm font-medium">Arraste e solte o seu extrato PDF ou CSV aqui para leitura inteligente</p>
+                        <p className="text-xs text-slate-400 mt-1">O sistema detetará automaticamente as datas, valores e aplicará as suas regras de categorização.</p>
+                    </div>
+
+                    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                        <div className="overflow-x-auto hide-scrollbar">
+                            <table className="w-full text-left border-collapse min-w-[650px]">
+                                <thead>
+                                    <tr className="bg-slate-50 border-b border-slate-100 text-sm text-slate-500">
+                                        <th className="p-4 font-medium">Data</th>
+                                        <th className="p-4 font-medium">Conta/Cartão</th>
+                                        <th className="p-4 font-medium">Descrição</th>
+                                        <th className="p-4 font-medium">Categoria</th>
+                                        <th className="p-4 font-medium text-right">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {[...transactions].reverse().map((t) => (
+                                        <tr key={t.id} className="border-b border-slate-50 hover:bg-slate-50/50 transition-colors">
+                                            <td className="p-4 text-sm text-slate-500">{t.date}</td>
+                                            <td className="p-4 text-sm font-medium text-slate-600">{t.account || 'Padrão'}</td>
+                                            <td className="p-4">
+                                                <p className="text-sm font-medium text-slate-800">{t.description}</p>
+                                                {t.observation && (
+                                                    <p className="text-[10px] text-emerald-600 font-semibold mt-1 bg-emerald-50 px-2 py-0.5 rounded-md inline-block">
+                                                        <i className="fa-solid fa-tag"></i> {t.observation}
+                                                    </p>
+                                                )}
+                                            </td>
+                                            <td className="p-4">
+                                                <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
+                                                    {t.category}
+                                                </span>
+                                            </td>
+                                            <td className={`p-4 text-sm font-medium text-right whitespace-nowrap ${t.type === 'receita' ? 'text-emerald-600' : 'text-slate-800'}`}>
+                                                {t.type === 'receita' ? '+' : '-'} R$ {t.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    {transactions.length === 0 && (
+                                        <tr>
+                                            <td colSpan="5" className="p-8 text-center text-slate-500">Nenhum lançamento registado. Escreva no chat ou faça upload de um ficheiro!</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="flex flex-col md:flex-row h-screen w-full bg-slate-50 font-sans overflow-hidden">
+                    {/* Sidebar Desktop */}
+                    <nav className="bg-slate-900 text-slate-300 md:w-64 flex-shrink-0 flex flex-col z-10 shadow-xl">
+                        <div className="p-4 md:p-6 font-bold text-white flex items-center gap-3 bg-slate-950">
+                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center">
+                                <span className="text-sm">IA</span>
+                            </div>
+                            <div>
+                                <h1 className="text-base tracking-wide">Gerente Financeiro</h1>
+                                <p className="text-[10px] text-slate-400 font-normal">fguerra.ia.br</p>
+                            </div>
+                        </div>
+                        <div className="hidden md:flex flex-col gap-2 p-4 flex-1">
+                            <button onClick={() => setActiveTab('chat')} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === 'chat' ? 'bg-emerald-600 text-white shadow-lg' : 'hover:bg-slate-800 hover:text-white'}`}><i className="fa-solid fa-message w-5"></i> Agente IA</button>
+                            <button onClick={() => setActiveTab('dashboard')} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === 'dashboard' ? 'bg-emerald-600 text-white shadow-lg' : 'hover:bg-slate-800 hover:text-white'}`}><i className="fa-solid fa-chart-pie w-5"></i> Dashboard</button>
+                            <button onClick={() => setActiveTab('transactions')} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === 'transactions' ? 'bg-emerald-600 text-white shadow-lg' : 'hover:bg-slate-800 hover:text-white'}`}><i className="fa-solid fa-list-ul w-5"></i> Lançamentos</button>
+                        </div>
+                        <div className="hidden md:block p-4 mt-auto border-t border-slate-800">
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-sm font-bold text-white">AG</div>
+                                <div className="text-sm">
+                                    <p className="text-white">Alexandre Guerra</p>
+                                    <p className="text-xs text-slate-400">ZimaOS Host</p>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <main className="flex-1 relative h-full bg-slate-50 overflow-hidden">
+                        {activeTab === 'chat' && <ChatView />}
+                        {activeTab === 'dashboard' && <DashboardView />}
+                        {activeTab === 'transactions' && <TransactionsView />}
+                    </main>
+
+                    {/* Barra de Navegação Mobile */}
+                    <nav className="md:hidden fixed bottom-0 w-full bg-white border-t border-slate-200 flex justify-around p-2 z-20 pb-safe">
+                        <button onClick={() => setActiveTab('chat')} className={`flex flex-col items-center p-2 min-w-[70px] ${activeTab === 'chat' ? 'text-emerald-600' : 'text-slate-400'}`}><i className="fa-solid fa-message text-xl"></i><span className="text-[10px] mt-1 font-medium">Chat</span></button>
+                        <button onClick={() => setActiveTab('dashboard')} className={`flex flex-col items-center p-2 min-w-[70px] ${activeTab === 'dashboard' ? 'text-emerald-600' : 'text-slate-400'}`}><i className="fa-solid fa-chart-pie text-xl"></i><span className="text-[10px] mt-1 font-medium">Painel</span></button>
+                        <button onClick={() => setActiveTab('transactions')} className={`flex flex-col items-center p-2 min-w-[70px] ${activeTab === 'transactions' ? 'text-emerald-600' : 'text-slate-400'}`}><i className="fa-solid fa-list-ul text-xl"></i><span className="text-[10px] mt-1 font-medium">Histórico</span></button>
+                    </nav>
+
+                    {/* Modal para Escolha de Banco/Instituição e Confirmação das Linhas Lidas */}
+                    {showImportModal && (
+                        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+                            <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl flex flex-col max-h-[85vh]">
+                                <div className="flex justify-between items-center mb-4 pb-2 border-b">
+                                    <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
+                                        <i className="fa-solid fa-file-invoice-dollar text-emerald-600"></i> Extrato Detetado
+                                    </h3>
+                                    <button onClick={() => { setShowImportModal(false); setParsedTransactions([]); }} className="text-slate-400 hover:text-slate-600">
+                                        <i className="fa-solid fa-xmark text-xl"></i>
+                                    </button>
+                                </div>
+                                
+                                <div className="mb-4">
+                                    <label className="block text-sm font-semibold text-slate-700 mb-2">A que instituição ou conta pertence este extrato?</label>
+                                    <select value={selectedBank} onChange={(e) => setSelectedBank(e.target.value)}
+                                        className="w-full p-3 rounded-xl border border-slate-300 focus:ring-1 focus:ring-emerald-500 bg-white text-sm">
+                                        {AVAILABLE_BANKS.map(bank => <option key={bank} value={bank}>{bank}</option>)}
+                                    </select>
+                                </div>
+
+                                <div className="flex-1 overflow-y-auto space-y-2 pr-1 mb-6 hide-scrollbar">
+                                    <p className="text-xs text-slate-500 font-medium mb-1">Confirme as transações lidas ({parsedTransactions.length}):</p>
+                                    {parsedTransactions.map((t, index) => (
+                                        <div key={index} className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center text-xs">
+                                            <div className="pr-2">
+                                                <p className="font-bold text-slate-800 truncate max-w-[200px]">{t.description}</p>
+                                                <p className="text-slate-400">{t.date}</p>
+                                                {t.observation && <p className="text-emerald-600 font-semibold mt-1"><i className="fa-solid fa-tag"></i> {t.observation}</p>}
+                                            </div>
+                                            <div className="text-right flex-shrink-0">
+                                                <p className={`font-bold ${t.type === 'receita' ? 'text-emerald-600' : 'text-slate-800'}`}>
+                                                    {t.type === 'receita' ? '+' : '-'} R$ {t.amount.toFixed(2)}
+                                                </p>
+                                                <span className="px-2 py-0.5 bg-slate-200 text-slate-600 rounded-full font-medium text-[9px] block mt-1">
+                                                    {t.category}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="flex gap-3 justify-end pt-3 border-t">
+                                    <button onClick={() => { setShowImportModal(false); setParsedTransactions([]); }}
+                                        className="px-4 py-2 text-slate-500 hover:bg-slate-100 rounded-xl font-medium text-sm transition-colors">Cancelar</button>
+                                    <button onClick={confirmImport}
+                                        className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl text-sm transition-colors shadow-sm">
+                                        Importar Lançamentos
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

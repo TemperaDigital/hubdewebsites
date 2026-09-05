@@ -1,0 +1,22 @@
+{
+  "feature": "corrigir-merge-video-audio",
+  "timestamp": "2026-09-01T18:46:20.059Z",
+  "gitRev": null,
+  "command": "npx vitest run --reporter=json --outputFile=.spec/verification/raw.json",
+  "reporter": "vitest-json",
+  "exitCode": 127,
+  "testsParsed": 14,
+  "results": {
+    "AC-001": {
+      "status": "pass",
+      "testName": "sniffContainer reconhece MP4 pelo 'ftyp' no deslocamento 4 @spec:AC-001 reconhece MP4 pelo 'ftyp' no deslocamento 4 @spec:AC-001",
+      "method": "vitest-json"
+    },
+    "AC-004": {
+      "status": "pass",
+      "testName": "sniffContainer não confunde bytes aleatórios com MPEG-TS mesmo que o primeiro byte seja 0x47 @spec:AC-004 não confunde bytes aleatórios com MPEG-TS mesmo que o primeiro byte seja 0x47 @spec:AC-004",
+      "method": "vitest-json"
+    }
+  },
+  "principles": {}
+}

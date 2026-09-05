@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerente Financeiro · fguerra.ia.br</title>
+  <meta name="description" content="Agente financeiro inteligente. Controle suas finanças em linguagem natural.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ══════════════════════════════════════════
+       SIDEBAR
+  ══════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-wordmark">Gerente<br><em>Financeiro</em></div>
+      <div class="brand-domain">gerentefinanceiro.fguerra.ia.br</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Principal</div>
+
+      <button class="nav-item active" data-screen="dashboard" onclick="goTo('dashboard', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        Dashboard
+      </button>
+
+      <button class="nav-item" data-screen="chat" onclick="goTo('chat', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        Chat com Agente
+        <span class="nav-badge">IA</span>
+      </button>
+
+      <div class="nav-group-label">Financeiro</div>
+
+      <button class="nav-item" data-screen="historico" onclick="goTo('historico', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+          <rect x="9" y="3" width="6" height="4" rx="2"/>
+        </svg>
+        Histórico
+      </button>
+
+      <button class="nav-item" data-screen="parcelamentos" onclick="goTo('parcelamentos', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>
+        </svg>
+        Parcelamentos
+        <span class="nav-badge" id="parc-count">3</span>
+      </button>
+
+      <button class="nav-item" data-screen="faturas" onclick="goTo('faturas', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+        </svg>
+        Faturas a Pagar
+      </button>
+
+      <button class="nav-item" data-screen="metas" onclick="goTo('metas', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+        </svg>
+        Metas
+      </button>
+
+      <button class="nav-item" data-screen="importar" onclick="goTo('importar', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        Importar Arquivo
+        <span class="nav-badge" style="background:var(--ember)">novo</span>
+      </button>
+
+      <div class="nav-group-label">Relatórios</div>
+
+      <button class="nav-item" data-screen="plano" onclick="goTo('plano', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+        </svg>
+        Plano de Contas
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar">AG</div>
+      <div>
+        <div class="avatar-name">Alexandre Guerra</div>
+        <div class="avatar-sub">João Pessoa · PB</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════
+       MAIN AREA
+  ══════════════════════════════════════════ -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="topbar-right">
+        <span class="topbar-month">Maio 2025</span>
+        <button class="btn btn-ghost btn-sm" onclick="goTo('historico', document.querySelector('[data-screen=historico]'))">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Exportar
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="openLancamento()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Novo Lançamento
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SCREEN: DASHBOARD
+    ══════════════════════════════════════════ -->
+    <div class="screen active content" id="screen-dashboard">
+
+      <div class="flex items-center justify-between mb-5">
+        <div class="toggle-group">
+          <button class="toggle-btn active dash-toggle" onclick="toggleDashMode(this,'competencia')">Competência</button>
+          <button class="toggle-btn dash-toggle" onclick="toggleDashMode(this,'caixa')">Caixa</button>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="grid-4 mb-5">
+        <div class="card card-sm">
+          <div class="metric-label">Receita do mês</div>
+          <div class="metric-value teal" id="dash-receitas">R$ 8.400</div>
+          <div class="metric-sub">Salário + freelance</div>
+        </div>
+        <div class="card card-sm">
+          <div class="metric-label" id="dash-despesas-label">Gastos (competência)</div>
+          <div class="metric-value ember" id="dash-despesas">R$ 5.230</div>
+          <div class="metric-sub down">↑ 12% vs abril</div>
+        </div>
+        <div class="card card-sm">
+          <div class="metric-label">Saldo disponível</div>
+          <div class="metric-value" id="dash-saldo">R$ 3.170</div>
+          <div class="metric-sub up">↑ dentro da meta</div>
+        </div>
+        <div class="card card-sm" style="border-color:rgba(200,155,60,.3); background:var(--gold-l)">
+          <div class="metric-label" style="color:var(--gold)">Parcelas futuras (6m)</div>
+          <div class="metric-value gold" id="dash-parcelas">R$ 5.480</div>
+          <div class="metric-sub" style="color:var(--gold)">Comprometimento: <span id="dash-comprometimento">62%</span></div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="grid-2 mb-5">
+        <div class="card">
+          <div class="section-heading mb-4">
+            <div class="section-title">Receitas × Despesas</div>
+            <div class="flex items-center gap-2 text-xs text-muted">
+              <span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--teal)"></span>Receitas
+              <span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--ember)"></span>Despesas
+            </div>
+          </div>
+          <div class="bar-chart-wrap" id="bar-chart"></div>
+        </div>
+        <div class="card">
+          <div class="section-title mb-4">Gastos por categoria</div>
+          <div style="display:flex;align-items:center;gap:20px">
+            <svg width="110" height="110" viewBox="0 0 42 42" id="donut-svg"></svg>
+            <div style="flex:1" id="donut-legend"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saldos por conta -->
+      <div class="grid-3 mb-5">
+        <div class="card card-sm" style="border-left: 3px solid #f7d070">
+          <div class="metric-label">BB Conta Corrente</div>
+          <div class="metric-value" style="font-size:20px">R$ 3.420,00</div>
+          <div class="metric-sub">conta corrente</div>
+        </div>
+        <div class="card card-sm" style="border-left: 3px solid #8a2be2">
+          <div class="metric-label">Nubank</div>
+          <div class="metric-value" style="font-size:20px">R$ 1.180,50</div>
+          <div class="metric-sub">conta digital</div>
+        </div>
+        <div class="card card-sm" style="border-left: 3px solid #007aff">
+          <div class="metric-label">Caixa Econômica</div>
+          <div class="metric-value" style="font-size:20px">R$ 650,00</div>
+          <div class="metric-sub">conta corrente</div>
+        </div>
+      </div>
+
+      <!-- Últimas transações -->
+      <div class="section-heading">
+        <div class="section-title">Últimas movimentações</div>
+        <button class="btn btn-ghost btn-sm" onclick="goTo('historico', document.querySelector('[data-screen=historico]'))">Ver todas →</button>
+      </div>
+      <div class="tx-list" id="recent-tx"></div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         SCREEN: CHAT
+    ══════════════════════════════════════════ -->
+    <div class="screen-chat" id="screen-chat">
+      <div class="chat-quick-bar">
+        <button class="chip" onclick="sendChat('Qual o resumo do mês?')">📊 Resumo do mês</button>
+        <button class="chip" onclick="sendChat('Quero registrar um gasto')">💸 Registrar gasto</button>
+        <button class="chip" onclick="sendChat('Recebi meu salário')">💰 Registrar receita</button>
+        <button class="chip" onclick="sendChat('Como estão minhas parcelas?')">💳 Ver parcelas</button>
+        <button class="chip" onclick="sendChat('Qual meu comprometimento de renda?')">📈 Comprometimento</button>
+        <button class="chip" onclick="sendChat('Como estão minhas metas?')">🎯 Ver metas</button>
+        <button class="chip" onclick="sendChat('Qual meu saldo atual?')">🏦 Saldo por conta</button>
+      </div>
+
+      <div class="chat-messages" id="chat-messages">
+        <!-- Mensagem inicial do agente -->
+        <div class="msg agent">
+          <div class="msg-av">🤖</div>
+          <div class="msg-body">
+            <div class="msg-bubble">
+              Olá, Alexandre! 👋<br><br>
+              Sou seu <strong>Agente Financeiro</strong>. Posso te ajudar a:<br>
+              • Registrar receitas e despesas em linguagem natural<br>
+              • Analisar seus hábitos financeiros<br>
+              • Controlar parcelamentos e faturas<br>
+              • Prever impactos financeiros futuros<br><br>
+              Como posso te ajudar hoje?
+            </div>
+            <div class="msg-time">09:00</div>
+          </div>
+        </div>
+
+        <!-- Conversa de exemplo -->
+        <div class="msg user">
+          <div class="msg-av">AG</div>
+          <div class="msg-body">
+            <div class="msg-bubble">Comprei uma geladeira na Casas Bahia por R$ 1.800</div>
+            <div class="msg-time">09:14</div>
+          </div>
+        </div>
+
+        <div class="msg agent">
+          <div class="msg-av">🤖</div>
+          <div class="msg-body">
+            <div class="msg-bubble">
+              Registrei! Antes de salvar, essa compra foi <strong>à vista</strong> ou <strong>parcelada</strong>?
+              <div class="confirm-card">
+                <div style="font-size:11px;font-weight:600;color:var(--mist);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Compra detectada</div>
+                <div class="confirm-row"><span class="confirm-label">Loja</span><span class="confirm-val">Casas Bahia</span></div>
+                <div class="confirm-row"><span class="confirm-label">Valor</span><span class="confirm-val">R$ 1.800,00</span></div>
+                <div class="confirm-row"><span class="confirm-label">Categoria</span><span class="confirm-val">Eletrodomésticos</span></div>
+                <div class="confirm-row"><span class="confirm-label">Data</span><span class="confirm-val">Hoje, 14/05</span></div>
+                <div class="confirm-actions">
+                  <button class="btn btn-ghost btn-sm w-full" onclick="sendChat('À vista')">À vista</button>
+                  <button class="btn btn-primary btn-sm w-full" onclick="sendChat('Parcelado em 6x')">Parcelado</button>
+                </div>
+              </div>
+            </div>
+            <div class="msg-time">09:14</div>
+          </div>
+        </div>
+
+        <div class="msg user">
+          <div class="msg-av">AG</div>
+          <div class="msg-body">
+            <div class="msg-bubble">Parcelado em 6x</div>
+            <div class="msg-time">09:15</div>
+          </div>
+        </div>
+
+        <div class="msg agent">
+          <div class="msg-av">🤖</div>
+          <div class="msg-body">
+            <div class="msg-bubble">
+              Perfeito! Criei os 6 lançamentos automaticamente. ✅<br>Cada parcela de <strong>R$ 300,00</strong> aparecerá na fatura do cartão nos próximos 6 meses.
+              <div class="confirm-card" style="margin-top:10px">
+                <div style="font-size:11px;font-weight:600;color:var(--teal);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Parcelamento criado</div>
+                <div class="confirm-row"><span class="confirm-label">Parcela 1/6</span><span class="confirm-val" style="color:var(--teal)">Jun · R$ 300,00</span></div>
+                <div class="confirm-row"><span class="confirm-label">Parcela 2/6</span><span class="confirm-val">Jul · R$ 300,00</span></div>
+                <div class="confirm-row"><span class="confirm-label">Parcela 3/6</span><span class="confirm-val">Ago · R$ 300,00</span></div>
+                <div class="confirm-row"><span class="confirm-label">Parcelas 4–6</span><span class="confirm-val">Set–Nov · R$ 900,00</span></div>
+              </div>
+            </div>
+            <div class="msg-time">09:15</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-bar">
+        <textarea class="chat-input" id="chat-input" rows="1"
+          placeholder="Digite algo... ex: 'gastei R$ 45 no mercado hoje'"
+          onkeydown="handleChatKey(event)"></textarea>
+        <button class="btn btn-primary" onclick="sendChat()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
+          </svg>
+          Enviar
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         SCREEN: HISTÓRICO
+    ══════════════════════════════════════════ -->
+    <div class="screen content" id="screen-historico">
+      <div class="filter-row">
+        <select class="filter-select"><option>Todos os tipos</option><option>Conta corrente</option><option>Cartão</option><option>Entradas</option></select>
+        <select class="filter-select"><option>Maio 2025</option><option>Abril 2025</option><option>Março 2025</option></select>
+        <select class="filter-select"><option>Todas as categorias</option><option>Alimentação</option><option>Transporte</option><option>Moradia</option><option>Saúde</option><option>Lazer</option><option>Assinaturas</option></select>
+        <select class="filter-select"><option>Todos os status</option><option>Confirmado</option><option>Projetado</option></select>
+      </div>
+      <div class="tx-list" id="historico-list"></div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         SCREEN: PARCELAMENTOS
+    ══════════════════════════════════════════ -->
+    <div class="screen content" id="screen-parcelamentos">
+      <div class="grid-3 mb-5">
+        <div class="card card-sm">
+          <div class="metric-label">Parcelamentos ativos</div>
+          <div class="metric-value" id="parc-count-kpi">3</div>
+          <div class="metric-sub">compras em andamento</div>
+        </div>
+        <div class="card card-sm" style="border-color:rgba(200,155,60,.3);background:var(--gold-l)">
+          <div class="metric-label" style="color:var(--gold)">Débito futuro total</div>
+          <div class="metric-value gold" id="parc-total-debito">R$ 5.480</div>
+          <div class="metric-sub" style="color:var(--gold)">soma de todas as parcelas</div>
+        </div>
+        <div class="card card-sm">
+          <div class="metric-label">Maior mês comprometido</div>
+          <div class="metric-value ember">R$ 620</div>
+          <div class="metric-sub">junho (TV + Geladeira)</div>
+        </div>
+      </div>
+
+      <div class="section-title mb-4">Compras parceladas ativas</div>
+      <div id="parc-list"></div>
+
+      <div class="section-heading mt-6">
+        <div class="section-title">Comprometimento mensal futuro</div>
+      </div>
+      <div class="card mb-5">
+        <div class="cal-grid" id="parc-calendar"></div>
+        <div class="text-xs text-muted mt-4" style="padding-top:12px;border-top:1px solid var(--cloud)">
+          💡 <strong>Dica do agente:</strong> Em junho e julho você tem R$ 620 em parcelas fixas. Evite novas compras parceladas grandes nesses meses para não comprometer seu saldo.
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         SCREEN: FATURAS
+    ══════════════════════════════════════════ -->
+    <div class="screen content" id="screen-faturas">
+      <div class="grid-3 mb-5">
+        <div class="card card-sm" style="border-color:rgba(200,155,60,.3);background:var(--gold-l)">
+          <div class="metric-label" style="color:var(--gold)">A vencer em junho</div>
+          <div class="metric-value gold" id="fat-vencer">R$ 1.847</div>
+          <div class="metric-sub">2 faturas</div>
+        </div>
+        <div class="card card-sm">
+          <div class="metric-label">Próximos 3 meses</div>
+          <div class="metric-value ember">R$ 4.230</div>
+          <div class="metric-sub">projeção de caixa</div>
+        </div>
+        <div class="card card-sm">
+          <div class="metric-label">Pagas em maio</div>
+          <div class="metric-value teal">R$ 3.120</div>
+          <div class="metric-sub">2 faturas quitadas</div>
+        </div>
+      </div>
+
+      <div class="section-title mb-4">Próximas faturas</div>
+      <div id="faturas-upcoming"></div>
+
+      <div class="section-title mb-4 mt-6">Pagas recentemente</div>
+      <div id="faturas-paid"></div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         SCREEN: METAS
+    ══════════════════════════════════════════ -->
+    <div class="screen content" id="screen-metas">
+      <div class="grid-3 mb-5">
+        <div class="card card-sm">
+          <div class="metric-label">Metas ativas</div>
+          <div class="metric-value">3</div>
+          <div class="metric-sub">em acompanhamento</div>
+        </div>
+        <div class="card card-sm" style="background:var(--teal-l)">
+          <div class="metric-label" style="color:var(--teal-d)">Total guardado</div>
+          <div class="metric-value teal">R$ 6.100</div>
+          <div class="metric-sub up">em 3 objetivos</div>
+        </div>
+        <div class="card card-sm">
+          <div class="metric-label">Aporte mensal total</div>
+          <div class="metric-value">R$ 1.600</div>
+          <div class="metric-sub">metas + reserva</div>
+        </div>
+      </div>
+      <div id="metas-list"></div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         SCREEN: PLANO DE CONTAS
+    ══════════════════════════════════════════ -->
+    <div class="screen content" id="screen-plano">
+      <div class="grid-2 mb-5">
+        <div class="card">
+          <div class="section-title mb-4">Plano de Contas — Maio 2025</div>
+          <div id="plano-tabela"></div>
+        </div>
+        <div class="card">
+          <div class="section-title mb-4">Situação financeira</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>Despesas fixas / Receita</span>
+                <span style="font-weight:600">23%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill fill-teal" style="width:23%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>Comprometimento total</span>
+                <span style="font-weight:600;color:var(--gold)">62%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill fill-gold" style="width:62%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>Renda livre / Receita</span>
+                <span style="font-weight:600;color:var(--teal)">20%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill fill-teal" style="width:20%"></div></div>
+            </div>
+            <div class="card card-sm mt-3" style="background:var(--teal-l);border-color:rgba(0,168,150,.2)">
+              <div class="text-xs" style="color:var(--teal-d)">
+                💡 <strong>Análise do agente:</strong> Seu comprometimento de 62% está dentro da zona segura (abaixo de 70%). A renda livre de R$ 1.720 permite manter seus aportes nas metas. Atenção ao aumento de parcelas em junho.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title mb-4">Despesas por classificação</div>
+      <div class="grid-3">
+        <div class="card card-sm" style="background:var(--teal-l);border-color:rgba(0,168,150,.2)">
+          <div class="metric-label" style="color:var(--teal-d)">Fixas</div>
+          <div class="metric-value teal" style="font-size:22px">R$ 1.950</div>
+          <div class="text-xs mt-2" style="color:var(--teal-d)">Aluguel · Internet · Escola</div>
+        </div>
+        <div class="card card-sm" style="background:var(--ember-l);border-color:rgba(232,108,58,.2)">
+          <div class="metric-label" style="color:var(--ember)">Variáveis</div>
+          <div class="metric-value ember" style="font-size:22px">R$ 2.480</div>
+          <div class="text-xs mt-2" style="color:var(--ember)">Mercado · Delivery · Lazer</div>
+        </div>
+        <div class="card card-sm" style="background:var(--gold-l);border-color:rgba(200,155,60,.2)">
+          <div class="metric-label" style="color:var(--gold)">Parceladas</div>
+          <div class="metric-value gold" style="font-size:22px">R$ 800</div>
+          <div class="text-xs mt-2" style="color:var(--gold)">TV · Notebook · Geladeira</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SCREEN: IMPORTAR ARQUIVO
+    ══════════════════════════════════════════ -->
+    <div class="screen content" id="screen-importar">
+
+      <!-- Drop zone -->
+      <div class="import-dropzone" id="import-dropzone"
+           ondragover="dzDragOver(event)" ondragleave="dzDragLeave(event)" ondrop="dzDrop(event)"
+           onclick="document.getElementById('file-input').click()">
+        <div class="import-dz-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <div class="import-dz-title">Arraste seu arquivo aqui</div>
+        <div class="import-dz-sub">ou clique para selecionar</div>
+        <div class="import-dz-formats">
+          <span class="import-fmt-badge">PDF</span>
+          <span class="import-fmt-badge">CSV</span>
+          <span class="import-fmt-badge">OFX</span>
+        </div>
+        <input type="file" id="file-input" accept=".pdf,.csv,.ofx" style="display:none" onchange="handleFileSelect(this)">
+      </div>
+
+      <!-- Tipo de documento + Conta -->
+      <div class="grid-2 mb-5" id="import-config" style="display:none">
+        <div class="form-field" style="margin-bottom:0">
+          <label class="form-label">Tipo de documento</label>
+          <select class="form-select" id="import-tipo">
+            <option value="fatura">Fatura de Cartão de Crédito</option>
+            <option value="extrato_corrente">Extrato de Conta Corrente</option>
+            <option value="extrato_digital">Extrato Conta Digital</option>
+          </select>
+        </div>
+        <div class="form-field" style="margin-bottom:0">
+          <label class="form-label">Conta / Cartão</label>
+          <select class="form-select" id="import-conta">
+            <option>Nubank Visa (cartão)</option>
+            <option>Bradesco Visa (cartão)</option>
+            <option>BB Conta Corrente</option>
+            <option>Nubank (conta digital)</option>
+            <option>Caixa Econômica</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Progress / status -->
+      <div id="import-progress-area" style="display:none">
+        <div class="card mb-5">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="import-spinner" id="import-spinner"></div>
+            <div>
+              <div style="font-size:14px;font-weight:500" id="import-status-title">Lendo arquivo...</div>
+              <div class="text-xs text-muted" id="import-status-sub">Identificando instituição e tipo de documento</div>
+            </div>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill fill-teal" id="import-progress-bar" style="width:0%;transition:width .4s ease"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results preview -->
+      <div id="import-results" style="display:none">
+
+        <!-- Summary -->
+        <div class="import-summary-grid mb-5" id="import-summary"></div>
+
+        <!-- Agent analysis -->
+        <div class="card mb-5" id="import-agent-card" style="background:var(--teal-l);border-color:rgba(0,168,150,.2)">
+          <div class="flex items-center gap-3 mb-3">
+            <div style="font-size:20px">🤖</div>
+            <div style="font-size:14px;font-weight:500;color:var(--teal-d)">Análise do Agente Financeiro</div>
+          </div>
+          <div class="text-sm" id="import-agent-text" style="color:var(--ink);line-height:1.7"></div>
+        </div>
+
+        <!-- Transactions table -->
+        <div class="section-heading mb-4">
+          <div class="section-title" id="import-tx-count">0 transações encontradas</div>
+          <div class="flex items-center gap-2">
+            <button class="btn btn-ghost btn-sm" onclick="selectAllTx(false)">Desmarcar todas</button>
+            <button class="btn btn-ghost btn-sm" onclick="selectAllTx(true)">Marcar todas</button>
+          </div>
+        </div>
+
+        <div class="import-tx-table" id="import-tx-table"></div>
+
+        <!-- Actions -->
+        <div class="import-actions" id="import-actions">
+          <button class="btn btn-ghost" onclick="resetImport()">Cancelar</button>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-muted" id="import-selected-count">0 selecionadas</span>
+            <button class="btn btn-primary" onclick="confirmImport()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Importar selecionadas
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success state -->
+      <div id="import-success" style="display:none;text-align:center;padding:40px 20px">
+        <div style="font-size:48px;margin-bottom:16px">✅</div>
+        <div style="font-family:var(--font-display);font-size:22px;font-weight:300;margin-bottom:8px">Importação concluída!</div>
+        <div class="text-muted mb-5" id="import-success-text"></div>
+        <div class="flex items-center gap-3" style="justify-content:center">
+          <button class="btn btn-ghost" onclick="resetImport()">Importar outro arquivo</button>
+          <button class="btn btn-primary" onclick="goTo('historico', document.querySelector('[data-screen=historico]'))">Ver no histórico →</button>
+        </div>
+      </div>
+
+    </div><!-- /screen-importar -->
+
+  </div><!-- /main -->
+</div><!-- /app-shell -->
+
+
+<!-- ══════════════════════════════════════════
+     MODAL: NOVO LANÇAMENTO
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-lancamento" onclick="if(event.target===this)closeLancamento()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Novo Lançamento</div>
+      <button class="modal-close btn btn-icon" onclick="closeLancamento()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="toggle-group mb-5">
+      <button class="toggle-btn active" onclick="switchTx(this,'despesa')">Despesa</button>
+      <button class="toggle-btn" onclick="switchTx(this,'receita')">Receita</button>
+      <button class="toggle-btn" onclick="switchTx(this,'transferencia')">Transferência</button>
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">Descrição</label>
+      <input class="form-input" type="text" placeholder="Ex: Supermercado Atacadão">
+    </div>
+    <div class="grid-2">
+      <div class="form-field">
+        <label class="form-label">Valor</label>
+        <input class="form-input" type="text" placeholder="R$ 0,00">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Data</label>
+        <input class="form-input" type="date" value="2025-05-25">
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="form-field">
+        <label class="form-label">Categoria</label>
+        <select class="form-select">
+          <option>Alimentação</option><option>Transporte</option><option>Moradia</option>
+          <option>Saúde</option><option>Lazer</option><option>Assinaturas</option><option>Outros</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Conta / Cartão</label>
+        <select class="form-select">
+          <option>BB Conta Corrente</option><option>Nubank</option>
+          <option>Nubank Visa (cartão)</option><option>Bradesco Visa (cartão)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Parcelado?</label>
+      <select class="form-select" id="modal-parcelas">
+        <option value="1">À vista</option>
+        <option value="2">2x</option><option value="3">3x</option>
+        <option value="6">6x</option><option value="10">10x</option>
+        <option value="12">12x</option>
+      </select>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeLancamento()">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeLancamento()">Salvar lançamento</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  function switchTx(btn, type) {
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  /* ── IMPORT MODULE ───────────────────────────────────────── */
+
+  // Update goTo to know about 'importar' title
+  const _origGoTo = goTo;
+
+  // Drag & drop
+  function dzDragOver(e) {
+    e.preventDefault();
+    document.getElementById('import-dropzone').classList.add('drag-over');
+  }
+  function dzDragLeave() {
+    document.getElementById('import-dropzone').classList.remove('drag-over');
+  }
+  function dzDrop(e) {
+    e.preventDefault();
+    dzDragLeave();
+    const file = e.dataTransfer.files[0];
+    if (file) processFile(file);
+  }
+  function handleFileSelect(input) {
+    if (input.files[0]) processFile(input.files[0]);
+  }
+
+  // Simulated parsed transactions from a Nubank PDF fatura
+  const MOCK_PARSED = [
+    { id:'i1',  sel:true,  data:'03/04/2025', descricao:'AMERICANAS LTDA',        valor:-189.90, categoria:'Compras',      tipo_det:'à vista',   icon:'🛍️', parcelado:false },
+    { id:'i2',  sel:true,  data:'05/04/2025', descricao:'IFOOD *RESTAURANTE',     valor: -42.50, categoria:'Alimentação',  tipo_det:'à vista',   icon:'🍔', parcelado:false },
+    { id:'i3',  sel:true,  data:'07/04/2025', descricao:'MAGAZINELUIZA 3/10',     valor:-320.00, categoria:'Eletrônicos',  tipo_det:'3 de 10x',  icon:'📺', parcelado:true, parcela_atual:3, total_parcelas:10 },
+    { id:'i4',  sel:true,  data:'08/04/2025', descricao:'POSTO IPIRANGA',         valor: -95.00, categoria:'Transporte',   tipo_det:'à vista',   icon:'⛽', parcelado:false },
+    { id:'i5',  sel:true,  data:'09/04/2025', descricao:'FARMACIA SAO JOAO',      valor: -67.30, categoria:'Saúde',        tipo_det:'à vista',   icon:'💊', parcelado:false },
+    { id:'i6',  sel:true,  data:'10/04/2025', descricao:'NETFLIX.COM',            valor: -55.90, categoria:'Assinaturas',  tipo_det:'recorrente',icon:'📺', parcelado:false, fixa:true },
+    { id:'i7',  sel:true,  data:'11/04/2025', descricao:'SUPERMERCADO ATACADAO',  valor:-312.40, categoria:'Alimentação',  tipo_det:'à vista',   icon:'🛒', parcelado:false },
+    { id:'i8',  sel:true,  data:'14/04/2025', descricao:'CASAS BAHIA 1/6',        valor:-300.00, categoria:'Eletrodomésticos','tipo_det':'1 de 6x', icon:'❄️', parcelado:true, parcela_atual:1, total_parcelas:6 },
+    { id:'i9',  sel:false, data:'15/04/2025', descricao:'PAGAMENTO RECEBIDO',     valor:1840.00, categoria:'Pagamento',    tipo_det:'crédito',   icon:'💰', parcelado:false },
+    { id:'i10', sel:true,  data:'18/04/2025', descricao:'UBER *VIAGEM',           valor: -28.70, categoria:'Transporte',   tipo_det:'à vista',   icon:'🚗', parcelado:false },
+    { id:'i11', sel:true,  data:'20/04/2025', descricao:'RAPPI BR',               valor: -38.00, categoria:'Alimentação',  tipo_det:'à vista',   icon:'🛵', parcelado:false },
+    { id:'i12', sel:true,  data:'22/04/2025', descricao:'AMAZON.COM.BR',          valor:-149.90, categoria:'Compras',      tipo_det:'à vista',   icon:'📦', parcelado:false },
+  ];
+
+  let importedTxs = [];
+
+  // OFX mock — simula extrato de conta corrente do Banco do Brasil
+  const MOCK_OFX = [
+    { id:'o1',  sel:true,  data:'02/04/2025', descricao:'SALARIO SIAPE',             valor: 7200.00, categoria:'Salário',     tipo_det:'crédito',   icon:'💰', parcelado:false },
+    { id:'o2',  sel:true,  data:'05/04/2025', descricao:'DEB AUT ALUGUEL',           valor:-1400.00, categoria:'Moradia',     tipo_det:'débito auto',icon:'🏠', parcelado:false, fixa:true },
+    { id:'o3',  sel:true,  data:'05/04/2025', descricao:'TED RECEBIDA FREELANCE',    valor: 1200.00, categoria:'Freelance',   tipo_det:'crédito',   icon:'🎬', parcelado:false },
+    { id:'o4',  sel:true,  data:'07/04/2025', descricao:'PIX ENVIADO CONDOMINIO',    valor: -380.00, categoria:'Moradia',     tipo_det:'pix',       icon:'🏢', parcelado:false, fixa:true },
+    { id:'o5',  sel:true,  data:'10/04/2025', descricao:'COMPRA POSTO SHELL',        valor:  -95.00, categoria:'Transporte',  tipo_det:'débito',    icon:'⛽', parcelado:false },
+    { id:'o6',  sel:true,  data:'12/04/2025', descricao:'PIX SUPERMERCADO ATACADAO', valor: -287.60, categoria:'Alimentação', tipo_det:'pix',       icon:'🛒', parcelado:false },
+    { id:'o7',  sel:true,  data:'14/04/2025', descricao:'SAQUE TERMINAL BB',         valor: -200.00, categoria:'Outros',      tipo_det:'saque',     icon:'🏧', parcelado:false },
+    { id:'o8',  sel:true,  data:'15/04/2025', descricao:'DEB AUT INTERNET CLARO',    valor:  -99.90, categoria:'Assinaturas', tipo_det:'débito auto',icon:'📶', parcelado:false, fixa:true },
+    { id:'o9',  sel:true,  data:'18/04/2025', descricao:'PIX FARMACIA PAGUE MENOS',  valor:  -67.30, categoria:'Saúde',       tipo_det:'pix',       icon:'💊', parcelado:false },
+    { id:'o10', sel:true,  data:'22/04/2025', descricao:'TED ENVIADA',               valor: -500.00, categoria:'Outros',      tipo_det:'ted',       icon:'🏦', parcelado:false },
+    { id:'o11', sel:true,  data:'25/04/2025', descricao:'PIX ESCOLA CURSO INGLES',   valor: -350.00, categoria:'Educação',    tipo_det:'pix',       icon:'📚', parcelado:false, fixa:true },
+    { id:'o12', sel:false, data:'27/04/2025', descricao:'RENDIMENTO POUPANCA',       valor:    8.42, categoria:'Outros',      tipo_det:'crédito',   icon:'📈', parcelado:false },
+  ];
+
+  // CSV mock — simula exportação do Nubank
+  const MOCK_CSV = [
+    { id:'c1',  sel:true,  data:'01/04/2025', descricao:'Spotify',                valor:  -21.90, categoria:'Assinaturas', tipo_det:'recorrente',icon:'🎵', parcelado:false, fixa:true },
+    { id:'c2',  sel:true,  data:'03/04/2025', descricao:'Mercado Livre',          valor: -214.00, categoria:'Compras',     tipo_det:'à vista',   icon:'🛍️', parcelado:false },
+    { id:'c3',  sel:true,  data:'05/04/2025', descricao:'iFood',                  valor:  -48.90, categoria:'Alimentação', tipo_det:'à vista',   icon:'🍔', parcelado:false },
+    { id:'c4',  sel:true,  data:'08/04/2025', descricao:'Posto Ipiranga',         valor:  -95.00, categoria:'Transporte',  tipo_det:'à vista',   icon:'⛽', parcelado:false },
+    { id:'c5',  sel:true,  data:'10/04/2025', descricao:'Americanas 2/6',         valor: -189.90, categoria:'Compras',     tipo_det:'2 de 6x',   icon:'🛍️', parcelado:true, parcela_atual:2, total_parcelas:6 },
+    { id:'c6',  sel:true,  data:'12/04/2025', descricao:'Rappi',                  valor:  -36.50, categoria:'Alimentação', tipo_det:'à vista',   icon:'🛵', parcelado:false },
+    { id:'c7',  sel:true,  data:'15/04/2025', descricao:'Netflix',                valor:  -55.90, categoria:'Assinaturas', tipo_det:'recorrente',icon:'📺', parcelado:false, fixa:true },
+    { id:'c8',  sel:true,  data:'18/04/2025', descricao:'Uber',                   valor:  -32.00, categoria:'Transporte',  tipo_det:'à vista',   icon:'🚗', parcelado:false },
+    { id:'c9',  sel:true,  data:'22/04/2025', descricao:'Amazon',                 valor: -149.90, categoria:'Compras',     tipo_det:'à vista',   icon:'📦', parcelado:false },
+    { id:'c10', sel:false, data:'24/04/2025', descricao:'Estorno Mercado Livre',  valor:  214.00, categoria:'Estorno',     tipo_det:'crédito',   icon:'↩️', parcelado:false },
+  ];
+
+  const FORMAT_CONFIG = {
+    pdf: {
+      institution: 'Nubank Visa detectado',
+      steps: [
+        [10,  'Lendo arquivo PDF...'],
+        [25,  'Decodificando layout da fatura...'],
+        [45,  'Extraindo linhas de transação...'],
+        [62,  'Detectando padrão de parcelas X/Y...'],
+        [78,  'Classificando categorias com IA...'],
+        [92,  'Verificando duplicatas...'],
+      ],
+      mock: MOCK_PARSED,
+      agentNote: (n, p, f) => `Fatura <strong>Nubank Visa</strong> de abril/2025 — ${n} lançamentos.<br><br>
+        🔄 <strong>${p} parcelamentos</strong> detectados pelo padrão X/Y nos descritivos. Parcelas futuras criadas automaticamente.<br>
+        📌 <strong>${f} despesa recorrente</strong> identificada — marcada como fixa.<br>
+        💡 Maior categoria: <strong>Alimentação</strong> (R$ 393,90).`,
+    },
+    ofx: {
+      institution: 'BB Conta Corrente detectado',
+      steps: [
+        [10,  'Lendo arquivo OFX...'],
+        [22,  'Validando estrutura SGML/XML...'],
+        [38,  'Extraindo bloco <STMTTRN>...'],
+        [55,  'Mapeando FITID e datas...'],
+        [72,  'Classificando tipos (CREDIT/DEBIT)...'],
+        [88,  'Identificando débitos automáticos e PIX...'],
+      ],
+      mock: MOCK_OFX,
+      agentNote: (n, p, f) => `Extrato <strong>BB Conta Corrente</strong> de abril/2025 — ${n} lançamentos OFX.<br><br>
+        🏦 Formato OFX lido com sucesso — dados estruturados, sem ambiguidade de layout.<br>
+        📌 <strong>${f} débitos automáticos/recorrentes</strong> identificados (aluguel, internet, escola).<br>
+        ℹ️ Extrato de conta corrente não possui parcelamentos — compras parceladas aparecem apenas na fatura do cartão.<br>
+        💡 Rendimento de poupança desmarcado automaticamente — não é receita operacional.`,
+    },
+    csv: {
+      institution: 'Nubank CSV detectado',
+      steps: [
+        [10,  'Lendo arquivo CSV...'],
+        [25,  'Detectando separador e encoding...'],
+        [42,  'Mapeando colunas (data, descrição, valor)...'],
+        [60,  'Normalizando formato de valores...'],
+        [75,  'Detectando parcelamentos nos descritivos...'],
+        [90,  'Classificando categorias com IA...'],
+      ],
+      mock: MOCK_CSV,
+      agentNote: (n, p, f) => `Exportação CSV <strong>Nubank</strong> de abril/2025 — ${n} transações.<br><br>
+        🔄 <strong>${p} parcelamento</strong> detectado nos descritivos.<br>
+        📌 <strong>${f} assinaturas recorrentes</strong> identificadas (Spotify, Netflix).<br>
+        ↩️ Estorno do Mercado Livre desmarcado automaticamente — crédito de devolução, não receita nova.<br>
+        💡 Maior categoria: <strong>Compras</strong> (R$ 403,90 entre Americanas, Mercado Livre e Amazon).`,
+    },
+  };
+
+  function processFile(file) {
+    const ext = file.name.split('.').pop().toLowerCase();
+    const allowed = ['pdf','csv','ofx'];
+    if (!allowed.includes(ext)) {
+      alert('Formato não suportado. Use PDF, CSV ou OFX.');
+      return;
+    }
+
+    // Store format for showResults
+    processFile._ext = ext;
+
+    // Show config row
+    document.getElementById('import-config').style.display = 'grid';
+
+    // Show progress
+    document.getElementById('import-dropzone').style.display = 'none';
+    document.getElementById('import-progress-area').style.display = 'block';
+
+    const cfg = FORMAT_CONFIG[ext];
+    const baseSteps = cfg.steps;
+    const allSteps = [
+      ...baseSteps,
+      [100, 'Análise concluída!', `${cfg.mock.length} transações encontradas`],
+    ].map(([pct, title], i) => {
+      const sub = i === 0
+        ? `${file.name} · ${(file.size/1024).toFixed(1)} KB`
+        : i === 1 ? cfg.institution
+        : baseSteps[i] ? baseSteps[i][1]
+        : `${cfg.mock.length} transações encontradas`;
+      return [pct, title, sub];
+    });
+
+    // Rebuild with sub labels properly
+    const steps = [
+      [allSteps[0][0], allSteps[0][1], `${file.name} · ${(file.size/1024).toFixed(1)} KB`],
+      [allSteps[1][0], allSteps[1][1], cfg.institution],
+      ...baseSteps.slice(2).map(([p, t]) => [p, t, '']),
+      [100, 'Análise concluída!', `${cfg.mock.length} transações encontradas`],
+    ];
+
+    let i = 0;
+    const bar = document.getElementById('import-progress-bar');
+    const titleEl = document.getElementById('import-status-title');
+    const subEl   = document.getElementById('import-status-sub');
+
+    const tick = setInterval(() => {
+      if (i >= steps.length) {
+        clearInterval(tick);
+        setTimeout(showResults, 300);
+        return;
+      }
+      const [pct, title, sub] = steps[i++];
+      bar.style.width = pct + '%';
+      titleEl.textContent = title;
+      subEl.textContent = sub;
+    }, 520);
+  }
+
+  function showResults() {
+    document.getElementById('import-progress-area').style.display = 'none';
+    document.getElementById('import-results').style.display = 'block';
+    const ext = processFile._ext || 'pdf';
+    const cfg = FORMAT_CONFIG[ext];
+    importedTxs = cfg.mock.map(t => ({...t}));
+
+    // Summary cards
+    const ext2   = processFile._ext || 'pdf';
+    const cfg2   = FORMAT_CONFIG[ext2];
+    const total   = importedTxs.filter(t => t.valor < 0).reduce((s,t) => s + Math.abs(t.valor), 0);
+    const parcels = importedTxs.filter(t => t.parcelado).length;
+    const fixas   = importedTxs.filter(t => t.fixa).length;
+    const totalLabel = ext2 === 'ofx' ? 'Total saídas' : 'Total da fatura';
+    document.getElementById('import-summary').innerHTML = `
+      <div class="card card-sm"><div class="metric-label">Transações</div><div class="metric-value" style="font-size:22px">${importedTxs.length}</div><div class="metric-sub">encontradas</div></div>
+      <div class="card card-sm"><div class="metric-label">${totalLabel}</div><div class="metric-value ember" style="font-size:22px">R$ ${total.toLocaleString('pt-BR',{minimumFractionDigits:2})}</div><div class="metric-sub">saídas</div></div>
+      <div class="card card-sm"><div class="metric-label">Parcelamentos</div><div class="metric-value gold" style="font-size:22px">${parcels}</div><div class="metric-sub">detectados</div></div>
+      <div class="card card-sm"><div class="metric-label">Recorrentes</div><div class="metric-value" style="font-size:22px">${fixas}</div><div class="metric-sub">identificados</div></div>
+    `;
+
+    // Agent analysis — format-aware
+    document.getElementById('import-agent-text').innerHTML = cfg2.agentNote(importedTxs.length, parcels, fixas);
+
+    renderImportTable();
+    updateSelectedCount();
+  }
+
+  function renderImportTable() {
+    const el = document.getElementById('import-tx-table');
+    if (!el) return;
+    el.innerHTML = importedTxs.map((t, idx) => {
+      const isPos = t.valor > 0;
+      const parcelBadge = t.parcelado
+        ? `<span class="badge badge-ember" style="margin-left:6px">${t.parcela_atual}/${t.total_parcelas}x</span>`
+        : t.fixa ? `<span class="badge badge-slate" style="margin-left:6px">recorrente</span>` : '';
+      return `
+        <div class="import-tx-row ${t.sel ? '' : 'import-tx-dimmed'}" id="itx-row-${idx}">
+          <label class="import-tx-check">
+            <input type="checkbox" ${t.sel ? 'checked' : ''} onchange="toggleTx(${idx}, this.checked)">
+            <span class="checkmark"></span>
+          </label>
+          <div style="width:80px;font-size:12px;color:var(--mist);flex-shrink:0">${t.data}</div>
+          <div class="import-tx-icon">${t.icon}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.descricao}${parcelBadge}</div>
+            <div style="font-size:11px;color:var(--mist);margin-top:2px">${t.tipo_det}</div>
+          </div>
+          <div style="flex-shrink:0;min-width:120px">
+            <select class="import-cat-select" onchange="importedTxs[${idx}].categoria=this.value">
+              ${['Alimentação','Transporte','Moradia','Saúde','Lazer','Assinaturas','Compras','Eletrônicos','Eletrodomésticos','Pagamento','Outros']
+                .map(c => `<option ${c===t.categoria?'selected':''}>${c}</option>`).join('')}
+            </select>
+          </div>
+          <div style="font-size:14px;font-weight:600;text-align:right;min-width:100px;flex-shrink:0;${isPos?'color:var(--teal)':'color:var(--ember)'}">
+            ${isPos ? '+' : '−'} R$ ${Math.abs(t.valor).toLocaleString('pt-BR',{minimumFractionDigits:2})}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function toggleTx(idx, checked) {
+    importedTxs[idx].sel = checked;
+    const row = document.getElementById('itx-row-' + idx);
+    if (row) row.classList.toggle('import-tx-dimmed', !checked);
+    updateSelectedCount();
+  }
+
+  function selectAllTx(val) {
+    importedTxs.forEach((t, i) => { t.sel = val; });
+    renderImportTable();
+    updateSelectedCount();
+  }
+
+  function updateSelectedCount() {
+    const n = importedTxs.filter(t => t.sel).length;
+    const el = document.getElementById('import-selected-count');
+    if (el) el.textContent = n + ' selecionada' + (n !== 1 ? 's' : '');
+  }
+
+  function confirmImport() {
+    const selected = importedTxs.filter(t => t.sel);
+    document.getElementById('import-results').style.display = 'none';
+    document.getElementById('import-success').style.display = 'block';
+    document.getElementById('import-success-text').innerHTML =
+      `<strong>${selected.length} transações</strong> importadas com sucesso.<br>
+       ${selected.filter(t=>t.parcelado).length} parcelamentos com parcelas futuras criadas automaticamente.`;
+  }
+
+  function resetImport() {
+    document.getElementById('import-dropzone').style.display = '';
+    document.getElementById('import-config').style.display = 'none';
+    document.getElementById('import-progress-area').style.display = 'none';
+    document.getElementById('import-results').style.display = 'none';
+    document.getElementById('import-success').style.display = 'none';
+    document.getElementById('import-progress-bar').style.width = '0%';
+    document.getElementById('file-input').value = '';
+    importedTxs = [];
+  }
+</script>
+<!-- ══════════════════════════════════════════
+     FLOATING CHAT BUTTON
+══════════════════════════════════════════ -->
+<button class="fab-chat" id="fab-chat" onclick="goTo('chat', document.querySelector('[data-screen=chat]'))" title="Abrir chat com o agente">
+  <span class="fab-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </span>
+  <span class="fab-label">Falar com o agente</span>
+  <span class="fab-dot"></span>
+</button>
+
+</body>
+</html>

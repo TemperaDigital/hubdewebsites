@@ -1,0 +1,99 @@
+{
+  "runId": "video-saver-pro-download-sem-buffer-memoria-mtgutmxt",
+  "feature": "download-sem-buffer-memoria",
+  "agent": "claude",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-08-31 06:25",
+  "branchTrabalho": "spec/download-sem-buffer-memoria",
+  "baseDir": ".spec/features/download-sem-buffer-memoria",
+  "specDir": ".spec",
+  "repoName": "video-saver-pro",
+  "logsDir": "../onp-worktrees/video-saver-pro-download-sem-buffer-memoria-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/download-sem-buffer-memoria-faixa-1",
+      "worktree": "../onp-worktrees/video-saver-pro-download-sem-buffer-memoria-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-006",
+          "titulo": "Detectar se o navegador consegue gravar direto no disco",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/lib/file-sink.ts",
+            "src/lib/file-sink.test.ts"
+          ],
+          "refs": [
+            "US-003",
+            "AC-006"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/download-sem-buffer-memoria-faixa-2",
+      "worktree": "../onp-worktrees/video-saver-pro-download-sem-buffer-memoria-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-007",
+          "titulo": "Separar a leitura do stream da forma de salvar",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/lib/downloader-client.ts",
+            "src/lib/downloader-client.test.ts"
+          ],
+          "refs": [
+            "US-003",
+            "US-004",
+            "AC-005",
+            "AC-008"
+          ]
+        },
+        {
+          "id": "T-008",
+          "titulo": "Implementar a gravação direta em disco",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/lib/downloader-client.ts"
+          ],
+          "refs": [
+            "US-003",
+            "US-004",
+            "AC-005",
+            "AC-008"
+          ]
+        },
+        {
+          "id": "T-009",
+          "titulo": "Avisar em português quando o arquivo não couber na memória",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "src/lib/downloader-client.ts",
+            "src/components/downloader/DownloadBar.tsx"
+          ],
+          "refs": [
+            "US-003",
+            "AC-007"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

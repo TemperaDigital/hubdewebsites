@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Catálogo - Ver Mais Tarde</title>
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        :root {
+            --bg-color: #1a1a2e;
+            --text-color: #ffffff;
+            --card-bg: #16213e;
+            --accent-color: #e94560;
+            --watched-color: #4a4e69;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-title {
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            text-align: center;
+        }
+
+        /* --- CATEGORIAS --- */
+        .category-section {
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        /* --- CARDS E CONTAINERS --- */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: flex-start;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 370px; /* Cards um pouco menores para caber mais na tela */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.3);
+        }
+
+        /* --- VÍDEO --- */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- CONTEÚDO DO CARD & CHECKBOX --- */
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            transition: color 0.3s;
+        }
+
+        .card-info p {
+            margin: 0;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .watch-action {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .watch-action input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--accent-color);
+        }
+
+        .watch-action label {
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        /* --- ESTADO "ASSISTIDO" (Efeitos de JavaScript) --- */
+        .card.watched {
+            opacity: 0.6;
+            filter: grayscale(80%);
+            box-shadow: none;
+        }
+
+        .card.watched:hover {
+            transform: none;
+        }
+
+        .card.watched .card-info h3 {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="page-title">📌 Meus Vídeos para Assistir</h1>
+
+    <!-- CATEGORIA 1 -->
+    <section class="category-section">
+        <h2 class="category-title">🧠 Reflexão & Comportamento</h2>
+        <div class="container">
+            
+            <!-- Card 1 -->
+            <div class="card" id="card-reflexao-1">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/7Q7Q5ooEn58" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Por que tem muitos pastores autoritários nas igrejas?</h3>
+                        <p>Canal: Sem pressa, sem pausa !</p>
+                    </div>
+                    <!-- Área do Checkbox -->
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-reflexao-1">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CATEGORIA 2 -->
+    <section class="category-section">
+        <h2 class="category-title">💻 Programação & Tecnologia</h2>
+        <div class="container">
+            
+            <!-- Card 2 -->
+            <div class="card" id="card-tech-1">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/OxQS_wNhqd8" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Nada é construído sem spec: o jeito certo de codar com IA</h3>
+                        <p>Canal: Matheus Battisti - Hora de Codar</p>
+                    </div>
+                    <!-- Área do Checkbox -->
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-1">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card Exemplo (Pode ser substituído ou apagado) -->
+            <div class="card" id="card-tech-2">
+                <div class="video-container">
+                    <!-- URL de exemplo -->
+                    <iframe src="https://www.youtube.com/embed/FwFqqqMeG9w" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>O que é uma API? (Exemplo de Card Adicional)</h3>
+                        <p>Canal: Código Fonte TV</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-2">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- --- JAVASCRIPT --- -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.check-watched');
+
+            // 1. Ao carregar a página, verifica se há vídeos salvos como assistidos na memória
+            checkboxes.forEach(checkbox => {
+                const cardId = checkbox.getAttribute('data-card-id');
+                const cardElement = document.getElementById(cardId);
+                
+                // Lê do Armazenamento Local do navegador
+                const isWatched = localStorage.getItem(cardId) === 'true';
+                
+                if (isWatched) {
+                    checkbox.checked = true;
+                    cardElement.classList.add('watched');
+                }
+
+                // 2. Evento de clique: quando o usuário marca/desmarca
+                checkbox.addEventListener('change', (e) => {
+                    const isChecked = e.target.checked;
+                    
+                    if (isChecked) {
+                        cardElement.classList.add('watched');
+                        localStorage.setItem(cardId, 'true'); // Salva na memória
+                    } else {
+                        cardElement.classList.remove('watched');
+                        localStorage.setItem(cardId, 'false'); // Remove da memória
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

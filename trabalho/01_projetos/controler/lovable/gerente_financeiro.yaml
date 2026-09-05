@@ -1,0 +1,77 @@
+name: gerente-financeiro
+services:
+  gerente-financeiro-portal:
+    cpu_shares: 90
+    command:
+      - nginx
+      - -g
+      - daemon off;
+    container_name: gerente_financeiro
+    deploy:
+      resources:
+        limits:
+          memory: 16691150848
+        reservations:
+          devices: []
+    environment:
+      - DYNPKG_RELEASE=1
+      - NGINX_VERSION=1.29.4
+      - NJS_RELEASE=1
+      - NJS_VERSION=0.9.4
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - PKG_RELEASE=1
+    image: nginx:alpine
+    ports:
+      - target: 80
+        published: "8171"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /media/ZimaOS-HD/zimasites/pessoais/eu/controler/lovable
+        target: /usr/share/nginx/html
+    x-casaos:
+      envs:
+        - container: NGINX_VERSION
+        - container: NJS_VERSION
+        - container: PATH
+        - container: PKG_RELEASE
+        - container: DYNPKG_RELEASE
+        - container: NJS_RELEASE
+      image: ""
+      ports:
+        - container: "80"
+          description:
+            en_us: HTTP - Gerente Financeiro
+      volumes:
+        - container: /usr/share/nginx/html
+          description:
+            en_US: Redirecionador para gerentefinn.lovable.app
+    devices: []
+    cap_add: []
+    network_mode: compose_default
+    privileged: false
+x-casaos:
+  architectures:
+    - amd64
+  author: CasaOS User
+  category: personal
+  description:
+    en_US: Redirecionador para o aplicativo Gerente Financeiro hospedado em
+      gerentefinn.lovable.app via Cloudflare Tunnel
+  developer: unknown
+  hostname: ""
+  icon: ""
+  index: /
+  is_uncontrolled: false
+  main: gerente-financeiro-portal
+  port_map: "8171"
+  scheme: http
+  store_app_id: gerente-financeiro
+  tagline:
+    en_US: Controle suas finanças – redirecionador via Tunnel
+  tips:
+    custom: Aponte gerentefinanceiro.fguerra.ia.br no Cloudflare Tunnel para http://192.168.1.153:8171
+  title:
+    custom: gerente_financeiro
+    en_US: Gerente Financeiro – fguerra.ia.br

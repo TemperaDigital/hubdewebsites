@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>02_imersoes_cursos — sites.fguerra.ia.br</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #161b26;
+    --surface-2: #1d2333;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: rgba(148, 163, 184, 0.14);
+    --accent: #be185d;
+    --accent-bright: #ec4899;
+    --font-body: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1100px 480px at 12% -10%, rgba(190,24,93,.12), transparent 60%),
+      radial-gradient(900px 420px at 90% 0%, rgba(59,130,246,.08), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px 80px; }
+
+  header { padding: 72px 0 40px; }
+
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+
+  .breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--border);
+  }
+
+  .breadcrumb a:hover {
+    color: var(--accent-bright);
+    border-bottom-color: var(--accent-bright);
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin: 0 0 12px;
+  }
+
+  h1 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .lead {
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-size: .78rem;
+    font-family: var(--font-mono);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin: 48px 0 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-note {
+    color: var(--text-muted);
+    font-size: .86rem;
+    margin: 12px 0 20px;
+    line-height: 1.5;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+
+  a.card:hover, a.card:focus-visible {
+    background: var(--surface-2);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .card h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: .88rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .card .path {
+    margin-top: auto;
+    padding-top: 10px;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--accent-bright);
+    opacity: .8;
+    word-break: break-all;
+  }
+
+  .card.is-pending {
+    border-style: dashed;
+    opacity: .78;
+  }
+
+  .card.is-pending .path {
+    color: var(--text-muted);
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: .66rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 9px;
+    width: fit-content;
+  }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: .82rem;
+    line-height: 1.6;
+  }
+
+  footer code {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="breadcrumb"><a href="/">sites.fguerra.ia.br</a> / trabalho / 02_imersoes_cursos</p>
+    <p class="kicker">Trabalho — imersões e cursos</p>
+    <h1>Base de Conhecimento</h1>
+    <p class="lead">
+      Notas, exercícios e projetos das imersões e cursos que acompanho (principalmente Alura).
+      Cada card abaixo é uma pasta desta área — alguns viraram página própria, outros ainda
+      são só material de apoio.
+    </p>
+  </header>
+
+  <h2>Publicados</h2>
+  <p class="section-note">Pastas com página própria, já servida pelo painel.</p>
+  <div class="grid">
+
+    <a class="card" href="estudos-alura/">
+      <h3>Base de Conhecimento</h3>
+      <p>Catálogo de linguagens de programação com busca — projeto mais recente da imersão de dev.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/estudos-alura/</span>
+    </a>
+
+    <a class="card" href="Alura_18Nov2025/">
+      <h3>Base de Conhecimento de Linguagens</h3>
+      <p>Versão anterior do mesmo exercício, da imersão de 18/11/2025.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Alura_18Nov2025/</span>
+    </a>
+
+  </div>
+
+  <h2>Em atualização</h2>
+  <p class="section-note">Conteúdo ainda sendo enviado pelo Nextcloud ou sem página própria — sem link por enquanto.</p>
+  <div class="grid">
+
+    <div class="card is-pending">
+      <span class="badge">upload incompleto</span>
+      <h3>Analisar Codigos</h3>
+      <p>Scripts Python de análise de código e um chatbot de servidores. Tem index.html, mas o arquivo ainda está vazio (upload não terminou).</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Analisar_codigos/</span>
+    </div>
+
+    <div class="card is-pending">
+      <span class="badge">upload incompleto</span>
+      <h3>Versão Beta</h3>
+      <p>Primeiros exercícios de HTML, CSS e JavaScript (projeto "atletas do Brasil"). Página existe, mas ainda está vazia (upload não terminou).</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Versao_Beta/</span>
+    </div>
+
+    <div class="card is-pending">
+      <span class="badge">upload incompleto</span>
+      <h3>Projetos de Colegas</h3>
+      <p>Projetos de conclusão de colegas de turma (11 pastas). Índice próprio em preparação — a maioria ainda está com upload incompleto.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/</span>
+    </div>
+
+    <div class="card is-pending">
+      <span class="badge">material de apoio</span>
+      <h3>Textos Alura</h3>
+      <p>Exercícios e anotações de várias imersões e cursos: frontend, backend, HTML/CSS e agentes de IA.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/02_Alura_Textos/</span>
+    </div>
+
+    <div class="card is-pending">
+      <span class="badge">material de apoio</span>
+      <h3>Agentes de IA</h3>
+      <p>Notebook e anotações do curso de agentes de IA.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/agentesIA/</span>
+    </div>
+
+    <div class="card is-pending">
+      <span class="badge">material de apoio</span>
+      <h3>DevOps — 30/Jun/2025</h3>
+      <p>Guia em PDF da Imersão Cloud DevOps.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/DEVOPs_30Jun25/</span>
+    </div>
+
+    <div class="card is-pending">
+      <span class="badge">material de apoio</span>
+      <h3>PDFs — Aula 2</h3>
+      <p>Políticas internas usadas em aula: reembolso, e-mail/segurança da informação e home office.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/PDFs_Aula 2/</span>
+    </div>
+
+    <div class="card is-pending">
+      <span class="badge">material de apoio</span>
+      <h3>Prints de Tela</h3>
+      <p>Capturas de erros e do VS Code, guardadas como referência de aula.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/printsdetela/</span>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>
+      Índice desta pasta reescrito em <code>2026-09-05</code>. Os cards em "Em atualização" não têm link porque a página
+      de destino ainda não existe ou o upload não terminou — volte aqui depois que os arquivos chegarem completos.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

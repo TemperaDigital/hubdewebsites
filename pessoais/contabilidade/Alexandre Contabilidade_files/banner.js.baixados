@@ -1,0 +1,10 @@
+// JavaScript Document
+
+$(document).ready(function() {
+	$('#banner').cycle({
+		timeout:3000,
+		speed:800,
+		/* slides: '> img.fotos', */
+	});
+	
+});

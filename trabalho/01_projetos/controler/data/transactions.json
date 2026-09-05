@@ -1,0 +1,14 @@
+[
+  {
+    "id": "tx001",
+    "description": "Netflix",
+    "type": "fixed",
+    "amount": 55
+  },
+  {
+    "id": "tx002",
+    "description": "Mercado",
+    "type": "variable",
+    "amount": 320
+  }
+]

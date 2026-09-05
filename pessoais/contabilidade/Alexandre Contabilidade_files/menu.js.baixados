@@ -1,0 +1,52 @@
+// JavaScript Document
+
+$(document).ready(function(){
+	$('#menu li').bind({
+		mouseover: function(){$(this).children('.bk').animate({height:'15rem'}, 'fast');
+							  $(this).children('p').css({'color': 'white'});
+		},
+		mouseleave: function(){$(this).children('.bk').animate({height:'0'}, 'fast');
+							   $(this).children('p').css({'color': '#305881'});
+		}
+	});
+});
+
+function troca(texto){
+	$('#conteudo').load( 'conteudo/' + texto);			
+	$('#conteudo').slideDown('normal');
+	
+	$('#slogan, #layout2, #layout5, iframe').slideUp('fast');
+	
+	$('header').animate({paddingBottom:'10%'}, 'normal');
+	$('html, body').animate({ scrollTop: $('#acao').offset().top }, 500);
+}
+
+function home(){
+	$('#slogan, #layout2, #layout5, iframe').slideDown('fast');
+	/* $('#conteudo').remove(); */
+	$('#conteudo').slideUp('normal');
+	
+	$('header').animate({paddingBottom:'35%'}, 'normal');
+	$('html, body').animate({ scrollTop: $('#topoAncora').offset().top }, 500);
+}
+
+function home480(){
+$('#layout2, #layout5, iframe').slideDown('fast');
+	/* $('#conteudo').remove(); */
+	$('#conteudo').slideUp('normal');
+	
+	$('header').animate({paddingBottom:'35%'}, 'normal');
+	$('html, body').animate({ scrollTop: $('#topoAncora').offset().top }, 500);
+}
+
+$(document).ready(function() {
+	$('.up').click(function(){
+		$('html, body').animate({ scrollTop: $('#topoAncora').offset().top }, 1000);
+	})
+	
+})
+
+/*alerta*/
+function alerta() {
+    alert('EM COSTRUÇÃO \n saiba mais em: www.??.com.br');
+}

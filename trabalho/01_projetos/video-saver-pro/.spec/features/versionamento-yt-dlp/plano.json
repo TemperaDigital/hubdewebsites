@@ -1,0 +1,125 @@
+{
+  "runId": "video-saver-pro-versionamento-yt-dlp-mtgutoav",
+  "feature": "versionamento-yt-dlp",
+  "agent": "claude",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-08-31 06:25",
+  "branchTrabalho": "spec/versionamento-yt-dlp",
+  "baseDir": ".spec/features/versionamento-yt-dlp",
+  "specDir": ".spec",
+  "repoName": "video-saver-pro",
+  "logsDir": "../onp-worktrees/video-saver-pro-versionamento-yt-dlp-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/versionamento-yt-dlp-faixa-1",
+      "worktree": "../onp-worktrees/video-saver-pro-versionamento-yt-dlp-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-016",
+          "titulo": "Ler versão e estado da atualização do yt-dlp",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/ytdlp-info.js",
+            "extractor/ytdlp-info.test.js"
+          ],
+          "refs": [
+            "US-008",
+            "AC-014",
+            "AC-015"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/versionamento-yt-dlp-faixa-2",
+      "worktree": "../onp-worktrees/video-saver-pro-versionamento-yt-dlp-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-017",
+          "titulo": "Mostrar versão e estado na saúde do serviço",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/server.js"
+          ],
+          "refs": [
+            "US-008",
+            "AC-014",
+            "AC-015"
+          ]
+        },
+        {
+          "id": "T-018",
+          "titulo": "Registrar a tentativa de atualização em vez de engolir a falha",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "docker/Dockerfile.extractor"
+          ],
+          "refs": [
+            "US-008",
+            "AC-015"
+          ]
+        },
+        {
+          "id": "T-019",
+          "titulo": "Ativar um runtime de JavaScript para a extração do YouTube",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "docker/Dockerfile.extractor",
+            "extractor/server.js"
+          ],
+          "refs": [
+            "US-010",
+            "AC-018"
+          ]
+        },
+        {
+          "id": "T-020",
+          "titulo": "Fazer os avisos do yt-dlp chegarem ao registro do servidor",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/server.js"
+          ],
+          "refs": [
+            "US-010",
+            "AC-019"
+          ]
+        },
+        {
+          "id": "T-021",
+          "titulo": "Permitir fixar e voltar a versão do yt-dlp",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "docker/Dockerfile.extractor",
+            "docker-compose.yml",
+            "README-docker.md"
+          ],
+          "refs": [
+            "US-009",
+            "AC-016",
+            "AC-017"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

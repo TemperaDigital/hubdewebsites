@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 187 100% 45%;
+    --primary-foreground: 210 40% 10%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 187 100% 45%;
+
+    --radius: 0.625rem;
+    --radius-sm: calc(0.625rem - 4px);
+    --radius-lg: calc(0.625rem + 4px);
+    --radius-full: 9999px;
+
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03), 0 1px 3px 0 rgb(0 0 0 / 0.06);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 350ms;
+
+    --chart-1: 187 100% 45%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 12 76% 61%;
+    --chart-4: 210 37% 24%;
+    --chart-5: 43 74% 66%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 5.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 5.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 187 100% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 187 100% 50%;
+
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.15), 0 1px 2px -1px rgb(0 0 0 / 0.15);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.15);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.15);
+
+    --chart-1: 187 100% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 210 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary) / 0.2);
+    color: hsl(var(--primary));
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background-color: transparent; }
+  ::-webkit-scrollbar-thumb { background-color: hsl(var(--border)); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background-color: hsl(var(--muted-foreground) / 0.5); }
+}
+
+@layer utilities {
+  /* Hide scrollbar */
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Hero background */
+  .hero-gradient {
+    background:
+      radial-gradient(ellipse 60% 50% at 50% -10%, hsl(187 100% 45% / 0.1), transparent),
+      radial-gradient(ellipse 40% 40% at 80% 0%, hsl(200 80% 50% / 0.06), transparent),
+      radial-gradient(ellipse 40% 30% at 20% 10%, hsl(210 80% 50% / 0.04), transparent);
+  }
+
+  .dark .hero-gradient {
+    background:
+      radial-gradient(ellipse 60% 50% at 50% -10%, hsl(187 100% 50% / 0.15), transparent),
+      radial-gradient(ellipse 40% 40% at 80% 0%, hsl(200 80% 60% / 0.08), transparent),
+      radial-gradient(ellipse 40% 30% at 20% 10%, hsl(210 80% 60% / 0.06), transparent);
+  }
+
+  /* Avatar portal effect */
+  .avatar-portal {
+    clip-path: ellipse(48% 48%);
+    box-shadow: 0 0 24px 4px rgba(0, 229, 255, 0.33), 0 0 48px 8px rgba(14, 165, 233, 0.2);
+    animation: border-glow 4s ease-in-out infinite;
+  }
+
+  .dark .avatar-portal {
+    box-shadow: 0 0 32px 6px rgba(0, 229, 255, 0.45), 0 0 64px 12px rgba(14, 165, 233, 0.3);
+  }
+
+  @keyframes border-glow {
+    0%, 100% {
+      box-shadow: 0 0 24px 4px rgba(0, 229, 255, 0.33), 0 0 48px 8px rgba(14, 165, 233, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 36px 8px rgba(0, 229, 255, 0.55), 0 0 64px 16px rgba(14, 165, 233, 0.35);
+    }
+  }
+
+  .dark .avatar-portal {
+    animation: border-glow-dark 4s ease-in-out infinite;
+  }
+
+  @keyframes border-glow-dark {
+    0%, 100% {
+      box-shadow: 0 0 32px 6px rgba(0, 229, 255, 0.45), 0 0 64px 12px rgba(14, 165, 233, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 48px 12px rgba(0, 229, 255, 0.7), 0 0 80px 20px rgba(14, 165, 233, 0.45);
+    }
+  }
+
+  /* MDX content styles */
+  .prose-custom h2 {
+    @apply text-xl font-bold mt-8 mb-4 text-foreground;
+  }
+  .prose-custom h3 {
+    @apply text-lg font-semibold mt-6 mb-3 text-foreground;
+  }
+  .prose-custom p {
+    @apply mb-4 leading-relaxed text-muted-foreground;
+  }
+  .prose-custom ul {
+    @apply list-disc pl-6 mb-4 space-y-1 text-muted-foreground;
+  }
+  .prose-custom ol {
+    @apply list-decimal pl-6 mb-4 space-y-1 text-muted-foreground;
+  }
+  .prose-custom li {
+    @apply leading-relaxed;
+  }
+  .prose-custom a {
+    @apply text-primary hover:underline;
+  }
+  .prose-custom code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+  .prose-custom pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto mb-4;
+  }
+  .prose-custom pre code {
+    @apply bg-transparent p-0;
+  }
+  .prose-custom blockquote {
+    @apply border-l-4 border-primary/30 pl-4 italic text-muted-foreground mb-4;
+  }
+  .prose-custom strong {
+    @apply text-foreground font-semibold;
+  }
+  .prose-custom hr {
+    @apply border-border my-8;
+  }
+}

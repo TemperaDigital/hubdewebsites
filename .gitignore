@@ -1,0 +1,15 @@
+# Nunca versionar segredos ou dependências
+.env
+.env.local
+.env.production
+.env.development
+node_modules/
+
+# Lixo comum de Windows/Nextcloud
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Binários de instalador que não deveriam estar em pastas de curso
+*.exe
+*.msi

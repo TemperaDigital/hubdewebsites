@@ -1,0 +1,134 @@
+{
+  "runId": "video-saver-pro-autenticacao-api-download-mtgutnon",
+  "feature": "autenticacao-api-download",
+  "agent": "claude",
+  "modo": "paralelo",
+  "paralelizar": null,
+  "modeloForcado": null,
+  "esforcoForcado": null,
+  "geradoEm": "2026-08-31 06:25",
+  "branchTrabalho": "spec/autenticacao-api-download",
+  "baseDir": ".spec/features/autenticacao-api-download",
+  "specDir": ".spec",
+  "repoName": "video-saver-pro",
+  "logsDir": "../onp-worktrees/video-saver-pro-autenticacao-api-download-logs",
+  "ondas": [
+    [
+      "faixa-1",
+      "faixa-2",
+      "faixa-3"
+    ]
+  ],
+  "faixas": [
+    {
+      "id": "faixa-1",
+      "branch": "spec/autenticacao-api-download-faixa-1",
+      "worktree": "../onp-worktrees/video-saver-pro-autenticacao-api-download-faixa-1",
+      "tarefas": [
+        {
+          "id": "T-010",
+          "titulo": "Conferir credencial em tempo constante",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/auth.js",
+            "extractor/auth.test.js"
+          ],
+          "refs": [
+            "US-005",
+            "AC-009",
+            "AC-010",
+            "AC-011"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-2",
+      "branch": "spec/autenticacao-api-download-faixa-2",
+      "worktree": "../onp-worktrees/video-saver-pro-autenticacao-api-download-faixa-2",
+      "tarefas": [
+        {
+          "id": "T-011",
+          "titulo": "Ligar a verificação nas rotas do motor",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/server.js"
+          ],
+          "refs": [
+            "US-005",
+            "AC-009",
+            "AC-010",
+            "AC-011"
+          ]
+        },
+        {
+          "id": "T-012",
+          "titulo": "Fechar o CORS aberto",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/server.js",
+            "docker-compose.yml"
+          ],
+          "refs": [
+            "US-006",
+            "AC-012"
+          ]
+        },
+        {
+          "id": "T-014",
+          "titulo": "Aplicar o limite na rota de download",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/server.js"
+          ],
+          "refs": [
+            "US-007",
+            "AC-013"
+          ]
+        },
+        {
+          "id": "T-015",
+          "titulo": "Atualizar a documentação de instalação",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "README-docker.md",
+            "docker-compose.yml"
+          ],
+          "refs": [
+            "US-005",
+            "AC-011"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faixa-3",
+      "branch": "spec/autenticacao-api-download-faixa-3",
+      "worktree": "../onp-worktrees/video-saver-pro-autenticacao-api-download-faixa-3",
+      "tarefas": [
+        {
+          "id": "T-013",
+          "titulo": "Limitar downloads simultâneos",
+          "modelo": "claude-sonnet-5",
+          "esforco": "medium",
+          "arquivos": [
+            "extractor/concurrency.js",
+            "extractor/concurrency.test.js"
+          ],
+          "refs": [
+            "US-007",
+            "AC-013"
+          ]
+        }
+      ]
+    }
+  ],
+  "sequenciais": [],
+  "concluidas": [],
+  "avisos": []
+}

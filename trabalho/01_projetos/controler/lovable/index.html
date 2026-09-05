@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finn — Redirecionando...</title>
+
+  <meta http-equiv="refresh" content="3;url=https://gerentefinn.lovable.app/login" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:      #0b0f1a;
+      --accent:  #63b3ed;
+      --accent2: #4fd1c5;
+      --text:    #e2e8f0;
+      --muted:   #718096;
+      --glow:    rgba(99,179,237,0.20);
+      --border:  rgba(99,179,237,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── Canvas SVG de fundo ── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Conteúdo central ── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      gap: 2rem;
+      animation: fadeIn 0.7s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      position: relative;
+      width: 76px;
+      height: 76px;
+    }
+
+    .logo-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    .logo-ring:nth-child(1) { inset: -10px; opacity: 0.30; }
+    .logo-ring:nth-child(2) { inset: -22px; opacity: 0.14; animation-delay: 0.5s; }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.08); }
+    }
+
+    .logo-icon {
+      width: 76px;
+      height: 76px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.1rem;
+      color: #0b0f1a;
+      box-shadow: 0 0 36px var(--glow);
+    }
+
+    /* ── Título ── */
+    .label { text-align: center; }
+
+    .label h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .label p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .label p span { color: var(--accent); font-weight: 500; }
+
+    /* ── Barra de progresso ── */
+    .progress-wrap { width: min(340px, 88vw); }
+
+    .progress-track {
+      height: 3px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 10px var(--glow);
+      animation: fill 2.8s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    @keyframes fill { from { width: 0%; } to { width: 100%; } }
+
+    .progress-label {
+      margin-top: 0.55rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: right;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Botão fallback ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(99,179,237,0.08);
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      opacity: 0;
+      animation: showBtn 0.4s 2.6s ease forwards;
+    }
+
+    @keyframes showBtn { to { opacity: 1; } }
+    .btn:hover { background: rgba(99,179,237,0.16); border-color: var(--accent); transform: translateY(-1px); }
+
+    footer {
+      position: fixed;
+      bottom: 1rem;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+      opacity: 0.45;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fundo animado desenhado por JS -->
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="wrapper">
+
+    <div class="logo-wrap">
+      <div class="logo-ring"></div>
+      <div class="logo-ring"></div>
+      <div class="logo-icon">F</div>
+    </div>
+
+    <div class="label">
+      <h1>Controle suas finanças</h1>
+      <p>Redirecionando para <span>gerentefinn.lovable.app</span>…</p>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-bar"></div>
+      </div>
+      <div class="progress-label" id="counter">aguarde…</div>
+    </div>
+
+    <a href="https://gerentefinn.lovable.app/login" class="btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+      Abrir agora
+    </a>
+
+  </div>
+
+  <footer>gerentefinanceiro.fguerra.ia.br &nbsp;·&nbsp; fguerra.ia.br</footer>
+
+  <script>
+  /* ══════════════════════════════════════════════════
+     REDIRECIONAMENTO
+  ══════════════════════════════════════════════════ */
+  (function () {
+    var TARGET = 'https://gerentefinn.lovable.app/login';
+    var DELAY  = 3000;
+    var counter = document.getElementById('counter');
+    var secs = Math.ceil(DELAY / 1000);
+    (function tick() {
+      if (counter) counter.textContent = secs + 's';
+      if (secs-- > 0) setTimeout(tick, 1000);
+    })();
+    setTimeout(function () { window.location.replace(TARGET); }, DELAY);
+    setTimeout(function () {
+      if (window.location.href.indexOf('gerentefinn') === -1)
+        window.location.assign(TARGET);
+    }, DELAY + 600);
+  })();
+
+  /* ══════════════════════════════════════════════════
+     FUNDO ANIMADO — gráficos, moedas, células
+  ══════════════════════════════════════════════════ */
+  (function () {
+    var c  = document.getElementById('bg-canvas');
+    var cx = c.getContext('2d');
+    var W, H;
+
+    function resize() {
+      W = c.width  = window.innerWidth;
+      H = c.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var ACCENT  = 'rgba(99,179,237,';
+    var ACCENT2 = 'rgba(79,209,197,';
+
+    /* ── Partículas de moedas ── */
+    var coins = [];
+    for (var i = 0; i < 18; i++) {
+      coins.push({
+        x: Math.random() * 1,
+        y: Math.random() * 1,
+        r: 6 + Math.random() * 10,
+        speed: 0.00008 + Math.random() * 0.00012,
+        phase: Math.random() * Math.PI * 2,
+        symbol: ['$','R$','€','¥'][Math.floor(Math.random()*4)],
+        alpha: 0.06 + Math.random() * 0.10
+      });
+    }
+
+    /* ── Células de tabela flutuantes ── */
+    var cells = [];
+    for (var j = 0; j < 10; j++) {
+      cells.push({
+        x: Math.random(),
+        y: Math.random(),
+        w: 60 + Math.random() * 80,
+        h: 18 + Math.random() * 10,
+        speed: 0.00005 + Math.random() * 0.0001,
+        phase: Math.random() * Math.PI * 2,
+        alpha: 0.04 + Math.random() * 0.07
+      });
+    }
+
+    /* ── Mini gráficos de barras ── */
+    var charts = [];
+    for (var k = 0; k < 6; k++) {
+      var bars = [];
+      for (var b = 0; b < 5; b++) bars.push(0.2 + Math.random() * 0.8);
+      charts.push({
+        x: Math.random(),
+        y: Math.random(),
+        bars: bars,
+        w: 50 + Math.random() * 40,
+        speed: 0.00006 + Math.random() * 0.00009,
+        phase: Math.random() * Math.PI * 2,
+        alpha: 0.05 + Math.random() * 0.08
+      });
+    }
+
+    /* ── Mini linhas de gráfico (sparklines) ── */
+    var sparks = [];
+    for (var s = 0; s < 8; s++) {
+      var pts = [];
+      for (var p = 0; p < 7; p++) pts.push(Math.random());
+      sparks.push({
+        x: Math.random(),
+        y: Math.random(),
+        pts: pts,
+        w: 60 + Math.random() * 60,
+        speed: 0.00007 + Math.random() * 0.0001,
+        phase: Math.random() * Math.PI * 2,
+        alpha: 0.05 + Math.random() * 0.09,
+        color: Math.random() > 0.5 ? ACCENT : ACCENT2
+      });
+    }
+
+    var t = 0;
+
+    function draw() {
+      cx.clearRect(0, 0, W, H);
+      t += 0.6;
+
+      /* Moedas */
+      coins.forEach(function(coin) {
+        var x = ((coin.x + t * coin.speed) % 1) * W;
+        var y = ((coin.y + t * coin.speed * 0.6 + Math.sin(t * 0.01 + coin.phase) * 0.02) % 1) * H;
+        cx.save();
+        cx.globalAlpha = coin.alpha;
+        cx.strokeStyle = ACCENT + '1)';
+        cx.fillStyle   = ACCENT + '0.12)';
+        cx.lineWidth   = 1;
+        cx.beginPath();
+        cx.arc(x, y, coin.r, 0, Math.PI * 2);
+        cx.fill();
+        cx.stroke();
+        cx.fillStyle = ACCENT + '0.5)';
+        cx.font = 'bold ' + (coin.r * 0.9) + 'px DM Sans, sans-serif';
+        cx.textAlign = 'center';
+        cx.textBaseline = 'middle';
+        cx.fillText(coin.symbol, x, y);
+        cx.restore();
+      });
+
+      /* Células */
+      cells.forEach(function(cell) {
+        var x = ((cell.x + t * cell.speed) % 1) * W;
+        var y = ((cell.y + Math.sin(t * 0.008 + cell.phase) * 0.04) % 1) * H;
+        cx.save();
+        cx.globalAlpha = cell.alpha;
+        cx.strokeStyle = ACCENT2 + '0.8)';
+        cx.fillStyle   = ACCENT2 + '0.06)';
+        cx.lineWidth   = 0.8;
+        cx.beginPath();
+        cx.roundRect ? cx.roundRect(x, y, cell.w, cell.h, 3)
+                     : cx.rect(x, y, cell.w, cell.h);
+        cx.fill();
+        cx.stroke();
+        /* linha interna simulando texto */
+        cx.fillStyle = ACCENT2 + '0.25)';
+        cx.fillRect(x + 6, y + cell.h * 0.35, cell.w * 0.55, 2.5);
+        cx.fillRect(x + 6, y + cell.h * 0.65, cell.w * 0.35, 2.5);
+        cx.restore();
+      });
+
+      /* Mini gráficos de barra */
+      charts.forEach(function(ch) {
+        var x = ((ch.x + t * ch.speed * 0.7) % 1) * W;
+        var y = ((ch.y + Math.sin(t * 0.009 + ch.phase) * 0.03) % 1) * H;
+        var bw = ch.w / ch.bars.length;
+        var maxH = 28;
+        cx.save();
+        cx.globalAlpha = ch.alpha;
+        ch.bars.forEach(function(val, idx) {
+          var bh = val * maxH;
+          cx.fillStyle = ACCENT + '0.7)';
+          cx.fillRect(x + idx * bw + 2, y + maxH - bh, bw - 3, bh);
+        });
+        /* eixo */
+        cx.strokeStyle = ACCENT + '0.4)';
+        cx.lineWidth   = 0.6;
+        cx.beginPath();
+        cx.moveTo(x, y + maxH);
+        cx.lineTo(x + ch.w, y + maxH);
+        cx.stroke();
+        cx.restore();
+      });
+
+      /* Sparklines */
+      sparks.forEach(function(sp) {
+        var x = ((sp.x + t * sp.speed * 0.8) % 1) * W;
+        var y = ((sp.y + Math.sin(t * 0.011 + sp.phase) * 0.025) % 1) * H;
+        var sw = sp.w / (sp.pts.length - 1);
+        var sh = 22;
+        cx.save();
+        cx.globalAlpha = sp.alpha;
+        cx.strokeStyle = sp.color + '1)';
+        cx.lineWidth   = 1.2;
+        cx.lineJoin    = 'round';
+        cx.beginPath();
+        sp.pts.forEach(function(pt, i) {
+          var px = x + i * sw;
+          var py = y + (1 - pt) * sh;
+          i === 0 ? cx.moveTo(px, py) : cx.lineTo(px, py);
+        });
+        cx.stroke();
+        /* ponto final */
+        var last = sp.pts[sp.pts.length - 1];
+        cx.fillStyle = sp.color + '0.8)';
+        cx.beginPath();
+        cx.arc(x + sp.w, y + (1 - last) * sh, 2.5, 0, Math.PI * 2);
+        cx.fill();
+        cx.restore();
+      });
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+  </script>
+
+</body>
+</html>

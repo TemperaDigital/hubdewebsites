@@ -1,0 +1,49 @@
+---
+title: "Como eu configurei meu servidor ZimaOS"
+date: "2025-06-01"
+description: "Passo a passo da configuração do meu servidor doméstico com ZimaOS, Docker e Cloudflare Tunnel."
+tags: ["zimaos", "docker", "homelab"]
+---
+
+Sempre quis ter um servidor em casa. Depois de anos usando VPS e serviços na nuvem, decidi montar meu próprio homelab com o ZimaOS.
+
+## Por que um servidor doméstico?
+
+A ideia é simples: ter controle total sobre meus dados e aplicações. Nada contra serviços cloud, mas existe algo libertador em saber que seus dados estão ali, no escritório, rodando num hardware que você controla.
+
+## Escolhendo o ZimaOS
+
+Testei várias opções — TrueNAS, Unraid, Proxmox — mas o ZimaOS me conquistou pela simplicidade. Interface limpa, Docker integrado de forma nativa, e uma comunidade ativa.
+
+## Configuração passo a passo
+
+### 1. Hardware
+
+Usei um mini PC com:
+- Intel N100 (4 cores, baixo consumo)
+- 16GB RAM
+- SSD NVMe 512GB + HDD 2TB para dados
+
+### 2. Instalação
+
+A instalação é direta — gravar a ISO num pendrive, dar boot e seguir o wizard. Em 10 minutos o sistema estava rodando.
+
+### 3. Docker e containers
+
+O ZimaOS usa Docker nativamente. Configurei os seguintes serviços:
+
+- **Portainer** para gerenciamento visual de containers
+- **Nginx Proxy Manager** para reverse proxy
+- **Nextcloud** para armazenamento de arquivos
+- **Vaultwarden** como gerenciador de senhas
+- **Uptime Kuma** para monitoramento
+
+### 4. Cloudflare Tunnel
+
+Para acessar tudo de fora sem expor portas, usei o Cloudflare Tunnel. Funciona perfeitamente — cria um túnel seguro sem precisar abrir portas no roteador.
+
+## Resultado
+
+Depois de um final de semana de configuração, tenho um servidor estável, eficiente e completamente sob meu controle. O consumo de energia é mínimo e a experiência tem sido excelente.
+
+Se você está pensando em montar um homelab, recomendo fortemente. É um projeto que ensina muito sobre infraestrutura, redes e Linux.

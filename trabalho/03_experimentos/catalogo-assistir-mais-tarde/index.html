@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Catálogo - Ver Mais Tarde</title>
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        :root {
+            --bg-color: #1a1a2e;
+            --text-color: #ffffff;
+            --card-bg: #16213e;
+            --accent-color: #e94560;
+            --watched-color: #4a4e69;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-title {
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            text-align: center;
+        }
+
+        /* --- CATEGORIAS --- */
+        .category-section {
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        /* --- CARDS E CONTAINERS --- */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: flex-start;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 370px; /* Cards um pouco menores para caber mais na tela */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.3);
+        }
+
+        /* --- VÍDEO --- */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- CONTEÚDO DO CARD & CHECKBOX --- */
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            transition: color 0.3s;
+        }
+
+        .card-info p {
+            margin: 0;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .watch-action {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .watch-action input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--accent-color);
+        }
+
+        .watch-action label {
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        /* --- ESTADO "ASSISTIDO" (Efeitos de JavaScript) --- */
+        .card.watched {
+            opacity: 0.6;
+            filter: grayscale(80%);
+            box-shadow: none;
+        }
+
+        .card.watched:hover {
+            transform: none;
+        }
+
+        .card.watched .card-info h3 {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="page-title">📌 Meus Vídeos para Assistir</h1>
+
+    <!-- CATEGORIA 1 -->
+    <section class="category-section">
+        <h2 class="category-title">🧠 Reflexão & Comportamento</h2>
+        <div class="container">
+
+            <!-- Card 1 -->
+            <div class="card" id="card-reflexao-1">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/7Q7Q5ooEn58" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Por que tem muitos pastores autoritários nas igrejas?</h3>
+                        <p>Canal: Sem pressa, sem pausa !</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-reflexao-1">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 2 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-reflexao-2">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/wGKwpgQ0ziU" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Quando o CRENTE entrevista o ATEU: O resultado surpreende!</h3>
+                        <p>Canal: ANTÔNIO MIRANDA - TEOLOGIA REVERSA</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-reflexao-2">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 3 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-reflexao-3">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/awCPcGsCxDw" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>O Debate Mais Difícil da Minha Vida. Fui Refutado? | Ateu vs Claude - O Deus da Bíblia Existe?</h3>
+                        <p>Canal: ANTÔNIO MIRANDA - TEOLOGIA REVERSA</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-reflexao-3">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 4 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-reflexao-4">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Ht4cjKlBJLQ" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Expondo a real sobre os debates 30 contra 1 (e como entretenimento te manipula)</h3>
+                        <p>Canal: Aprofundo</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-reflexao-4">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 5 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-reflexao-5">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ixmWsygT4nA" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Independência do Brasil ou farsa histórica?</h3>
+                        <p>Canal: Aline Câmara - Desperta</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-reflexao-5">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CATEGORIA 2 -->
+    <section class="category-section">
+        <h2 class="category-title">💻 Programação & Tecnologia</h2>
+        <div class="container">
+
+            <!-- Card 2 -->
+            <div class="card" id="card-tech-1">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/OxQS_wNhqd8" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Nada é construído sem spec: o jeito certo de codar com IA</h3>
+                        <p>Canal: Matheus Battisti - Hora de Codar</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-1">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card Exemplo (Pode ser substituído ou apagado) -->
+            <div class="card" id="card-tech-2">
+                <div class="video-container">
+                    <!-- URL de exemplo -->
+                    <iframe src="https://www.youtube.com/embed/FwFqqqMeG9w" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>O que é uma API? (Exemplo de Card Adicional)</h3>
+                        <p>Canal: Código Fonte TV</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-2">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 3 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-3">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/TH5j8o8I-pY" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>DEIXEI o ANTIGRAVITY usar meu navegador por 20 minutos (ele voltou Vários clientes)</h3>
+                        <p>Canal: Helio Arreche</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-3">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 4 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-4">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/9b8Tja3st80" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>O Fim da Edição Manual? Conectei o Claude no meu Editor 🤯</h3>
+                        <p>Canal: IADOSILVA</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-4">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 5 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-5">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/66baMa5nVvQ" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Como configurar o Obsidian para o Claude Cowork (MÉTODO CORRETO)</h3>
+                        <p>Canal: Rafa Voss | IA na Prática</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-5">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 6 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-6">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/aAMO6MsLSYw" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Por que a IA está destruindo o hardware? O que ninguém te conta</h3>
+                        <p>Canal: Universo Latente</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-6">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 7 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-7">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/TYAs_EQxO3o" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Como migrar projetos do LOVABLE CLOUD para o SUPABASE em 5 minutos</h3>
+                        <p>Canal: Pulse Coding</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-7">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 8 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-8">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/MGJQfclCu8A" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>NotebookLM os fluxos secretos que ninguém te mostra</h3>
+                        <p>Canal: AI Kong</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-8">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 9 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-9">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/AUk8bhpXzpE" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>O que é Harness e por que ele muda tudo nos agentes de IA</h3>
+                        <p>Canal: Rafael Quintanilha – QuantBrasil</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-9">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 10 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-10">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/P1HFplZDtBc" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>CLAUDE - A I.A. QUE MUDOU A INTERNET PRA SEMPRE</h3>
+                        <p>Canal: Nerds de Negócios</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-10">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 11 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-11">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/8NOxb2WV95I" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Segundo Cérebro com IA: Ganhe SUPER-PODERES (Claude Code + Obsidian)</h3>
+                        <p>Canal: Ana Jords</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-11">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 12 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-12">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/7OwfknXUfYk" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>IA Alugando Humanos: GPT-5.3 Codex vs Claude Opus 4.6 (Atingimos a AGI?) | EP. 269</h3>
+                        <p>Canal: IA Todo Dia | Podcast de Inteligência Artificial</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-12">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 13 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-13">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/oDXDYjksMds" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>A História Não Contada do Colapso da Engenharia de Software</h3>
+                        <p>Canal: Renato Augusto</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-13">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 14 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-tech-14">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/RAZcKISzfRo" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Ferramentas de terminal que eu realmente uso no dia a dia</h3>
+                        <p>Canal: LBtec</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-tech-14">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CATEGORIA 3 (NOVA) -->
+    <section class="category-section">
+        <h2 class="category-title">🖥️ Self-Hosted, Linux & Servidores</h2>
+        <div class="container">
+
+            <!-- Card 1 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-selfhosted-1">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/HAesxj9RUNs" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Demonstração de Funcionamento NextCloud - Servidor de Arquivos em Nuvem</h3>
+                        <p>Canal: BH Nuvem</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-selfhosted-1">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 2 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-selfhosted-2">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/OBWVmZk1qWg" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Esqueça o Dual Boot! Como usar o BOTTLES no Linux para Jogos e Apps (Masterclass 2026)</h3>
+                        <p>Canal: aarProTech</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-selfhosted-2">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 3 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-selfhosted-3">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Jm1ELjIhbGI" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>⚡ Ubuntu 26.04 LTS pode fazer muita gente largar o Windows</h3>
+                        <p>Canal: LinuXpert</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-selfhosted-3">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 4 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-selfhosted-4">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/LXoNMdG_fuM" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Minha personalização do Pop!_OS Cosmic 24.04 ficou insana!</h3>
+                        <p>Canal: LinuXpert</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-selfhosted-4">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card 5 (da playlist Assistir mais tarde) -->
+            <div class="card" id="card-selfhosted-5">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/SP05ls0QUXI" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <div class="card-info">
+                        <h3>Pterodactyl Complete Setup: Panel, Wings & Game Server 2025 (Fixed Audio Issues)</h3>
+                        <p>Canal: BigBearTechWorld</p>
+                    </div>
+                    <label class="watch-action">
+                        <input type="checkbox" class="check-watched" data-card-id="card-selfhosted-5">
+                        <span>Marcar como Assistido</span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- --- JAVASCRIPT --- -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.check-watched');
+
+            // 1. Ao carregar a página, verifica se há vídeos salvos como assistidos na memória
+            checkboxes.forEach(checkbox => {
+                const cardId = checkbox.getAttribute('data-card-id');
+                const cardElement = document.getElementById(cardId);
+
+                // Lê do Armazenamento Local do navegador
+                const isWatched = localStorage.getItem(cardId) === 'true';
+
+                if (isWatched) {
+                    checkbox.checked = true;
+                    cardElement.classList.add('watched');
+                }
+
+                // 2. Evento de clique: quando o usuário marca/desmarca
+                checkbox.addEventListener('change', (e) => {
+                    const isChecked = e.target.checked;
+
+                    if (isChecked) {
+                        cardElement.classList.add('watched');
+                        localStorage.setItem(cardId, 'true'); // Salva na memória
+                    } else {
+                        cardElement.classList.remove('watched');
+                        localStorage.setItem(cardId, 'false'); // Remove da memória
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

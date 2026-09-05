@@ -1,0 +1,13 @@
+Ink.requireModules(['Ink.UI.Tabs_1','Ink.UI.Drawer_1'], function(Tabs, Drawer) {
+
+	var tabs = Ink.i('tabs');
+	tabs && new Tabs(tabs);
+
+	new Drawer({sides: 'left', mode: 'push'});
+	Ink.Dom.Event.observe(Ink.s('.left-drawer'), 'click', function(evt) {
+		var elm = Ink.Dom.Event.findElement(evt, 'a', true);
+		if (!elm) return;
+		Ink.Dom.Css.hasClassName(elm, 'toggle') && Ink.Dom.Event.stop(evt);
+	});
+
+});

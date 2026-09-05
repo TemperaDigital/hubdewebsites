@@ -1,0 +1,9 @@
+// JavaScript Document
+
+window.onscroll = function () {
+ if (window.scrollY > 100){
+  $(".up").slideDown(500);
+ } else {
+  $(".up").slideUp(500);
+ }
+}
