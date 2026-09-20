@@ -106,6 +106,44 @@
 
   /* ---------- busca ---------- */
 
+  /* Índice de busca de um documento: os artigos mais os apêndices, que também são
+     texto normativo. Ficavam de fora, e termos que só existem neles — "veneziana",
+     "marfim", "tetra-chave" — não eram encontrados. Montado uma vez por documento. */
+  var indices = {};
+  function itensBuscaveis(doc) {
+    if (indices[doc.id]) return indices[doc.id];
+
+    /* O índice de cada item inclui o próprio rótulo, o título da sua parte e, quando há,
+       o subtítulo e o título do quadro. Sem isso, a Seção "Prazos e Garantias" não era
+       encontrada por "garantia": o texto dela é uma tabela de itens e prazos, e a palavra
+       só aparecia no título. */
+    var itens = doc.artigos.map(function (a) {
+      var extra = [a.rotulo, a.capTitulo, a.subtitulo || ''];
+      if (a.tabela) {
+        var t = (doc.tabelas || []).filter(function (x) { return x.id === a.tabela; })[0];
+        if (t) extra.push(t.titulo, t.colunas.join(' '));
+      }
+      var copia = {};
+      for (var k in a) copia[k] = a[k];
+      copia.busca = a.busca + ' ' + norm(extra.join(' '));
+      return copia;
+    });
+    (doc.apendices || []).forEach(function (ap) {
+      itens.push({
+        n: 'ap-' + ap.id,
+        apendice: ap.id,
+        rotulo: 'Apêndice ' + ap.id,
+        cap: 'ap-' + ap.id,
+        capTitulo: ap.titulo,
+        blocos: [{ rotulo: null, caput: ap.texto, itens: [] }],
+        tags: [],
+        busca: norm(ap.texto)
+      });
+    });
+    indices[doc.id] = itens;
+    return itens;
+  }
+
   /* Devolve dois grupos: os artigos que citam o termo digitado ("diretos")
      e os que só aparecem por causa de um sinônimo ("relacionados"). */
   function buscar(doc) {
@@ -114,7 +152,7 @@
     var lit = norm(estado.termo).trim();
     var diretos = [], relacionados = [];
 
-    doc.artigos.forEach(function (a) {
+    itensBuscaveis(doc).forEach(function (a) {
       if (estado.tema && a.tags.indexOf(estado.tema) < 0) return;
       if (!alvos.length) { diretos.push({ art: a, peso: 0 }); return; }
       var hits = lit ? ocorrencias(a.busca, lit).length : 0;
@@ -124,8 +162,12 @@
     });
 
     function ordena(lista) {
-      return lista.sort(function (x, y) { return y.peso - x.peso || x.art.n - y.art.n; })
-                  .map(function (r) { return r.art; });
+      return lista.sort(function (x, y) {
+        if (y.peso !== x.peso) return y.peso - x.peso;
+        var ax = typeof x.art.n === 'number' ? x.art.n : 1e6;
+        var ay = typeof y.art.n === 'number' ? y.art.n : 1e6;
+        return ax - ay;
+      }).map(function (r) { return r.art; });
     }
     return { diretos: ordena(diretos), relacionados: ordena(relacionados) };
   }
@@ -342,7 +384,7 @@
 
     (D.apendices || []).forEach(function (ap) {
       var id = estado.doc + '-ap-' + ap.id, aberto = !!estado.abertos[id];
-      h += '<section class="cap"><button class="cap-btn" type="button" data-cap="' + id + '" aria-expanded="' + aberto + '">' +
+      h += '<section class="cap" id="' + id + '"><button class="cap-btn" type="button" data-cap="' + id + '" aria-expanded="' + aberto + '">' +
         '<span class="cap-num">' + esc(ap.id) + '</span><span class="cap-tit">Apêndice ' + esc(ap.id) + ' \u2014 ' + esc(ap.titulo) + '</span>' +
         '<span class="cap-cnt"></span><span class="cap-seta" aria-hidden="true">\u203a</span></button>';
       if (aberto) h += '<div class="cap-corpo"><div class="art"><div class="art-corpo"><p>' +
@@ -410,7 +452,8 @@
       return '<button class="res-item" type="button" data-ir="' + a.n + '">' +
         '<span class="res-topo"><span class="res-doc">' + esc(ROTULO[estado.doc] || '') + '</span>' +
         '<strong>' + esc(a.rotulo) + '</strong>' +
-        '<span class="res-cap">' + (estado.doc === 'manual' ? '' : 'Cap. ' + esc(a.cap) + ' \u2014 ') +
+        '<span class="res-cap">' +
+        (a.apendice ? '' : (estado.doc === 'manual' ? '' : 'Cap. ' + esc(a.cap) + ' \u2014 ')) +
         esc(a.capTitulo) + (a.subtitulo ? ' \u203a ' + esc(a.subtitulo) : '') + '</span></span>' +
         '<p class="res-texto">' + destacar(trecho(a, alvos), alvos) + '</p></button>';
     }
@@ -491,10 +534,15 @@
   function irParaArtigo(n) {
     /* mantém o termo para seguir destacado dentro do artigo */
     estado.verDoc = true;
-    var art = docAtivo().artigos.filter(function (a) { return a.n === n; })[0];
-    if (art) estado.abertos[estado.doc + '-' + art.cap] = true;
+    var art = itensBuscaveis(docAtivo()).filter(function (a) { return String(a.n) === String(n); })[0];
+    if (art) {
+      estado.abertos[art.apendice
+        ? estado.doc + '-ap-' + art.apendice
+        : estado.doc + '-' + art.cap] = true;
+    }
     render();
-    var alvo = document.getElementById(estado.doc + '-art-' + n);
+    var alvo = document.getElementById(estado.doc + '-art-' + n) ||
+               (art && art.apendice ? document.getElementById(estado.doc + '-ap-' + art.apendice) : null);
     if (alvo) alvo.scrollIntoView({ block: 'center' });
   }
 
@@ -553,7 +601,7 @@
       return;
     }
     var ir = e.target.closest('[data-ir]');
-    if (ir) irParaArtigo(Number(ir.dataset.ir));
+    if (ir) irParaArtigo(ir.dataset.ir);
   });
 
   /* tema claro/escuro */
