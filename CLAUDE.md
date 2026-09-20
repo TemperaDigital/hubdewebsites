@@ -1,11 +1,17 @@
 # hubdewebsites — o que uma sessão nova precisa saber
 
+> **Este arquivo é servido publicamente.** Ele está na raiz, não começa com
+> `_` e `.md` não é bloqueado pelo nginx — qualquer pessoa lê
+> `https://sites.fguerra.ia.br/CLAUDE.md`. Não escreva aqui endereço interno,
+> caminho de servidor, nem detalhe de incidente. Isso vai no
+> `_PASSAGEM-DE-BASTAO.md`, que o `_` na raiz bloqueia.
+
 > **Está retomando os trabalhos?** Leia antes o `_PASSAGEM-DE-BASTAO.md` da
 > raiz: ele tem o contexto do que foi feito, o que ficou pendente e por que.
 > Este arquivo é a regra do dia a dia; aquele é a história.
 
 Este repositório é a pasta `sites` servida em **https://sites.fguerra.ia.br**
-pelo nginx do servidor pessoal (192.168.1.153, ZimaOS). Cada subpasta é um
+pelo nginx do servidor pessoal (ZimaOS). Cada subpasta é um
 site independente com seu próprio `index.html`.
 
 ## Antes de qualquer coisa: isto é público
@@ -13,8 +19,8 @@ site independente com seu próprio `index.html`.
 Não há senha, não há login. Qualquer pessoa na internet lê o que estiver aqui.
 **É deliberado** — é material de estudo e de trabalho que o dono prefere
 acessível. O que nunca pode entrar é credencial: chave, token, `.env`, dump de
-banco. Em 05/09/2026 apareceram servidos com HTTP 200 uma chave SSH privada,
-credenciais OAuth do Google e três tokens do GitHub.
+banco. **Já houve incidente de credencial exposta nesta pasta** — o relato
+está no `_LEIA-ME.md` e no `_PASSAGEM-DE-BASTAO.md`, que o nginx bloqueia.
 
 Antes de publicar material novo:
 
@@ -28,7 +34,8 @@ do nginx como `location ~ ^/_`, e o `^` ancora no começo do endereço: `/_x.md`
 é recusado, `/trabalho/qualquer/_x.md` não seria. Quem contar com o underscore
 para proteger algo em subpasta conta com o que não existe. O conserto seria
 trocar a âncora por `(^|/)_` — não aplicado, porque a fonte de verdade é
-`/DATA/AppData/compose/sites-nginx.conf`, no servidor.
+o arquivo de configuração do nginx no servidor (caminho no
+`_PASSAGEM-DE-BASTAO.md`).
 
 `.js`, `.md`, `.json`, `.txt` **não** são bloqueados. `.sh`, `.py` e extensões
 de documento/dump são.
@@ -45,7 +52,7 @@ Foram **movidos, não excluídos**, para conferência contra backup.
 **Não apagar sem o usuário confirmar.** Se a sincronização ainda estiver com
 defeito, o problema volta a acontecer com arquivo novo.
 
-**A pasta ao vivo `/media/auxiliar/sites` não é fonte boa.** Em 20/09/2026 uma
+**A pasta ao vivo do servidor não é fonte boa.** Em 20/09/2026 uma
 sessão irmã presumiu que fosse, restaurou os arquivos por cima (`dd84fab`) e
 depois conferiu byte a byte: a pasta ao vivo está zerada também. Reverteu em
 `8c3fac1`. Não verificado desta sessão — não tenho acesso a esse caminho —,
