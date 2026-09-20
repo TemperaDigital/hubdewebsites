@@ -8,7 +8,24 @@ const { chromium } = require('../playwright-local');
   let _n=0, _f=0;
   const ok = (n,c)=>{_n++; if(!c)_f++; console.log((c?'✓':'✗')+' '+n);};
 
-  ok('aviso "Texto conferido"', (await p.locator('.alerta').first().textContent()).includes('Texto conferido'));
+  // A nota de procedência foi removida de propósito: como o texto foi conferido
+  // é assunto de quem mantém a base, não de quem veio saber se pode ter cachorro.
+  const tecnico = /Texto conferido|motores de OCR|\bOCR\b|\bdpi\b|segmenta[çc]|tesseract/i;
+  ok('Regimento sem nota técnica de procedência',
+     !tecnico.test(await p.locator('#painel').innerText()));
+  ok('Regimento não abre com caixa de alerta', (await p.locator('.alerta').count()) === 0);
+
+  // a nota de fidelidade vai no fim, depois dos capítulos, não no topo
+  const posicao = await p.evaluate(() => {
+    const nota = document.querySelector('.nota-fidelidade');
+    const caps = document.querySelectorAll('.cap');
+    if (!nota || !caps.length) return null;
+    const ultimo = caps[caps.length - 1];
+    // DOCUMENT_POSITION_FOLLOWING = a nota vem depois do último capítulo
+    return !!(ultimo.compareDocumentPosition(nota) & Node.DOCUMENT_POSITION_FOLLOWING);
+  });
+  ok('nota de fidelidade fica depois dos capítulos, não no topo', posicao === true);
+
   await p.locator('#ver-erros').click(); await p.waitForTimeout(200);
   ok('lista de erros do original abre', await p.locator('.erros-orig').isVisible());
   ok('8 divergências listadas', (await p.locator('.erros-orig dt').count()) === 8);

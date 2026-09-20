@@ -44,7 +44,8 @@ const { chromium } = require('../playwright-local');
   await p.fill('#busca',''); await p.waitForTimeout(250);   // sem isso a view é a de resultados
   await p.locator('.aba[data-doc="regimento"]').click(); await p.waitForTimeout(250);
   ok('Regimento com 88 artigos', (await p.locator('.doc-cabeca').textContent()).includes('88 artigos'));
-  ok('aviso "Texto conferido" no Regimento', (await p.locator('.alerta').first().textContent()).includes('Texto conferido'));
+  ok('Regimento sem nota técnica de procedência',
+     !/Texto conferido|motores de OCR|\bOCR\b|\bdpi\b/i.test(await p.locator('#painel').innerText()));
 
   await p.locator('.aba[data-doc="legislacao"]').click(); await p.waitForTimeout(250);
   ok('Legislação intacta', (await p.locator('.lei-item').count()) === 17);

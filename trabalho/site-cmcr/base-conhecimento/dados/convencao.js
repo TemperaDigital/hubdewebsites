@@ -1909,7 +1909,6 @@ window.DADOS_CONVENCAO = {
    "id": "areas",
    "titulo": "Fração ideal e áreas das unidades autônomas",
    "origem": "Art. 4º",
-   "aviso": "Quadro conferido diretamente na imagem da página 9 do documento registrado. As frações ideais somam 1,00021 para as 76 unidades, o que confirma a leitura.",
    "colunas": [
     "Unidades",
     "Fração ideal",
@@ -1994,7 +1993,7 @@ window.DADOS_CONVENCAO = {
    "titulo": "Vagas de garagem por unidade",
    "origem": "Art. 6º",
    "longa": true,
-   "aviso": "Quadro conferido nas imagens das páginas 11 e 12 do documento registrado e conferido de novo por OCR, com acordo integral. São 76 unidades e 79 vagas: as unidades 1801, 1901 e 1904 têm duas cada, sendo uma confinada. A soma por pavimento — 18 no estacionamento superior, 30 no térreo e 31 no subsolo — bate com a descrição do Art. 2º.",
+   "aviso": "São 76 unidades e 79 vagas: as unidades 1801, 1901 e 1904 têm duas cada, sendo uma confinada. Por pavimento são 18 no estacionamento superior, 30 no térreo e 31 no subsolo.",
    "colunas": [
     "Unidade",
     "Livres",

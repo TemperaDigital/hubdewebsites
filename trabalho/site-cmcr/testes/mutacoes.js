@@ -76,6 +76,24 @@ module.exports = [
       return s.replace("h += '<p class=\"preambulo\">' + destacar(D.preambulo, alvos) + '</p>';", '');
     } },
 
+  { nome: 'nota técnica de procedência volta para o topo do documento',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) {
+      return s.replace(
+        "if (D.naoNormativo) {",
+        "if (D.confiabilidade === 'conferido') {\n" +
+        "      h += htmlAlerta('OK', '<p><strong>Texto conferido.</strong> Lido por dois motores de OCR.</p>');\n" +
+        "    }\n" +
+        "    if (D.naoNormativo) {");
+    } },
+
+  { nome: 'procedência volta para o aviso de um quadro',
+    arquivo: 'base-conhecimento/dados/manual.js',
+    aplicar: function (s) {
+      return s.replace('"aviso": "Os prazos contam',
+                       '"aviso": "Quadro conferido diretamente nas imagens das páginas 14 e 15 do manual. Os prazos contam');
+    } },
+
   { nome: 'logotipo exibido acima da resolução do arquivo',
     arquivo: 'assets/estilo.css',
     aplicar: function (s) { return s.replace('.marca img { width: 311px;', '.marca img { width: 620px;'); } },

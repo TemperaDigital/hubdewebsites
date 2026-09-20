@@ -2476,7 +2476,7 @@ window.DADOS_REGIMENTO = {
    "id": "horarios",
    "titulo": "Horários de uso das áreas comuns",
    "origem": "Art. 2º, inciso XVI",
-   "aviso": "Tabela conferida diretamente na imagem da página 5 do documento registrado. A observação do Salão de Festas está incompleta no próprio original, que diz apenas “o som ambiente (Sudema)”, sem o verbo.",
+   "aviso": "A observação do Salão de Festas está incompleta no próprio original, que diz apenas “o som ambiente (Sudema)”, sem o verbo.",
    "colunas": [
     "Item",
     "Local / Atividade",

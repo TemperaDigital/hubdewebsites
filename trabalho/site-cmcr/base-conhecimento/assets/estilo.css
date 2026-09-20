@@ -317,6 +317,14 @@ mark { background: var(--marca-hl); color: inherit; border-radius: 3px; padding:
   font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 2px;
 }
 .link-btn:hover { opacity: .75; }
+/* Fica no fim e em voz baixa: quem lê a norma não deve tropeçar nisso, mas
+   quem estranhar uma palavra errada precisa poder conferir de quem é o erro. */
+.nota-fidelidade {
+  margin: 34px 0 0; padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: .82rem; line-height: 1.6; color: var(--text-muted);
+}
+.nota-fidelidade .link-btn { font-size: .82rem; }
+
 .erros-orig {
   margin: 0 0 22px; padding: 16px 18px;
   background: var(--surface); border: 1px solid var(--border);
