@@ -2,7 +2,7 @@ window.DADOS_CONVENCAO = {
  "id": "convencao",
  "titulo": "Convenção de Condomínio",
  "subtitulo": "Condomínio Monte Carlo Residence",
- "data": "Junho de 2018",
+ "data": "15 de junho de 2018",
  "fonte": "Escritura particular de convenção, PDF escaneado de 27 páginas (a Convenção começa na página 7)",
  "confiabilidade": "conferido",
  "preambulo": "ESCRITURA PARTICULAR DE CONVENÇÃO DO CONDOMÍNIO MONTE CARLO RESIDENCE, SITUADO A RUA PASTOR FIRMINO DA SILVA, Nº 168, NO BAIRRO TREZE DE MAIO, EM JOÃO PESSOA - PB. Os abaixo assinados, proprietários das unidades autônomas do CONDOMÍNIO MONTE CARLO RESIDENCE situado à RUA PASTOR FIRMINO DA SILVA, Nº 168, NO BAIRRO TREZE DE MAIO, EM JOÃO PESSOA — PB, por este instrumento estabelecem a presente Convenção de Condomínio, a que se sujeitam e submetem, ficando estabelecido que o Regulamento Interno é parte integrante e complementar da presente Convenção.",
@@ -142,7 +142,14 @@ window.DADOS_CONVENCAO = {
    "artigos": [
     58,
     59,
-    60
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67
    ]
   }
  ],
@@ -1754,15 +1761,148 @@ window.DADOS_CONVENCAO = {
    ],
    "tags": [],
    "busca": "os condominos abdicam, voluntaria e irrevogavelmente, do direito de preferencia que lhes assegura a lei para a compra de outras unidades autonomas do edificio, podendo cada um vender, livremente, aquelas ou aqueles de que seja proprietario, sem consultar os demais. "
-  }
- ],
- "lacunas": [
+  },
   {
-   "n": null,
+   "n": 61,
+   "rotulo": "Art. 61º",
    "cap": "XIII",
-   "motivo": "O PDF recebido termina no Art. 60º. Os Arts. 61º a 67º e a página de assinaturas e data não constam do escaneamento. Pelo resumo em Word, os artigos ausentes tratam de: obrigações em caso de alienação ou locação (61º), exercício administrativo e financeiro (62º), sujeição e modificação da convenção por 2/3 (63º), responsabilidade do condomínio e fiscalização pelo porteiro (64º), foro (65º), casos omissos regidos pela Lei 4.591/1964 (66º) e registro em cartório (67º). É preciso digitalizar as folhas finais."
+   "capTitulo": "Das Disposições Gerais e das Transitóriass",
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "Nos casos de alienação, locação ou cedência, a qualquer título, de direito de uso de suas unidades a terceiros, os Condôminos comprometem-se fazer constar do respectivo instrumento, a obrigação do adquirente, locatário ou titular do direito de uso, de observar e cumprir fielmente os dispositivos da convenção, regimento interno e regulamento do edifício, sob pena de nulidade da transação, e de incorrer o condômino infrator em multa equivalente a 10 (dez) salários mínimos.",
+     "itens": []
+    },
+    {
+     "rotulo": "Parágrafo Único",
+     "caput": "Nenhuma unidade autônoma poderá ser vendida ou por qualquer motivo alienada sob pena de nulidade e pleno direito, sem que o proprietário ou condômino equiparado, esteja quite com as suas obrigações para o condomínio.",
+     "itens": []
+    }
+   ],
+   "tags": [
+    "locacao",
+    "multas",
+    "taxas",
+    "sindico"
+   ],
+   "busca": "nos casos de alienacao, locacao ou cedencia, a qualquer titulo, de direito de uso de suas unidades a terceiros, os condominos comprometem-se fazer constar do respectivo instrumento, a obrigacao do adquirente, locatario ou titular do direito de uso, de observar e cumprir fielmente os dispositivos da convencao, regimento interno e regulamento do edificio, sob pena de nulidade da transacao, e de incorrer o condomino infrator em multa equivalente a 10 (dez) salarios minimos. nenhuma unidade autonoma podera ser vendida ou por qualquer motivo alienada sob pena de nulidade e pleno direito, sem que o proprietario ou condomino equiparado, esteja quite com as suas obrigacoes para o condominio."
+  },
+  {
+   "n": 62,
+   "rotulo": "Art. 62º",
+   "cap": "XIII",
+   "capTitulo": "Das Disposições Gerais e das Transitóriass",
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "O exercício administrativo e financeiro do condomínio é contado do dia primeiro de janeiro até o dia trinta e um de dezembro de cada ano.",
+     "itens": []
+    }
+   ],
+   "tags": [
+    "taxas",
+    "sindico"
+   ],
+   "busca": "o exercicio administrativo e financeiro do condominio e contado do dia primeiro de janeiro ate o dia trinta e um de dezembro de cada ano."
+  },
+  {
+   "n": 63,
+   "rotulo": "Art. 63º",
+   "cap": "XIII",
+   "capTitulo": "Das Disposições Gerais e das Transitóriass",
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "A presente convenção sujeita todo ocupante, ainda que eventual do edifício ou de qualquer de suas partes, obriga todos os condôminos, seus sub-rogados e inquilinos e somente pode ser modificada pelo voto de dois terços do total de condôminos.",
+     "itens": []
+    }
+   ],
+   "tags": [
+    "sindico",
+    "locacao"
+   ],
+   "busca": "a presente convencao sujeita todo ocupante, ainda que eventual do edificio ou de qualquer de suas partes, obriga todos os condominos, seus sub-rogados e inquilinos e somente pode ser modificada pelo voto de dois tercos do total de condominos."
+  },
+  {
+   "n": 64,
+   "rotulo": "Art. 64º",
+   "cap": "XIII",
+   "capTitulo": "Das Disposições Gerais e das Transitóriass",
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "O condomínio não é responsável por qualquer roubo ou acidentes de incêndio no edifício e partes comuns, devendo os seus moradores e proprietários conservar sempre fechadas as suas portas. O porteiro (zelador) como preposto do síndico deverá zelar fiel cumprimento desta convenção, regimento interno e outros, sendo responsável pela fiscalização geral visando o bom nome e respeito do condomínio, no que se referir à segurança, moralidade, higiene, limpeza, conservação e disciplina dos empregados.",
+     "itens": []
+    },
+    {
+     "rotulo": "Parágrafo Único",
+     "caput": "O regimento interno do edifício, aprovado em assembléia, completará esta convenção.",
+     "itens": []
+    }
+   ],
+   "tags": [
+    "seguranca",
+    "portaria",
+    "funcionarios",
+    "areas",
+    "lixo"
+   ],
+   "busca": "o condominio nao e responsavel por qualquer roubo ou acidentes de incendio no edificio e partes comuns, devendo os seus moradores e proprietarios conservar sempre fechadas as suas portas. o porteiro (zelador) como preposto do sindico devera zelar fiel cumprimento desta convencao, regimento interno e outros, sendo responsavel pela fiscalizacao geral visando o bom nome e respeito do condominio, no que se referir a seguranca, moralidade, higiene, limpeza, conservacao e disciplina dos empregados. o regimento interno do edificio, aprovado em assembleia, completara esta convencao."
+  },
+  {
+   "n": 65,
+   "rotulo": "Art. 65º",
+   "cap": "XIII",
+   "capTitulo": "Das Disposições Gerais e das Transitóriass",
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "Fica eleito o foro desta cidade para qualquer ação ou execução decorrente da aplicação de qualquer de seus dispositivos.",
+     "itens": []
+    }
+   ],
+   "tags": [
+    "multas",
+    "sindico"
+   ],
+   "busca": "fica eleito o foro desta cidade para qualquer acao ou execucao decorrente da aplicacao de qualquer de seus dispositivos."
+  },
+  {
+   "n": 66,
+   "rotulo": "Art. 66º",
+   "cap": "XIII",
+   "capTitulo": "Das Disposições Gerais e das Transitóriass",
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "Os casos omissos nesta convenção serão regulados pela lei Nº 4.591, de 16 de dezembro de 1964 e legislação subseqüente.",
+     "itens": []
+    }
+   ],
+   "tags": [
+    "sindico"
+   ],
+   "busca": "os casos omissos nesta convencao serao regulados pela lei nº 4.591, de 16 de dezembro de 1964 e legislacao subsequente."
+  },
+  {
+   "n": 67,
+   "rotulo": "Art. 67º",
+   "cap": "XIII",
+   "capTitulo": "Das Disposições Gerais e das Transitóriass",
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "Assinada a convenção pelos condôminos que representem pelo menos dois terços do condomínio, será efetuado o seu registro no cartório de registro de imóveis.",
+     "itens": []
+    }
+   ],
+   "tags": [
+    "sindico"
+   ],
+   "busca": "assinada a convencao pelos condominos que representem pelo menos dois tercos do condominio, sera efetuado o seu registro no cartorio de registro de imoveis."
   }
  ],
+ "lacunas": [],
  "apendices": [],
  "tabelas": [
   {
@@ -2627,5 +2767,6 @@ window.DADOS_CONVENCAO = {
   }
  ],
  "errosDoOriginal": [],
- "notaConferencia": "Texto conferido por dois motores de OCR independentes: a camada embutida no PDF e uma segunda leitura com tesseract. Prazos, frações e quóruns coincidem integralmente, assim como a contagem de negações em 53 dos 57 artigos comparáveis — os outros quatro divergiam por palavras coladas na camada embutida, e em todos a segunda leitura é a correta. As tabelas dos Arts. 4º e 6º foram conferidas na imagem. Continua faltando o trecho final do documento, dos Arts. 61º a 67º."
+ "notaConferencia": "Texto conferido por dois motores de OCR independentes: a camada embutida no PDF e uma segunda leitura com tesseract. Prazos, frações e quóruns coincidem integralmente, assim como a contagem de negações em 53 dos 57 artigos comparáveis — os outros quatro divergiam por palavras coladas na camada embutida, e em todos a segunda leitura é a correta. As tabelas dos Arts. 4º e 6º foram conferidas na imagem. Os Arts. 61º a 67º vieram da digitalização da folha final, transcritos à vista e conferidos contra o resumo do documento, que descreve os mesmos sete artigos.",
+ "fecho": "João Pessoa, 15 de junho de 2018. Assinada por B & C Construções, Incorporações e Imobiliária Ltda."
 };

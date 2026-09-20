@@ -80,7 +80,7 @@ Todas verificadas contra a segunda leitura antes de entrar na base:
 
 ## 4. Convenção de Condomínio
 
-**Situação: publicada, com duas lacunas de escaneamento.**
+**Situação: publicada e conferida, completa.**
 
 O documento recebido é a *Escritura Particular de Convenção do Condomínio Monte Carlo
 Residence*, de junho de 2018, num PDF de 27 páginas (a Convenção começa na página 7; as
@@ -102,12 +102,22 @@ Em compensação, dois palpites meus se revelaram errados: os Capítulos **XI �
 Finalidades** e **XII — Dos Recursos** têm mesmo esses títulos no original, embora tratem
 de multas e de seguros. Ficam como estão.
 
-### O que falta
+### Folha final
 
-| Lacuna | Detalhe |
-|---|---|
-| **Arts. 61º a 67º** | O PDF termina no Art. 60º. Faltam os sete artigos finais e a página de assinaturas e data. Pelo resumo, tratam de alienação e locação (61º), exercício financeiro (62º), modificação da convenção por 2/3 (63º), responsabilidade do condomínio e fiscalização pelo porteiro (64º), foro (65º), casos omissos pela Lei 4.591/1964 (66º) e registro em cartório (67º). **É preciso digitalizar as folhas finais.** |
-| **Tabelas dos Arts. 4º e 6º** | Trazem as áreas das 76 unidades autônomas e a distribuição das 79 vagas de garagem. São quadros, e o OCR não preservou linhas e colunas. O texto corrido desses artigos está legível; os quadros, não. A página avisa isso no próprio artigo. |
+Os **Arts. 61º a 67º** e a página de assinaturas não constavam do PDF de 27 páginas e
+chegaram depois, como digitalização da folha final. Foram transcritos à vista e conferidos
+contra o resumo em Word, que descreve os mesmos sete artigos na mesma ordem, com a mesma
+data — 15 de junho de 2018.
+
+O original traz **três coisas que o resumo omitia**:
+
+- a multa de **10 (dez) salários mínimos** ao condômino que aliena ou loca sem repassar ao
+  adquirente a obrigação de cumprir a convenção (Art. 61º);
+- o parágrafo único do Art. 61º, que **impede a venda de unidade** cujo proprietário não
+  esteja quite com o condomínio;
+- o parágrafo único do Art. 64º, segundo o qual **o regimento interno completa a convenção**.
+
+A Convenção está completa: **67 artigos em 13 capítulos**, sem lacunas.
 
 ### Limpeza aplicada
 

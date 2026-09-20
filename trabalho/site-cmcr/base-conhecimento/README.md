@@ -45,7 +45,7 @@ base-conhecimento/
 │   └── app.js            # busca, sinônimos, índice e renderização
 ├── dados/
 │   ├── regimento.js      # 88 artigos, 12 capítulos, 2 apêndices, tabela de horários
-│   ├── convencao.js      # 60 artigos, 13 capítulos
+│   ├── convencao.js      # 67 artigos, 13 capítulos
 │   ├── manual.js         # 35 seções, 10 partes, quadro de garantias
 │   ├── legislacao.js     # links oficiais comentados
 │   └── temas.js          # temas e dicionário de sinônimos
@@ -58,7 +58,7 @@ base-conhecimento/
 | Documento | Situação |
 |---|---|
 | Regimento Interno | **Completo e conferido.** Os 88 artigos foram lidos por dois motores de OCR independentes e conferidos na imagem nos pontos divergentes — ver `REVISAO-OCR.md`. |
-| Convenção | **60 artigos em 13 capítulos**, conferidos por dois motores de OCR. Os quadros dos Arts. 4º e 6º foram lidos na imagem. Faltam os Arts. 61º a 67º, ausentes do escaneamento. |
+| Convenção | **Completa: 67 artigos em 13 capítulos**, conferidos por dois motores de OCR. Os quadros dos Arts. 4º e 6º foram lidos na imagem. |
 | Manual do Proprietário | **35 seções em 10 partes.** Não é norma: é o manual de uso e manutenção da Construtora. Os quatro quadros — garantias, projetos, serviços e materiais — foram conferidos nas imagens. |
 | Legislação | 17 links oficiais, conferidos. |
 

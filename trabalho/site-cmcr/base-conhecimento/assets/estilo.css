@@ -371,3 +371,9 @@ mark { background: var(--marca-hl); color: inherit; border-radius: 3px; padding:
   background: var(--surface); border: 1px solid var(--border); color: var(--accent);
 }
 .voltar-busca:hover { border-color: var(--accent); }
+
+.fecho {
+  margin: 20px 0 0; padding: 14px 18px; text-align: center;
+  font-family: var(--font-lei); font-size: .92rem; font-style: italic;
+  color: var(--text-muted); border-top: 1px solid var(--border);
+}

@@ -307,6 +307,8 @@
         destacar(ap.texto, alvos) + '</p></div></div></div>';
       h += '</section>';
     });
+
+    if (D.fecho) h += '<p class="fecho">' + destacar(D.fecho, alvos) + '</p>';
     return h;
   }
 
