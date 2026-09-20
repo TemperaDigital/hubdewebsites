@@ -60,15 +60,24 @@ arquivos do repositório: tamanho normal, conteúdo **100% de bytes nulos**.
 
 O que já foi descartado como fonte de recuperação:
 
-- **o git** — os arquivos já entraram zerados no commit inicial (`git show`)
-- **a pasta ao vivo `/media/auxiliar/sites`** — conferida byte a byte hoje,
-  numa amostra de 50 arquivos: zerada também
+- **o histórico do git, inteiro** — não só o commit inicial. Varridos os 39
+  commits de todas as branches, lendo a árvore de cada um: os 3.199 caminhos
+  têm **uma única versão cada em toda a história**, e 0 dos 1.985 blobs
+  distintos tem conteúdo. Nunca existiu versão boa em commit nenhum.
+- **a pasta ao vivo `/media/auxiliar/sites`** — conferida byte a byte em
+  20/09/2026 pela instância do ZimaOS, numa amostra de 50 arquivos do lote:
+  zerada também
 
 **Não apague sem o dono confirmar.** E não presuma nova fonte sem conferir
 conteúdo — foi presumir isso que causou o incidente de hoje.
 
-Onde ainda vale procurar, e ninguém procurou: lixeira do Nextcloud, espelho no
-Google Drive via rclone, snapshot antigo do ZimaOS.
+Onde ainda vale procurar, e ninguém procurou: **lixeira do Nextcloud, espelho
+no Google Drive via rclone, snapshot antigo do ZimaOS.** Essas três fontes são
+externas ao repositório e à pasta ao vivo — são as únicas que restam.
+
+Ao conferir qualquer uma delas, **não aceite tamanho como prova**: use a
+varredura do item 5.1 ou compare o hash. Foi assim que a primeira tentativa de
+recuperação se convenceu de ter funcionado sem ter copiado nada.
 
 ### 3.2. A causa não foi diagnosticada — pode reincidir
 
