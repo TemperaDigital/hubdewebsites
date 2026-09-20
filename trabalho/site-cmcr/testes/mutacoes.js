@@ -76,6 +76,54 @@ module.exports = [
       return s.replace("h += '<p class=\"preambulo\">' + destacar(D.preambulo, alvos) + '</p>';", '');
     } },
 
+  { nome: 'logotipo do cabeçalho aponta para caminho inexistente',
+    arquivo: 'base-conhecimento/index.html',
+    aplicar: function (s) { return s.replace(/\.\.\/assets\/logo-monte-carlo-vinho/g, '../assets/logo-sumido'); } },
+
+  { nome: 'abas voltam à ordem antiga',
+    arquivo: 'base-conhecimento/index.html',
+    aplicar: function (s) {
+      return s.replace('data-doc="manual" aria-selected="true">Manual do Proprietário',
+                       'data-doc="regimento" aria-selected="true">Regimento Interno');
+    } },
+
+  { nome: 'página volta a abrir no Regimento',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace("doc: 'manual'", "doc: 'regimento'"); } },
+
+  { nome: 'aviso do Manual perde a origem do documento',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace('entregue pela Construtora junto ', 'fornecido junto '); } },
+
+  { nome: 'botão de voltar ao site some das Normas e Informativos',
+    arquivo: 'base-conhecimento/index.html',
+    aplicar: function (s) { return s.replace('class="voltar-site" href="../"', 'class="voltar-site-x" href="../"'); } },
+
+  { nome: 'branco fixo volta por cima da cor de destaque',
+    arquivo: 'base-conhecimento/assets/estilo.css',
+    aplicar: function (s) {
+      // os dois blocos escuros: o da preferência do sistema e o do botão
+      return s.split('--accent-contraste: #2a1618;').join('--accent-contraste: #ffffff;');
+    } },
+
+  { nome: 'nota técnica de procedência volta para o topo do documento',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) {
+      return s.replace(
+        "if (D.naoNormativo) {",
+        "if (D.confiabilidade === 'conferido') {\n" +
+        "      h += htmlAlerta('OK', '<p><strong>Texto conferido.</strong> Lido por dois motores de OCR.</p>');\n" +
+        "    }\n" +
+        "    if (D.naoNormativo) {");
+    } },
+
+  { nome: 'procedência volta para o aviso de um quadro',
+    arquivo: 'base-conhecimento/dados/manual.js',
+    aplicar: function (s) {
+      return s.replace('"aviso": "Os prazos contam',
+                       '"aviso": "Quadro conferido diretamente nas imagens das páginas 14 e 15 do manual. Os prazos contam');
+    } },
+
   { nome: 'logotipo exibido acima da resolução do arquivo',
     arquivo: 'assets/estilo.css',
     aplicar: function (s) { return s.replace('.marca img { width: 311px;', '.marca img { width: 620px;'); } },

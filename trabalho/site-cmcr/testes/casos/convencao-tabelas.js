@@ -9,7 +9,27 @@ const { chromium } = require('../playwright-local');
   const ok=(n,c)=>{_n++; if(!c)_f++; console.log((c?'✓':'✗')+' '+n);};
 
   await p.locator('.aba[data-doc="convencao"]').click(); await p.waitForTimeout(350);
-  ok('Convenção agora "Texto conferido"', (await p.locator('.alerta').first().textContent()).includes('Texto conferido'));
+  // O aviso de um quadro só entra no DOM quando o capítulo é aberto, então
+  // varrer a página não alcança todos. Estes vêm dos dados, cobrindo os cinco
+  // quadros dos três documentos de uma vez.
+  const avisosTecnicos = await p.evaluate(() => {
+    const tec = /conferid[ao]|motores de OCR|\bOCR\b|\bdpi\b|p[áa]gina \d+ do documento|imagens? d[ao]s? p[áa]gina/i;
+    const docs = [window.DADOS_REGIMENTO, window.DADOS_CONVENCAO, window.DADOS_MANUAL];
+    const ruins = [];
+    docs.forEach(function (d) {
+      (d.tabelas || []).forEach(function (t) {
+        if (t.aviso && tec.test(t.aviso)) ruins.push(t.id + ': ' + t.aviso.slice(0, 60));
+      });
+    });
+    return ruins;
+  });
+  ok('nenhum quadro traz nota de procedência' +
+     (avisosTecnicos.length ? ' — ' + avisosTecnicos.join(' | ') : ''),
+     avisosTecnicos.length === 0);
+
+  ok('Convenção sem nota técnica de procedência',
+     !/Texto conferido|motores de OCR|\bOCR\b|conferid[ao] (?:diretamente )?n[ao]s? imagen?s?|p[áa]gina \d+ do documento/i
+       .test(await p.locator('#painel').innerText()));
   ok('sem lacunas pendentes', (await p.locator('.lacuna').count()) === 0);
 
   await p.locator('.cap-btn').nth(2).click(); await p.waitForTimeout(400);   // Cap III (Arts 3-6)

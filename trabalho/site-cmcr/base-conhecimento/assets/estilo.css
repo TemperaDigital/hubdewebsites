@@ -1,49 +1,56 @@
 :root {
-  --bg: #f6f7f9;
+  /* Paleta da fachada do edifício, a mesma da página inicial: pastilha branca,
+     pastilha vinho e esquadria bronze. O vinho profundo carrega texto (8,40:1
+     sobre branco); os tons medidos na foto ficam em preenchimento. */
+  --bg: #f8f7f6;
   --surface: #ffffff;
-  --surface-2: #eef1f5;
-  --text: #16202e;
-  --text-muted: #5b6b7f;
-  --border: #d9e0e8;
-  --accent: #0f5a4a;
-  --accent-bright: #127963;
-  --accent-soft: #e3f2ec;
-  --marca: #9a7b2f;
-  --alerta-bg: #fdf4e3;
-  --alerta-br: #e2bd6a;
-  --alerta-tx: #6b4e10;
-  --marca-hl: #fff2a8;
-  --sombra: 0 1px 2px rgba(22,32,46,.06), 0 6px 18px rgba(22,32,46,.05);
+  --surface-2: #f3efee;
+  --text: #2f2628;
+  --text-muted: #665c5a;
+  --border: #e6dfdd;
+  --accent: #7a3a3d;
+  --accent-bright: #9a4e52;
+  --accent-soft: #f4e9e8;
+  /* o que fica legível POR CIMA do --accent; muda de tema junto com ele */
+  --accent-contraste: #ffffff;
+  --marca: #6f5f52;
+  --alerta-bg: #f8f2e9;
+  --alerta-br: #cbb79a;
+  --alerta-tx: #5c4a33;
+  --marca-hl: #ffe4a1;
+  --sombra: 0 1px 2px rgba(59,43,45,.06), 0 6px 18px rgba(59,43,45,.05);
   --radius: 12px;
   --font: 'Inter', -apple-system, 'Segoe UI', sans-serif;
   --font-lei: 'Lora', Georgia, serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0e141b;
-    --surface: #161e27;
-    --surface-2: #1e2833;
-    --text: #e4eaf1;
-    --text-muted: #94a6b8;
-    --border: #2a3542;
-    --accent: #3fc8a6;
-    --accent-bright: #5ddcbd;
-    --accent-soft: rgba(63,200,166,.12);
-    --marca: #d4b25f;
-    --alerta-bg: rgba(226,189,106,.1);
-    --alerta-br: #7a6330;
-    --alerta-tx: #e4c67f;
-    --marca-hl: #6a5a12;
-    --sombra: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.25);
+    --bg: #17110f;
+    --surface: #211a18;
+    --surface-2: #2c2422;
+    --text: #f0e8e6;
+    --text-muted: #b5a7a4;
+    --border: #3c3230;
+    --accent: #e3a8aa;
+    --accent-bright: #f0bfc0;
+    --accent-soft: rgba(227,168,170,.14);
+    --accent-contraste: #2a1618;
+    --marca: #c9b5a2;
+    --alerta-bg: rgba(203,183,154,.10);
+    --alerta-br: #6d5c46;
+    --alerta-tx: #e2cba7;
+    --marca-hl: #6b4d1e;
+    --sombra: 0 1px 2px rgba(0,0,0,.45), 0 6px 18px rgba(0,0,0,.3);
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0e141b; --surface: #161e27; --surface-2: #1e2833;
-  --text: #e4eaf1; --text-muted: #94a6b8; --border: #2a3542;
-  --accent: #3fc8a6; --accent-bright: #5ddcbd; --accent-soft: rgba(63,200,166,.12);
-  --marca: #d4b25f; --alerta-bg: rgba(226,189,106,.1); --alerta-br: #7a6330;
-  --alerta-tx: #e4c67f; --marca-hl: #6a5a12;
-  --sombra: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.25);
+  --bg: #17110f; --surface: #211a18; --surface-2: #2c2422;
+  --text: #f0e8e6; --text-muted: #b5a7a4; --border: #3c3230;
+  --accent: #e3a8aa; --accent-bright: #f0bfc0; --accent-soft: rgba(227,168,170,.14);
+  --accent-contraste: #2a1618;
+  --marca: #c9b5a2; --alerta-bg: rgba(203,183,154,.10); --alerta-br: #6d5c46;
+  --alerta-tx: #e2cba7; --marca-hl: #6b4d1e;
+  --sombra: 0 1px 2px rgba(0,0,0,.45), 0 6px 18px rgba(0,0,0,.3);
 }
 
 * { box-sizing: border-box; }
@@ -57,7 +64,7 @@ body {
 
 .pular {
   position: absolute; left: -9999px; top: 0; z-index: 99;
-  background: var(--accent); color: #fff; padding: 10px 16px; border-radius: 0 0 8px 0;
+  background: var(--accent); color: var(--accent-contraste); padding: 10px 16px; border-radius: 0 0 8px 0;
 }
 .pular:focus { left: 0; }
 
@@ -67,18 +74,38 @@ body {
   position: sticky; top: 0; z-index: 20;
 }
 .topo-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 14px; }
-.marca { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.marca-icone {
-  flex: none; width: 42px; height: 42px; border-radius: 10px;
-  display: grid; place-items: center;
-  background: linear-gradient(140deg, var(--accent), var(--accent-bright));
-  color: #fff; font-weight: 800; font-size: .92rem; letter-spacing: .04em;
+/* O logotipo do condomínio, o mesmo da página inicial. O "Monte Carlo
+   Residence" que havia aqui como texto saiu: o logotipo já o diz. */
+.marca { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.marca-logo { display: block; flex: none; line-height: 0; }
+.marca-logo img { width: 208px; height: auto; display: block; }
+.marca h1 {
+  margin: 0; font-size: 1.05rem; font-weight: 700; letter-spacing: -.01em;
+  padding-left: 14px; border-left: 1px solid var(--border);
+  color: var(--text-muted); white-space: nowrap;
 }
-.marca-kicker {
-  margin: 0; font-size: .68rem; font-weight: 600; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--marca);
+/* Voltar ao site do condomínio. Antes a Base era um beco: dava para chegar
+   pela página inicial e não havia caminho de volta senão o botão do navegador. */
+.topo-acoes { display: flex; align-items: center; gap: 10px; flex: none; }
+.voltar-site {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text-muted); text-decoration: none;
+  font-size: .86rem; font-weight: 600; white-space: nowrap;
+  transition: border-color .15s, color .15s;
 }
-.marca h1 { margin: 0; font-size: 1.12rem; font-weight: 700; letter-spacing: -.01em; }
+.voltar-site:hover, .voltar-site:focus-visible { border-color: var(--accent); color: var(--accent); }
+.voltar-curto { display: none; }
+@media (max-width: 620px) {
+  .marca-logo img { width: 156px; }
+  .marca h1 { padding-left: 0; border-left: none; font-size: .98rem; }
+  .marca { gap: 10px; }
+  .voltar-longo { display: none; }
+  .voltar-curto { display: inline; }
+  .voltar-site { padding: 7px 12px; }
+}
+
 .btn-icone {
   flex: none; width: 38px; height: 38px; border-radius: 9px; cursor: pointer;
   background: var(--surface-2); border: 1px solid var(--border); color: var(--text);
@@ -115,22 +142,31 @@ body {
   background: var(--surface); border: 1px solid var(--border); color: var(--text);
 }
 .tema-chip:hover { border-color: var(--accent); color: var(--accent); }
-.tema-chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.tema-chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-contraste); }
 .tema-chip .cnt { font-size: .74rem; opacity: .65; font-variant-numeric: tabular-nums; }
 
 /* ---------- abas ---------- */
+/* Abas em pastilha, no lugar do sublinhado. A rolagem lateral escondia a
+   quarta aba em telas estreitas sem nenhum sinal de que ela existia; agora
+   elas quebram em duas linhas e todas ficam à vista. */
 .abas {
-  display: flex; gap: 4px; margin: 26px 0 18px;
-  border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none;
+  display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 22px;
 }
-.abas::-webkit-scrollbar { display: none; }
 .aba {
-  flex: none; cursor: pointer; padding: 11px 16px; font: inherit; font-weight: 600; font-size: .94rem;
-  background: none; border: none; border-bottom: 2.5px solid transparent;
-  color: var(--text-muted); margin-bottom: -1px; white-space: nowrap;
+  flex: none; cursor: pointer; padding: 11px 20px;
+  font: inherit; font-weight: 600; font-size: .92rem; white-space: nowrap;
+  background: var(--surface); color: var(--text-muted);
+  border: 1.5px solid var(--border); border-radius: 999px;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
 }
-.aba:hover { color: var(--text); }
-.aba[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.aba:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.aba:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.aba[aria-selected="true"] {
+  background: var(--accent); border-color: var(--accent); color: var(--accent-contraste);
+}
+.aba[aria-selected="true"]:hover {
+  background: var(--accent-bright); border-color: var(--accent-bright);
+}
 
 /* ---------- avisos ---------- */
 .alerta {
@@ -218,7 +254,7 @@ mark { background: var(--marca-hl); color: inherit; border-radius: 3px; padding:
 .res-item:hover { border-color: var(--accent); }
 .res-topo { display: flex; align-items: center; gap: 9px; margin-bottom: 6px; flex-wrap: wrap; }
 .res-doc { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-           padding: 2px 7px; border-radius: 4px; background: var(--accent); color: #fff; }
+           padding: 2px 7px; border-radius: 4px; background: var(--accent); color: var(--accent-contraste); }
 .res-cap { font-size: .78rem; color: var(--text-muted); }
 .res-texto { font-family: var(--font-lei); font-size: .92rem; line-height: 1.65; color: var(--text-muted); margin: 0; }
 
@@ -317,6 +353,14 @@ mark { background: var(--marca-hl); color: inherit; border-radius: 3px; padding:
   font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 2px;
 }
 .link-btn:hover { opacity: .75; }
+/* Fica no fim e em voz baixa: quem lê a norma não deve tropeçar nisso, mas
+   quem estranhar uma palavra errada precisa poder conferir de quem é o erro. */
+.nota-fidelidade {
+  margin: 34px 0 0; padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: .82rem; line-height: 1.6; color: var(--text-muted);
+}
+.nota-fidelidade .link-btn { font-size: .82rem; }
+
 .erros-orig {
   margin: 0 0 22px; padding: 16px 18px;
   background: var(--surface); border: 1px solid var(--border);

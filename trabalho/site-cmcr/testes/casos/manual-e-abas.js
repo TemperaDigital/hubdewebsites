@@ -9,9 +9,30 @@ const { chromium } = require('../playwright-local');
   const ok = (n,c)=>{_n++; if(!c)_f++; console.log((c?'✓':'✗')+' '+n);};
 
   ok('4 abas', (await p.locator('.aba').count()) === 4);
+  // Estas precisam vir antes de qualquer clique: depois de o teste selecionar
+  // uma aba, verificar qual está selecionada só confirma o que ele mesmo fez.
+  const ordem = await p.locator('.aba').evaluateAll(as => as.map(a => a.dataset.doc));
+  ok('as abas estão na ordem Manual, Convenção, Regimento, Legislação (' + ordem.join(' · ') + ')',
+     JSON.stringify(ordem) === JSON.stringify(['manual','convencao','regimento','legislacao']));
+  // o atributo aria-selected está escrito no HTML e pode mentir se o JS abrir
+  // outro documento; o que vale é o que apareceu no painel
+  const abriuEm = (await p.locator('.doc-cabeca h2').textContent()).trim();
+  ok('a página abre no Manual do Proprietário (abriu em "' + abriuEm + '")',
+     abriuEm === 'Manual do Proprietário');
+
   await p.locator('.aba[data-doc="manual"]').click(); await p.waitForTimeout(350);
+  // Observações: curto, com a origem e o que o documento é.
+  // o texto de .alerta começa pelo ícone; o parágrafo é o que o morador lê
+  const obs = (await p.locator('.alerta p').first().textContent()).trim();
+  ok('o aviso do Manual começa por "Observações" (começa por "' + obs.slice(0, 24) + '…")',
+     obs.startsWith('Observações'));
+  ok('o aviso diz de onde veio o Manual', /entregue pela Construtora/i.test(obs));
+  ok('o aviso diz para que serve', /conhecer o próprio imóvel/i.test(obs));
+  ok('o aviso cabe em um parágrafo',
+     (await p.locator('.alerta p').count()) === 1);
   ok('cabeçalho do Manual', (await p.locator('.doc-cabeca').textContent()).includes('35 seções em 10 partes'));
-  ok('aviso "não é norma"', (await p.locator('.alerta').first().textContent()).includes('não é norma do condomínio'));
+
+  ok('aviso "não é norma"', (await p.locator('.alerta').first().textContent()).includes('Não é norma do condomínio'));
   ok('10 partes', (await p.locator('.cap').count()) === 10);
 
   // seção 6.1 com a tabela de garantias

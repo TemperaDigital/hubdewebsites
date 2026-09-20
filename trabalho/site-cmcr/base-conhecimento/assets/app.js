@@ -18,7 +18,7 @@
   /* documentos normativos: só entre eles faz sentido o aviso cruzado */
   var NORMATIVOS = ['regimento', 'convencao'];
 
-  var estado = { doc: 'regimento', termo: '', tema: null, abertos: {}, verErros: false, verDoc: false };
+  var estado = { doc: 'manual', termo: '', tema: null, abertos: {}, verErros: false, verDoc: false };
 
   function docAtivo() { return DOCS[estado.doc] || REG; }
 
@@ -323,44 +323,21 @@
       '</span><span>' + D.artigos.length + (estado.doc === 'manual' ? ' seções em ' : ' artigos em ') +
       D.capitulos.length + (estado.doc === 'manual' ? ' partes' : ' capítulos') + '</span></p></div>';
 
+    /* Como o texto foi conferido é anotação de bastidor: interessa a quem
+       manteve a base, não a quem veio saber se pode ter cachorro. O aviso do
+       Manual fica porque não é técnico — é jurídico: o documento não é norma. */
     if (D.naoNormativo) {
-      h += htmlAlerta('\ud83d\udd27',
-        '<p><strong>Este documento não é norma do condomínio.</strong> É o manual de uso e manutenção ' +
-        'entregue pela Construtora. Quem estabelece regras de convivência e penalidades são a Convenção ' +
-        'e o Regimento Interno.</p>' +
-        '<p>O Manual vale sobretudo pelos <strong>prazos de garantia</strong> (Seção 6.1), pelos cuidados ' +
-        'de manutenção de cada sistema e pelo caminho da assistência técnica.</p>' +
-        (D.notaConferencia ? '<p>' + esc(D.notaConferencia) + '</p>' : ''));
-    } else if (D.confiabilidade === 'conferido') {
-      h += htmlAlerta('\u2705',
-        '<p><strong>Texto conferido.</strong> ' + (D.notaConferencia
-          ? esc(D.notaConferencia)
-          : 'Os ' + D.artigos.length + ' artigos foram lidos por dois motores de OCR independentes e, nos ' +
-            'pontos em que discordaram, conferidos diretamente na imagem do documento registrado.') + '</p>' +
-        ((D.errosDoOriginal || []).length
-          ? '<p>A redação reproduz o original, inclusive onde o próprio documento tem erro de digitação. ' +
-            '<button class="link-btn" type="button" id="ver-erros">Ver os ' + D.errosDoOriginal.length +
-            ' pontos em que o original diverge da norma culta</button></p>'
-          : ''));
-    } else {
-      h += htmlAlerta('\u26a0\ufe0f',
-        '<p><strong>Texto em revisão.</strong> Extraído por reconhecimento óptico (OCR) do documento escaneado. ' +
-        'A conferência página a página ainda não foi concluída.</p>');
+      h += htmlAlerta('\u2139\ufe0f',
+        '<p><strong>Observações.</strong> Manual de uso e manutenção entregue pela Construtora junto ' +
+        'com as chaves. <strong>Não é norma do condomínio:</strong> serve para o proprietário conhecer ' +
+        'o próprio imóvel — os sistemas da unidade, os cuidados de manutenção e os prazos de garantia. ' +
+        'As regras de convivência e as penalidades estão na Convenção e no Regimento Interno.</p>');
     }
 
     (D.lacunas || []).forEach(function (l) {
       h += '<p class="lacuna"><strong>' + (l.n ? 'Art. ' + l.n + 'º — texto ausente.' : 'Trecho ausente no escaneamento.') +
         '</strong> ' + esc(l.motivo) + '</p>';
     });
-
-    if (estado.verErros && (D.errosDoOriginal || []).length) {
-      h += '<div class="erros-orig"><h3>Divergências presentes no documento original</h3>' +
-        '<p>Reproduzidas fielmente nesta base. Não são erros de leitura.</p><dl>';
-      D.errosDoOriginal.forEach(function (e) {
-        h += '<dt>' + esc(e.onde) + '</dt><dd>' + esc(e.texto) + ' <span>' + esc(e.nota) + '</span></dd>';
-      });
-      h += '</dl></div>';
-    }
 
     h += '<p class="preambulo">' + destacar(D.preambulo, alvos) + '</p>';
 
@@ -393,6 +370,23 @@
     });
 
     if (D.fecho) h += '<p class="fecho">' + destacar(D.fecho, alvos) + '</p>';
+
+    /* Vai no fim, em voz baixa: só serve a quem estranhar uma palavra errada e
+       precisar saber que o erro é do papel, não da digitação desta base. */
+    if ((D.errosDoOriginal || []).length) {
+      h += '<p class="nota-fidelidade">Esta base reproduz o texto registrado em cartório, ' +
+        'inclusive onde o próprio documento tem erro de digitação. ' +
+        '<button class="link-btn" type="button" id="ver-erros">Ver os ' +
+        D.errosDoOriginal.length + ' pontos</button></p>';
+      if (estado.verErros) {
+        h += '<div class="erros-orig"><h3>Divergências presentes no documento original</h3>' +
+          '<p>Reproduzidas fielmente nesta base. Não são erros de leitura.</p><dl>';
+        D.errosDoOriginal.forEach(function (e) {
+          h += '<dt>' + esc(e.onde) + '</dt><dd>' + esc(e.texto) + ' <span>' + esc(e.nota) + '</span></dd>';
+        });
+        h += '</dl></div>';
+      }
+    }
     return h;
   }
 

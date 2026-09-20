@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Base de conhecimento do Condomínio Monte Carlo Residence: consulta à Convenção, ao Regimento Interno e à legislação condominial.">
+<meta name="description" content="Normas e informativos do Condomínio Monte Carlo Residence: consulta à Convenção, ao Regimento Interno e à legislação condominial.">
 <meta name="robots" content="noindex, nofollow">
-<title>Base de Conhecimento — Monte Carlo Residence</title>
+<title>Normas e Informativos — Monte Carlo Residence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/favicon-vinho.png" type="image/png">
 <link rel="stylesheet" href="assets/estilo.css">
 </head>
 <body>
@@ -18,15 +19,24 @@
 <header class="topo">
   <div class="wrap topo-inner">
     <div class="marca">
-      <span class="marca-icone" aria-hidden="true">MC</span>
-      <div>
-        <p class="marca-kicker">Condomínio Monte Carlo Residence</p>
-        <h1>Base de Conhecimento</h1>
-      </div>
+      <a class="marca-logo" href="../" aria-label="Monte Carlo Residence — página do condomínio">
+        <img src="../assets/logo-monte-carlo-vinho.png"
+             srcset="../assets/logo-monte-carlo-vinho@1x.png 394w, ../assets/logo-monte-carlo-vinho.png 788w"
+             sizes="(max-width: 620px) 156px, 208px"
+             alt="Monte Carlo Residence" width="788" height="234">
+      </a>
+      <h1>Normas e Informativos</h1>
     </div>
-    <button id="btn-tema" class="btn-icone" type="button" aria-label="Alternar tema claro e escuro" title="Alternar tema">
-      <span aria-hidden="true">◑</span>
-    </button>
+    <div class="topo-acoes">
+      <a class="voltar-site" href="../">
+        <span aria-hidden="true">←</span>
+        <span class="voltar-longo">Página do condomínio</span>
+        <span class="voltar-curto">Início</span>
+      </a>
+      <button id="btn-tema" class="btn-icone" type="button" aria-label="Alternar tema claro e escuro" title="Alternar tema">
+        <span aria-hidden="true">◑</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -49,9 +59,9 @@
   </section>
 
   <nav class="abas" id="abas" role="tablist" aria-label="Documentos">
-    <button class="aba" role="tab" data-doc="regimento" aria-selected="true">Regimento Interno</button>
+    <button class="aba" role="tab" data-doc="manual" aria-selected="true">Manual do Proprietário</button>
     <button class="aba" role="tab" data-doc="convencao" aria-selected="false">Convenção</button>
-    <button class="aba" role="tab" data-doc="manual" aria-selected="false">Manual do Proprietário</button>
+    <button class="aba" role="tab" data-doc="regimento" aria-selected="false">Regimento Interno</button>
     <button class="aba" role="tab" data-doc="legislacao" aria-selected="false">Legislação</button>
   </nav>
 

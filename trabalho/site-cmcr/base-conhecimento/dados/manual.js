@@ -2851,7 +2851,7 @@ window.DADOS_MANUAL = {
    "id": "garantias",
    "titulo": "Prazos de garantia da Construtora",
    "origem": "Seção 6.1",
-   "aviso": "Quadro conferido diretamente nas imagens das páginas 14 e 15 do manual. Os prazos contam a partir da entrega das chaves. Para equipamentos e serviços, prevalece a garantia dada pelo fornecedor.",
+   "aviso": "Os prazos contam a partir da entrega das chaves. Para equipamentos e serviços, prevalece a garantia dada pelo fornecedor.",
    "colunas": [
     "Item",
     "Garantia"
@@ -2972,7 +2972,7 @@ window.DADOS_MANUAL = {
    "id": "materiais",
    "titulo": "Especificações de materiais",
    "origem": "Seção 10",
-   "aviso": "Quadro conferido diretamente nas imagens do manual. A referência do material é o dado mais durável daqui: serve para repor peça igual numa reforma, mesmo que o fornecedor tenha mudado. Os telefones e e-mails dos fornecedores constavam do original e não foram publicados; estão no manual impresso.",
+   "aviso": "A referência do material é o dado mais durável daqui: serve para repor peça igual numa reforma, mesmo que o fornecedor tenha mudado. Os telefones e e-mails dos fornecedores constavam do original e não foram publicados; estão no manual impresso.",
    "longa": true,
    "colunas": [
     "Tipo",

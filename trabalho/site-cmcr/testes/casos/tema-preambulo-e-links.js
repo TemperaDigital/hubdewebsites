@@ -15,6 +15,11 @@ const { chromium } = require('../playwright-local');
   const erros=[]; p.on('pageerror', e=>erros.push(e.message));
   const URL = require('../alvo').exigir('BASE_URL');
   await p.goto(URL, {waitUntil:'domcontentloaded'}); await p.waitForTimeout(450);
+
+  // A aba de partida é o Manual. Nenhum caso deve depender disso: quem precisa
+  // de um documento escolhe a aba, senão reordenar as abas quebra a suíte
+  // inteira por um motivo que nada tem a ver com o que cada caso verifica.
+  await p.locator('.aba[data-doc="regimento"]').click(); await p.waitForTimeout(400);
   let _n=0, _f=0;
   const ok=(n,c)=>{_n++; if(!c)_f++; console.log((c?'✓':'✗')+' '+n);};
 
@@ -66,6 +71,27 @@ const { chromium } = require('../playwright-local');
   }));
   ok('voltar ao tema anterior também grava ('+terceiro.tema+')',
      terceiro.tema !== depois && terceiro.salvo === terceiro.tema);
+
+  // O tema escuro tinha um defeito silencioso: as regras que usam a cor de
+  // destaque como FUNDO fixavam texto branco, e no escuro esse fundo fica
+  // claro. Dava 2,10:1. Agora a cor do texto acompanha o tema, e isto guarda.
+  await p.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
+  await p.fill('#busca', 'sindico'); await p.waitForTimeout(340);
+  const contrasteEscuro = await p.locator('.res-doc').first().evaluate(function (el) {
+    function canal(v) { v = v / 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }
+    function lum(txt) {
+      var m = txt.match(/(\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+      if (!m) return null;
+      return 0.2126 * canal(+m[1]) + 0.7152 * canal(+m[2]) + 0.0722 * canal(+m[3]);
+    }
+    var e = getComputedStyle(el);
+    var a = lum(e.backgroundColor), b = lum(e.color);
+    if (a === null || b === null) return -1;
+    return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  });
+  ok('no tema escuro o texto sobre a cor de destaque continua legível (mediu ' +
+     contrasteEscuro.toFixed(2) + ':1)', contrasteEscuro >= 4.5);
+  await p.fill('#busca', ''); await p.waitForTimeout(300);
 
   // --- links externos ----------------------------------------------------
   await p.locator('.aba[data-doc="legislacao"]').click(); await p.waitForTimeout(400);

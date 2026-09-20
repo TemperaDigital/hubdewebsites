@@ -9,7 +9,13 @@ const { chromium } = require('../playwright-local');
   const ok=(n,c)=>{_n++; if(!c)_f++; console.log((c?'✓':'✗')+' '+n);};
 
   await p.locator('.aba[data-doc="manual"]').click(); await p.waitForTimeout(350);
-  ok('Manual: aviso não-normativo + nota de conferência', (await p.locator('.alerta').first().textContent()).includes('não é norma do condomínio') && (await p.locator('.alerta').first().textContent()).includes('conferidos diretamente nas imagens'));
+  // O aviso de que o Manual não é norma fica: não é nota técnica, é jurídica.
+  // O parágrafo de procedência que vinha colado nele saiu.
+  const alerta = await p.locator('.alerta').first().textContent();
+  ok('Manual mantém o aviso de que não é norma', alerta.includes('Não é norma do condomínio'));
+  ok('Manual sem nota técnica de procedência',
+     !/conferid[ao]s? diretamente|motores de OCR|\bOCR\b|\bdpi\b/i
+       .test(await p.locator('#painel').innerText()));
   ok('sem avisos de tabela perdida', (await p.locator('.aviso-tabela').count()) === 0);
 
   // Seções 8 e 9: listas de contato removidas, com nota explicando a ausência

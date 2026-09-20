@@ -24,21 +24,29 @@ const URL = require('../alvo').exigir('HOME_URL');
   const distorcao = Math.abs((m.w / m.h) - (m.nw / m.nh));
   ok('logotipo não sai esticado (proporção '+(m.w/m.h).toFixed(3)+
      ' contra '+(m.nw/m.nh).toFixed(3)+')', distorcao < 0.01);
-  // naturalWidth NÃO é a largura do arquivo quando o srcset usa descritores w:
-  // o navegador já a divide pela densidade que escolheu. Para saber a
-  // resolução de verdade é preciso carregar o arquivo escolhido sozinho.
+  // O navegador escolhe a fonte conforme a densidade da tela, então exigir 2x
+  // do arquivo ESCOLHIDO só vale quando o teste roda a 2x — mede a densidade
+  // do teste, não a qualidade da página. O que importa é haver no srcset um
+  // arquivo grande o bastante para uma tela retina, e o escolhido cobrir a
+  // densidade atual.
   const res = await logo.evaluate(function (i) {
+    var maior = (i.srcset || '').split(',')
+      .map(function (c) { var m = c.trim().match(/(\d+)w$/); return m ? +m[1] : 0; })
+      .reduce(function (a, b) { return Math.max(a, b); }, 0);
     var src = i.currentSrc || i.src;
     return new Promise(function (ok) {
       var im = new Image();
-      im.onload = function () { ok({ arq: src.split('/').pop(), px: im.naturalWidth, exib: i.width }); };
-      im.onerror = function () { ok({ arq: src.split('/').pop(), px: 0, exib: i.width }); };
+      im.onload = function () { ok({ maior: maior, escolhido: im.naturalWidth, exib: i.width, dpr: window.devicePixelRatio }); };
+      im.onerror = function () { ok({ maior: maior, escolhido: 0, exib: i.width, dpr: window.devicePixelRatio }); };
       im.src = src;
     });
   });
-  ok('logotipo tem resolução para tela retina ('+res.arq+': '+res.px+
-     'px de arquivo para '+Math.round(res.exib)+'px exibidos)',
-     res.px >= res.exib * 2);
+  ok('logotipo: o srcset oferece resolução para tela retina (' + res.maior +
+     'w disponível para ' + Math.round(res.exib) + 'px exibidos)',
+     res.maior >= res.exib * 2);
+  ok('logotipo: o arquivo escolhido cobre a densidade desta tela (' + res.escolhido +
+     'px para ' + Math.round(res.exib) + '×' + res.dpr + ')',
+     res.escolhido >= res.exib * res.dpr);
   ok('logotipo ocupa o cabeçalho sem exagero ('+Math.round(m.w)+'px)',
      m.w >= 280 && m.w <= 340);
 
@@ -49,7 +57,7 @@ const URL = require('../alvo').exigir('HOME_URL');
 
   // link real para a base
   const links = await p.locator('a[href="base-conhecimento/"]').count();
-  ok(`${links} links para a Base de Conhecimento`, links >= 3);
+  ok(`${links} links para as Normas e Informativos`, links >= 3);
   const resp = await p.request.get(URL + 'base-conhecimento/');
   ok('o link resolve de verdade (HTTP '+resp.status()+')', resp.status() === 200);
 
