@@ -3257,5 +3257,5 @@ window.DADOS_MANUAL = {
  "lacunas": [],
  "apendices": [],
  "errosDoOriginal": [],
- "notaConferencia": "Os quadros do manual — prazos de garantia, autores dos projetos, fornecedores e especificações de materiais — foram conferidos diretamente nas imagens das páginas, porque o OCR não preserva linhas e colunas. O texto corrido das demais seções vem de uma única leitura óptica."
+ "notaConferencia": "O texto foi lido duas vezes de forma independente, a 300 e a 400 dpi e com segmentações diferentes. As duas leituras coincidem em 15 das 16 medidas e prazos e nas 118 negações e proibições — a única diferença estava numa linha do quadro de garantias que a leitura de menor resolução perdeu. Os quatro quadros do manual foram conferidos diretamente nas imagens das páginas, porque o OCR não preserva linhas e colunas."
 };

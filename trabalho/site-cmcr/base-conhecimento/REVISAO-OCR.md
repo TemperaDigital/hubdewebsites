@@ -122,10 +122,18 @@ houve a conferência página a página na imagem.
 
 ## 5. Manual do Proprietário
 
-**Situação: publicado, em revisão.**
+**Situação: publicado e conferido.**
 
 O *Manual de Uso e Manutenção* entregue pela B&C Construções, em PDF de 22 páginas sem
-camada de texto. Lido com `tesseract` a 300 dpi. Resultado: **35 seções em 10 partes**.
+camada de texto. Resultado: **35 seções em 10 partes**.
+
+Como o arquivo não traz camada de OCR, a segunda leitura não pôde vir de outro motor. Foi
+feita com o mesmo `tesseract` em outra resolução e outra segmentação — 400 dpi contra
+300 dpi. É uma conferência mais fraca do que a do Regimento e da Convenção, onde dois
+motores diferentes compararam, mas ainda detecta instabilidade de leitura. As duas
+coincidiram em **15 das 16 medidas e prazos** e nas **118 negações e proibições**; a única
+diferença foi uma linha do quadro de garantias que a leitura de 300 dpi perdeu, e que a
+transcrição visual já trazia.
 
 O Manual **não é norma do condomínio** — a página avisa isso no topo. Quem estabelece regras
 de convivência e penalidades são a Convenção e o Regimento. O Manual vale pelos prazos de
