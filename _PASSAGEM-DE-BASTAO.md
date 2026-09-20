@@ -71,15 +71,150 @@ O que já foi descartado como fonte de recuperação:
 **Não apague sem o dono confirmar.** E não presuma nova fonte sem conferir
 conteúdo — foi presumir isso que causou o incidente de hoje.
 
-Onde ainda vale procurar, e ninguém procurou: **lixeira do Nextcloud, espelho
-no Google Drive via rclone, snapshot antigo do ZimaOS.** Essas três fontes são
-externas ao repositório e à pasta ao vivo — são as únicas que restam.
+Onde ainda vale procurar, atualizado em 20/09/2026 à noite pela instância do
+ZimaOS: das três fontes externas ao repositório e à pasta ao vivo, **duas já
+foram checadas e descartadas** — lixeira do ZimaOS (vazia; não é a lixeira
+por-arquivo do Nextcloud, é um recurso de sistema, checado via container root
+sem precisar de `sudo`) e snapshot btrfs do volume (`btrfs subvolume list`
+devolveu vazio — nunca existiu snapshot desse volume). **Só resta o espelho no
+Google Drive via `rclone`**, e esse está bloqueado agora por token expirado
+(`invalid_client`) — precisa o dono reautenticar local (`rclone authorize
+"drive"`, colar o token). Depois disso esgotado, só resta perguntar ao dono se
+existe cópia externa (pen drive, HD, máquina antiga).
 
 Ao conferir qualquer uma delas, **não aceite tamanho como prova**: use a
 varredura do item 5.1 ou compare o hash. Foi assim que a primeira tentativa de
 recuperação se convenceu de ter funcionado sem ter copiado nada.
 
-### 3.2. A causa não foi diagnosticada — pode reincidir
+### 3.1b. Onde cada arquivo estava — para procurar backup por pasta
+
+A pedido do dono, a lista completa dos 3.199 foi agrupada por pasta de
+origem, para orientar a busca por uma cópia boa. Resumo (conferido arquivo por
+arquivo, soma bate 3.199):
+
+| pasta | arquivos | situação |
+|---|---:|---|
+| `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/fontawesome-free-6.7.2-desktop` | 2.067 | **não precisa de backup** — pacote público do Font Awesome |
+| `trabalho/01_projetos/prestacao-contas/prestacao_contas-master/…/phpmailer605` | 58 | **não precisa de backup** — biblioteca pública PHPMailer |
+| `trabalho/01_projetos/prestacao-contas/prestacao_contas-master` (resto) | 362 | procurar backup — código próprio, `README.md` também zerado |
+| `trabalho/01_projetos/prestacao-contas/MobiriseOnlineBuilder_files` | 224 | baixa prioridade — página salva de site de terceiro |
+| `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_2` | 110 | procurar backup — material de aula |
+| `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Pagina de codigos de retorno` | 99 | procurar backup — material de aula |
+| `trabalho/02_imersoes_cursos/02_Alura_Textos/9 - Controle de Fluxos` | 70 | baixa prioridade — página salva, revisitável no site da Alura |
+| `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_5` | 69 | procurar backup — material de aula |
+| `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/spotify-imersao-main` | 33 | procurar backup — projeto de aula |
+| `trabalho/site-cmcr/Fonts do Condominio` | 11 | procurar backup — fontes do logotipo (AC Honey Bee, Sogate Script) |
+| ver lista abaixo | 96 | procurar backup — espalhados em ~20 pastas pequenas |
+
+**Nota de segurança:** dois nomes de arquivo na lista de 96 sugerem
+credencial — `chaveapi.txt` e `Google_API.env`. Conteúdo zerado hoje, então
+não é vazamento ativo. **Se aparecerem com conteúdo numa cópia de backup, não
+recolocar direto no repositório** — confirmar se ainda são válidos e revogar
+antes, mesmo procedimento do incidente de 05/09.
+
+<details>
+<summary>Os 96 arquivos restantes, caminho completo</summary>
+
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Agentes de IA/Alura - Agentes de IA - Anotac. Importantes Set 2025.docx`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Agentes de IA/Python-Masterclass 1.pdf`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/.gitignore`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Certificado de Conclusão/Alexandre Guerra.html`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Certificado de Conclusão/Alexandre Guerra_files/188a969e-a1b1-4ffc-a033-83a68fa2bfcc.png`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Certificado de Conclusão/Alexandre Guerra_files/alura.webp`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Certificado de Conclusão/Alexandre Guerra_files/c639fa0ccfa0d5a2b22a2d7af3553730.png`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Certificado de Conclusão/Alexandre Guerra_files/immersionCertificate.15a8345a.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Certificado de Conclusão/Alexandre Guerra_files/newCertificateSignature.4b57f063.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Certificado de Conclusão/Alexandre Guerra_files/reset.6bc915ff.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Certificado de Conclusão/Alexandre Guerra_files/water-mark-bottom.png`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Certificado de Conclusão/Certificado de BackEnd.pdf`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 1/.gitignore`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 1/package-lock.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 1/package.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 1/server.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 2/server.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 3/.gitignore`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 3/package-lock.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 3/package.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 3/server.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/package-lock.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/package.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/server.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/src/config/dbConfig.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/src/controllers/postsController.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/src/models/postsModel.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/src/routes/postsRoutes.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/upload-storage-main/upload.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/uploads/67226e3aab047d160d5cd3c5.png`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 4/uploads/ju.png`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 5/package-lock.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 5/package.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 5/server.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 5/services.sh`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 5/src/controllers/postsController.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 5/src/models/postsModel.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 5/src/routes/postsRoutes.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 5/src/services/geminiService.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/Repositorios/Aula 5/uploads/67227f381bd4e9807e9e171f.png`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/chaveapi.txt`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/package-lock.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/package.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/server copy.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Alura - B.End/server-Alterado pelo gpt32k.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/Desafios/script-desafio4-.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_1/fontawesome.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_1/index.html`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_1/solid.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_1/style.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_3/index.html`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_3/src/styles/main-content.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_3/src/styles/reset.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_3/src/styles/sidebar-footer.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_3/src/styles/vars.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_4/api-artists/artists.json`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_4/index.html`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_4/script.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_4/src/styles/main-content.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/FrontEnd/imersao-front-aula_4/src/styles/media-queries.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/HTML_CSS/Aulas Introdutórias de HTML e CSS.docx`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/HTML_CSS/Portifolio-HTML-e-CSS-aula_3/Imagem.png`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/HTML_CSS/Portifolio-HTML-e-CSS-aula_3/index.html`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/HTML_CSS/Portifolio-HTML-e-CSS-aula_4/Portifolio-HTML-e-CSS-aula_4/index.html`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/HTML_CSS/Portifolio-HTML-e-CSS-aula_4/Portifolio-HTML-e-CSS-aula_4/style.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/HTML_CSS/VS Code Extensoes mais usadas.docx`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/HTML_CSS/html-logo-main/html-logo-main/html.png`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao 10  - IA com Gemini/Criando_Agentes/Agentes_Codigos_Explicados.ipynb`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao 10  - IA com Gemini/Criando_Agentes/Google_API.env`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao 10  - IA com Gemini/Criando_Agentes/agentes_IA_refatorado.ipynb`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao 10  - IA com Gemini/Criando_Agentes/agentes_de_ia_versao3.ipynb`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao 10  - IA com Gemini/Criando_Agentes/meu primeiroagenteIA.ipynb`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao 10  - IA com Gemini/Criando_Agentes/meusegundoagenteIA.ipynb`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao 10  - IA com Gemini/Criando_Agentes/quarto.ipynb`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao 10  - IA com Gemini/Criando_Agentes/readme_1.md`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao 10  - IA com Gemini/Criando_Agentes/terceiro.py`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Imersao Alura Out.2025/Aula 2.docx`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Textos/Engenharia de Prompt e Gems_.pdf`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/Textos/Primeiros passos em Inteligência Artificial (IA) _ Alura.pdf`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/game5_vfernanda_imers-o/LICENSE.txt`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/game5_vfernanda_imers-o/README.md`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/game5_vfernanda_imers-o/dist/index.html`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/game5_vfernanda_imers-o/dist/script.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/game5_vfernanda_imers-o/dist/style.css`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/game5_vfernanda_imers-o/src/index.html`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/game5_vfernanda_imers-o/src/script.js`
+- `trabalho/02_imersoes_cursos/02_Alura_Textos/game5_vfernanda_imers-o/src/style.css`
+- `trabalho/02_imersoes_cursos/DEVOPs_30Jun25/Imersão Cloud DevOps [Guia de Mergulho].pdf`
+- `trabalho/02_imersoes_cursos/PDFs_Aula 2/Política de Reembolsos (Viagens e Despesas).pdf`
+- `trabalho/02_imersoes_cursos/PDFs_Aula 2/Política de Uso de E-mail e Segurança da Informação.pdf`
+- `trabalho/02_imersoes_cursos/PDFs_Aula 2/Políticas de Home Office.pdf`
+- `trabalho/02_imersoes_cursos/agentesIA/README.md`
+- `trabalho/02_imersoes_cursos/agentesIA/versao2AIA.ipynb`
+- `trabalho/02_imersoes_cursos/printsdetela/Erro de dados.png`
+- `trabalho/02_imersoes_cursos/printsdetela/Print da Tela do VS Studio.png`
+- `trabalho/site-cmcr/pagina1.html`
+
+</details>
+
+
 
 142 MB declarados contra 17 MB ocupados em disco: são **arquivos esparsos**,
 cujos blocos de dados nunca chegaram a ser gravados. Assinatura de falha entre
