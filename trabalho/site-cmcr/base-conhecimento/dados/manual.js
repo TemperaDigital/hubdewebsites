@@ -2874,118 +2874,117 @@ window.DADOS_MANUAL = {
    "origem": "Seção 6.1",
    "aviso": "Quadro conferido diretamente nas imagens das páginas 14 e 15 do manual. Os prazos contam a partir da entrega das chaves. Para equipamentos e serviços, prevalece a garantia dada pelo fornecedor.",
    "colunas": [
-    "#",
     "Item",
     "Garantia"
    ],
    "linhas": [
     {
-     "item": "",
-     "local": "Impermeabilizações",
-     "dia": "",
-     "hora": "03 anos"
+     "c": [
+      "Impermeabilizações",
+      "03 anos"
+     ]
     },
     {
-     "item": "",
-     "local": "Revestimentos das fachadas",
-     "dia": "",
-     "hora": "03 anos"
+     "c": [
+      "Revestimentos das fachadas",
+      "03 anos"
+     ]
     },
     {
-     "item": "",
-     "local": "Vazamentos internos",
-     "dia": "",
-     "hora": "02 anos"
+     "c": [
+      "Vazamentos internos",
+      "02 anos"
+     ]
     },
     {
-     "item": "",
-     "local": "Trinca no reboco das paredes",
-     "dia": "",
-     "hora": "02 anos"
+     "c": [
+      "Trinca no reboco das paredes",
+      "02 anos"
+     ]
     },
     {
-     "item": "",
-     "local": "Cubas de pias e lavatórios soltos",
-     "dia": "",
-     "hora": "01 ano"
+     "c": [
+      "Cubas de pias e lavatórios soltos",
+      "01 ano"
+     ]
     },
     {
-     "item": "",
-     "local": "Portas empenadas",
-     "dia": "",
-     "hora": "01 ano"
+     "c": [
+      "Portas empenadas",
+      "01 ano"
+     ]
     },
     {
-     "item": "",
-     "local": "Eletrodutos obstruídos",
-     "dia": "",
-     "hora": "01 ano"
+     "c": [
+      "Eletrodutos obstruídos",
+      "01 ano"
+     ]
     },
     {
-     "item": "",
-     "local": "Instalações elétricas em geral",
-     "dia": "",
-     "hora": "01 ano"
+     "c": [
+      "Instalações elétricas em geral",
+      "01 ano"
+     ]
     },
     {
-     "item": "",
-     "local": "Acerto e vedações de esquadrias externas",
-     "dia": "",
-     "hora": "01 ano"
+     "c": [
+      "Acerto e vedações de esquadrias externas",
+      "01 ano"
+     ]
     },
     {
-     "item": "",
-     "local": "Cerâmicas, pisos soltos e rejuntamento",
-     "dia": "",
-     "hora": "01 ano"
+     "c": [
+      "Cerâmicas, pisos soltos e rejuntamento",
+      "01 ano"
+     ]
     },
     {
-     "item": "",
-     "local": "Entupimento em tubulações hidro-sanitárias (defeito de construção)",
-     "dia": "",
-     "hora": "06 meses"
+     "c": [
+      "Entupimento em tubulações hidro-sanitárias (defeito de construção)",
+      "06 meses"
+     ]
     },
     {
-     "item": "",
-     "local": "Peças soltas das instalações",
-     "dia": "",
-     "hora": "06 meses"
+     "c": [
+      "Peças soltas das instalações",
+      "06 meses"
+     ]
     },
     {
-     "item": "",
-     "local": "Regulagem de válvulas",
-     "dia": "",
-     "hora": "06 meses"
+     "c": [
+      "Regulagem de válvulas",
+      "06 meses"
+     ]
     },
     {
-     "item": "",
-     "local": "Bolsas de vasos sanitários",
-     "dia": "",
-     "hora": "06 meses"
+     "c": [
+      "Bolsas de vasos sanitários",
+      "06 meses"
+     ]
     },
     {
-     "item": "",
-     "local": "Vazamento nas partes hidráulicas aparentes",
-     "dia": "",
-     "hora": "06 meses"
+     "c": [
+      "Vazamento nas partes hidráulicas aparentes",
+      "06 meses"
+     ]
     },
     {
-     "item": "",
-     "local": "Pintura de paredes e forro de gesso",
-     "dia": "",
-     "hora": "06 meses"
+     "c": [
+      "Pintura de paredes e forro de gesso",
+      "06 meses"
+     ]
     },
     {
-     "item": "",
-     "local": "Mau cheiro (mesmo que as caixas de passagem estejam limpas)",
-     "dia": "",
-     "hora": "06 meses"
+     "c": [
+      "Mau cheiro (mesmo que as caixas de passagem estejam limpas)",
+      "06 meses"
+     ]
     },
     {
-     "item": "",
-     "local": "Nas vistorias de entrega",
-     "dia": "",
-     "hora": "Defeito aparente"
+     "c": [
+      "Nas vistorias de entrega",
+      "Defeito aparente"
+     ]
     }
    ]
   }

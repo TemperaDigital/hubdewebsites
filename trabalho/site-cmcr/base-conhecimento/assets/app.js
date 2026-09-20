@@ -184,29 +184,38 @@
     return h + '</article>';
   }
 
+  /* Tabelas usam um formato único: colunas[] de rótulos e linhas[] de {c:[células]}.
+     Uma linha com obs:true ocupa a largura toda. A primeira célula vira cabeçalho da
+     linha e é omitida quando repete a da linha anterior, como nos quadros originais. */
   function htmlTabela(id, alvos) {
-    var t = (docAtivo().tabelas || []).filter(function (x) { return x.id === id; })[0];
+    var D = docAtivo();
+    var t = (D.tabelas || []).filter(function (x) { return x.id === id; })[0];
     if (!t) return '';
-    var temMeio = t.linhas.some(function (l) { return !l.obs && l.dia; });
-    var cols = t.colunas.slice(1);
-    if (!temMeio) cols = [cols[0], cols[cols.length - 1]];
-    var h = '<div class="tabela-box"><table class="tabela"><caption class="sr-only">' + esc(t.titulo) + '</caption><thead><tr>';
-    cols.forEach(function (c) { h += '<th scope="col">' + esc(c) + '</th>'; });
+    var h = '<div class="tabela-box' + (t.longa ? ' tabela-longa' : '') + '">' +
+      '<table class="tabela"><caption class="sr-only">' + esc(t.titulo) + '</caption><thead><tr>';
+    t.colunas.forEach(function (c, i) {
+      h += '<th scope="col"' + (i ? '' : ' class="col-1"') + '>' + esc(c) + '</th>';
+    });
     h += '</tr></thead><tbody>';
     var anterior = null;
     t.linhas.forEach(function (l) {
       if (l.obs) {
-        h += '<tr class="linha-obs"><td colspan="' + cols.length + '"><strong>Observação</strong> — ' + destacar(l.hora, alvos) + '</td></tr>';
+        h += '<tr class="linha-obs"><td colspan="' + t.colunas.length + '"><strong>Observação</strong> — ' +
+          destacar(l.c[0], alvos) + '</td></tr>';
+        anterior = null;
         return;
       }
-      var novo = l.local !== anterior;
-      h += '<tr' + (novo ? ' class="linha-nova"' : '') + '>' +
-        '<th scope="row">' + (novo ? destacar(l.local, alvos) + (l.item ? ' <span class="item-n">' + esc(l.item) + '</span>' : '') : '') + '</th>' +
-        (temMeio ? '<td>' + destacar(l.dia, alvos) + '</td>' : '') +
-        '<td class="hora">' + destacar(l.hora, alvos) + '</td></tr>';
-      anterior = l.local;
+      var novo = l.c[0] !== anterior;
+      h += '<tr' + (novo ? ' class="linha-nova"' : '') + '>';
+      l.c.forEach(function (cel, i) {
+        if (i === 0) h += '<th scope="row">' + (novo ? destacar(cel, alvos) : '') + '</th>';
+        else h += '<td' + (/^[\d.,]+$|^\d+\s*(anos?|meses|h)/.test(cel) ? ' class="num"' : '') + '>' +
+          destacar(cel, alvos) + '</td>';
+      });
+      h += '</tr>';
+      anterior = l.c[0];
     });
-    h += '</tbody></table><p class="tabela-aviso">' + esc(t.aviso) + '</p></div>';
+    h += '</tbody></table>' + (t.aviso ? '<p class="tabela-aviso">' + esc(t.aviso) + '</p>' : '') + '</div>';
     return h;
   }
 
@@ -232,8 +241,10 @@
         'de manutenção de cada sistema e pelo caminho da assistência técnica.</p>');
     } else if (D.confiabilidade === 'conferido') {
       h += htmlAlerta('\u2705',
-        '<p><strong>Texto conferido.</strong> Os ' + D.artigos.length + ' artigos foram lidos por dois motores de OCR ' +
-        'independentes e, nos pontos em que discordaram, conferidos diretamente na imagem do documento registrado.</p>' +
+        '<p><strong>Texto conferido.</strong> ' + (D.notaConferencia
+          ? esc(D.notaConferencia)
+          : 'Os ' + D.artigos.length + ' artigos foram lidos por dois motores de OCR independentes e, nos ' +
+            'pontos em que discordaram, conferidos diretamente na imagem do documento registrado.') + '</p>' +
         ((D.errosDoOriginal || []).length
           ? '<p>A redação reproduz o original, inclusive onde o próprio documento tem erro de digitação. ' +
             '<button class="link-btn" type="button" id="ver-erros">Ver os ' + D.errosDoOriginal.length +

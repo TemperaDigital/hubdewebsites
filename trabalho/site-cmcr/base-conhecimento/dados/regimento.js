@@ -2478,91 +2478,97 @@ window.DADOS_REGIMENTO = {
    "origem": "Art. 2º, inciso XVI",
    "aviso": "Tabela conferida diretamente na imagem da página 5 do documento registrado. A observação do Salão de Festas está incompleta no próprio original, que diz apenas “o som ambiente (Sudema)”, sem o verbo.",
    "colunas": [
-    "Item",
     "Local / Atividade",
     "Dia da semana",
     "Horário"
    ],
    "linhas": [
     {
-     "item": "1",
-     "local": "Salão de Festas",
-     "dia": "Domingo a quinta-feira",
-     "hora": "09h às 00h"
+     "c": [
+      "Salão de Festas",
+      "Domingo a quinta-feira",
+      "09h às 00h"
+     ]
     },
     {
-     "item": "",
-     "local": "Salão de Festas",
-     "dia": "Sexta-feira e sábado",
-     "hora": "09h às 02h"
+     "c": [
+      "Salão de Festas",
+      "Sexta-feira e sábado",
+      "09h às 02h"
+     ]
     },
     {
-     "item": "",
-     "local": "Salão de Festas",
-     "dia": "OBS",
-     "hora": "Em qualquer dos dias a partir das 22h, o som ambiente (Sudema). Após o horário limite de utilização do espaço as portas e janelas devem ser fechadas pelo usuário do espaço.",
+     "c": [
+      "Em qualquer dos dias a partir das 22h, o som ambiente (Sudema). Após o horário limite de utilização do espaço as portas e janelas devem ser fechadas pelo usuário do espaço."
+     ],
      "obs": true
     },
     {
-     "item": "2",
-     "local": "Espaço Gourmet / Churrasqueira",
-     "dia": "Sexta-feira e sábado",
-     "hora": "09h às 00h"
+     "c": [
+      "Espaço Gourmet / Churrasqueira",
+      "Sexta-feira e sábado",
+      "09h às 00h"
+     ]
     },
     {
-     "item": "",
-     "local": "Espaço Gourmet / Churrasqueira",
-     "dia": "Domingo a quinta-feira",
-     "hora": "09h às 22h"
+     "c": [
+      "Espaço Gourmet / Churrasqueira",
+      "Domingo a quinta-feira",
+      "09h às 22h"
+     ]
     },
     {
-     "item": "3",
-     "local": "Brinquedoteca — Espaço Kids",
-     "dia": "Sexta-feira e sábado",
-     "hora": "08h às 02h"
+     "c": [
+      "Brinquedoteca — Espaço Kids",
+      "Sexta-feira e sábado",
+      "08h às 02h"
+     ]
     },
     {
-     "item": "",
-     "local": "Brinquedoteca — Espaço Kids",
-     "dia": "Domingo a quinta",
-     "hora": "08h às 00h"
+     "c": [
+      "Brinquedoteca — Espaço Kids",
+      "Domingo a quinta",
+      "08h às 00h"
+     ]
     },
     {
-     "item": "4",
-     "local": "Piscina",
-     "dia": "Domingo a domingo",
-     "hora": "08h às 22h"
+     "c": [
+      "Piscina",
+      "Domingo a domingo",
+      "08h às 22h"
+     ]
     },
     {
-     "item": "5",
-     "local": "Academia",
-     "dia": "Domingo a domingo",
-     "hora": "24 horas"
+     "c": [
+      "Academia",
+      "Domingo a domingo",
+      "24 horas"
+     ]
     },
     {
-     "item": "",
-     "local": "Academia",
-     "dia": "OBS",
-     "hora": "A partir das 22h o som deverá ser desligado (as atividades deverão ser silenciosas no horário).",
+     "c": [
+      "A partir das 22h o som deverá ser desligado (as atividades deverão ser silenciosas no horário)."
+     ],
      "obs": true
     },
     {
-     "item": "6",
-     "local": "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
-     "dia": "Segunda a sexta-feira",
-     "hora": "08h às 12h e 13h às 17h"
+     "c": [
+      "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
+      "Segunda a sexta-feira",
+      "08h às 12h e 13h às 17h"
+     ]
     },
     {
-     "item": "",
-     "local": "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
-     "dia": "Sábado",
-     "hora": "09h às 12h"
+     "c": [
+      "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
+      "Sábado",
+      "09h às 12h"
+     ]
     },
     {
-     "item": "",
-     "local": "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
-     "dia": "OBS",
-     "hora": "Proibido aos domingos e feriados.",
+     "c": [
+      "Proibido aos domingos e feriados."
+     ],
      "obs": true
     }
    ]

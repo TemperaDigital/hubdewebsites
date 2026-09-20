@@ -4,7 +4,7 @@ window.DADOS_CONVENCAO = {
  "subtitulo": "Condomínio Monte Carlo Residence",
  "data": "Junho de 2018",
  "fonte": "Escritura particular de convenção, PDF escaneado de 27 páginas (a Convenção começa na página 7)",
- "confiabilidade": "revisao_pendente",
+ "confiabilidade": "conferido",
  "preambulo": "ESCRITURA PARTICULAR DE CONVENÇÃO DO CONDOMÍNIO MONTE CARLO RESIDENCE, SITUADO A RUA PASTOR FIRMINO DA SILVA, Nº 168, NO BAIRRO TREZE DE MAIO, EM JOÃO PESSOA - PB. Os abaixo assinados, proprietários das unidades autônomas do CONDOMÍNIO MONTE CARLO RESIDENCE situado à RUA PASTOR FIRMINO DA SILVA, Nº 168, NO BAIRRO TREZE DE MAIO, EM JOÃO PESSOA — PB, por este instrumento estabelecem a presente Convenção de Condomínio, a que se sujeitam e submetem, ficando estabelecido que o Regulamento Interno é parte integrante e complementar da presente Convenção.",
  "capitulos": [
   {
@@ -229,8 +229,8 @@ window.DADOS_CONVENCAO = {
     "fachada",
     "areas"
    ],
-   "busca": "sao partes de propriedade exclusiva de cada condomino a unidade indicada pela numeracao correspondente, contida na escritura de aquisicao, bem como as instalacoes internas, encanamentos e tubulacoes, etc., ate a intersecao com o sistema tronco das linhas, encanamentos e tubulacoes.  a cada unidade correspondem as seguintes areas 1203, 1303, 1403, 0,01280 12,79 51,45 48,58 100,03 84,75 unidades 101, 201, 301, 401, 601, 801, 901, 1001, 1101, 1201, 1301, 1401, 1501, 1601,/ 1701: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social cozinha/ servico; 01 vaga coberta para automovel situada na area comum. unidades 501, 701: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 / suite, wc social, cozinha/ servico; 01 vaga descoberta para automovel situada na area comum. unidades 1801: a unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, web / social, cozinha/ servico; 02 vagas descobertas, sendo 01 confinada, para automoveis situadas na area comum. 4 4º unidade 1901: a unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 02 vagas cobertas, sendo 01 confinada, para automoveis situadas na area comum. unidades 102, 202, 602, 702, 802, 902, 1002, 1102, 1202: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga descoberta para automovel situada na area comum. unidades 302, 402, 502, 1302, 1402, 1502, 1602, 1702, 1802, 1902: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga coberta para automovel situada na area comum. unidades 103, 203, 403, 503, 603, 703, 803, 903, 1003, 1103: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga descoberta para automovel situada na area comum. unidades 303, 1203, 1303, 1403, 1503, 1603, 1703, 1803, 1903: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga coberta para automovel situada na area comum. unidades 104, 204, 304, 404, 504, 604, 704, 804, 904, 1004, 1104, 1204, 1304, 1404 1504, 1604, 1704, 1804: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga coberta para automovel situada na area l comum. unidade 1904: a unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 02 vagas descobertas, sendo 01 confinada, para automoveis situadas na area comum. ",
-   "avisoTabela": "Este artigo contém uma tabela no documento original. O reconhecimento óptico não preservou as linhas e colunas, e o trecho correspondente abaixo está embaralhado. Para esses dados, consulte a Convenção registrada em cartório."
+   "busca": "sao partes de propriedade exclusiva de cada condomino a unidade indicada pela numeracao correspondente, contida na escritura de aquisicao, bem como as instalacoes internas, encanamentos e tubulacoes, etc., ate a intersecao com o sistema tronco das linhas, encanamentos e tubulacoes.  a cada unidade correspondem as seguintes areas 1203, 1303, 1403, 0,01280 12,79 51,45 48,58 100,03 84,75 unidades 101, 201, 301, 401, 601, 801, 901, 1001, 1101, 1201, 1301, 1401, 1501, 1601,/ 1701: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social cozinha/ servico; 01 vaga coberta para automovel situada na area comum. unidades 501, 701: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 / suite, wc social, cozinha/ servico; 01 vaga descoberta para automovel situada na area comum. unidades 1801: a unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, web / social, cozinha/ servico; 02 vagas descobertas, sendo 01 confinada, para automoveis situadas na area comum. 4 4º unidade 1901: a unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 02 vagas cobertas, sendo 01 confinada, para automoveis situadas na area comum. unidades 102, 202, 602, 702, 802, 902, 1002, 1102, 1202: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga descoberta para automovel situada na area comum. unidades 302, 402, 502, 1302, 1402, 1502, 1602, 1702, 1802, 1902: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga coberta para automovel situada na area comum. unidades 103, 203, 403, 503, 603, 703, 803, 903, 1003, 1103: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga descoberta para automovel situada na area comum. unidades 303, 1203, 1303, 1403, 1503, 1603, 1703, 1803, 1903: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga coberta para automovel situada na area comum. unidades 104, 204, 304, 404, 504, 604, 704, 804, 904, 1004, 1104, 1204, 1304, 1404 1504, 1604, 1704, 1804: cada unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 01 vaga coberta para automovel situada na area l comum. unidade 1904: a unidade contem: sala de estar/ jantar, 02 quartos, sendo 01 suite, wc social, cozinha/ servico; 02 vagas descobertas, sendo 01 confinada, para automoveis situadas na area comum.  101, 201, 301, 401, 501, 601, 701, 801, 901, 1001, 1101, 1201, 1301, 1401, 1501, 1601, 1701 0,01344 13,43 54,32 50,44 104,76 89,00 1801, 1901 0,01447 14,46 54,32 62,62 116,94 95,82 102, 202, 302, 402, 502, 602, 702, 802, 902, 1002, 1102, 1202, 1302, 1402, 1502, 1602, 1702, 1802, 1902 0,01280 12,79 51,45 48,58 100,03 84,75 103, 203, 303, 403, 503, 603, 703, 803, 903, 1003, 1103, 1203, 1303, 1403, 1503, 1603, 1703, 1803, 1903 0,01280 12,79 51,45 48,58 100,03 84,75 104, 204, 304, 404, 504, 604, 704, 804, 904, 1004, 1104, 1204, 1304, 1404, 1504, 1604, 1704, 1804 0,01344 13,43 54,32 50,44 104,76 89,00 1904 0,01447 14,46 54,32 62,62 116,94 95,82",
+   "tabela": "areas"
   },
   {
    "n": 5,
@@ -255,7 +255,7 @@ window.DADOS_CONVENCAO = {
    "blocos": [
     {
      "rotulo": null,
-     "caput": "Quanto ao direito de uso das vagas de garagens, conforme planta baixa do projeto de arquitetura, há 79 vagas para garagem marcadas e distribuídas situadas na área comum (de divisão não proporcional) do edifício. O quadro a seguir esclarece o direito de uso das vagas por cada unidade VAGAS VAGAS TOTAL DE UNIDADE | nes | contadas | Vagas | PmMENTO | commuma — hoo | [| |i [pav.supeRioR Estacionamento [DESCOBERTA 7 jo [1 [fi Pav. SUPERIOR EstacionaMENTO [COBERTA 7 zo [fa Pav. SUPERIOR EstAcIONAMENTO [COBERTA 22 [1 [fa Pav. SUPERIOR ESTACIONAMENTO [DESCOBERTA 7 os | [0 [a fpav. SUPERIOR EstacioNAMENTO [DESCOBERTA 2 [1 [0 [a fpav. SUPERIOR EstAciONAMENTO [COBERTA 303 [1 [fa Pav. supeROR EstAcIONAMENTO [COBERTAZ ao [1 [| [a Pav. SUPERIOR EstAciONAMENTO [COBERTA] ao [1 [fa Pav. SUPERIOR EstacioNaMENTO [COBERTA] aos | | [1 |pav. SUPERIOR EsTACIONAMENTO [DESCOBERTA jo [1 [a fPav.SUPERIOR ESTACIONAMENTO [DESCOBERTA pos [0 [a fpavimentoréRneO [DESCOBERTA 71 nor [1 [0 [i fpavimentoréRreo [corra nos [1 [0 [2 fPavimentoérreo [DESCOBERTA VAGAS VAGAS TOTAL DE tone | ines |conemmdas| usis | emmero | comum iso [| fi |sunsoo [coma iso fu [fi |sussoo ootemra 2 sos | [fi |sunsoo O [ooneRra iso | [| [1 |sumsoo [romero] iso | [0 [1 [sussoo [comer sos | [a [sussa fcommra iso [1 [| | sussa coma iso [1 [fi |sussoo cosa O projeto de arquitetura anexo fixa a posição de cada vaga no pavimento Superior Estacionamento, pavimento Térreo ou pavimento Subsolo, de acordo com a unidade a qual se encontra vinculada.",
+     "caput": "Quanto ao direito de uso das vagas de garagens, conforme planta baixa do projeto de arquitetura, há 79 vagas para garagem marcadas e distribuídas situadas na área comum (de divisão não proporcional) do edifício. O quadro a seguir esclarece o direito de uso das vagas por cada unidade",
      "itens": []
     }
    ],
@@ -264,8 +264,8 @@ window.DADOS_CONVENCAO = {
     "fachada",
     "areas"
    ],
-   "busca": "quanto ao direito de uso das vagas de garagens, conforme planta baixa do projeto de arquitetura, ha 79 vagas para garagem marcadas e distribuidas situadas na area comum (de divisao nao proporcional) do edificio. o quadro a seguir esclarece o direito de uso das vagas por cada unidade vagas vagas total de unidade | nes | contadas | vagas | pmmento | commuma — hoo | [| |i [pav.superior estacionamento [descoberta 7 jo [1 [fi pav. superior estacionamento [coberta 7 zo [fa pav. superior estacionamento [coberta 22 [1 [fa pav. superior estacionamento [descoberta 7 os | [0 [a fpav. superior estacionamento [descoberta 2 [1 [0 [a fpav. superior estacionamento [coberta 303 [1 [fa pav. superor estacionamento [cobertaz ao [1 [| [a pav. superior estacionamento [coberta] ao [1 [fa pav. superior estacionamento [coberta] aos | | [1 |pav. superior estacionamento [descoberta jo [1 [a fpav.superior estacionamento [descoberta pos [0 [a fpavimentorerneo [descoberta 71 nor [1 [0 [i fpavimentorerreo [corra nos [1 [0 [2 fpavimentoerreo [descoberta vagas vagas total de tone | ines |conemmdas| usis | emmero | comum iso [| fi |sunsoo [coma iso fu [fi |sussoo ootemra 2 sos | [fi |sunsoo o [oonerra iso | [| [1 |sumsoo [romero] iso | [0 [1 [sussoo [comer sos | [a [sussa fcommra iso [1 [| | sussa coma iso [1 [fi |sussoo cosa o projeto de arquitetura anexo fixa a posicao de cada vaga no pavimento superior estacionamento, pavimento terreo ou pavimento subsolo, de acordo com a unidade a qual se encontra vinculada. ",
-   "avisoTabela": "Este artigo contém uma tabela no documento original. O reconhecimento óptico não preservou as linhas e colunas, e o trecho correspondente abaixo está embaralhado. Para esses dados, consulte a Convenção registrada em cartório."
+   "busca": "quanto ao direito de uso das vagas de garagens, conforme planta baixa do projeto de arquitetura, ha 79 vagas para garagem marcadas e distribuidas situadas na area comum (de divisao nao proporcional) do edificio. o quadro a seguir esclarece o direito de uso das vagas por cada unidade vagas vagas total de unidade | nes | contadas | vagas | pmmento | commuma — hoo | [| |i [pav.superior estacionamento [descoberta 7 jo [1 [fi pav. superior estacionamento [coberta 7 zo [fa pav. superior estacionamento [coberta 22 [1 [fa pav. superior estacionamento [descoberta 7 os | [0 [a fpav. superior estacionamento [descoberta 2 [1 [0 [a fpav. superior estacionamento [coberta 303 [1 [fa pav. superor estacionamento [cobertaz ao [1 [| [a pav. superior estacionamento [coberta] ao [1 [fa pav. superior estacionamento [coberta] aos | | [1 |pav. superior estacionamento [descoberta jo [1 [a fpav.superior estacionamento [descoberta pos [0 [a fpavimentorerneo [descoberta 71 nor [1 [0 [i fpavimentorerreo [corra nos [1 [0 [2 fpavimentoerreo [descoberta vagas vagas total de tone | ines |conemmdas| usis | emmero | comum iso [| fi |sunsoo [coma iso fu [fi |sussoo ootemra 2 sos | [fi |sunsoo o [oonerra iso | [| [1 |sumsoo [romero] iso | [0 [1 [sussoo [comer sos | [a [sussa fcommra iso [1 [| | sussa coma iso [1 [fi |sussoo cosa o projeto de arquitetura anexo fixa a posicao de cada vaga no pavimento superior estacionamento, pavimento terreo ou pavimento subsolo, de acordo com a unidade a qual se encontra vinculada.  101 1 — 1 pav. superior estacionamento coberta 102 1 — 1 pav. superior estacionamento descoberta 103 1 — 1 pav. superior estacionamento descoberta 104 1 — 1 pav. superior estacionamento coberta 201 1 — 1 pav. superior estacionamento coberta 202 1 — 1 pav. superior estacionamento descoberta 203 1 — 1 pav. superior estacionamento descoberta 204 1 — 1 pav. superior estacionamento coberta 301 1 — 1 pav. superior estacionamento coberta 302 1 — 1 pav. superior estacionamento coberta 303 1 — 1 pav. superior estacionamento coberta 304 1 — 1 pav. superior estacionamento coberta 401 1 — 1 pav. superior estacionamento coberta 402 1 — 1 pav. superior estacionamento coberta 403 1 — 1 pav. superior estacionamento descoberta 404 1 — 1 pav. superior estacionamento coberta 501 1 — 1 pavimento terreo descoberta 502 1 — 1 pav. superior estacionamento coberta 503 1 — 1 pavimento terreo descoberta 504 1 — 1 pavimento terreo coberta 601 1 — 1 pavimento terreo coberta 602 1 — 1 pavimento terreo descoberta 603 1 — 1 pavimento terreo descoberta 604 1 — 1 pavimento terreo coberta 701 1 — 1 pav. superior estacionamento descoberta 702 1 — 1 pavimento terreo descoberta 703 1 — 1 pavimento terreo descoberta 704 1 — 1 pavimento terreo coberta 801 1 — 1 pavimento terreo coberta 802 1 — 1 pavimento terreo descoberta 803 1 — 1 pavimento terreo descoberta 804 1 — 1 pavimento terreo coberta 901 1 — 1 pavimento terreo coberta 902 1 — 1 pavimento terreo descoberta 903 1 — 1 pavimento terreo descoberta 904 1 — 1 pavimento terreo coberta 1001 1 — 1 pavimento terreo coberta 1002 1 — 1 pavimento terreo descoberta 1003 1 — 1 pavimento terreo descoberta 1004 1 — 1 subsolo coberta 1101 1 — 1 subsolo coberta 1102 1 — 1 pavimento terreo descoberta 1103 1 — 1 pavimento terreo descoberta 1104 1 — 1 pavimento terreo coberta 1201 1 — 1 pavimento terreo coberta 1202 1 — 1 pavimento terreo descoberta 1203 1 — 1 subsolo coberta 1204 1 — 1 subsolo coberta 1301 1 — 1 subsolo coberta 1302 1 — 1 subsolo coberta 1303 1 — 1 subsolo coberta 1304 1 — 1 subsolo coberta 1401 1 — 1 subsolo coberta 1402 1 — 1 subsolo coberta 1403 1 — 1 subsolo coberta 1404 1 — 1 subsolo coberta 1501 1 — 1 subsolo coberta 1502 1 — 1 subsolo coberta 1503 1 — 1 subsolo coberta 1504 1 — 1 subsolo coberta 1601 1 — 1 subsolo coberta 1602 1 — 1 subsolo coberta 1603 1 — 1 subsolo coberta 1604 1 — 1 subsolo coberta 1701 1 — 1 subsolo coberta 1702 1 — 1 subsolo coberta 1703 1 — 1 subsolo coberta 1704 1 — 1 subsolo coberta 1801 1 1 2 pavimento terreo descoberta 1802 1 — 1 subsolo coberta 1803 1 — 1 subsolo coberta 1804 1 — 1 subsolo coberta 1901 1 1 2 subsolo coberta 1902 1 — 1 subsolo coberta 1903 1 — 1 subsolo coberta 1904 1 1 2 pavimento terreo descoberta",
+   "tabela": "vagas"
   },
   {
    "n": 7,
@@ -1761,14 +1761,871 @@ window.DADOS_CONVENCAO = {
    "n": null,
    "cap": "XIII",
    "motivo": "O PDF recebido termina no Art. 60º. Os Arts. 61º a 67º e a página de assinaturas e data não constam do escaneamento. Pelo resumo em Word, os artigos ausentes tratam de: obrigações em caso de alienação ou locação (61º), exercício administrativo e financeiro (62º), sujeição e modificação da convenção por 2/3 (63º), responsabilidade do condomínio e fiscalização pelo porteiro (64º), foro (65º), casos omissos regidos pela Lei 4.591/1964 (66º) e registro em cartório (67º). É preciso digitalizar as folhas finais."
-  },
-  {
-   "n": null,
-   "cap": "III",
-   "motivo": "Os Arts. 4º e 6º trazem tabelas (áreas das 76 unidades autônomas e distribuição das 79 vagas de garagem) que o OCR não conseguiu preservar. O texto corrido desses artigos está legível; os quadros, não."
   }
  ],
  "apendices": [],
- "tabelas": [],
- "errosDoOriginal": []
+ "tabelas": [
+  {
+   "id": "areas",
+   "titulo": "Fração ideal e áreas das unidades autônomas",
+   "origem": "Art. 4º",
+   "aviso": "Quadro conferido diretamente na imagem da página 9 do documento registrado. As frações ideais somam 1,00021 para as 76 unidades, o que confirma a leitura.",
+   "colunas": [
+    "Unidades",
+    "Fração ideal",
+    "Cota do terreno (m²)",
+    "Área privativa real (m²)",
+    "Área de uso comum real (m²)",
+    "Área da unidade real (m²)",
+    "Área de construção (m²)"
+   ],
+   "linhas": [
+    {
+     "c": [
+      "101, 201, 301, 401, 501, 601, 701, 801, 901, 1001, 1101, 1201, 1301, 1401, 1501, 1601, 1701",
+      "0,01344",
+      "13,43",
+      "54,32",
+      "50,44",
+      "104,76",
+      "89,00"
+     ]
+    },
+    {
+     "c": [
+      "1801, 1901",
+      "0,01447",
+      "14,46",
+      "54,32",
+      "62,62",
+      "116,94",
+      "95,82"
+     ]
+    },
+    {
+     "c": [
+      "102, 202, 302, 402, 502, 602, 702, 802, 902, 1002, 1102, 1202, 1302, 1402, 1502, 1602, 1702, 1802, 1902",
+      "0,01280",
+      "12,79",
+      "51,45",
+      "48,58",
+      "100,03",
+      "84,75"
+     ]
+    },
+    {
+     "c": [
+      "103, 203, 303, 403, 503, 603, 703, 803, 903, 1003, 1103, 1203, 1303, 1403, 1503, 1603, 1703, 1803, 1903",
+      "0,01280",
+      "12,79",
+      "51,45",
+      "48,58",
+      "100,03",
+      "84,75"
+     ]
+    },
+    {
+     "c": [
+      "104, 204, 304, 404, 504, 604, 704, 804, 904, 1004, 1104, 1204, 1304, 1404, 1504, 1604, 1704, 1804",
+      "0,01344",
+      "13,43",
+      "54,32",
+      "50,44",
+      "104,76",
+      "89,00"
+     ]
+    },
+    {
+     "c": [
+      "1904",
+      "0,01447",
+      "14,46",
+      "54,32",
+      "62,62",
+      "116,94",
+      "95,82"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vagas",
+   "titulo": "Vagas de garagem por unidade",
+   "origem": "Art. 6º",
+   "longa": true,
+   "aviso": "Quadro conferido nas imagens das páginas 11 e 12 do documento registrado e conferido de novo por OCR, com acordo integral. São 76 unidades e 79 vagas: as unidades 1801, 1901 e 1904 têm duas cada, sendo uma confinada. A soma por pavimento — 18 no estacionamento superior, 30 no térreo e 31 no subsolo — bate com a descrição do Art. 2º.",
+   "colunas": [
+    "Unidade",
+    "Livres",
+    "Confinadas",
+    "Total",
+    "Pavimento",
+    "Cobertura"
+   ],
+   "linhas": [
+    {
+     "c": [
+      "101",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "102",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "103",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "104",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "201",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "202",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "203",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "204",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "301",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "302",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "303",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "304",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "401",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "402",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "403",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "404",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "501",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "502",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "503",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "504",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "601",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "602",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "603",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "604",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "701",
+      "1",
+      "—",
+      "1",
+      "Pav. Superior Estacionamento",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "702",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "703",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "704",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "801",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "802",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "803",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "804",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "901",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "902",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "903",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "904",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1001",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1002",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "1003",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "1004",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1101",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1102",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "1103",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "1104",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1201",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1202",
+      "1",
+      "—",
+      "1",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "1203",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1204",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1301",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1302",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1303",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1304",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1401",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1402",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1403",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1404",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1501",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1502",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1503",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1504",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1601",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1602",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1603",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1604",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1701",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1702",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1703",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1704",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1801",
+      "1",
+      "1",
+      "2",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    },
+    {
+     "c": [
+      "1802",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1803",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1804",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1901",
+      "1",
+      "1",
+      "2",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1902",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1903",
+      "1",
+      "—",
+      "1",
+      "Subsolo",
+      "Coberta"
+     ]
+    },
+    {
+     "c": [
+      "1904",
+      "1",
+      "1",
+      "2",
+      "Pavimento Térreo",
+      "Descoberta"
+     ]
+    }
+   ]
+  }
+ ],
+ "errosDoOriginal": [],
+ "notaConferencia": "Texto conferido por dois motores de OCR independentes: a camada embutida no PDF e uma segunda leitura com tesseract. Prazos, frações e quóruns coincidem integralmente, assim como a contagem de negações em 53 dos 57 artigos comparáveis — os outros quatro divergiam por palavras coladas na camada embutida, e em todos a segunda leitura é a correta. As tabelas dos Arts. 4º e 6º foram conferidas na imagem. Continua faltando o trecho final do documento, dos Arts. 61º a 67º."
 };
