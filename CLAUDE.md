@@ -55,8 +55,31 @@ defeito, o problema volta a acontecer com arquivo novo.
 **A pasta ao vivo do servidor não é fonte boa.** Em 20/09/2026 uma
 sessão irmã presumiu que fosse, restaurou os arquivos por cima (`dd84fab`) e
 depois conferiu byte a byte: a pasta ao vivo está zerada também. Reverteu em
-`8c3fac1`. Não verificado desta sessão — não tenho acesso a esse caminho —,
-mas registrado porque é a hipótese que qualquer um tenta primeiro.
+`8c3fac1`.
+
+**Atualização 20/09/2026, instância do ZimaOS (que assumiu o repositório
+— ver `_PASSAGEM-DE-BASTAO.md`), com acesso direto ao host:**
+
+- **Lixeira do ZimaOS (`.recycle` da pasta ao vivo) — checada, vazia.**
+  Não é a lixeira por-arquivo do Nextcloud (essa fica dentro do storage do
+  Nextcloud, não da pasta ao vivo montada via Samba); é um recurso de
+  sistema do ZimaOS, e não guarda nada.
+- **Snapshot btrfs — checado, não existe nenhum.** `btrfs subvolume list`
+  no volume que hospeda `/media/auxiliar` devolve vazio: o volume nunca
+  teve snapshot tirado. Também não achei recurso de snapshot/backup do
+  ZimaOS configurado pra essa pasta.
+- **Espelho no Google Drive via rclone — ainda não verificado.** O
+  `bisync` planejado pra `/DATA/Documents` nunca chegou a ser implementado
+  (não é backup desta pasta de qualquer forma). O remote `gdrive:` em si
+  está com token expirado agora (`invalid_client`) — precisa de
+  reautenticação pelo dono (mesmo fluxo de sempre: `rclone authorize`
+  local, colar o token). Ainda não descartado, mas bloqueado até isso
+  acontecer.
+
+Restam duas pistas: o Drive (bloqueado por reautenticação) e perguntar
+direto ao dono se ele tem alguma outra cópia (pen drive, HD externo,
+máquina antiga) desse material — as fontes internas ao servidor já foram
+todas verificadas e estão esgotadas.
 
 **Tamanho não prova conteúdo.** 42.788 bytes de zeros têm tamanho "certo" no
 `ls`, no `stat` e no `git cat-file -s`; foi assim que a restauração acima
