@@ -12,9 +12,40 @@ const URL = require('../alvo').exigir('HOME_URL');
   // logotipo
   const logo = p.locator('.marca img');
   ok('logotipo carregou', await logo.evaluate(i => i.complete && i.naturalWidth > 0));
-  console.log('   natural:', await logo.evaluate(i => i.naturalWidth+'x'+i.naturalHeight),
-              '| exibido:', await logo.evaluate(i => Math.round(i.width)+'x'+Math.round(i.height)));
   ok('logotipo tem alt', (await logo.getAttribute('alt')) === 'Monte Carlo Residence');
+
+  // Fixar a largura exata congelaria a arte: trocar o logotipo mudaria o
+  // número sem que nada estivesse errado. O que não pode mudar é a imagem
+  // sair esticada, sair borrada por falta de resolução, ou aparecer num
+  // tamanho que denuncie conta errada.
+  const m = await logo.evaluate(i => ({
+    nw: i.naturalWidth, nh: i.naturalHeight, w: i.width, h: i.height
+  }));
+  const distorcao = Math.abs((m.w / m.h) - (m.nw / m.nh));
+  ok('logotipo não sai esticado (proporção '+(m.w/m.h).toFixed(3)+
+     ' contra '+(m.nw/m.nh).toFixed(3)+')', distorcao < 0.01);
+  // naturalWidth NÃO é a largura do arquivo quando o srcset usa descritores w:
+  // o navegador já a divide pela densidade que escolheu. Para saber a
+  // resolução de verdade é preciso carregar o arquivo escolhido sozinho.
+  const res = await logo.evaluate(function (i) {
+    var src = i.currentSrc || i.src;
+    return new Promise(function (ok) {
+      var im = new Image();
+      im.onload = function () { ok({ arq: src.split('/').pop(), px: im.naturalWidth, exib: i.width }); };
+      im.onerror = function () { ok({ arq: src.split('/').pop(), px: 0, exib: i.width }); };
+      im.src = src;
+    });
+  });
+  ok('logotipo tem resolução para tela retina ('+res.arq+': '+res.px+
+     'px de arquivo para '+Math.round(res.exib)+'px exibidos)',
+     res.px >= res.exib * 2);
+  ok('logotipo ocupa o cabeçalho sem exagero ('+Math.round(m.w)+'px)',
+     m.w >= 280 && m.w <= 340);
+
+  // o ícone da aba precisa existir de verdade, não só estar declarado
+  const icone = await p.locator('link[rel="icon"]').getAttribute('href');
+  const respIcone = await p.evaluate(u => fetch(u).then(r => r.status).catch(() => 0), icone);
+  ok('ícone da aba existe ('+icone+' -> '+respIcone+')', respIcone === 200);
 
   // link real para a base
   const links = await p.locator('a[href="base-conhecimento/"]').count();
