@@ -80,7 +80,22 @@ module.exports = [
     arquivo: 'base-conhecimento/index.html',
     aplicar: function (s) { return s.replace(/\.\.\/assets\/logo-monte-carlo-vinho/g, '../assets/logo-sumido'); } },
 
-  { nome: 'botão de voltar ao site some das Normas Legais',
+  { nome: 'abas voltam à ordem antiga',
+    arquivo: 'base-conhecimento/index.html',
+    aplicar: function (s) {
+      return s.replace('data-doc="manual" aria-selected="true">Manual do Proprietário',
+                       'data-doc="regimento" aria-selected="true">Regimento Interno');
+    } },
+
+  { nome: 'página volta a abrir no Regimento',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace("doc: 'manual'", "doc: 'regimento'"); } },
+
+  { nome: 'aviso do Manual perde a origem do documento',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace('entregue pela Construtora junto ', 'fornecido junto '); } },
+
+  { nome: 'botão de voltar ao site some das Normas e Informativos',
     arquivo: 'base-conhecimento/index.html',
     aplicar: function (s) { return s.replace('class="voltar-site" href="../"', 'class="voltar-site-x" href="../"'); } },
 

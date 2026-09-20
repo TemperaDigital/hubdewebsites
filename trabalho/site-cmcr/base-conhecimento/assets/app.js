@@ -18,7 +18,7 @@
   /* documentos normativos: só entre eles faz sentido o aviso cruzado */
   var NORMATIVOS = ['regimento', 'convencao'];
 
-  var estado = { doc: 'regimento', termo: '', tema: null, abertos: {}, verErros: false, verDoc: false };
+  var estado = { doc: 'manual', termo: '', tema: null, abertos: {}, verErros: false, verDoc: false };
 
   function docAtivo() { return DOCS[estado.doc] || REG; }
 
@@ -327,12 +327,11 @@
        manteve a base, não a quem veio saber se pode ter cachorro. O aviso do
        Manual fica porque não é técnico — é jurídico: o documento não é norma. */
     if (D.naoNormativo) {
-      h += htmlAlerta('\ud83d\udd27',
-        '<p><strong>Este documento não é norma do condomínio.</strong> É o manual de uso e manutenção ' +
-        'entregue pela Construtora. Quem estabelece regras de convivência e penalidades são a Convenção ' +
-        'e o Regimento Interno.</p>' +
-        '<p>O Manual vale sobretudo pelos <strong>prazos de garantia</strong> (Seção 6.1), pelos cuidados ' +
-        'de manutenção de cada sistema e pelo caminho da assistência técnica.</p>');
+      h += htmlAlerta('\u2139\ufe0f',
+        '<p><strong>Observações.</strong> Manual de uso e manutenção entregue pela Construtora junto ' +
+        'com as chaves. <strong>Não é norma do condomínio:</strong> serve para o proprietário conhecer ' +
+        'o próprio imóvel — os sistemas da unidade, os cuidados de manutenção e os prazos de garantia. ' +
+        'As regras de convivência e as penalidades estão na Convenção e no Regimento Interno.</p>');
     }
 
     (D.lacunas || []).forEach(function (l) {

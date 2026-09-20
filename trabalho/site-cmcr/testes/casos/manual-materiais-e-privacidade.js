@@ -12,7 +12,7 @@ const { chromium } = require('../playwright-local');
   // O aviso de que o Manual não é norma fica: não é nota técnica, é jurídica.
   // O parágrafo de procedência que vinha colado nele saiu.
   const alerta = await p.locator('.alerta').first().textContent();
-  ok('Manual mantém o aviso de que não é norma', alerta.includes('não é norma do condomínio'));
+  ok('Manual mantém o aviso de que não é norma', alerta.includes('Não é norma do condomínio'));
   ok('Manual sem nota técnica de procedência',
      !/conferid[ao]s? diretamente|motores de OCR|\bOCR\b|\bdpi\b/i
        .test(await p.locator('#painel').innerText()));

@@ -10,6 +10,11 @@ const { chromium } = require('../playwright-local');
   p.on('pageerror', e=>erros.push(e.message));
   await p.goto(require('../alvo').exigir('BASE_URL'), {waitUntil:'domcontentloaded'}); await p.waitForTimeout(400);
 
+  // A aba de partida é o Manual. Nenhum caso deve depender disso: quem precisa
+  // de um documento escolhe a aba, senão reordenar as abas quebra a suíte
+  // inteira por um motivo que nada tem a ver com o que cada caso verifica.
+  await p.locator('.aba[data-doc="regimento"]').click(); await p.waitForTimeout(400);
+
   await p.locator('.cap-btn').nth(1).click(); await p.waitForTimeout(400);   // Regimento Cap II
   const hor = p.locator('.tabela').first();
   ok('horários com 4 colunas (ITEM de volta)', (await hor.locator('thead th').count()) === 4);

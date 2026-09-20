@@ -5,13 +5,18 @@ const { chromium } = require('../playwright-local');
   const erros = []; p.on('pageerror', e => erros.push(e.message));
   await p.goto(require('../alvo').exigir('BASE_URL'), { waitUntil: 'domcontentloaded' });
   await p.waitForTimeout(500);
+
+  // A aba de partida é o Manual. Nenhum caso deve depender disso: quem precisa
+  // de um documento escolhe a aba, senão reordenar as abas quebra a suíte
+  // inteira por um motivo que nada tem a ver com o que cada caso verifica.
+  await p.locator('.aba[data-doc="regimento"]').click(); await p.waitForTimeout(400);
   let _n=0, _f=0;
   const ok = (n,c)=>{_n++; if(!c)_f++; console.log((c?'✓':'✗')+' '+n);};
 
-  // A página se chama Normas Legais e tem saída: antes era um beco, só dava
+  // A página se chama Normas e Informativos e tem saída: antes era um beco, só dava
   // para voltar pelo botão do navegador.
-  ok('a página se chama Normas Legais',
-     (await p.locator('.marca h1').textContent()).trim() === 'Normas Legais');
+  ok('a página se chama Normas e Informativos',
+     (await p.locator('.marca h1').textContent()).trim() === 'Normas e Informativos');
 
   // O logotipo vem da pasta acima (../assets). Caminho relativo entre pastas é
   // exatamente o que quebra numa mudança de estrutura, sem erro visível.
@@ -63,6 +68,8 @@ const { chromium } = require('../playwright-local');
   ok('clicar leva à página do condomínio (chegou em "' + cheguei.trim().slice(0, 40) + '")',
      /Monte Carlo|endereço para morar/i.test(cheguei));
   await p.goBack(); await p.waitForTimeout(500);
+  // ao voltar, a página reabre na aba de partida — é preciso escolher de novo
+  await p.locator('.aba[data-doc="regimento"]').click(); await p.waitForTimeout(400);
 
   // A nota de procedência foi removida de propósito: como o texto foi conferido
   // é assunto de quem mantém a base, não de quem veio saber se pode ter cachorro.

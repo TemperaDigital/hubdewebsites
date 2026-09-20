@@ -57,7 +57,7 @@ const URL = require('../alvo').exigir('HOME_URL');
 
   // link real para a base
   const links = await p.locator('a[href="base-conhecimento/"]').count();
-  ok(`${links} links para as Normas Legais`, links >= 3);
+  ok(`${links} links para as Normas e Informativos`, links >= 3);
   const resp = await p.request.get(URL + 'base-conhecimento/');
   ok('o link resolve de verdade (HTTP '+resp.status()+')', resp.status() === 200);
 

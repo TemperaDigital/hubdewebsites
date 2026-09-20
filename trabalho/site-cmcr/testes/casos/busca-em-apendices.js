@@ -4,6 +4,11 @@ const { chromium } = require('../playwright-local');
   const p = await b.newPage({ viewport:{width:1000,height:1000}, deviceScaleFactor:1.5 });
   const erros=[]; p.on('pageerror', e=>erros.push(e.message));
   await p.goto(require('../alvo').exigir('BASE_URL'), {waitUntil:'domcontentloaded'}); await p.waitForTimeout(450);
+
+  // A aba de partida é o Manual. Nenhum caso deve depender disso: quem precisa
+  // de um documento escolhe a aba, senão reordenar as abas quebra a suíte
+  // inteira por um motivo que nada tem a ver com o que cada caso verifica.
+  await p.locator('.aba[data-doc="regimento"]').click(); await p.waitForTimeout(400);
   let _n=0, _f=0;
   const ok=(n,c)=>{_n++; if(!c)_f++; console.log((c?'✓':'✗')+' '+n);};
 
