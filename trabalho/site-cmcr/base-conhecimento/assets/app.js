@@ -185,19 +185,34 @@
   }
 
   /* Tabelas usam um formato único: colunas[] de rótulos e linhas[] de {c:[células]}.
-     Uma linha com obs:true ocupa a largura toda. A primeira célula vira cabeçalho da
-     linha e é omitida quando repete a da linha anterior, como nos quadros originais. */
+     Uma linha com obs:true ocupa a largura toda. A célula do grupo (a primeira, ou a
+     indicada por agrupaPor) vira cabeçalho da linha e é omitida quando repete a da linha
+     anterior, como nos quadros originais. Com mais de três colunas, o quadro se empilha
+     em blocos no celular, porque uma tabela larga ou corta colunas ou vira rolagem que
+     ninguém descobre. */
   function htmlTabela(id, alvos) {
     var D = docAtivo();
     var t = (D.tabelas || []).filter(function (x) { return x.id === id; })[0];
     if (!t) return '';
-    var h = '<div class="tabela-box">' + (t.longa ? '<div class="tabela-rolagem">' : '') +
-      '<table class="tabela"><caption class="sr-only">' + esc(t.titulo) + '</caption><thead><tr>';
+    var grupo = t.agrupaPor || 0;
+    var empilha = t.colunas.length > 3;
+
+    var h = '<div class="tabela-box" data-tabela="' + esc(t.id) + '">';
+    if (t.filtro) {
+      h += '<div class="tabela-filtro"><input type="search" class="filtro-campo" ' +
+        'data-filtra="' + esc(t.id) + '" placeholder="' + esc(t.filtro) + '" ' +
+        'aria-label="' + esc(t.filtro) + '" autocomplete="off">' +
+        '<span class="filtro-conta" data-conta="' + esc(t.id) + '">' + t.linhas.length + ' linhas</span></div>';
+    }
+    if (t.longa) h += '<div class="tabela-rolagem">';
+    h += '<table class="tabela' + (empilha ? ' empilha' : '') + (t.zebra ? ' zebra' : '') + '">' +
+      '<caption class="sr-only">' + esc(t.titulo) + '</caption><thead><tr>';
     t.colunas.forEach(function (c, i) {
-      h += '<th scope="col"' + (i ? '' : ' class="col-1"') + '>' + esc(c) + '</th>';
+      h += '<th scope="col"' + (i === grupo ? ' class="col-grupo"' : '') + '>' + esc(c) + '</th>';
     });
     h += '</tr></thead><tbody>';
-    var anterior = null;
+
+    var anterior = null, faixa = false;
     t.linhas.forEach(function (l) {
       if (l.obs) {
         h += '<tr class="linha-obs"><td colspan="' + t.colunas.length + '"><strong>Observação</strong> — ' +
@@ -205,19 +220,46 @@
         anterior = null;
         return;
       }
-      var novo = l.c[0] !== anterior;
-      h += '<tr' + (novo ? ' class="linha-nova"' : '') + '>';
+      var novoGrupo = l.c[grupo] !== anterior;
+      if (novoGrupo) faixa = !faixa;
+      h += '<tr class="' + (novoGrupo ? 'linha-nova ' : '') + (faixa ? 'faixa' : '') + '"' +
+        ' data-chave="' + esc(norm(l.c.join(' '))) + '">';
       l.c.forEach(function (cel, i) {
-        if (i === 0) h += '<th scope="row">' + (novo ? destacar(cel, alvos) : '') + '</th>';
-        else h += '<td' + (/^[\d.,]+$|^\d+\s*(anos?|meses|h)/.test(cel) ? ' class="num"' : '') + '>' +
+        var rot = ' data-rot="' + esc(t.colunas[i]) + '"';
+        if (i === grupo) h += '<th scope="row"' + rot + ' data-valor="' + esc(cel) + '">' +
+          (novoGrupo ? destacar(cel, alvos) : '') + '</th>';
+        else h += '<td' + rot + (/^[\d.,]+$|^\d+\s*(anos?|meses|h)/.test(cel) ? ' class="num"' : '') + '>' +
           destacar(cel, alvos) + '</td>';
       });
       h += '</tr>';
-      anterior = l.c[0];
+      anterior = l.c[grupo];
     });
     h += '</tbody></table>' + (t.longa ? '</div>' : '') +
       (t.aviso ? '<p class="tabela-aviso">' + esc(t.aviso) + '</p>' : '') + '</div>';
     return h;
+  }
+
+  /* filtra as linhas de um quadro sem redesenhar a página */
+  function filtrarTabela(id, termo) {
+    var caixa = document.querySelector('[data-tabela="' + id + '"]');
+    if (!caixa) return;
+    var alvo = norm(termo).trim();
+    var visiveis = 0;
+    Array.prototype.forEach.call(caixa.querySelectorAll('tbody tr'), function (tr) {
+      var bate = !alvo || (tr.dataset.chave || '').indexOf(alvo) > -1;
+      tr.hidden = !bate;
+      if (bate) visiveis++;
+      /* com filtro ativo, a célula de grupo omitida por repetição volta a aparecer */
+      if (alvo) {
+        var th = tr.querySelector('th[scope="row"]');
+        if (th && !th.textContent.trim()) th.classList.add('mostra-grupo');
+      } else {
+        var th2 = tr.querySelector('th[scope="row"]');
+        if (th2) th2.classList.remove('mostra-grupo');
+      }
+    });
+    var conta = caixa.querySelector('[data-conta="' + id + '"]');
+    if (conta) conta.textContent = visiveis === 1 ? '1 linha' : visiveis + ' linhas';
   }
 
   function htmlAlerta(icone, html) {
@@ -528,6 +570,11 @@
     var novo = atual === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = novo;
     try { localStorage.setItem('mcr-tema', novo); } catch (e) { /* ignora */ }
+  });
+
+  painel.addEventListener('input', function (e) {
+    var f = e.target.closest('[data-filtra]');
+    if (f) filtrarTabela(f.dataset.filtra, f.value);
   });
 
   /* atalho: "/" foca a busca */

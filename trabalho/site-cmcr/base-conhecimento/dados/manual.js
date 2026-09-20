@@ -2965,7 +2965,8 @@ window.DADOS_MANUAL = {
       "Defeito aparente"
      ]
     }
-   ]
+   ],
+   "zebra": true
   },
   {
    "id": "materiais",
@@ -2976,7 +2977,7 @@ window.DADOS_MANUAL = {
    "colunas": [
     "Tipo",
     "Modelo / referência",
-    "Fabricante"
+    "Fornecedor"
    ],
    "linhas": [
     {
@@ -3091,7 +3092,8 @@ window.DADOS_MANUAL = {
       "Vitrium Ind. e Com. de Vidros Ltda"
      ]
     }
-   ]
+   ],
+   "zebra": true
   }
  ],
  "lacunas": [],

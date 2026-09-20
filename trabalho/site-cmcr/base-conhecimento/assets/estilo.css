@@ -291,8 +291,9 @@ mark { background: var(--marca-hl); color: inherit; border-radius: 3px; padding:
   background: var(--surface-2); font-size: .74rem; font-weight: 700;
   letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted);
 }
-.tabela tbody th { font-weight: 600; width: 38%; }
-.tabela tbody tr:not(.linha-nova):not(.linha-obs) th { border-top: none; }
+.tabela tbody th { font-weight: 600; }
+.tabela .col-grupo { width: 32%; }
+
 .tabela tr.linha-nova th, .tabela tr.linha-nova td { border-top: 1px solid var(--border); }
 .tabela .hora { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
 .tabela .item-n { font-weight: 400; font-size: .74rem; color: var(--text-muted); }
@@ -377,3 +378,58 @@ mark { background: var(--marca-hl); color: inherit; border-radius: 3px; padding:
   font-family: var(--font-lei); font-size: .92rem; font-style: italic;
   color: var(--text-muted); border-top: 1px solid var(--border);
 }
+
+/* ---------- tabelas: leitura ---------- */
+.tabela.zebra tbody tr.faixa:not(.linha-obs) { background: var(--surface-2); }
+.tabela tbody tr:not(.linha-obs):hover { background: var(--accent-soft); }
+.tabela th[scope="row"].mostra-grupo::before { content: attr(data-valor); }
+
+.tabela-filtro { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.filtro-campo {
+  flex: 1; min-width: 0; padding: 8px 12px; font: inherit; font-size: .88rem;
+  color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 8px;
+}
+.filtro-campo:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.filtro-campo::-webkit-search-cancel-button { cursor: pointer; }
+.filtro-conta {
+  flex: none; font-size: .78rem; color: var(--text-muted);
+  font-variant-numeric: tabular-nums; font-family: var(--font);
+}
+
+/* ---------- tabelas largas no celular: blocos em vez de colunas ---------- */
+@media (max-width: 620px) {
+  .tabela.empilha { border: none; background: none; }
+  .tabela.empilha thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .tabela.empilha tbody, .tabela.empilha tr, .tabela.empilha th, .tabela.empilha td { display: block; width: auto; }
+  .tabela.empilha tbody tr:not(.linha-obs) {
+    padding: 11px 13px; margin-bottom: 8px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 9px;
+  }
+  .tabela.empilha.zebra tbody tr.faixa:not(.linha-obs) { background: var(--surface-2); }
+  .tabela.empilha tbody tr.linha-nova th, .tabela.empilha tbody tr.linha-nova td { border-top: none; }
+  .tabela.empilha th[scope="row"] {
+    font-size: 1rem; font-weight: 700; padding: 0 0 6px;
+    border-bottom: 1px solid var(--border); margin-bottom: 7px;
+  }
+  .tabela.empilha th[scope="row"]:empty { display: none; }
+  .tabela.empilha td { padding: 3px 0; }
+  .tabela.empilha td::before {
+    content: attr(data-rot) ": "; font-family: var(--font); font-weight: 600;
+    font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .tabela.empilha td:empty { display: none; }
+  .tabela.empilha .linha-obs td { display: block; border-radius: 9px; margin-bottom: 8px; }
+  .tabela.empilha .linha-obs td::before { content: none; }
+  .tabela-rolagem { max-height: none; overflow: visible; border: none; border-radius: 0; }
+  .tabela-rolagem + .tabela-aviso { border-radius: 7px; border-top: 1px dashed var(--alerta-br); margin-top: 8px; }
+}
+
+@media print {
+  .tabela-rolagem { max-height: none !important; overflow: visible !important; }
+  .tabela-filtro { display: none !important; }
+  .tabela tbody tr[hidden] { display: table-row !important; }
+}
+
+/* o empilhamento redefine tr como block, o que venceria o atributo hidden */
+.tabela tbody tr[hidden] { display: none !important; }
