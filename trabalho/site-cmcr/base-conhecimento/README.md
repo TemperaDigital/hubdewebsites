@@ -1,4 +1,4 @@
-# Base de Conhecimento — Condomínio Monte Carlo Residence
+# Normas Legais — Condomínio Monte Carlo Residence
 
 Página de consulta às normas do condomínio: **Regimento Interno**, **Convenção**,
 **Manual do Proprietário** e **legislação condominial**, com busca por tema.

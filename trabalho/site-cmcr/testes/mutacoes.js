@@ -76,6 +76,21 @@ module.exports = [
       return s.replace("h += '<p class=\"preambulo\">' + destacar(D.preambulo, alvos) + '</p>';", '');
     } },
 
+  { nome: 'logotipo do cabeçalho aponta para caminho inexistente',
+    arquivo: 'base-conhecimento/index.html',
+    aplicar: function (s) { return s.replace(/\.\.\/assets\/logo-monte-carlo-vinho/g, '../assets/logo-sumido'); } },
+
+  { nome: 'botão de voltar ao site some das Normas Legais',
+    arquivo: 'base-conhecimento/index.html',
+    aplicar: function (s) { return s.replace('class="voltar-site" href="../"', 'class="voltar-site-x" href="../"'); } },
+
+  { nome: 'branco fixo volta por cima da cor de destaque',
+    arquivo: 'base-conhecimento/assets/estilo.css',
+    aplicar: function (s) {
+      // os dois blocos escuros: o da preferência do sistema e o do botão
+      return s.split('--accent-contraste: #2a1618;').join('--accent-contraste: #ffffff;');
+    } },
+
   { nome: 'nota técnica de procedência volta para o topo do documento',
     arquivo: 'base-conhecimento/assets/app.js',
     aplicar: function (s) {
