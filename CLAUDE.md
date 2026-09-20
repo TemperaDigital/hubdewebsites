@@ -1,5 +1,9 @@
 # hubdewebsites — o que uma sessão nova precisa saber
 
+> **Está retomando os trabalhos?** Leia antes o `_PASSAGEM-DE-BASTAO.md` da
+> raiz: ele tem o contexto do que foi feito, o que ficou pendente e por que.
+> Este arquivo é a regra do dia a dia; aquele é a história.
+
 Este repositório é a pasta `sites` servida em **https://sites.fguerra.ia.br**
 pelo nginx do servidor pessoal (192.168.1.153, ZimaOS). Cada subpasta é um
 site independente com seu próprio `index.html`.
