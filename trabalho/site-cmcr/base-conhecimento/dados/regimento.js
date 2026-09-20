@@ -3,8 +3,8 @@ window.DADOS_REGIMENTO = {
  "titulo": "Regimento Interno",
  "subtitulo": "Condomínio Monte Carlo Residence",
  "data": "12 de novembro de 2018",
- "fonte": "PDF escaneado com camada de OCR, 25 páginas",
- "confiabilidade": "revisao_pendente",
+ "fonte": "PDF escaneado de 25 páginas, lido por dois motores de OCR independentes e conferido na imagem nos pontos divergentes",
+ "confiabilidade": "conferido",
  "preambulo": "O Regulamento Interno é parte integrante da Convenção de Condomínio, nos termos do inciso V do Art. 1.334 da Lei nº. 10.406 2.002. Este Regulamento Interno tem por finalidade orientar a conduta e a convivência das pessoas que se encontram, a qualquer título, dentro das dependências do MONTE CARLO RESIDENCE, especialmente condôminos, locatários, moradores, seus familiares, hóspedes, convidados, fornecedores, entregadores e pessoas que tiverem acesso pela autorização dada por eles próprios.",
  "capitulos": [
   {
@@ -129,7 +129,8 @@ window.DADOS_REGIMENTO = {
    "artigos": [
     69,
     70,
-    71
+    71,
+    72
    ]
   },
   {
@@ -463,7 +464,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "rotulo": "§2º",
-     "caput": "Entregadores em geral deverão aguardar na eclusa para que o proprietário venha receber a encomenda.",
+     "caput": "Entregadores em geral deverão aguardar na inclusa para que o proprietário venha receber a encomenda.",
      "itens": []
     },
     {
@@ -473,7 +474,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "rotulo": "§4º",
-     "caput": "No caso da visita se estender a mais de um morador, todos deverão liberar. Caso falte a liberação de algum morador, o visitante não poderá acessar o apartamento ou partes relativas a ele (água, gás, antena, internet, etc.).",
+     "caput": "No caso da visita se estender a mais de um morador, todos deverão liberar. Caso falte a liberação de algum morador, o visitante não poderá acessar o apartamento ou pares relativas a ele (água, gás, antena, internet, etc.).",
      "itens": []
     },
     {
@@ -625,7 +626,7 @@ window.DADOS_REGIMENTO = {
       },
       {
        "rot": "XIV",
-       "txt": "Manter a posse ou guarda de animais de grande porte, silvestres ou de temperamento agressivo, de maneira a expor riscos à saúde, segurança ou tranquilidade dos demais condôminos. a) Todos os animais deverão ser cadastrados pelos condôminos, junto ao Condomínio; b) Não poderão utilizar o elevador social (salvo em extrema necessidade) e deverão estar sempre acompanhados pelo responsável e conduzidos nos braços, com guia e focinheira (caso animal de maior porte) ou em gaiolas, casinhas, aquários etc.; c) Não poderão permanecer nem circular, em nenhuma hipótese, nas áreas da no mezanino (nível 0), isto é, piscina, salão de festas, academia, sala de estudos/ lanhouse, quadra, hall social, garagens e demais áreas de uso comum, salvo cães-guia; d) No sentido de manter o asseio no Condomínio, caso ocorra qualquer “sujeira” provocada por qualquer animal, ficará o seu respectivo dono responsável pela imediata higienização e desinfecção do ambiente; e) Os visitantes não poderão conduzir quaisquer animais, que não sejam os cadastrados e já existentes no Condomínio; f) O condômino ou possuidor de animal que não satisfizer as condições deste Art. será punido na forma dimensionada no capítulo de penalidades deste Regimento Interno."
+       "txt": "Manter a posse ou guarda de animais de grande porte, silvestres ou de temperamento agressivo, de maneira a expor riscos à saúde, segurança ou tranquilidade dos demais condôminos. a) Todos os animais deverão ser cadastrados pelos condôminos, junto ao Condomínio; b) Não poderão utilizar o elevador social (salvo em extrema necessidade) e deverão estar sempre acompanhados pelo responsável e conduzidos nos braços, com guia e focinheira (caso animal de maior porte) ou em gaiolas, casinhas, aquários etc.; c) Não poderão permanecer nem circular, em nenhuma hipótese, nas áreas da no mezanino (nível 0), isto é, piscina, salão de festas, academia, sala de estudos/ lanhouse, quadra, hall social, garagens e demais áreas de uso comum, salvo cães guias; d) No sentido de manter o asseio no Condomínio, caso ocorra qualquer “sujeira” provocada por qualquer animal, ficará o seu respectivo dono responsável pela imediata higienização e desinfecção do ambiente; e) Os visitantes não poderão conduzir quaisquer animais, que não sejam os cadastrados e já existentes no Condomínio; f) O condômino ou possuidor de animal que não satisfizer as condições deste Art. será punido na forma dimensionada no capítulo de penalidades deste Regimento Interno."
       },
       {
        "rot": "XV",
@@ -1511,7 +1512,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "rotulo": "§2º",
-     "caput": "O solicitante poderá sofrer penalidade em caso de dano, especialmente se for apurado que o dano foi intencional,",
+     "caput": "O solicitante poderá sofre penalidade em caso de dano, especialmente se for apurado que o dano foi intencional,",
      "itens": []
     }
    ],
@@ -2001,6 +2002,24 @@ window.DADOS_REGIMENTO = {
    "busca": "a academia e de uso misto, com horarios pre-estabelecidos pela administracao, e podera ser utilizada conforme tabela do inciso xvi do art. 2º, obedecido ao seguinte: a) e proibido nas dependencias da academia e areas comuns o uso de substancias nao regulamentadas pela legislacao e agencias reguladoras do brasil. b) e proibido o uso de produtos, aparelhos, equipamentos e acessorios no ambito da academia, que nao os especificos para praticas esportivas internas ou que nao sejam autorizados pela administracao. a desligar as lampadas ao sair. "
   },
   {
+   "n": 72,
+   "rotulo": "Art. 72º",
+   "cap": "IX",
+   "capTitulo": "Da Academia",
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "Os últimos usuários que utilizarem a Academia em horário noturno deverão desligar as lâmpadas ao sair.",
+     "itens": []
+    }
+   ],
+   "tags": [
+    "academia",
+    "areas"
+   ],
+   "busca": "os ultimos usuarios que utilizarem a academia em horario noturno deverao desligar as lampadas ao sair."
+  },
+  {
    "n": 73,
    "rotulo": "Art. 73º",
    "cap": "X",
@@ -2178,7 +2197,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "rotulo": "§7º",
-     "caput": "Das multas impostas pelo Síndico ou de qualquer de suas decisões, cabe recurso a ser interposto por escrito pelo condômino que se sentir prejudicado: a) O condômino encaminhará recurso por escrito com justificativas, evidências e/ou pedidos de perdão, dentro do prazo de 10 (dez) dias corridos a contar da data em que tiver a respectiva comunicação ou conhecimento do fato, ao Síndico ou a um membro do Conselho Consultivo; b) O membro da Administração que receber o recurso, o submeterá à apreciação da Comissão completa para pré-análise; c) Em casos que a Comissão julgue simples, ela mesma os julgará, podendo: reduzir valor da multa ou suspensões. Deverão se tornar impedidos os membros que tenham notória amizade ou inimizade com o condômino em questão. O voto do impedido não será contabilizado; d) Em casos que a Comissão julgue mais complexos, ela submeterá para julgamento da assembleia geral. Um membro da Comissão explicará o caso, abrirá um breve momento para defesa do condômino e, em maioria simples, a assembleia decidirá manter a penalidade ou não.",
+     "caput": "Das multas impostas pelo Síndico ou de qualquer de suas decisões, cabe recurso a ser interposto por escrito pelo condômino que se sentir prejudicado: a) O condômino encaminhará recurso por escrito com justificativas, evidências e/ou pedidos de perdão, dentro do prazo de 10 (dez) dias corridos a contar da data em que tiver a respectiva comunicação ou conhecimento do fato, ao Síndico ou a um membro do Conselho Consultivo; b) O membro da Administração que receber o artefato, o submeterá à apreciação da Comissão completa para pré-análise; c) Em casos que a Comissão julgue simples, ela mesma os julgará, podendo: reduzir valor da multa ou suspensões. Deverão se tornar impedidos os membros que tenham notória amizade ou inimizade com o condômino em questão. O voto do impedido não será contabilizado; d) Em casos que a Comissão julgue mais complexos, ela submeterá para julgamento da assembleia geral. Um membro da Comissão explicará o caso, abrirá um breve momento para defesa do condômino e, em maioria simples, a assembleia decidirá manter a penalidade ou não.",
      "itens": []
     },
     {
@@ -2193,7 +2212,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "rotulo": "§10º",
-     "caput": "A infração não decairá caso haja demora da Administração a receber a denúncia ou perceber a infração, desde que haja continuidade do infrator ou comprovações de atos já passados.",
+     "caput": "A infração não vencerá caso haja demora da Administração a receber a denúncia ou perceber a infração, desde que haja continuidade do infrator ou comprovações de atos já passados.",
      "itens": []
     },
     {
@@ -2439,18 +2458,12 @@ window.DADOS_REGIMENTO = {
    "busca": "fazem parte do regimento interno todos os seus apendices, desta forma eles deverao ser cumpridos fielmente. joao pessoa, 12 de novembro de 2018. 4 joao pessoa "
   }
  ],
- "lacunas": [
-  {
-   "n": 72,
-   "cap": "IX",
-   "motivo": "Não recuperado pelo OCR — texto perdido na quebra entre as páginas 18 e 19 do PDF. Fragmento identificado: \"...desligar as lâmpadas ao sair.\""
-  }
- ],
+ "lacunas": [],
  "apendices": [
   {
    "id": "A",
    "titulo": "Padronização das Fachadas",
-   "texto": "PADRONIZAÇÃO DAS FACHADAS Somente serão aceitas modificações arquitetônicas de fachada e áreas comuns do Condomínio da forma descrita neste anexo para não haver quebra na estética do prédio. B1. Para as portas de entrada dos apartamentos (incluindo as forras e batentes — alisares) fica decidido que: a. Poderão ser alteradas as dimensões (altura e largura); b. Poderão ser alterados os materiais que compõem as portas de entrada, internos ou externos à ela; c. Poderá ser alterada a cor desde que tenha cor única (ou seja de madeira única — não composta) e esta cor tenha tonalidade clara e não vibrante. Exemplo de cores adequadas: branca, bege, creme, marfim e variantes destas. O mesmo vale para portas de madeira ou de padrão madeirado, somente colorações claras; d. Poderão ser alterados os metais da porta (dobradiças e fechaduras): e. Poderão ser incorporados itens de segurança, tais como travas, olhos mágicos, fechaduras “tetra-chave”, etc. f. O número do apartamento e posição da placa deverá ser mantido com padrão. A placa não deverá ser riscada, quebrada ou perfurada. B2. Será permitida a instalação de telas/ redes de proteção nas janelas. Elas deverão ser na cor preta. O proprietário deverá priorizar o uso de ganchos fabricados em aço inoxidável. B3. Os furos deverão ser isolados com silicone vedante para impedir infiltrações e em caso de quebra de pedras de cerâmica, elas deverão ser substituídas, B3. Os vidros externos deverão ser sempre de tonalidade marrom/ bronze ou totalmente incolor (cristal). B5. Poderá ser aplicada película (insufilm) nos vidros externos, desde que tenham algum grau de transparência (não opacos) e não sejam espelhadas. B6. Não poderá ser instalada janela de correr e nem janela de veneziana,"
+   "texto": "PADRONIZAÇÃO DAS FACHADAS Somente serão aceitas modificações arquitetônicas de fachada e áreas comuns do Condomínio da forma descrita neste anexo para não haver quebra na estética do prédio. B1. Para as portas de entrada dos apartamentos (incluindo as forras e batentes — alisares) fica decidido que: a. Poderão ser alteradas as dimensões (altura e largura); b. Poderão ser alterados os materiais que compõem as portas de entrada, internos ou externos à ela; c. Poderá ser alterada a cor desde que tenha cor única (ou seja de madeira única — não composta) e esta cor tenha tonalidade clara e não vibrante. Exemplo de cores adequadas: branca, bege, creme, marfim e variantes destas. O mesmo vale para portas de madeira ou de padrão madeirado, somente colorações claras; d. Poderão ser alterados os metais da porta (dobradiças e fechaduras): e. Poderão ser incorporados itens de segurança, tais como travas, olhos mágicos, fechaduras “tetra-chave”, etc. f. O número do apartamento e posição da placa deverá ser mantido com padrão. A placa não deverá ser riscada, quebrada ou perfurada. B2. Será permitida a instalação de telas/ redes de proteção nas janelas. Elas deverão ser na cor preta. O proprietário deverá priorizar o uso de ganchos fabricados em aço inoxidável. B3. Os furos deverão ser isolados com silicone vedante para impedir infiltrações e em caso de quebra de pedras de cerâmica, elas deverão ser substituídas, B4. Os vidros externos deverão ser sempre de tonalidade marrom/ bronze ou totalmente incolor (cristal). B5. Poderá ser aplicada película (insufilm) nos vidros externos, desde que tenham algum grau de transparência (não opacos) e não sejam espelhadas. B6. Não poderá ser instalada janela de correr e nem janela de veneziana,"
   },
   {
    "id": "B",
@@ -2463,7 +2476,7 @@ window.DADOS_REGIMENTO = {
    "id": "horarios",
    "titulo": "Horários de uso das áreas comuns",
    "origem": "Art. 2º, inciso XVI",
-   "aviso": "Tabela reconstruída a partir do OCR: o original é uma tabela escaneada e o reconhecimento embaralhou linhas e colunas. Os horários foram lidos com clareza; a numeração dos itens e os pontos marcados com (?) precisam de conferência no documento registrado.",
+   "aviso": "Tabela conferida diretamente na imagem da página 5 do documento registrado. A observação do Salão de Festas está incompleta no próprio original, que diz apenas “o som ambiente (Sudema)”, sem o verbo.",
    "colunas": [
     "Item",
     "Local / Atividade",
@@ -2487,11 +2500,11 @@ window.DADOS_REGIMENTO = {
      "item": "",
      "local": "Salão de Festas",
      "dia": "OBS",
-     "hora": "Em qualquer dos dias, a partir das 22h o som ambiente deverá ser reduzido (Sudema). Após o horário limite de utilização do espaço, as portas e janelas devem ser fechadas pelo usuário.",
+     "hora": "Em qualquer dos dias a partir das 22h, o som ambiente (Sudema). Após o horário limite de utilização do espaço as portas e janelas devem ser fechadas pelo usuário do espaço.",
      "obs": true
     },
     {
-     "item": "3 (?)",
+     "item": "2",
      "local": "Espaço Gourmet / Churrasqueira",
      "dia": "Sexta-feira e sábado",
      "hora": "09h às 00h"
@@ -2503,7 +2516,7 @@ window.DADOS_REGIMENTO = {
      "hora": "09h às 22h"
     },
     {
-     "item": "(?)",
+     "item": "3",
      "local": "Brinquedoteca — Espaço Kids",
      "dia": "Sexta-feira e sábado",
      "hora": "08h às 02h"
@@ -2511,7 +2524,7 @@ window.DADOS_REGIMENTO = {
     {
      "item": "",
      "local": "Brinquedoteca — Espaço Kids",
-     "dia": "Domingo a quinta-feira",
+     "dia": "Domingo a quinta",
      "hora": "08h às 00h"
     },
     {
@@ -2530,29 +2543,71 @@ window.DADOS_REGIMENTO = {
      "item": "",
      "local": "Academia",
      "dia": "OBS",
-     "hora": "A partir das 22h o som deverá ser desligado; as atividades deverão ser silenciosas nesse horário.",
+     "hora": "A partir das 22h o som deverá ser desligado (as atividades deverão ser silenciosas no horário).",
      "obs": true
     },
     {
      "item": "6",
-     "local": "Mudanças, reformas nos apartamentos, instalação e montagem de móveis e outros",
+     "local": "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
      "dia": "Segunda a sexta-feira",
      "hora": "08h às 12h e 13h às 17h"
     },
     {
      "item": "",
-     "local": "Mudanças, reformas nos apartamentos, instalação e montagem de móveis e outros",
+     "local": "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
      "dia": "Sábado",
-     "hora": "08h (?) às 12h"
+     "hora": "09h às 12h"
     },
     {
      "item": "",
-     "local": "Mudanças, reformas nos apartamentos, instalação e montagem de móveis e outros",
+     "local": "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
      "dia": "OBS",
      "hora": "Proibido aos domingos e feriados.",
      "obs": true
     }
    ]
+  }
+ ],
+ "errosDoOriginal": [
+  {
+   "onde": "Art. 7º, §2º",
+   "texto": "“Entregadores em geral deverão aguardar na inclusa”",
+   "nota": "Provavelmente “na eclusa”. Mantido como está no original."
+  },
+  {
+   "onde": "Art. 7º, §4º",
+   "texto": "“o apartamento ou pares relativas a ele”",
+   "nota": "Provavelmente “partes”. Mantido como está no original."
+  },
+  {
+   "onde": "Art. 12º, XIV, “c”",
+   "texto": "“nas áreas da no mezanino”",
+   "nota": "Concordância incorreta no original. Mantida."
+  },
+  {
+   "onde": "Art. 50º, §2º",
+   "texto": "“O solicitante poderá sofre penalidade”",
+   "nota": "Provavelmente “sofrer”. Mantido como está no original."
+  },
+  {
+   "onde": "Art. 77º, §7º, “b”",
+   "texto": "“O membro da Administração que receber o artefato”",
+   "nota": "Provavelmente “o recurso”. Mantido como está no original."
+  },
+  {
+   "onde": "Art. 77º, §10º",
+   "texto": "“A infração não vencerá caso haja demora da Administração”",
+   "nota": "Provavelmente “não decairá”. Mantido como está no original."
+  },
+  {
+   "onde": "Art. 2º, XVI (tabela)",
+   "texto": "“a partir das 22h, o som ambiente (Sudema)”",
+   "nota": "Frase sem verbo no original. Mantida."
+  },
+  {
+   "onde": "Capítulo XI",
+   "texto": "Numeração dos capítulos",
+   "nota": "O sumário e o corpo trazem XII para Disposições Finais; a primeira leitura de OCR havia indicado XI por engano."
   }
  ]
 };

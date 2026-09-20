@@ -12,7 +12,7 @@
   var campo = $('#busca');
   var btnLimpar = $('#busca-limpar');
 
-  var estado = { doc: 'regimento', termo: '', tema: null, abertos: {} };
+  var estado = { doc: 'regimento', termo: '', tema: null, abertos: {}, verErros: false };
 
   /* ---------- utilidades ---------- */
 
@@ -204,11 +204,30 @@
       '<p class="doc-meta"><span>' + esc(REG.subtitulo) + '</span><span>' + esc(REG.data) +
       '</span><span>' + REG.artigos.length + ' artigos em ' + REG.capitulos.length + ' capítulos</span></p></div>';
 
-    h += htmlAlerta('⚠️',
-      '<p><strong>Texto em revisão.</strong> Foi extraído por reconhecimento óptico (OCR) de um PDF escaneado. ' +
-      'A conferência contra o documento registrado em cartório ainda não foi concluída.</p>' +
-      '<p>Pendências conhecidas: ' + REG.lacunas.map(function (l) { return 'Art. ' + l.n + 'º não recuperado'; }).join('; ') +
-      '. Consulte <code>REVISAO-OCR.md</code> para a lista completa.</p>');
+    if (REG.confiabilidade === 'conferido') {
+      h += htmlAlerta('\u2705',
+        '<p><strong>Texto conferido.</strong> Os 88 artigos foram lidos por dois motores de OCR independentes ' +
+        'e, nos pontos em que discordaram, conferidos diretamente na imagem do documento registrado.</p>' +
+        '<p>A redação reproduz o original, inclusive onde o próprio documento tem erro de digitação. ' +
+        '<button class="link-btn" type="button" id="ver-erros">Ver os ' + (REG.errosDoOriginal || []).length +
+        ' pontos em que o original diverge da norma culta</button></p>');
+    } else {
+      h += htmlAlerta('\u26a0\ufe0f',
+        '<p><strong>Texto em revisão.</strong> Foi extraído por reconhecimento óptico (OCR) de um PDF escaneado. ' +
+        'A conferência contra o documento registrado em cartório ainda não foi concluída.</p>' +
+        (REG.lacunas.length ? '<p>Pendências conhecidas: ' +
+          REG.lacunas.map(function (l) { return 'Art. ' + l.n + 'º não recuperado'; }).join('; ') +
+          '. Consulte <code>REVISAO-OCR.md</code> para a lista completa.</p>' : ''));
+    }
+
+    if (estado.verErros && (REG.errosDoOriginal || []).length) {
+      h += '<div class="erros-orig"><h3>Divergências presentes no documento original</h3>' +
+        '<p>Reproduzidas fielmente nesta base. Não são erros de leitura.</p><dl>';
+      REG.errosDoOriginal.forEach(function (e) {
+        h += '<dt>' + esc(e.onde) + '</dt><dd>' + esc(e.texto) + ' <span>' + esc(e.nota) + '</span></dd>';
+      });
+      h += '</dl></div>';
+    }
 
     h += '<p class="preambulo">' + destacar(REG.preambulo, expandir(estado.termo)) + '</p>';
 
@@ -416,6 +435,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
+    if (e.target.id === 'ver-erros') { estado.verErros = !estado.verErros; render(); return; }
     var cap = e.target.closest('[data-cap]');
     if (cap) {
       var k = cap.dataset.cap;

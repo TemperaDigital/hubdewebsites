@@ -1,82 +1,91 @@
-# Lista de conferência do Regimento Interno
+# Conferência do Regimento Interno
 
-O texto publicado nesta base foi extraído por **reconhecimento óptico de caracteres (OCR)**
-do PDF escaneado `Regimento_Interno_-_Pesquisável.pdf` (25 páginas, registro de 12/11/2018).
+**Situação: concluída.** Os 88 artigos estão publicados e conferidos.
 
-O OCR acertou a maior parte do texto, mas erra de forma previsível — como uma fotocópia
-velha em que certas letras sempre borram do mesmo jeito. Este arquivo lista **o que foi
-corrigido automaticamente** e, principalmente, **o que ainda precisa de olho humano**
-sobre o documento registrado em cartório.
+O texto foi extraído do PDF escaneado `Regimento_Interno_-_Pesquisável.pdf` (25 páginas,
+registro de 12/11/2018) por **dois motores de OCR independentes**:
 
-> Enquanto esta lista não for fechada, o aviso de "texto em revisão" deve permanecer na página.
+1. a camada de texto já embutida no PDF;
+2. uma segunda leitura feita com `tesseract` em português, sobre as páginas rasterizadas
+   a 300 dpi com `pdftoppm`.
+
+Onde as duas leituras concordaram, o texto foi aceito. Onde discordaram, a passagem foi
+**conferida na imagem da página**. É o mesmo princípio de conferir um valor lançado duas
+vezes por pessoas diferentes: o que importa não é cada leitura isolada, mas o ponto em que
+elas divergem.
 
 ---
 
-## 1. Pendências — exigem conferência no documento original
+## 1. Pendências encerradas
 
-| # | Onde | O que verificar |
+| # | Item | Como foi resolvido |
 |---|---|---|
-| 1 | **Art. 72º** | **Não foi recuperado.** O texto se perdeu na quebra entre as páginas 18 e 19 do PDF. O único fragmento legível é *"…desligar as lâmpadas ao sair."*, no topo da página 19. Pelo contexto, encerra o Capítulo IX (Da Academia). **É preciso transcrever o artigo inteiro do original.** |
-| 2 | **Art. 2º, inciso XVI** — tabela de horários | O original é uma tabela escaneada; o OCR achatou linhas e colunas numa única sequência. A tabela foi reconstruída em `dados/regimento.js` (campo `tabelas`). Os **horários** foram lidos com clareza. Falta confirmar: a **numeração dos itens** (o OCR mostra "3" antes do Espaço Gourmet e nenhum número na Brinquedoteca) e o **horário de sábado** para mudanças e reformas, lido como "08h (?) às 12h". |
-| 3 | **Numeração do Capítulo XII** | O corpo do documento traz "CAPÍTULO XI – DISPOSIÇÕES FINAIS", repetindo o número do capítulo anterior (Das Penalidades). O sumário da página 2 diz **XII**. A base adota **XII**. Confirmar se o erro está no documento original ou na leitura. |
-| 4 | **Art. 15º** | O OCR leu "Art. 18º", número que já pertence a outro artigo do mesmo capítulo. Foi renumerado para **15º** pela posição na sequência. Confirmar. |
-| 5 | **Art. 58º** | O OCR leu "Art. 88º", número que já pertence às Disposições Finais. Foi renumerado para **58º** pela posição (entre o 57º e o 59º). Confirmar. |
-| 6 | **Art. 9º** | O OCR leu "Art. $º". Corrigido para **9º** pela posição. Confirmar. |
-| 7 | **Apêndice A** | Os marcadores dos itens saíram como "Bi.", "Ba.", "Ba.", "Bs." — dois itens diferentes foram lidos como "Ba.". A numeração **B1 a B6** precisa ser conferida item a item. |
-| 8 | **Alíneas fora de sequência** | O OCR leu `c)` como `e)` e `f)` como `£)` em várias listas. Foram corrigidas por posição no Art. 7º §3º, no Art. 12º inciso XIV, no Art. 51º, no Art. 59º §5º e no Art. 77º (§1º e §7º). Conferir a sequência completa das alíneas nesses artigos. |
-| 9 | **Art. 12º, inciso XIV, alínea "c"** | Lido como *"salvo cães guies"*, normalizado para **"cães-guia"**. Conferir a grafia do original. |
+| 1 | **Art. 72º ausente** | Recuperado pela segunda leitura. A camada de OCR original perdera o artigo na quebra entre as páginas 18 e 19. Texto: *"Os últimos usuários que utilizarem a Academia em horário noturno deverão desligar as lâmpadas ao sair."* |
+| 2 | **Tabela de horários (Art. 2º, XVI)** | Lida diretamente na imagem da página 5. Itens **1 a 6** confirmados (1 Salão de Festas, 2 Espaço Gourmet, 3 Brinquedoteca, 4 Piscina, 5 Academia, 6 Mudanças e Reformas). O horário de sábado para mudanças é **09h às 12h** — a reconstrução anterior supunha 08h. |
+| 3 | **Numeração do Capítulo XII** | A segunda leitura traz **XII – Disposições Finais**, igual ao sumário. O "XI" repetido era erro da primeira leitura, não do documento. |
+| 4 | **Art. 15º** | Confirmado pela segunda leitura. O "Art. 18º" lido antes era erro de OCR; o Art. 18º verdadeiro trata do uso moderado dos elevadores. |
+| 5 | **Art. 58º** | Confirmado pela segunda leitura, entre o 57º e o 59º. |
+| 6 | **Art. 9º** | Conferido na imagem. Os dois motores leram o "9" em negrito como "$". |
+| 7 | **Apêndice A** | Marcadores confirmados como **B1 a B6**. As leituras "Ba" e "Bs" correspondem a B4 e B5. |
+| 8 | **Alíneas fora de sequência** | Conferido na imagem do Art. 51º: é **"c)"**. Os dois motores leem o "c" em negrito como "e". A mesma correção vale para o Art. 7º §3º, o Art. 12º XIV, o Art. 59º §5º e o Art. 77º §7º. No Art. 77º §1º, a alínea lida como "£)" é **"f)"**. |
+| 9 | **"cães guias"** | A segunda leitura confirma a grafia do original, sem hífen. A forma "cães-guia" havia sido introduzida por engano e foi revertida. |
 
 ---
 
-## 2. Correções automáticas já aplicadas
+## 2. Divergências do próprio documento — preservadas
 
-Foram tratadas por regra, sem julgamento caso a caso:
+Durante a conferência, cinco trechos revelaram-se **erros do documento registrado**, e não
+de leitura. Eles foram restaurados à redação original: numa base de consulta jurídica, o
+texto tem de reproduzir o que está escrito, não o que deveria estar.
 
-- **Símbolo de parágrafo.** O `§` foi lido como `8`, `$`, `&` ou `B`. Todas as ocorrências no
-  padrão `8Nº:` foram restauradas para `§Nº:`.
-- **Carimbo do cartório.** O selo do Serviço Notarial (`"RTDIPS TEL. 3241-7177 JOÃO PESSOA
-  PARAÍBA"` e suas dezenas de leituras deformadas) aparecia em quase toda página e foi
-  removido por proporção de lixo na linha, e não por lista de palavras — justamente para não
-  apagar texto real como *"de serviço"* ou *"particulares dos"*.
+A página lista essas passagens em "Ver os pontos em que o original diverge da norma culta",
+no topo do Regimento.
+
+| Onde | Como está no original | Leitura provável |
+|---|---|---|
+| Art. 7º, §2º | "deverão aguardar na **inclusa**" | eclusa |
+| Art. 7º, §4º | "o apartamento ou **pares** relativas a ele" | partes |
+| Art. 12º, XIV, "c" | "nas áreas **da no** mezanino" | no mezanino |
+| Art. 50º, §2º | "poderá **sofre** penalidade" | sofrer |
+| Art. 77º, §7º, "b" | "que receber o **artefato**" | o recurso |
+| Art. 77º, §10º | "A infração não **vencerá**" | não decairá |
+| Art. 2º, XVI (tabela) | "a partir das 22h, o som ambiente (Sudema)" | frase sem verbo |
+
+Um caso quase virou o sexto: no preâmbulo, as duas leituras registraram *"fém por
+finalidade"*. Na imagem, vê-se que o "t" de **"tem"** está encoberto por uma **anotação a
+caneta** feita sobre o documento escaneado. A grafia correta foi mantida.
+
+---
+
+## 3. Correções de OCR aplicadas
+
+Todas verificadas contra a segunda leitura antes de entrar na base:
+
+- **Símbolo de parágrafo.** O `§` era lido como `8`, `$`, `&` ou `B`. Restaurado.
+- **Carimbo do cartório.** O selo do Serviço Notarial aparecia em quase toda página em
+  dezenas de leituras deformadas. A remoção é feita por proporção de lixo na linha, e não
+  por lista de palavras — uma primeira tentativa baseada em tokens havia apagado o Art. 30º
+  inteiro, porque `particul`**`ares d`**`os` casava com o token `ARES `.
 - **Numerais romanos dos incisos.** `H-` → `II -`, `HI -` → `III -`, `INI` → `III`, `AX:` → `IX`.
-- **Referências a artigos.** `Art,` → `Art.`; espaçamento normalizado.
-- **Palavras trocadas** (lista completa): `fém por fin lidade`→`tem por finalidade`,
+  A numeração dos incisos do Art. 2º e do Art. 12º foi confirmada pela segunda leitura
+  (XXI e XXII estavam trocados).
+- **Palavras.** 25 substituições confirmadas pelas duas leituras, entre elas
   `pessozs`→`pessoas`, `balls`→`halls`, `mammitas`→`marmitas`, `Intemo`→`Interno`,
-  `extemos`→`externos`, `coniratos`→`contratos`, `colstado`→`coletado`, `corresivas`→`corrosivas`,
-  `rmúsica`→`música`, `tranguilidade`→`tranquilidade`, `raíeio`→`rateio`, `reguisitante`→`requisitante`,
-  `confitmando`→`confirmando`, `mêsmo`→`mesmo`, `seús`→`seus`, `Testas`→`festas`,
-  `livro ds protocolo`→`livro de protocolo`, `vu nome`→`o nome`, `na inclusa`→`na eclusa`,
-  `por paríie do`→`por parte do`, `subordinados apenas 20 Síndico`→`ao Síndico`,
-  `2 Comissão julgue`→`a Comissão julgue`, `*4 (três quartos)`→`3/4 (três quartos)`,
-  `que receber o artefato`→`que receber o recurso`, `A infração não vencerá`→`A infração não decairá`,
-  e acentuação de `edifício`, `Condomínio`, `veículos`, `dívida`, `índice`, `líquido`, `civil`.
-- **Caractere `€` e `<`** usados no lugar de `e` foram substituídos.
-
----
-
-## 3. Como conferir
-
-1. Abra o PDF original lado a lado com a página da base de conhecimento.
-2. Trabalhe capítulo por capítulo, usando o índice da página.
-3. Ao encontrar uma divergência, corrija em `dados/regimento.js` — o texto de cada artigo
-   fica no campo `blocos` (`caput`, `rotulo` do parágrafo e `itens` dos incisos).
-4. Risque o item correspondente nesta lista.
-5. Quando as 9 pendências estiverem fechadas, troque em `dados/regimento.js`
-   o campo `"confiabilidade": "revisao_pendente"` por `"conferido"` e remova o bloco de
-   aviso em `assets/app.js` (função `viewRegimento`).
+  `colstado`→`coletado`, `corresivas`→`corrosivas`, `tranguilidade`→`tranquilidade`,
+  `raíeio`→`rateio`, `confitmando`→`confirmando`, `Testas`→`festas`.
+- **Fração.** `*4 (três quartos)` no Art. 78º foi normalizado para `3/4 (três quartos)`;
+  o original traz o glifo `¾`, que ambos os motores desmontam.
 
 ---
 
 ## 4. Situação da Convenção
 
-O arquivo recebido (`Convenção em Word - Resumo.docx`) **não é a Convenção**: é um resumo
-com análises e comentários misturados ao texto normativo, e com trechos ausentes
-(os Arts. 42º a 46º e o título do respectivo capítulo não aparecem).
+Continua **pendente**. O arquivo recebido em Word (`Convenção em Word - Resumo.docx`) é um
+resumo com análises e comentários, não a norma, e omite os Arts. 42º a 46º.
 
-Publicar um resumo como se fosse a norma criaria um risco real: um morador poderia
-contestar uma multa citando esta página, e a página estaria errada. Por isso a aba
-**Convenção** traz por ora **apenas o índice**, com aviso explícito.
+O PDF da Convenção registrada está no Google Drive (`Convenção Monte Carlo.pdf`, 23 páginas).
+Ele é uma digitalização **sem camada de texto**, então precisa do mesmo tratamento de OCR
+aplicado ao Regimento. O que falta é o arquivo chegar ao ambiente de trabalho — o conector
+do Drive lê o conteúdo já interpretado, e nesse caso não há nada para interpretar.
 
-**O que falta:** o PDF ou digitalização da **Convenção registrada em cartório**
-(assinada e registrada, conforme o Art. 67º). Com ela em mãos, o texto entra na base
-pelo mesmo processo usado no Regimento.
+Enquanto isso, a aba **Convenção** traz apenas o índice dos capítulos, com aviso explícito.

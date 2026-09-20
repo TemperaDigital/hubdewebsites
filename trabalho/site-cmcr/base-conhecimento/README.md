@@ -41,11 +41,11 @@ base-conhecimento/
 │   ├── estilo.css
 │   └── app.js            # busca, sinônimos, índice e renderização
 ├── dados/
-│   ├── regimento.js      # 87 artigos, 12 capítulos, 2 apêndices, tabela de horários
+│   ├── regimento.js      # 88 artigos, 12 capítulos, 2 apêndices, tabela de horários
 │   ├── convencao.js      # índice; texto integral pendente
 │   ├── legislacao.js     # links oficiais comentados
 │   └── temas.js          # temas e dicionário de sinônimos
-├── REVISAO-OCR.md        # o que ainda precisa ser conferido no original
+├── REVISAO-OCR.md        # como o texto foi conferido e o que diverge no original
 └── README.md
 ```
 
@@ -53,9 +53,13 @@ base-conhecimento/
 
 | Documento | Situação |
 |---|---|
-| Regimento Interno | 87 dos 88 artigos publicados. Texto extraído por OCR, **em revisão** — ver `REVISAO-OCR.md`. |
-| Convenção | **Somente o índice.** O material recebido é um resumo com comentários, não o texto oficial. Aguarda o documento registrado em cartório. |
+| Regimento Interno | **Completo e conferido.** Os 88 artigos foram lidos por dois motores de OCR independentes e conferidos na imagem nos pontos divergentes — ver `REVISAO-OCR.md`. |
+| Convenção | **Somente o índice.** O PDF registrado é uma digitalização sem camada de texto e ainda não passou por OCR. |
 | Legislação | 17 links oficiais, conferidos. |
+
+O Regimento reproduz o documento registrado **inclusive onde o próprio original tem erro de
+digitação**. Esses pontos ficam listados na página, no aviso do topo, para que ninguém os
+confunda com falha de leitura.
 
 ## Como atualizar
 
