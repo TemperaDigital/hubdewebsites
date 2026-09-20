@@ -355,11 +355,14 @@ mark { background: var(--marca-hl); color: inherit; border-radius: 3px; padding:
 
 .tabela .col-1 { width: 34%; }
 .tabela td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
-.tabela-longa { max-height: 460px; overflow: auto; border: 1px solid var(--border); border-radius: 8px; }
-.tabela-longa .tabela { border: none; border-radius: 0; }
-.tabela-longa thead th { position: sticky; top: 0; z-index: 1; }
-.tabela-longa .tabela-aviso { position: sticky; bottom: 0; margin: 0; border-radius: 0; }
-.tabela-longa .col-1 { width: auto; }
+.tabela-rolagem {
+  max-height: 440px; overflow: auto;
+  border: 1px solid var(--border); border-radius: 8px 8px 0 0;
+}
+.tabela-rolagem .tabela { border: none; border-radius: 0; }
+.tabela-rolagem thead th { position: sticky; top: 0; z-index: 1; box-shadow: 0 1px 0 var(--border); }
+.tabela-rolagem .col-1 { width: auto; }
+.tabela-rolagem + .tabela-aviso { border-radius: 0 0 8px 8px; border-top: none; margin-top: 0; }
 
 .voltar-busca {
   display: inline-flex; align-items: center; gap: 7px; cursor: pointer;

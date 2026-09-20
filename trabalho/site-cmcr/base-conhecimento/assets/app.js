@@ -154,7 +154,6 @@
     h += '<span class="art-rot">' + esc(art.rotulo) + '</span>';
     if (art.subtitulo) h += '<span class="art-sub">' + destacar(art.subtitulo, alvos) + '</span>';
     if (art.avisoTabela) h += '<p class="aviso-tabela">' + esc(art.avisoTabela) + '</p>';
-    if (art.tabela) h += htmlTabela(art.tabela, alvos);
     h += '<div class="art-corpo">';
     art.blocos.forEach(function (b) {
       if (b.caput || b.rotulo) {
@@ -173,6 +172,7 @@
       }
     });
     h += '</div>';
+    if (art.tabela) h += htmlTabela(art.tabela, alvos);
     if (art.tags.length) {
       h += '<div class="art-tags">';
       art.tags.forEach(function (t) {
@@ -191,7 +191,7 @@
     var D = docAtivo();
     var t = (D.tabelas || []).filter(function (x) { return x.id === id; })[0];
     if (!t) return '';
-    var h = '<div class="tabela-box' + (t.longa ? ' tabela-longa' : '') + '">' +
+    var h = '<div class="tabela-box">' + (t.longa ? '<div class="tabela-rolagem">' : '') +
       '<table class="tabela"><caption class="sr-only">' + esc(t.titulo) + '</caption><thead><tr>';
     t.colunas.forEach(function (c, i) {
       h += '<th scope="col"' + (i ? '' : ' class="col-1"') + '>' + esc(c) + '</th>';
@@ -215,7 +215,8 @@
       h += '</tr>';
       anterior = l.c[0];
     });
-    h += '</tbody></table>' + (t.aviso ? '<p class="tabela-aviso">' + esc(t.aviso) + '</p>' : '') + '</div>';
+    h += '</tbody></table>' + (t.longa ? '</div>' : '') +
+      (t.aviso ? '<p class="tabela-aviso">' + esc(t.aviso) + '</p>' : '') + '</div>';
     return h;
   }
 
