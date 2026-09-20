@@ -156,8 +156,14 @@ o substitui integralmente.
 
 ### Seções 8, 9 e 10
 
-São tabelas de contatos — autores dos projetos, fornecedores e serviços — com nomes,
-registros profissionais e telefones. O OCR não preservou as colunas, e os dados são de 2018.
-Ficam publicadas com aviso no próprio bloco: **confira no manual impresso antes de acionar
-qualquer fornecedor**. Não foram transcritas à mão porque envolvem dados pessoais de
-terceiros que podem estar desatualizados.
+São tabelas de contatos — autores dos projetos, fornecedores e serviços, e a relação de
+materiais. O OCR não preservou as colunas, então as três foram **conferidas diretamente nas
+imagens das páginas 20, 21 e 22** e transcritas: 7 projetos, 8 serviços e 16 materiais.
+
+O quadro de materiais é o mais útil no dia a dia: a coluna de modelo e referência permite
+repor peça igual numa reforma — o porcelanato, a fechadura, a tinta — mesmo que o
+fornecedor tenha mudado de mãos.
+
+As três carregam aviso de que **os dados são de 2018**; confirme antes de acionar qualquer
+fornecedor. Como envolvem nomes, telefones e e-mails de terceiros, podem ser removidas a
+qualquer momento se o condomínio preferir não publicá-las.

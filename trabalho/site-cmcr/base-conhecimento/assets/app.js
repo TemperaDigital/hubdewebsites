@@ -18,7 +18,7 @@
   /* documentos normativos: só entre eles faz sentido o aviso cruzado */
   var NORMATIVOS = ['regimento', 'convencao'];
 
-  var estado = { doc: 'regimento', termo: '', tema: null, abertos: {}, verErros: false };
+  var estado = { doc: 'regimento', termo: '', tema: null, abertos: {}, verErros: false, verDoc: false };
 
   function docAtivo() { return DOCS[estado.doc] || REG; }
 
@@ -227,7 +227,13 @@
     var D = docAtivo();
     var alvos = expandir(estado.termo);
 
-    var h = '<div class="doc-cabeca"><h2>' + esc(D.titulo) + '</h2>' +
+    var h = '';
+    if (estado.verDoc && (estado.termo.trim() || estado.tema)) {
+      h += '<button class="voltar-busca" type="button" id="voltar-busca">' +
+        '<span aria-hidden="true">\u2190</span> Voltar aos resultados' +
+        (estado.termo.trim() ? ' de \u201c' + esc(estado.termo) + '\u201d' : '') + '</button>';
+    }
+    h += '<div class="doc-cabeca"><h2>' + esc(D.titulo) + '</h2>' +
       '<p class="doc-meta"><span>' + esc(D.subtitulo) + '</span><span>' + esc(D.data) +
       '</span><span>' + D.artigos.length + (estado.doc === 'manual' ? ' seções em ' : ' artigos em ') +
       D.capitulos.length + (estado.doc === 'manual' ? ' partes' : ' capítulos') + '</span></p></div>';
@@ -238,7 +244,8 @@
         'entregue pela Construtora. Quem estabelece regras de convivência e penalidades são a Convenção ' +
         'e o Regimento Interno.</p>' +
         '<p>O Manual vale sobretudo pelos <strong>prazos de garantia</strong> (Seção 6.1), pelos cuidados ' +
-        'de manutenção de cada sistema e pelo caminho da assistência técnica.</p>');
+        'de manutenção de cada sistema e pelo caminho da assistência técnica.</p>' +
+        (D.notaConferencia ? '<p>' + esc(D.notaConferencia) + '</p>' : ''));
     } else if (D.confiabilidade === 'conferido') {
       h += htmlAlerta('\u2705',
         '<p><strong>Texto conferido.</strong> ' + (D.notaConferencia
@@ -424,7 +431,7 @@
   /* ---------- render principal ---------- */
 
   function render() {
-    var buscando = !!(estado.termo.trim() || estado.tema);
+    var buscando = !!(estado.termo.trim() || estado.tema) && !estado.verDoc;
     if (estado.doc === 'legislacao') painel.innerHTML = viewLegislacao();
     else if (buscando) painel.innerHTML = viewResultados();
     else painel.innerHTML = viewDocumento();
@@ -437,7 +444,8 @@
   }
 
   function irParaArtigo(n) {
-    estado.termo = ''; estado.tema = null; campo.value = '';
+    /* mantém o termo para seguir destacado dentro do artigo */
+    estado.verDoc = true;
     var art = docAtivo().artigos.filter(function (a) { return a.n === n; })[0];
     if (art) estado.abertos[estado.doc + '-' + art.cap] = true;
     render();
@@ -452,19 +460,21 @@
     clearTimeout(timer);
     timer = setTimeout(function () {
       estado.termo = campo.value;
+      estado.verDoc = false;
       if (estado.termo.trim() && estado.doc === 'legislacao') estado.doc = 'regimento';
       render();
     }, 160);
   });
 
   btnLimpar.addEventListener('click', function () {
-    campo.value = ''; estado.termo = ''; estado.tema = null; render(); campo.focus();
+    campo.value = ''; estado.termo = ''; estado.tema = null; estado.verDoc = false; render(); campo.focus();
   });
 
   $('#abas').addEventListener('click', function (e) {
     var b = e.target.closest('.aba');
     if (!b) return;
     estado.doc = b.dataset.doc;
+    estado.verDoc = false;
     if (estado.doc === 'legislacao') { estado.tema = null; }
     render();
   });
@@ -474,15 +484,18 @@
     if (chip) {
       var t = chip.dataset.tema;
       estado.tema = estado.tema === t ? null : t;
+      estado.verDoc = false;
       if (estado.doc === 'legislacao') estado.doc = 'regimento';
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     if (e.target.id === 'ver-erros') { estado.verErros = !estado.verErros; render(); return; }
+    if (e.target.closest('#voltar-busca')) { estado.verDoc = false; render(); window.scrollTo({top:0,behavior:'smooth'}); return; }
     var cruz = e.target.closest('[data-doc-ir]');
     if (cruz) {
       estado.doc = cruz.dataset.docIr;
+      estado.verDoc = false;
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;

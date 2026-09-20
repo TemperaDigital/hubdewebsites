@@ -58,8 +58,8 @@ base-conhecimento/
 | Documento | Situação |
 |---|---|
 | Regimento Interno | **Completo e conferido.** Os 88 artigos foram lidos por dois motores de OCR independentes e conferidos na imagem nos pontos divergentes — ver `REVISAO-OCR.md`. |
-| Convenção | **60 artigos em 13 capítulos**, extraídos do PDF registrado. Faltam os Arts. 61º a 67º, ausentes do escaneamento, e as tabelas dos Arts. 4º e 6º. Em revisão. |
-| Manual do Proprietário | **35 seções em 10 partes.** Não é norma: é o manual de uso e manutenção da Construtora. Quadro de garantias conferido na imagem. Em revisão. |
+| Convenção | **60 artigos em 13 capítulos**, conferidos por dois motores de OCR. Os quadros dos Arts. 4º e 6º foram lidos na imagem. Faltam os Arts. 61º a 67º, ausentes do escaneamento. |
+| Manual do Proprietário | **35 seções em 10 partes.** Não é norma: é o manual de uso e manutenção da Construtora. Os quatro quadros — garantias, projetos, serviços e materiais — foram conferidos nas imagens. |
 | Legislação | 17 links oficiais, conferidos. |
 
 O Regimento reproduz o documento registrado **inclusive onde o próprio original tem erro de
