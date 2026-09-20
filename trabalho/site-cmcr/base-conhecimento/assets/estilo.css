@@ -347,3 +347,8 @@ mark { background: var(--marca-hl); color: inherit; border-radius: 3px; padding:
   font-family: var(--font); font-size: .82rem; line-height: 1.55;
   background: var(--alerta-bg); border: 1px dashed var(--alerta-br); color: var(--alerta-tx);
 }
+
+.art-sub {
+  display: block; font-family: var(--font); font-weight: 600;
+  font-size: .97rem; margin: 0 0 8px; color: var(--text);
+}

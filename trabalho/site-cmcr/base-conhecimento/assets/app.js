@@ -3,6 +3,7 @@
 
   var REG = window.DADOS_REGIMENTO;
   var CONV = window.DADOS_CONVENCAO;
+  var MAN = window.DADOS_MANUAL;
   var LEIS = window.DADOS_LEGISLACAO;
   var TEMAS = window.DADOS_TEMAS;
   var SIN = window.DADOS_SINONIMOS;
@@ -12,8 +13,10 @@
   var campo = $('#busca');
   var btnLimpar = $('#busca-limpar');
 
-  var DOCS = { regimento: REG, convencao: CONV };
-  var ROTULO = { regimento: 'Regimento', convencao: 'Convenção' };
+  var DOCS = { regimento: REG, convencao: CONV, manual: MAN };
+  var ROTULO = { regimento: 'Regimento', convencao: 'Convenção', manual: 'Manual' };
+  /* documentos normativos: só entre eles faz sentido o aviso cruzado */
+  var NORMATIVOS = ['regimento', 'convencao'];
 
   var estado = { doc: 'regimento', termo: '', tema: null, abertos: {}, verErros: false };
 
@@ -149,7 +152,9 @@
   function htmlArtigo(art, alvos) {
     var h = '<article class="art" id="' + estado.doc + '-art-' + art.n + '">';
     h += '<span class="art-rot">' + esc(art.rotulo) + '</span>';
+    if (art.subtitulo) h += '<span class="art-sub">' + destacar(art.subtitulo, alvos) + '</span>';
     if (art.avisoTabela) h += '<p class="aviso-tabela">' + esc(art.avisoTabela) + '</p>';
+    if (art.tabela) h += htmlTabela(art.tabela, alvos);
     h += '<div class="art-corpo">';
     art.blocos.forEach(function (b) {
       if (b.caput || b.rotulo) {
@@ -182,19 +187,22 @@
   function htmlTabela(id, alvos) {
     var t = (docAtivo().tabelas || []).filter(function (x) { return x.id === id; })[0];
     if (!t) return '';
+    var temMeio = t.linhas.some(function (l) { return !l.obs && l.dia; });
+    var cols = t.colunas.slice(1);
+    if (!temMeio) cols = [cols[0], cols[cols.length - 1]];
     var h = '<div class="tabela-box"><table class="tabela"><caption class="sr-only">' + esc(t.titulo) + '</caption><thead><tr>';
-    t.colunas.slice(1).forEach(function (c) { h += '<th scope="col">' + esc(c) + '</th>'; });
+    cols.forEach(function (c) { h += '<th scope="col">' + esc(c) + '</th>'; });
     h += '</tr></thead><tbody>';
     var anterior = null;
     t.linhas.forEach(function (l) {
       if (l.obs) {
-        h += '<tr class="linha-obs"><td colspan="3"><strong>Observação</strong> — ' + destacar(l.hora, alvos) + '</td></tr>';
+        h += '<tr class="linha-obs"><td colspan="' + cols.length + '"><strong>Observação</strong> — ' + destacar(l.hora, alvos) + '</td></tr>';
         return;
       }
       var novo = l.local !== anterior;
       h += '<tr' + (novo ? ' class="linha-nova"' : '') + '>' +
         '<th scope="row">' + (novo ? destacar(l.local, alvos) + (l.item ? ' <span class="item-n">' + esc(l.item) + '</span>' : '') : '') + '</th>' +
-        '<td>' + destacar(l.dia, alvos) + '</td>' +
+        (temMeio ? '<td>' + destacar(l.dia, alvos) + '</td>' : '') +
         '<td class="hora">' + destacar(l.hora, alvos) + '</td></tr>';
       anterior = l.local;
     });
@@ -212,9 +220,17 @@
 
     var h = '<div class="doc-cabeca"><h2>' + esc(D.titulo) + '</h2>' +
       '<p class="doc-meta"><span>' + esc(D.subtitulo) + '</span><span>' + esc(D.data) +
-      '</span><span>' + D.artigos.length + ' artigos em ' + D.capitulos.length + ' capítulos</span></p></div>';
+      '</span><span>' + D.artigos.length + (estado.doc === 'manual' ? ' seções em ' : ' artigos em ') +
+      D.capitulos.length + (estado.doc === 'manual' ? ' partes' : ' capítulos') + '</span></p></div>';
 
-    if (D.confiabilidade === 'conferido') {
+    if (D.naoNormativo) {
+      h += htmlAlerta('\ud83d\udd27',
+        '<p><strong>Este documento não é norma do condomínio.</strong> É o manual de uso e manutenção ' +
+        'entregue pela Construtora. Quem estabelece regras de convivência e penalidades são a Convenção ' +
+        'e o Regimento Interno.</p>' +
+        '<p>O Manual vale sobretudo pelos <strong>prazos de garantia</strong> (Seção 6.1), pelos cuidados ' +
+        'de manutenção de cada sistema e pelo caminho da assistência técnica.</p>');
+    } else if (D.confiabilidade === 'conferido') {
       h += htmlAlerta('\u2705',
         '<p><strong>Texto conferido.</strong> Os ' + D.artigos.length + ' artigos foram lidos por dois motores de OCR ' +
         'independentes e, nos pontos em que discordaram, conferidos diretamente na imagem do documento registrado.</p>' +
@@ -252,7 +268,7 @@
       h += '<button class="cap-btn" type="button" data-cap="' + chave + '" aria-expanded="' + aberto + '">' +
         '<span class="cap-num">' + esc(c.numero) + '</span>' +
         '<span class="cap-tit">' + esc(c.titulo) + '</span>' +
-        '<span class="cap-cnt">' + c.artigos.length + ' art.</span>' +
+        '<span class="cap-cnt">' + c.artigos.length + (estado.doc === 'manual' ? ' seç.' : ' art.') + '</span>' +
         '<span class="cap-seta" aria-hidden="true">\u203a</span></button>';
       if (aberto) {
         h += '<div class="cap-corpo">';
@@ -300,13 +316,16 @@
     var total = r.diretos.length + r.relacionados.length;
 
     var titulo = estado.termo ? '\u201c' + esc(estado.termo) + '\u201d' : (tema ? tema.icone + ' ' + esc(tema.nome) : 'Tudo');
+    var nome = estado.doc === 'manual' ? 'seç' : 'artigo';
     var h = '<div class="res-cabeca"><h2>' + titulo + '</h2><span class="res-cnt">' +
-      (total === 1 ? '1 artigo encontrado' : total + ' artigos encontrados') +
+      (total === 1
+        ? (estado.doc === 'manual' ? '1 seção encontrada' : '1 artigo encontrado')
+        : total + (estado.doc === 'manual' ? ' seções encontradas' : ' artigos encontrados')) +
       ' em ' + esc(D.titulo) + '</span></div>';
 
     /* o outro documento normativo também pode tratar do assunto */
     var outroId = estado.doc === 'regimento' ? 'convencao' : 'regimento';
-    var outro = DOCS[outroId];
+    var outro = NORMATIVOS.indexOf(estado.doc) > -1 ? DOCS[outroId] : null;
     if (outro && outro.artigos.length) {
       var rOutro = buscar(outro);
       var nOutro = rOutro.diretos.length + rOutro.relacionados.length;
@@ -320,7 +339,7 @@
 
     if (!total) {
       return h + '<div class="vazio"><span class="vazio-icone" aria-hidden="true">\ud83d\udd0d</span>' +
-        '<strong>Nenhum artigo encontrado em ' + esc(D.titulo) + '</strong>' +
+        '<strong>Nada encontrado em ' + esc(D.titulo) + '</strong>' +
         'Tente outra palavra, ou use um dos temas acima.</div>';
     }
 
@@ -328,7 +347,8 @@
       return '<button class="res-item" type="button" data-ir="' + a.n + '">' +
         '<span class="res-topo"><span class="res-doc">' + esc(ROTULO[estado.doc] || '') + '</span>' +
         '<strong>' + esc(a.rotulo) + '</strong>' +
-        '<span class="res-cap">Cap. ' + esc(a.cap) + ' \u2014 ' + esc(a.capTitulo) + '</span></span>' +
+        '<span class="res-cap">' + (estado.doc === 'manual' ? '' : 'Cap. ' + esc(a.cap) + ' \u2014 ') +
+        esc(a.capTitulo) + (a.subtitulo ? ' \u203a ' + esc(a.subtitulo) : '') + '</span></span>' +
         '<p class="res-texto">' + destacar(trecho(a, alvos), alvos) + '</p></button>';
     }
 
@@ -356,7 +376,7 @@
   function montarTemas() {
     var box = $('#temas');
     var cont = {};
-    [REG, CONV].forEach(function (D) {
+    [REG, CONV, MAN].forEach(function (D) {
       (D.artigos || []).forEach(function (a) {
         a.tags.forEach(function (t) { cont[t] = (cont[t] || 0) + 1; });
       });

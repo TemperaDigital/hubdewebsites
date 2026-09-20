@@ -117,3 +117,47 @@ e semelhantes). São marcas de margem do documento físico, não texto normativo
 
 A Convenção continua marcada como **em revisão**: ao contrário do Regimento, ainda não
 houve a conferência página a página na imagem.
+
+---
+
+## 5. Manual do Proprietário
+
+**Situação: publicado, em revisão.**
+
+O *Manual de Uso e Manutenção* entregue pela B&C Construções, em PDF de 22 páginas sem
+camada de texto. Lido com `tesseract` a 300 dpi. Resultado: **35 seções em 10 partes**.
+
+O Manual **não é norma do condomínio** — a página avisa isso no topo. Quem estabelece regras
+de convivência e penalidades são a Convenção e o Regimento. O Manual vale pelos prazos de
+garantia, pelos cuidados de manutenção de cada sistema e pelo caminho da assistência técnica.
+
+### Cabeçalhos que o OCR destruiu
+
+Três títulos de seção saíram irreconhecíveis e foram restaurados pela posição e pelo
+sumário da página 2:
+
+| Como o OCR leu | O que é |
+|---|---|
+| `5.7.VIDROS` (sem espaço) | 5.7. Vidros |
+| `74 INFORMAÇÕES AO SÍNDICO` | 7.1. Informações ao Síndico |
+| `Tola PISCINA` | 7.7. Piscina |
+
+Também foi preciso separar os **passos numerados da Seção 6.2** ("1. Preencha a ficha…",
+"2. No recebimento do seu pedido…"), que o parser lia como se fossem seções de primeiro
+nível. A regra passou a exigir numeração estritamente crescente para seções de topo.
+
+### Quadro de garantias
+
+A tabela da Seção 6.1 é o item mais consultado do Manual e saiu destruída pelo OCR: restaram
+só os prazos, sem os itens a que se referem. Foi **conferida nas imagens das páginas 14 e 15**
+e reconstruída com os 18 itens, de 3 anos (impermeabilizações e revestimentos de fachada) a
+"defeito aparente" (vistorias de entrega). O texto embaralhado foi removido, já que a tabela
+o substitui integralmente.
+
+### Seções 8, 9 e 10
+
+São tabelas de contatos — autores dos projetos, fornecedores e serviços — com nomes,
+registros profissionais e telefones. O OCR não preservou as colunas, e os dados são de 2018.
+Ficam publicadas com aviso no próprio bloco: **confira no manual impresso antes de acionar
+qualquer fornecedor**. Não foram transcritas à mão porque envolvem dados pessoais de
+terceiros que podem estar desatualizados.
