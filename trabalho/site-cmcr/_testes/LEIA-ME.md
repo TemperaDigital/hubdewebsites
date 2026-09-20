@@ -69,6 +69,8 @@ completar. É esse número que serve para um hook ou uma ação do GitHub.
 | `tabelas-apresentacao-e-filtro.js` | a coluna ITEM, o zebrado por grupo, o filtro, e o empilhamento em cartões no celular |
 | `busca-em-apendices.js` | os apêndices aparecem na busca — antes ficavam de fora do índice |
 | `pagina-inicial.js` | a página de apresentação, incluindo o contraste do cartão da Base calculado na hora |
+| `busca-sinonimos-e-limites.js` | a tabela de sinônimos e a regra de limite de palavra da busca |
+| `tema-preambulo-e-links.js` | o preâmbulo de cada documento, a memória do tema escuro e o `rel` dos links de legislação |
 
 ## O marcador `FIM|executadas|falhas`
 
@@ -109,11 +111,37 @@ Duas regras que a auditoria carrega:
 
 ### Buracos conhecidos
 
-As mutações marcadas com `descoberto` em `mutacoes.js` são defeitos que a
-suíte **não** pega hoje. Elas ficam na lista de propósito, como lista de
-trabalho pendente. A auditoria só falha quando aparece um buraco **novo** —
-um que não estava documentado.
+Nenhum, hoje: **16 de 16**.
 
-O mais incômodo deles: desligar a regra de limite de palavra na busca, que
-faz "pet" voltar a encontrar "peteca". Esse bug já existiu e foi consertado;
-nada impede que volte.
+Não foi sempre assim. A primeira auditoria fechou em 11 de 16, e os cinco
+defeitos que escapavam eram estes:
+
+| Defeito que passava | Fechado por |
+|---|---|
+| a tabela de sinônimos quebrada — "cachorro" deixava de achar os artigos sobre animais | `busca-sinonimos-e-limites.js` |
+| o limite de palavra removido — "pet" voltava a encontrar "peteca" | `busca-sinonimos-e-limites.js` |
+| os links de legislação sem `rel="noopener"` | `tema-preambulo-e-links.js` |
+| o tema escuro deixando de ser lembrado entre visitas | `tema-preambulo-e-links.js` |
+| o preâmbulo do documento sumindo da página | `tema-preambulo-e-links.js` |
+
+O da busca era o mais incômodo: esse bug já existiu, foi consertado, e nada
+impedia que voltasse sem ninguém notar.
+
+**Se aparecer um buraco novo**, marque a mutação com a chave `descoberto` e o
+motivo, em `mutacoes.js`. A auditoria trata buraco documentado como dívida
+conhecida e não falha por causa dele — mas falha, com código 1, quando
+aparece um que ninguém registrou.
+
+### Escrevendo um caso novo
+
+Três coisas que a suíte aprendeu do jeito difícil:
+
+- **Termine com `FIM|executadas|falhas`.** Sem ela o caso é contado como
+  quebrado.
+- **Não deixe o caso morrer onde deveria reprovar.** Ler o texto de um
+  elemento ausente estoura, e um caso que estoura avisa que algo quebrou sem
+  dizer o quê. Confira a presença primeiro e reprove com nome.
+- **Prove que a asserção enxerga.** Uma asserção que nasce verde pode estar
+  medindo a coisa errada. Plante o defeito correspondente em `mutacoes.js` e
+  confirme que ela reprova — foi assim que se descobriu uma asserção
+  `... ? true : true`, verde desde o dia em que foi escrita.

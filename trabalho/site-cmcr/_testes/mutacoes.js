@@ -2,8 +2,11 @@
 // depois dela, a suíte não cobre aquilo — e o verde não significa nada ali.
 //
 // Os caminhos são relativos à raiz do site (a pasta acima desta).
-// As que hoje passam despercebidas ficam marcadas com `descoberto`, para não
-// se perderem: são a lista de trabalho pendente, não lixo.
+//
+// Uma mutação que passar despercebida deve ganhar a chave `descoberto` com o
+// motivo, para virar lista de trabalho e não desaparecer no relatório. Hoje
+// não há nenhuma: as cinco que existiam foram fechadas pelos casos
+// busca-sinonimos-e-limites.js e tema-preambulo-e-links.js.
 module.exports = [
   { nome: 'artigo removido do Regimento',
     arquivo: 'base-conhecimento/dados/regimento.js',
@@ -11,7 +14,6 @@ module.exports = [
 
   { nome: 'sinônimo quebrado (cachorro deixa de achar animais)',
     arquivo: 'base-conhecimento/dados/temas.js',
-    descoberto: 'nenhum caso exercita a tabela de sinônimos',
     aplicar: function (s) { return s.replace('"cachorro": [', '"cachorroX": ['); } },
 
   { nome: 'destaque do termo desligado',
@@ -24,7 +26,6 @@ module.exports = [
 
   { nome: 'limite de palavra removido (pet volta a achar peteca)',
     arquivo: 'base-conhecimento/assets/app.js',
-    descoberto: 'o conserto do falso positivo na busca não está travado por nenhum caso',
     aplicar: function (s) {
       return s.replace('var fimOk = alvo.length >= 4 || !/[a-z0-9]/.test(depois);', 'var fimOk = true;');
     } },
@@ -45,7 +46,6 @@ module.exports = [
 
   { nome: 'link da legislação perde rel=noopener',
     arquivo: 'base-conhecimento/assets/app.js',
-    descoberto: 'nenhum caso confere o rel dos links externos',
     aplicar: function (s) { return s.replace('rel="noopener noreferrer"', 'rel=""'); } },
 
   { nome: 'empilhamento no celular desligado',
@@ -68,12 +68,10 @@ module.exports = [
 
   { nome: 'tema escuro não persiste',
     arquivo: 'base-conhecimento/assets/app.js',
-    descoberto: 'nenhum caso troca de tema',
     aplicar: function (s) { return s.replace('document.documentElement.dataset.theme = novo;', ''); } },
 
   { nome: 'preâmbulo do documento some',
     arquivo: 'base-conhecimento/assets/app.js',
-    descoberto: 'nenhum caso confere o preâmbulo',
     aplicar: function (s) {
       return s.replace("h += '<p class=\"preambulo\">' + destacar(D.preambulo, alvos) + '</p>';", '');
     } },
