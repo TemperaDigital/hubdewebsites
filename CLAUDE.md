@@ -41,6 +41,34 @@ Foram **movidos, não excluídos**, para conferência contra backup.
 **Não apagar sem o usuário confirmar.** Se a sincronização ainda estiver com
 defeito, o problema volta a acontecer com arquivo novo.
 
+**A pasta ao vivo `/media/auxiliar/sites` não é fonte boa.** Em 20/09/2026 uma
+sessão irmã presumiu que fosse, restaurou os arquivos por cima (`dd84fab`) e
+depois conferiu byte a byte: a pasta ao vivo está zerada também. Reverteu em
+`8c3fac1`. Não verificado desta sessão — não tenho acesso a esse caminho —,
+mas registrado porque é a hipótese que qualquer um tenta primeiro.
+
+**Tamanho não prova conteúdo.** 42.788 bytes de zeros têm tamanho "certo" no
+`ls`, no `stat` e no `git cat-file -s`; foi assim que a restauração acima
+passou na própria verificação de quem a fez. O teste que distingue conta os
+bytes nulos, ou compara o hash do blob:
+
+```bash
+python3 -c "
+import os
+z=[]
+for r,d,f in os.walk('.'):
+    if '.git' in d: d.remove('.git')
+    for a in f:
+        p=os.path.join(r,a)
+        try:
+            n=os.path.getsize(p)
+            if n==0: continue
+            b=open(p,'rb').read()
+        except Exception: continue
+        if b.count(bytes([0]))==len(b): z.append(p)
+print('100% nulos:', len(z))"
+```
+
 ## `trabalho/site-cmcr/` — Condomínio Monte Carlo Residence
 
 Dois sites que se ligam: a página de apresentação (`index.html`) e as
