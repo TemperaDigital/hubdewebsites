@@ -13,3 +13,7 @@ desktop.ini
 # Binários de instalador que não deveriam estar em pastas de curso
 *.exe
 *.msi
+
+# Configuração de agente (Claude Code) copiada junto dos sub-projetos,
+# não é conteúdo do site
+.claude/
