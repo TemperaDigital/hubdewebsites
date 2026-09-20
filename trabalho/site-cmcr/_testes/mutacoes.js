@@ -1,0 +1,84 @@
+// Cada mutação é um defeito plausível no site. Se a suíte continuar verde
+// depois dela, a suíte não cobre aquilo — e o verde não significa nada ali.
+//
+// Os caminhos são relativos à raiz do site (a pasta acima desta).
+// As que hoje passam despercebidas ficam marcadas com `descoberto`, para não
+// se perderem: são a lista de trabalho pendente, não lixo.
+module.exports = [
+  { nome: 'artigo removido do Regimento',
+    arquivo: 'base-conhecimento/dados/regimento.js',
+    aplicar: function (s) { return s.replace('"n": 72,', '"n": 720,'); } },
+
+  { nome: 'sinônimo quebrado (cachorro deixa de achar animais)',
+    arquivo: 'base-conhecimento/dados/temas.js',
+    descoberto: 'nenhum caso exercita a tabela de sinônimos',
+    aplicar: function (s) { return s.replace('"cachorro": [', '"cachorroX": ['); } },
+
+  { nome: 'destaque do termo desligado',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace('return out + esc(texto.slice(pos));', 'return esc(texto);'); } },
+
+  { nome: 'busca deixa de ignorar acento',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace(".normalize('NFD')", ''); } },
+
+  { nome: 'limite de palavra removido (pet volta a achar peteca)',
+    arquivo: 'base-conhecimento/assets/app.js',
+    descoberto: 'o conserto do falso positivo na busca não está travado por nenhum caso',
+    aplicar: function (s) {
+      return s.replace('var fimOk = alvo.length >= 4 || !/[a-z0-9]/.test(depois);', 'var fimOk = true;');
+    } },
+
+  { nome: 'aviso cruzado entre documentos some',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace('if (outro && outro.artigos.length) {', 'if (false) {'); } },
+
+  { nome: 'tabela some do artigo',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace('if (art.tabela) h += htmlTabela(art.tabela, alvos);', ''); } },
+
+  { nome: 'linha do quadro de garantias perdida',
+    arquivo: 'base-conhecimento/dados/manual.js',
+    aplicar: function (s) {
+      return s.replace(/\{\s*"c":\s*\[\s*"Portas empenadas",\s*"01 ano"\s*\]\s*\},\s*/, '');
+    } },
+
+  { nome: 'link da legislação perde rel=noopener',
+    arquivo: 'base-conhecimento/assets/app.js',
+    descoberto: 'nenhum caso confere o rel dos links externos',
+    aplicar: function (s) { return s.replace('rel="noopener noreferrer"', 'rel=""'); } },
+
+  { nome: 'empilhamento no celular desligado',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace('var empilha = t.colunas.length > 3;', 'var empilha = false;'); } },
+
+  { nome: 'filtro deixa de esconder linhas',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) { return s.replace('tr.hidden = !bate;', ''); } },
+
+  { nome: 'coluna ITEM some de novo',
+    arquivo: 'base-conhecimento/dados/regimento.js',
+    aplicar: function (s) { return s.replace(/"Item",\s*(?=\s*"Local \/ Atividade")/, ''); } },
+
+  { nome: 'lacuna reaparece na Convenção',
+    arquivo: 'base-conhecimento/dados/convencao.js',
+    aplicar: function (s) {
+      return s.replace('"lacunas": [],', '"lacunas": [{"n": null, "cap": "XIII", "motivo": "teste"}],');
+    } },
+
+  { nome: 'tema escuro não persiste',
+    arquivo: 'base-conhecimento/assets/app.js',
+    descoberto: 'nenhum caso troca de tema',
+    aplicar: function (s) { return s.replace('document.documentElement.dataset.theme = novo;', ''); } },
+
+  { nome: 'preâmbulo do documento some',
+    arquivo: 'base-conhecimento/assets/app.js',
+    descoberto: 'nenhum caso confere o preâmbulo',
+    aplicar: function (s) {
+      return s.replace("h += '<p class=\"preambulo\">' + destacar(D.preambulo, alvos) + '</p>';", '');
+    } },
+
+  { nome: 'texto do cartão da base fica ilegível',
+    arquivo: 'assets/estilo.css',
+    aplicar: function (s) { return s.replace('color: #f0e2e0;', 'color: #7d4a4d;'); } }
+];
