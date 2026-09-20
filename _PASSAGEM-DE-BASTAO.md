@@ -53,38 +53,41 @@ branch.
 
 ## 3. Manutenções necessárias — o que ficou pendente de verdade
 
-### 3.1. Os 3.199 arquivos zerados — sem fonte boa conhecida
+### 3.1. Os 3.199 arquivos zerados — RESOLVIDO, apagados em 20/09/2026
 
-Em `_arquivos-zerados/`, com a estrutura de origem preservada. São 57% dos
-arquivos do repositório: tamanho normal, conteúdo **100% de bytes nulos**.
+Estavam em `_arquivos-zerados/`, com a estrutura de origem preservada. Eram
+57% dos arquivos do repositório: tamanho normal, conteúdo **100% de bytes
+nulos**.
 
-O que já foi descartado como fonte de recuperação:
+Fontes de recuperação verificadas antes de apagar, todas negativas:
 
 - **o histórico do git, inteiro** — não só o commit inicial. Varridos os 39
   commits de todas as branches, lendo a árvore de cada um: os 3.199 caminhos
   têm **uma única versão cada em toda a história**, e 0 dos 1.985 blobs
   distintos tem conteúdo. Nunca existiu versão boa em commit nenhum.
 - **a pasta ao vivo `/media/auxiliar/sites`** — conferida byte a byte em
-  20/09/2026 pela instância do ZimaOS, numa amostra de 50 arquivos do lote:
+  20/09/2026, numa amostra de 50+ arquivos do lote e depois confirmada com
+  um exemplo público (PDF servido em `sites.fguerra.ia.br`, todo nulo):
   zerada também
+- **lixeira do ZimaOS** (`.recycle`) — vazia
+- **snapshot btrfs do volume** — nenhum existe
 
-**Não apague sem o dono confirmar.** E não presuma nova fonte sem conferir
-conteúdo — foi presumir isso que causou o incidente de hoje.
+A única pista não esgotada era o espelho no Google Drive via `rclone`
+(token expirado, nunca chegou a ser verificado). **O dono decidiu apagar
+mesmo assim** — depois de eu mostrar um exemplo ao vivo (o PDF público
+citado acima) para confirmar a corrupção, ele concluiu que nada daquele
+material fazia falta e pediu a exclusão dos 3.199, tanto de
+`_arquivos-zerados/` quanto dos mesmos caminhos na pasta ao vivo.
 
-Onde ainda vale procurar, atualizado em 20/09/2026 à noite pela instância do
-ZimaOS: das três fontes externas ao repositório e à pasta ao vivo, **duas já
-foram checadas e descartadas** — lixeira do ZimaOS (vazia; não é a lixeira
-por-arquivo do Nextcloud, é um recurso de sistema, checado via container root
-sem precisar de `sudo`) e snapshot btrfs do volume (`btrfs subvolume list`
-devolveu vazio — nunca existiu snapshot desse volume). **Só resta o espelho no
-Google Drive via `rclone`**, e esse está bloqueado agora por token expirado
-(`invalid_client`) — precisa o dono reautenticar local (`rclone authorize
-"drive"`, colar o token). Depois disso esgotado, só resta perguntar ao dono se
-existe cópia externa (pen drive, HD, máquina antiga).
+Antes de apagar, valeu identificar que **~66% do total (2.125 arquivos)**
+era biblioteca pública reobtenível sem backup nenhum — Font Awesome (2.067)
+e PHPMailer (58), ver detalhamento por pasta no item 3.1b abaixo (mantido
+como registro histórico, já que os arquivos em si não existem mais).
 
-Ao conferir qualquer uma delas, **não aceite tamanho como prova**: use a
-varredura do item 5.1 ou compare o hash. Foi assim que a primeira tentativa de
-recuperação se convenceu de ter funcionado sem ter copiado nada.
+**Lição que valeu a pena, mesmo com o material apagado:** não aceitar
+tamanho como prova de conteúdo (item 4.1) foi o que evitou um "conserto"
+que teria movido bytes nulos de volta sem resolver nada — dessa vez
+verificado byte a byte antes de qualquer ação, não depois.
 
 ### 3.1b. Onde cada arquivo estava — para procurar backup por pasta
 

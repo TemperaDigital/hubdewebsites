@@ -40,41 +40,34 @@ o arquivo de configuração do nginx no servidor (caminho no
 `.js`, `.md`, `.json`, `.txt` **não** são bloqueados. `.sh`, `.py` e extensões
 de documento/dump são.
 
-## `_arquivos-zerados/` — não é lixo comum
+## `_arquivos-zerados/` — resolvido, apagado com confirmação do dono (20/09/2026)
 
-3.199 arquivos (57% do repositório, 142 MB declarados) têm tamanho normal e
-conteúdo **100% de bytes nulos**. Não são arquivos em branco: são arquivos cujo
-conteúdo se perdeu. Já entraram zerados no commit inicial — o git não recupera.
-142 MB declarados contra 17 MB em disco identifica arquivos esparsos, cujos
-blocos nunca foram gravados: falha entre sistema de arquivos e sincronização.
+Existiam 3.199 arquivos (57% do repositório, 142 MB declarados) com tamanho
+normal e conteúdo **100% de bytes nulos** — não estavam em branco, tinham
+conteúdo e o perderam. Já entraram zerados no commit inicial do repositório;
+o git nunca teve versão boa em nenhum commit. 142 MB declarados contra 17 MB
+em disco identificava arquivos esparsos, cujos blocos nunca foram gravados —
+falha entre sistema de arquivos e sincronização, nunca diagnosticada.
 
-Foram **movidos, não excluídos**, para conferência contra backup.
-**Não apagar sem o usuário confirmar.** Se a sincronização ainda estiver com
-defeito, o problema volta a acontecer com arquivo novo.
+Foram movidos (não excluídos) para `_arquivos-zerados/` em 20/09/2026 de
+manhã, para conferência contra backup antes de decidir. Buscas feitas antes
+de apagar, todas negativas:
 
-**A pasta ao vivo do servidor não é fonte boa.** Em 20/09/2026 uma
-sessão irmã presumiu que fosse, restaurou os arquivos por cima (`dd84fab`) e
-depois conferiu byte a byte: a pasta ao vivo está zerada também. Reverteu em
-`8c3fac1`.
+- histórico do git inteiro (39 commits, todas as branches) — nunca existiu
+  versão boa
+- pasta ao vivo do servidor (`/media/auxiliar/sites`) — zerada também,
+  confirmado byte a byte
+- lixeira do ZimaOS (`.recycle`) — vazia
+- snapshot btrfs do volume — nenhum existe
 
-**Atualização 20/09/2026, instância do ZimaOS (que assumiu o repositório
-— ver `_PASSAGEM-DE-BASTAO.md`), com acesso direto ao host:**
-
-- **Lixeira do ZimaOS (`.recycle` da pasta ao vivo) — checada, vazia.**
-  Não é a lixeira por-arquivo do Nextcloud (essa fica dentro do storage do
-  Nextcloud, não da pasta ao vivo montada via Samba); é um recurso de
-  sistema do ZimaOS, e não guarda nada.
-- **Snapshot btrfs — checado, não existe nenhum.** `btrfs subvolume list`
-  no volume que hospeda `/media/auxiliar` devolve vazio: o volume nunca
-  teve snapshot tirado. Também não achei recurso de snapshot/backup do
-  ZimaOS configurado pra essa pasta.
-- **Espelho no Google Drive via rclone — ainda não verificado.** O
-  `bisync` planejado pra `/DATA/Documents` nunca chegou a ser implementado
-  (não é backup desta pasta de qualquer forma). O remote `gdrive:` em si
-  está com token expirado agora (`invalid_client`) — precisa de
-  reautenticação pelo dono (mesmo fluxo de sempre: `rclone authorize`
-  local, colar o token). Ainda não descartado, mas bloqueado até isso
-  acontecer.
+A única pista não esgotada era o espelho no Google Drive via `rclone`
+(bloqueado por token expirado, nunca chegou a ser verificado). **O dono
+decidiu apagar de qualquer forma**, sem esperar essa última verificação:
+nada daquele material fazia falta. Removidos `_arquivos-zerados/` do
+repositório e os mesmos 3.199 caminhos da pasta ao vivo, na mesma sessão.
+Identificado antes de apagar que ~66% do total (2.125 arquivos) era
+biblioteca pública reobtenível (Font Awesome, PHPMailer) de qualquer forma —
+detalhe completo no `_PASSAGEM-DE-BASTAO.md`.
 
 Restam duas pistas: o Drive (bloqueado por reautenticação) e perguntar
 direto ao dono se ele tem alguma outra cópia (pen drive, HD externo,
