@@ -1,0 +1,10 @@
+- if @activities.present?
+  #user-activities
+    %h2.group-title Dagens aktiviteter
+    %ul
+      - @activities.each do |activity|
+        %li
+          = activity.reason
+          = activity.starting
+          = "till"
+          = activity.ending

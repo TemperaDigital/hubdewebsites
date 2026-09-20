@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Modelos de Intranet — sites.fguerra.ia.br</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #161b26;
+    --surface-2: #1d2333;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: rgba(148, 163, 184, 0.14);
+    --accent: #be185d;
+    --accent-bright: #ec4899;
+    --font-body: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1100px 480px at 12% -10%, rgba(190,24,93,.12), transparent 60%),
+      radial-gradient(900px 420px at 90% 0%, rgba(59,130,246,.08), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px 80px; }
+
+  header { padding: 72px 0 40px; }
+
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+
+  .breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--border);
+  }
+
+  .breadcrumb a:hover {
+    color: var(--accent-bright);
+    border-bottom-color: var(--accent-bright);
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin: 0 0 12px;
+  }
+
+  h1 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .lead {
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 62ch;
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-size: .78rem;
+    font-family: var(--font-mono);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin: 48px 0 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-note {
+    color: var(--text-muted);
+    font-size: .86rem;
+    margin: 12px 0 20px;
+    line-height: 1.5;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+
+  a.card:hover, a.card:focus-visible {
+    background: var(--surface-2);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .card h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: .88rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .card .path {
+    margin-top: auto;
+    padding-top: 10px;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--accent-bright);
+    opacity: .8;
+    word-break: break-all;
+  }
+
+  .card.is-pending {
+    border-style: dashed;
+    opacity: .78;
+  }
+
+  .card.is-pending .path {
+    color: var(--text-muted);
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: .66rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 9px;
+    width: fit-content;
+  }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: .82rem;
+    line-height: 1.6;
+  }
+
+  footer code {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="breadcrumb"><a href="/">sites.fguerra.ia.br</a> / modelos / models-intranet</p>
+    <p class="kicker">Modelos — referência</p>
+    <h1>Modelos de Intranet</h1>
+    <p class="lead">
+      Seis repositórios de terceiros guardados como referência visual, pra ver como cada um fica
+      montado antes de desenhar a intranet própria com especificações próprias. Sendo montados um
+      de cada vez — nem todo repositório tem uma versão navegável ainda.
+    </p>
+  </header>
+
+  <h2>Publicados</h2>
+  <p class="section-note">Já montado e navegável.</p>
+  <div class="grid">
+
+    <a class="card" href="company-intranet-main/">
+      <h3>Company Intranet Dashboard</h3>
+      <p>Dashboard de intranet em HTML + CSS + Bootstrap 5 (CDN). Estático, sem build.</p>
+      <span class="path">/modelos/models-intranet/company-intranet-main/</span>
+    </a>
+
+    <a class="card" href="mocktranet-main/web/">
+      <h3>Mocktranet</h3>
+      <p>Intranet fictícia ("Blue Box Limited") feita pra labs de treinamento — diretório de funcionários, mapa do escritório, políticas e histórico da empresa. HTML/CSS puro.</p>
+      <span class="path">/modelos/models-intranet/mocktranet-main/web/</span>
+    </a>
+
+    <a class="card" href="helpful-intranet-master/">
+      <h3>Helpful Intranet (GovIntranetPress)</h3>
+      <p>Tema WordPress estilo GOV.UK — só os 2 prints originais do tema (depende de WordPress + Pods numa versão antiga, sem conteúdo de exemplo; não vale montar de verdade).</p>
+      <span class="path">/modelos/models-intranet/helpful-intranet-master/</span>
+    </a>
+
+    <a class="card" href="http://192.168.1.153:3050/" target="_blank" rel="noopener">
+      <h3>Intranet Dashboard ("Min sida" — Malmö)</h3>
+      <p>App Rails de verdade rodando (Ruby 2.3 + MySQL, fora do nginx estático). Login sem senha: usuário <code>admin1</code> ou <code>user1</code>, qualquer senha. Busca de funcionários não funciona (precisaria de Elasticsearch).</p>
+      <span class="path">192.168.1.153:3050 — só na rede local</span>
+    </a>
+
+    <a class="card" href="http://192.168.1.153:3060/" target="_blank" rel="noopener">
+      <h3>Intranet Home Page</h3>
+      <p>Painel pessoal com cards de RSS (notícias reais ao vivo), clima (NWS), radar, links rápidos e imagem aleatória. PHP + Apache + MySQL, buildou de primeira sem ajuste nenhum.</p>
+      <span class="path">192.168.1.153:3060 — só na rede local</span>
+    </a>
+
+  </div>
+
+  <footer>
+    <p>
+      Índice criado em <code>2026-09-06</code>, com os 5 modelos montados no mesmo dia. Pasta
+      <code>/modelos/</code> é negada por padrão no nginx (cópias de terceiros, não é conteúdo
+      publicado) — cada subpasta estática aqui listada ganhou uma exceção específica; os dois apps
+      de verdade (Rails e PHP) rodam em containers próprios, fora do nginx dos sites estáticos.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

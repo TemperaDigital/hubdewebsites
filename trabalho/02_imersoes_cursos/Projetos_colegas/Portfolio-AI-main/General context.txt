@@ -1,0 +1,107 @@
+Hubble AI is a professional AI and product development company focused on delivering intelligent, scalable, and high-impact solutions that empower businesses, startups, and innovators. Our mission is to transform ideas into AI-driven products and systems that solve real-world problems, streamline workflows, and enable smarter decision-making.
+
+Hubble AI combines deep expertise in artificial intelligence, machine learning engineering, and full-stack product development. This allows us to handle projects ranging from small, targeted AI automations to full-scale enterprise platforms and production-grade AI applications.
+
+----------------------------------------------------------------
+Company Overview
+----------------------------------------------------------------
+- Name: Hubble AI  
+- Type: AI-driven product development and solutions company  
+- Focus: AI products, ML systems, automation, intelligent agents, and scalable web applications  
+- Goal: Enable organizations to leverage AI and ML for efficiency, innovation, and long-term growth  
+
+----------------------------------------------------------------
+What We Do / Core Capabilities
+----------------------------------------------------------------
+Hubble AI specializes in end-to-end AI and software product development. We design, build, deploy, and scale intelligent systems across different business domains and project sizes.
+
+1. AI Automation & Intelligent Agents  
+- Design and development of AI workflows, chatbots, voice agents, and agentic systems  
+- Automation of repetitive tasks, internal operations, HR workflows, customer support, and decision-making pipelines  
+- Solutions scale from small AI automations for startups to enterprise-grade autonomous systems  
+
+2. AI Product Development  
+- Full lifecycle AI product development: ideation, architecture, model design, development, testing, deployment, and scaling  
+- Expertise in NLP, Computer Vision, and multimodal AI systems  
+- Capable of building MVPs, production-ready AI platforms, and enterprise-level AI products  
+
+3. Machine Learning Engineering (ML Engineering)  
+- End-to-end ML model development: data preparation, feature engineering, model training, evaluation, and optimization  
+- Classical ML, deep learning, and transformer-based systems  
+- Model deployment, monitoring, versioning, and performance optimization  
+- MLOps pipelines for reproducibility, scalability, and continuous improvement  
+- Fine-tuning, retraining, and optimization of models for real-world production workloads  
+
+4. Full-Stack Web & Software Development  
+- Backend systems using NestJS, FastAPI, MongoDB, and microservices architectures  
+- Frontend development with Next.js, real-time dashboards, and responsive interfaces  
+- Seamless integration of AI models, ML pipelines, and intelligent agents into web and software products  
+
+5. Real-Time Intelligent Systems  
+- AI systems capable of processing data and interacting in real time  
+- Examples include live AI interviewers, real-time analytics platforms, interactive automation tools, and voice-based systems  
+- Focus on performance, reliability, and human-like interactions at scale  
+
+6. AI & ML Consulting and Strategy  
+- AI and ML feasibility analysis, system design, and technical roadmapping  
+- Guidance on data strategy, model selection, and infrastructure decisions  
+- Support from proof-of-concept and MVP stages through enterprise deployment  
+
+----------------------------------------------------------------
+Past Products / Portfolio Highlights
+----------------------------------------------------------------
+While Hubble AI primarily delivers custom solutions for clients, we demonstrate our expertise through internally built and previously delivered products:
+
+- HRXpert  
+  AI-powered recruitment automation platform handling candidate applications, resume scoring, AI-assisted interviews, and automated workflows  
+
+- VizdomAI  
+  Industrial computer vision system for defect detection, inspection, and visual analytics  
+
+- Additional internal prototypes and client solutions showcasing capabilities in AI automation, ML engineering, agentic workflows, and full-stack delivery  
+
+----------------------------------------------------------------
+Why Choose Hubble AI
+----------------------------------------------------------------
+- True end-to-end delivery: from small AI automations to enterprise-scale platforms  
+- Strong ML engineering and MLOps capabilities for production-ready systems  
+- Deep expertise in NLP, Computer Vision, and agentic AI  
+- Clean architecture, scalable systems, and long-term maintainability  
+- Proven ability to turn ideas into deployed, real-world AI products  
+- Flexible engagement model suitable for startups, scale-ups, and enterprises  
+
+----------------------------------------------------------------
+Team & Approach
+----------------------------------------------------------------
+- Team of AI engineers, ML engineers, and full-stack developers  
+- Experience across backend systems, frontend interfaces, ML pipelines, and real-time AI systems  
+- Collaborative, transparent approach with clients  
+- Strong emphasis on engineering quality, reliability, and measurable business impact  
+
+----------------------------------------------------------------
+Vision & Values
+----------------------------------------------------------------
+- Innovation: pushing boundaries in AI, ML, and intelligent systems  
+- Impact: building solutions that solve real business problems  
+- Excellence: high standards in AI design, ML engineering, and software development  
+- Collaboration: working closely with clients as long-term partners  
+
+----------------------------------------------------------------
+Key Differentiators
+----------------------------------------------------------------
+- Ability to deliver across the full spectrum: small automations, MVPs, and enterprise platforms  
+- Strong ML engineering and deployment expertise  
+- Experience with real-time and agentic AI systems  
+- Balance of research-level AI understanding and production-grade engineering  
+
+----------------------------------------------------------------
+Contact & Engagement
+----------------------------------------------------------------
+- Open to client projects, partnerships, and collaborations  
+- Engagement via contact forms, email, or social platforms such as LinkedIn, GitHub, and X  
+- Portfolio demos and technical discussions available on request  
+
+----------------------------------------------------------------
+Summary
+----------------------------------------------------------------
+Hubble AI is a professional AI and product development company capable of delivering everything from small AI automations to full-stack AI products and enterprise applications. With strong expertise in machine learning engineering, NLP, computer vision, agentic AI, and full-stack development, Hubble AI builds scalable, reliable, and impactful systems for startups, growing businesses, and large enterprises.

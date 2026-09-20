@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: "Exo", sans-serif;
+    color: #000000;
+    background-color: #eeeeee;
+
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    font-style: italic;
+}
+
+div.banner {
+    background-image: url("../img/logo.png");
+    width: 430px;
+    height: 60px;
+
+}
+
+#bgh {
+    background: linear-gradient(-45deg, #1255ff, #45ddd5, #23a6d5);
+    background-size: 400% 400%;
+    animation: gradientBG 65s ease infinite;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav {
+    background: #08083b;
+    width: 200px;
+    height: 100%;
+    margin-top: 60px;
+    position: fixed;
+    color: white;
+    top: 0;
+    left: 0;
+    line-height: 1.35;
+}
+
+.nav ul {
+    list-style-type: none;
+    padding: 15px;
+}
+
+.nav ul li {
+    padding: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: lightgray;
+}
+
+.content {
+
+    margin-top: 5%;
+    margin-left: 17%;
+    margin-right: 7%;
+}
+
+.profile-cards {
+    display: grid;
+    padding: 0;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.profile-cards li {
+    display: inline-block;
+    border: 1px solid hsl(0, 0%, 85%);
+    border-radius: 3px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.profile-cards li img {
+    width: 100%;
+}
+
+.profile-name {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+}
+
+.profile-position {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    color: #000000;
+}

@@ -1,0 +1,99 @@
+- title "Redigera profil för #{@user.displayname}"
+%section.box.form#edit-user
+  %h1.box-title= h1
+  .box-content
+    = simple_form_for @user, html: { class: "basic" } do |f|
+      = f.error_notification class: "warning"
+
+      - # Special case where the user is directed here due to lack of roles
+      - if f.error_notification.nil?
+        - if !@user.roles.where(category: "department").present?
+          .warning= "Välj en förvaltning nedan"
+        - if !@user.roles.where(category: "working_field").present?
+          .warning= "Välj ett arbetsfält nedan"
+
+      = f.input :displayname, as: :more_info, wrapper: :more_info
+      = f.input :title, as: :more_info, wrapper: :more_info
+      = f.input :professional_bio, input_html: { rows: 7 }
+      = f.input :company_short, as: :more_info, wrapper: :more_info
+
+      %h2.group-title Grundprofil i Komin:
+      = f.error(:department, class: "warning")
+      = f.association :roles, as: :check_boxes, wrapper: :radio_and_checkboxes, collection: @roles.select { |r| r.category == "department" }, label: "Förvaltningar"
+      = f.error(:working_field, class: "warning")
+      = f.association :roles, as: :check_boxes, wrapper: :radio_and_checkboxes, collection: @roles.select { |r| r.category == "working_field" }, label: "Arbetsfält"
+
+      %h2.group-title Kontakt
+      = f.input :search_address do
+        = text_field_tag :user_search_address, nil,  class: 'form-control'
+      = f.input :address, input_html: { readonly: true }
+      = f.input :district, as: "hidden"
+      = f.input :post_code, input_html: { readonly: true }
+      = f.input :postal_town, input_html: { readonly: true }
+      = f.input :geo_position_x, as: "hidden"
+      = f.input :geo_position_y, as: "hidden"
+
+      = f.input :room
+
+      = f.input :email, as: :more_info, wrapper: :more_info
+      = f.input :phone, wrapper: :more_info do
+        = @user.phone
+        = link_to "(Info)", "#", class: "show-more-info"
+        .more-info
+          %p
+            = "Ditt fasta telefonnummer finns lagrat i Malmö stads centrala databas över alla anställda. Kontaktboken visar vilket nummer som är knutet till dig. Om det visas fel telefonnummer beställer du en ändring i "
+            = link_to "IT-ärendehanteringssystemet (MSM).", "https://msm.intra.malmo.se/MSMSelfService/"
+            = "Om du behöver hjälp, kontakta ITS, 040-34 27 27."
+      = f.input :cell_phone, wrapper: :more_info do
+        = @user.cell_phone
+        = link_to "(Info)", "#", class: "show-more-info"
+        .more-info
+          %p
+            = "Ditt mobilnummer finns lagrat i Malmö stads centrala databas över alla anställda. Kontaktboken visar vilket nummer som är knutet till dig. Om det visas fel telefonnummer beställer du en ändring i "
+            = link_to "IT-ärendehanteringssystemet (MSM).", "https://msm.intra.malmo.se/MSMSelfService/"
+            = "Om du behöver hjälp, kontakta ITS, 040-34 27 27."
+
+      = f.input :skype
+
+      %h2.group-title Kompetensprofil
+      = f.input :skill_list,
+        input_html: { "data-path" => skills_suggest_path, "data-load" => @user.skills.map{ |l| { id: l.name, name: l.name }}.to_json }
+
+      = f.input :language_list,
+        input_html: { "data-path" => languages_suggest_path, "data-load" => @user.languages.map{ |l| { id: l.name, name: l.name }}.to_json }
+
+      %h2.group-title Projekt & aktiviteter
+      = f.input :activity_list,
+        input_html: { "data-path" => activities_suggest_path, "data-load" => @user.activities.map{ |l| { id: l.name, name: l.name }}.to_json }
+
+      %h2.group-title Personligt
+      = f.input :private_bio, input_html: { rows: 7 }
+
+      = f.input :twitter, wrapper: :input_group do
+        .input-group-addon @
+        = f.input_field :twitter, class: "form-control"
+
+      = f.input :linkedin
+
+      = f.input :homepage
+
+      - if admin?
+        %h2.group-title Rättigheter
+        = f.input :early_adopter, wrapper: :radio_and_checkboxes
+        = f.input :contacts_editor, wrapper: :radio_and_checkboxes
+        = f.input :admin, wrapper: :radio_and_checkboxes
+
+      .form-group
+        %span.no-control-label
+        .controls
+          = f.button :submit, :class => 'btn-primary'
+          = link_to t('actions.cancel'), user_path(@user.username), class: "btn btn-default"
+          %p.help-block Tänk på att det du skriver i din profil – precis som nästan allt annat du gör i Malmö stad – blir offentlig handling. Skriv bara sådant du kan stå för.
+
+- if admin? && !@user.admin?
+  %section.box.show.user.danger-zone
+    %h1.box-title Riskområde
+    .box-content.basic.form-data
+      %section.misc
+        %p= "Medarbetaren kommer att raderas permanent från Kontaktboken. Detta går inte att ångra."
+        .delete= link_to "Radera #{@user.first_name} #{@user.last_name} permanent", @user, method: :delete, data: { confirm: 'Är du säker på att du vill radera medarbetaren permanent?' }, class: "btn btn-danger btn-default"

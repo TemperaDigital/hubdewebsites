@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Projetos de Colegas — sites.fguerra.ia.br</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #161b26;
+    --surface-2: #1d2333;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: rgba(148, 163, 184, 0.14);
+    --accent: #be185d;
+    --accent-bright: #ec4899;
+    --font-body: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1100px 480px at 12% -10%, rgba(190,24,93,.12), transparent 60%),
+      radial-gradient(900px 420px at 90% 0%, rgba(59,130,246,.08), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px 80px; }
+
+  header { padding: 72px 0 40px; }
+
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+
+  .breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--border);
+  }
+
+  .breadcrumb a:hover {
+    color: var(--accent-bright);
+    border-bottom-color: var(--accent-bright);
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin: 0 0 12px;
+  }
+
+  h1 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .lead {
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-size: .78rem;
+    font-family: var(--font-mono);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin: 48px 0 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-note {
+    color: var(--text-muted);
+    font-size: .86rem;
+    margin: 12px 0 20px;
+    line-height: 1.5;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+
+  a.card:hover, a.card:focus-visible {
+    background: var(--surface-2);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .card h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: .88rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .card .path {
+    margin-top: auto;
+    padding-top: 10px;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--accent-bright);
+    opacity: .8;
+    word-break: break-all;
+  }
+
+  .card.is-pending {
+    border-style: dashed;
+    opacity: .78;
+  }
+
+  .card.is-pending .path {
+    color: var(--text-muted);
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: .66rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 9px;
+    width: fit-content;
+  }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: .82rem;
+    line-height: 1.6;
+  }
+
+  footer code {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="breadcrumb"><a href="/">sites.fguerra.ia.br</a> / trabalho / 02_imersoes_cursos / Projetos_colegas</p>
+    <p class="kicker">Trabalho — imersões e cursos</p>
+    <h1>Projetos de Colegas</h1>
+    <p class="lead">
+      Projetos de conclusão de colegas de turma da Imersão Dev (Alura + Google Gemini) e de outros
+      cursos. Cada card abaixo é uma pasta independente, com seu próprio README e autoria.
+    </p>
+  </header>
+
+  <h2>Publicados</h2>
+  <p class="section-note">Pastas com página própria, já servida pelo painel.</p>
+  <div class="grid">
+
+    <a class="card" href="jogos-indie-br-main/">
+      <h3>Jogos Indie | Brasil</h3>
+      <p>Catálogo de jogos independentes brasileiros, com busca e curadoria para valorizar a cena nacional.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/jogos-indie-br-main/</span>
+    </a>
+
+    <a class="card" href="Meu-Projeto-Alura-main/">
+      <h3>COALAS</h3>
+      <p>Site informativo sobre coalas: habitat, alimentação e curiosidades.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/Meu-Projeto-Alura-main/</span>
+    </a>
+
+    <a class="card" href="ai-hub-portfolio-main/">
+      <h3>AI Hub Portfolio</h3>
+      <p>Portfólio responsivo mostrando ferramentas de IA em destaque, feito com HTML, CSS e Bootstrap.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/ai-hub-portfolio-main/</span>
+    </a>
+
+    <a class="card" href="decola-dev-main/">
+      <h3>Decola Dev</h3>
+      <p>Base de conhecimento com projetos e iniciativas para desenvolvedores em início de formação.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/decola-dev-main/</span>
+    </a>
+
+    <a class="card" href="entendendo-o-autismo-main/">
+      <h3>Entendendo o Autismo</h3>
+      <p>Site educativo sobre autismo — ficou em 6º lugar na Imersão Dev Alura + Google Gemini.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/entendendo-o-autismo-main/</span>
+    </a>
+
+    <a class="card" href="ongs-main/">
+      <h3>Busca ONGs Brasil</h3>
+      <p>Buscador de ONGs brasileiras para ajudar a encontrar a organização certa para apoiar.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/ongs-main/</span>
+    </a>
+
+    <a class="card" href="ongs-master/">
+      <h3>Projeto ONGs (versão alternativa)</h3>
+      <p>Outra implementação do buscador de instituições para ajudar, com foco em causas animal, social, LGBT e internacional.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/ongs-master/</span>
+    </a>
+
+    <a class="card" href="projetos_aptos_LIE-main/">
+      <h3>Projetos Aptos — Lei de Incentivo ao Esporte</h3>
+      <p>Consulta de projetos esportivos aptos pela Lei de Incentivo ao Esporte.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/projetos_aptos_LIE-main/</span>
+    </a>
+
+    <a class="card" href="Projeto-Tedio-master/">
+      <h3>Tédio — Encontre o que Fazer</h3>
+      <p>Sugestões de atividades para quem está com tédio, disponível em português e inglês.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/Projeto-Tedio-master/</span>
+    </a>
+
+    <a class="card" href="token-elements-main/">
+      <h3>Token+ Elements</h3>
+      <p>Projeto de elementos/componentes reutilizáveis (Token+).</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/token-elements-main/</span>
+    </a>
+
+    <a class="card" href="Portfolio-AI-main/dist/">
+      <h3>Hubble AI — Portfolio AI</h3>
+      <p>Site em React + TailwindCSS + Framer Motion. Fonte era Vite puro (sem build publicado); buildado em 2026-09-06 com o base path correto.</p>
+      <span class="path">/trabalho/02_imersoes_cursos/Projetos_colegas/Portfolio-AI-main/dist/</span>
+    </a>
+
+  </div>
+
+  <footer>
+    <p>
+      Índice criado em <code>2026-09-06</code>, quando os uploads dos projetos de colegas terminaram.
+      Títulos e descrições vêm do <code>&lt;title&gt;</code>/README de cada projeto original. O
+      "Hubble AI — Portfolio AI" era código-fonte Vite sem build publicado; a pasta <code>dist/</code>
+      foi gerada localmente e não faz parte do repositório original do colega.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

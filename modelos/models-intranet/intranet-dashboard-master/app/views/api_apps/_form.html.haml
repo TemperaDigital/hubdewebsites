@@ -1,0 +1,15 @@
+= simple_form_for @api_app, html: { class: "basic" } do |f|
+  = f.error_notification class: "warning"
+
+  .form-inputs
+    = f.input :name
+    = f.input :contact
+    = f.input :ip_address
+    - unless @api_app.new_record?
+      = f.input :app_token, disabled: true
+
+  .form-group
+    %span.no-control-label
+    .controls
+      = f.button :submit, :class => 'btn-primary'
+      = link_to t('actions.cancel'), api_apps_path(@api_app), class: "btn btn-default"

@@ -1,0 +1,15 @@
+Hej televäxeln!
+
+<%= "#{@user.first_name} #{@user.last_name}" %> har gjort ändringar i sina adressuppgifter. De nya uppgifterna är:
+
+Rumsnummer: <%= @data[:room] %>
+Gatuadress: <%= @data[:address] %>
+
+Kontaktuppgifter till den anställde:
+E-post: <%= @user.email %>
+Telefon: <%= @user.phone %>
+Användarnamn: <%= @user.username %>
+Kontaktkort: <%= user_url(@user.username) %>
+
+<%= "-- " %>
+Detta meddelande skickades automatiskt från Komins Kontaktbok efter att den anställde gjode en ändring av sin besöksadress och/eller sitt rumsmnummer. Generella frågor besvaras av webbteamet@malmo.se.

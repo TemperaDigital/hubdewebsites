@@ -1,0 +1,26 @@
+- if !@users.blank?
+  %ul.results{ class: @batch_edit ? "batch" : "" }
+    - @users.each do |user|
+      %li.vcard
+        - if @batch_edit
+          .batch-check= check_box_tag "user_ids[]", user.id, nil, { id: nil }
+        .avatar
+          = link_to image_tag(user.avatar.url(:medium_quadrat), alt: "Profilbild"), user_path(user.username)
+        .info
+          %h2.fn= link_to "#{user.first_name} #{user.last_name}", user_path(user.username)
+          %p
+            - if user.company.present?
+              %span.org= link_to "#{user.company_short}", users_tags_path(company: user.company)
+            - if user.department.present?
+              %span.org= link_to "#{user.department}", users_tags_path(department: user.department)
+          %p
+            %span.phone= user.phone
+            - if user.cell_phone.present?
+              %span.phone= user.cell_phone
+            %span.email= user.email
+
+          %p.note= user.professional_bio
+
+    - if @has_more
+      %li.load-more
+        %input.btn.btn-default{ type: "button", value: "Visa fler", "data-path" => @more_request }

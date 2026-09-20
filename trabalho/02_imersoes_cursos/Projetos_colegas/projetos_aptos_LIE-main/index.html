@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> <!-- Define o idioma da página como português do Brasil -->
+
+<head>
+    <!-- Metadados da página -->
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva -->
+    <title>Projetos Aptos - Lei de Incentivo ao Esporte</title> <!-- Título da página que aparece na aba do navegador -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link para o arquivo de estilos CSS -->
+    <!-- Importação de fontes personalizadas do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Kreon:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container"> <!-- Contêiner principal que engloba todo o conteúdo da página -->
+
+        <!-- Ícone dos anéis olímpicos girando -->
+        <div class="olympic-rings"> <!-- Div para os ícones dos anéis olímpicos -->
+            <img src="https://raw.githubusercontent.com/marioluciofjr/projetos_aptos_LIE/fcd465517abf1cd8b41a7f03a00219d1494dba4c/Imagens/olympic.svg" alt="Jogos Olímpicos" class="rings-icon"> <!-- Logo dos Jogos Olímpicos -->
+            <img src="https://raw.githubusercontent.com/marioluciofjr/projetos_aptos_LIE/fcd465517abf1cd8b41a7f03a00219d1494dba4c/Imagens/paralympic.svg" class="rings-icon"> <!-- Logo dos Jogos Paralímpicos -->
+        </div>
+
+        <div class="header"> <!-- Cabeçalho da página -->
+            <h1>Projetos Aptos - Lei de Incentivo ao Esporte</h1> <!-- Título principal da página -->
+        </div>
+
+        <!-- Seção de seleção de manifestação desportiva -->
+        <div class="form-group"> <!-- Grupo de formulário para selecionar manifestação -->
+            <label for="manifestacao">Escolha a Manifestação Desportiva:</label> <!-- Rótulo do campo de seleção -->
+            <select id="manifestacao" class="dropdown"> <!-- Dropdown para selecionar o tipo de manifestação -->
+                <option value="">Selecione</option> <!-- Opção padrão inicial -->
+                <option value="Educacional">Educacional</option> <!-- Opção para manifestação educacional -->
+                <option value="Participação">Participação</option> <!-- Opção para manifestação de participação -->
+                <option value="Rendimento">Rendimento</option> <!-- Opção para manifestação de rendimento -->
+            </select>
+        </div>
+
+        <!-- Seção de seleção de projeto, inicialmente desabilitada -->
+        <div class="form-group"> <!-- Outro grupo de formulário para seleção de projetos -->
+            <label for="projeto">Escolha o Projeto:</label> <!-- Rótulo do campo de seleção -->
+            <select id="projeto" class="dropdown" disabled> <!-- Dropdown para selecionar projeto, desabilitado até que uma manifestação seja selecionada -->
+                <option value="">Selecione a Manifestação primeiro</option> <!-- Opção padrão inicial -->
+            </select>
+        </div>
+
+        <!-- Botão de pesquisa que permanece sempre visível -->
+        <div id="botao-pesquisa">
+            <button id="obterDados" class="btn">🔍 Obter deliberação e CNPJ</button> <!-- Botão para obter informações de deliberação e CNPJ -->
+        </div>
+
+        <!-- Botões de resultados, inicialmente ocultos -->
+        <div id="resultados" class="hidden">
+            <button id="consultarDeliberacao" class="btn-delibera">Deliberação</button> <!-- Botão para consultar deliberação -->
+            <button id="consultarCNPJ" class="btn-cnpj">CNPJ</button> <!-- Botão para consultar CNPJ -->
+        </div>
+
+        <!-- Seção de FAQ com funcionalidade de acordeão -->
+        <div class="faq"> <!-- Seção FAQ para perguntas frequentes -->
+            <h2>Perguntas frequentes</h2> <!-- Título da seção FAQ -->
+            <div class="accordion"> <!-- Contêiner de acordeão para as perguntas -->
+                <!-- Cada item do acordeão -->
+                <div class="accordion-item">
+                    <button id="faq1" class="accordion-button">O que diz a Lei de Incentivo ao Esporte?</button> <!-- Pergunta do FAQ como botão -->
+                    <div class="accordion-content" id="faqContent1"></div> <!-- Conteúdo da resposta que será mostrado ao clicar -->
+                </div>
+                <div class="accordion-item">
+                    <button id="faq2" class="accordion-button">O que significa cada manifestação desportiva?</button>
+                    <div class="accordion-content" id="faqContent2"></div>
+                </div>
+                <div class="accordion-item">
+                    <button id="faq3" class="accordion-button">O que são os selos da Lei de Incentivo ao Esporte?</button>
+                    <div class="accordion-content" id="faqContent3"></div>
+                </div>
+                <div class="accordion-item">
+                    <button id="faq4" class="accordion-button">Qual é o valor que posso doar para os projetos?</button>
+                    <div class="accordion-content" id="faqContent4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão de reset para limpar as seleções e resultados -->
+        <button id="reset" class="btn reset-btn">🧹 Limpar</button> <!-- Botão para resetar as seleções e campos -->
+
+    </div>
+
+    <!-- Rodapé da página -->
+    <footer>
+        <div class="footer-content"> <!-- Contêiner do conteúdo do rodapé -->
+            <p>2024 - Mário Lúcio - projeto_AluraGemini</p> <!-- Texto do rodapé -->
+            <!-- Ícones de redes sociais -->
+            <div class="social-icons">
+                <a href="https://linkedin.com/in/marioluciofjr" target="_blank"> <!-- Link para o LinkedIn -->
+                    <img src="https://cdn-icons-png.flaticon.com/512/1051/1051282.png" alt="LinkedIn" class="social-icon"> <!-- Ícone do LinkedIn -->
+                </a>
+                <a href="https://github.com/marioluciofjr" target="_blank"> <!-- Link para o GitHub -->
+                    <img src="https://cdn-icons-png.flaticon.com/512/1051/1051275.png" alt="GitHub" class="social-icon"> <!-- Ícone do GitHub -->
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Importação do script JavaScript -->
+    <script src="script.js"></script> <!-- Link para o arquivo JavaScript -->
+</body>
+
+</html>

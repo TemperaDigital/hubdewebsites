@@ -1,0 +1,9 @@
+section#edit-user {
+  .control-group {
+    margin-bottom: .5em;
+  }
+  input.success {
+    background: $success-background;
+    border: $success-border;
+  }
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Busca de atletas brasileiros por nome, modalidade ou apelido. Projeto de estudo da Imersão Dev da Alura.">
+    <title>Atletas do Brasil</title>
+
+    <!-- Favicon embutido: evita o 404 de /favicon.ico sem precisar de arquivo. -->
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>🏅</text></svg>">
+
+    <!-- O CSS mora em css/, os scripts em js/. Caminhos relativos a esta página. -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Atletas do Brasil</h1>
+        <p class="subtitulo">Pesquise por nome, modalidade ou apelido</p>
+    </header>
+
+    <main>
+        <!-- Form em vez de botão solto: a tecla Enter passa a funcionar de graça.
+             O return false impede o recarregamento da página. -->
+        <form class="busca" onsubmit="pesquisar(); return false;">
+            <label class="busca-rotulo" for="campo-pesquisa">Nome do atleta</label>
+            <div class="busca-linha">
+                <input id="campo-pesquisa"
+                       type="search"
+                       placeholder="Ex.: Rayssa, ginástica, judô"
+                       autocomplete="off">
+                <button type="submit">Pesquisar</button>
+            </div>
+        </form>
+
+        <!-- O script.js injeta os resultados aqui. O aria-live faz o leitor de
+             tela anunciar o que apareceu, já que não há recarga de página. -->
+        <section class="resultados-pesquisa" id="resultados-pesquisa" aria-live="polite">
+        </section>
+    </main>
+
+    <footer>
+        <p>Projeto de estudo — Imersão Dev da Alura.</p>
+        <p>Textos e links de referência com base na Wikipédia.</p>
+    </footer>
+
+    <!-- dados.js primeiro: define a const dados que o script.js percorre. -->
+    <script src="js/dados.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

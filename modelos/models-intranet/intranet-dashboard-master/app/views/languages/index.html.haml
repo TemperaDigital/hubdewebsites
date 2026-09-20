@@ -1,0 +1,19 @@
+- title "Språk"
+%section.box.index
+  %h1.box-title= h1
+  %table
+    %thead
+      %tr
+        %th Namn
+        %th Medarbetare
+        %th
+    %tbody
+      - @languages.each do |language|
+        %tr
+          %td= link_to language.name, edit_language_path(language)
+          %td= link_to "Visa", users_tags_path(language: language.name)
+          %td.delete= link_to "Radera", language, method: :delete, data: { confirm: 'Är du säker?' }, class: "btn btn-danger btn-sm"
+
+      %tr
+        %td{ colspan: 3 }
+          .actions= link_to "Lägg till", new_language_path, class: "btn btn-primary"

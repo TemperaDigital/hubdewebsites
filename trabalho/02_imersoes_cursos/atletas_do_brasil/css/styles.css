@@ -1,0 +1,187 @@
+/* Atletas do Brasil — folha de estilo única.
+   A página está na raiz da pasta; este arquivo, em css/. Por isso o caminho
+   da imagem sobe um nível: ../img/. */
+
+:root {
+    --tinta:    #45474B;
+    --papel:    rgba(245, 247, 248, 0.9);
+    --destaque: #0B6E4F;
+    --borda:    rgba(69, 71, 75, 0.15);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* O corpo é a coluna flex que sustenta o rodapé no fim da página, mesmo com
+   pouco conteúdo. A imagem do mapa entra como fundo fixo, sob um véu claro:
+   sem o véu o texto perde contraste sobre as áreas escuras do mapa. */
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--tinta);
+
+    background-color: #EEF1F3;
+    background-image:
+        linear-gradient(rgba(238, 241, 243, 0.88), rgba(238, 241, 243, 0.88)),
+        url("../img/mapa-do-brasil.jpeg");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+header {
+    text-align: center;
+    padding: 2.5rem 1rem 1rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    letter-spacing: -0.02em;
+}
+
+.subtitulo {
+    margin: 0.25rem 0 0;
+    opacity: 0.75;
+}
+
+main {
+    flex: 1;                 /* empurra o rodapé para baixo */
+    width: min(100% - 2rem, 720px);
+    margin-inline: auto;
+    padding-bottom: 3rem;
+}
+
+/* ------------------------------------------------------------------ busca */
+
+.busca {
+    margin: 1.5rem 0 2rem;
+}
+
+.busca-rotulo {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+/* Em tela estreita o wrap joga o botão para a linha de baixo em vez de
+   espremer o campo de texto. */
+.busca-linha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+#campo-pesquisa {
+    flex: 1 1 14rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: inherit;
+    background-color: var(--papel);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+}
+
+#campo-pesquisa:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--destaque);
+    outline-offset: 2px;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 600;
+    color: #FFF;
+    background-color: var(--destaque);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+}
+
+button:hover {
+    filter: brightness(1.15);
+}
+
+/* -------------------------------------------------------------- resultados */
+/* As classes abaixo são geradas pelo js/script.js — mudar um nome aqui exige
+   mudar lá também. */
+
+.resultados-pesquisa {
+    display: grid;
+    gap: 1rem;
+}
+
+.item-resultado {
+    padding: 1.25rem 1.5rem;
+    background-color: var(--papel);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.item-resultado h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.35rem;
+}
+
+.item-resultado a {
+    color: var(--destaque);
+    text-decoration: none;
+}
+
+.item-resultado a:hover {
+    text-decoration: underline;
+}
+
+.descricao-meta {
+    margin: 0 0 0.75rem;
+    text-align: justify;
+}
+
+/* Parágrafo solto no container é a mensagem "Nenhum resultado encontrado". */
+.resultados-pesquisa > p {
+    padding: 1rem;
+    text-align: center;
+    font-style: italic;
+    opacity: 0.75;
+}
+
+/* ------------------------------------------------------------------ rodapé */
+/* Estiliza o rodapé da página */
+footer {
+    background-color: var(--papel);
+    color: var(--tinta);
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    margin-top: auto; /* Substitui o absolute/bottom para melhor uso do Flexbox */
+    font-size: 1rem;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 0.25rem 0;
+}
+
+/* O fundo fixo custa caro em celular e alguns navegadores móveis o ignoram;
+   melhor desligar do que rolar com engasgo. */
+@media (max-width: 640px) {
+    body {
+        background-attachment: scroll;
+    }
+}

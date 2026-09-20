@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+.fotocapa img {
+    width: 100%;
+}
+
+header {
+    font-family: 'Poppins', sans-serif;
+    position: fixed;
+    width:100%;
+    
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+.titulo h1 {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    color: #be190d;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container_1{
+    display: flex;
+    align-items: center;
+    padding-left: 120px;
+    padding-right: 120px;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+.img_1 img {
+    width: 400px;
+    display: flex;
+}
+
+.container_1 p {
+    margin-left: 30px;
+}
+
+.container_1 a{
+    background: #be190d;
+    border-radius: 6px; 
+    padding: 15px; 
+    cursor: pointer; 
+    color: #fff; 
+    border: none; 
+    font-size: 16px;
+    margin-left: 30px;
+    padding-top: 10px;
+}
+
+.container_1 a:hover{
+    color: rgb(211, 107, 93) ;
+}
+
+.container_1 h2{
+    font-size: 40px;
+    margin-left: 30px;
+    color: #be190d;
+}
+.pezinho {
+    align-items: center;
+
+}
+footer {
+    background-color: #be190d;
+    height: 170px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+footer a {
+    align-items: center;
+    background: #fff; 
+    border-radius: 6px; 
+    padding: 15px; 
+    cursor: pointer; 
+    color: #be190d; 
+    border: none; 
+    font-size: 16px;
+}
+
+footer h3 {
+    padding-left: 150px;
+    padding-top: 50px;
+}
+
+footer a:hover{
+    color: rgb(211, 107, 93) ;
+}

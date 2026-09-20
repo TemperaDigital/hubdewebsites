@@ -1,0 +1,48 @@
+Novidades incluídas
+
+Tabs Chatbot / Dados / Logs para organização.
+
+Perguntas rápidas via seletor, ajudando usuários iniciantes.
+
+Registro de logs (timestamp, pergunta, resposta) em st.session_state, com download em CSV na barra lateral.
+
+Expansor para visualizar a planilha completa.
+
+Ícones/emojis para deixar o layout mais amigável.
+
+
+Salve o arquivo chatbotservidores_app.py, instale/atualize as dependências via requirements.txt, ajuste sua chave no .env e execute:
+
+streamlit run chatbotservidores_app.py
+
+📦 Arquivo ZIP pronto!
+
+Você pode baixá-lo agora:
+
+Baixar chatbotservidores.zip
+
+Ele contém:
+
+Arquivo	Descrição
+chatbotservidores_app.py	App Streamlit com abas (Chat, Dados, Logs), perguntas rápidas, logs e integração Gemini.
+README.md	Instruções de instalação, configuração e uso.
+requirements.txt	Dependências do projeto.
+.env.example	Modelo para colocar sua chave GOOGLE_API_KEY.
+
+Depois de baixar:
+
+Extraia o ZIP.
+
+Renomeie .env.example para .env e coloque sua chave da API.
+
+Copie o servidores.csv para a pasta extraída.
+
+Instale os requisitos e rode:
+
+bash
+pip install -r requirements.txt
+streamlit run chatbotservidores_app.py
+Qualquer ajuste extra ou dúvida, estou por aqui! 
+
+
+

@@ -1,0 +1,42 @@
+defaults: &defaults
+  ldap:
+    enabled: false
+  portwise:
+    enabled: false
+  saml:
+    enabled: false
+  allow_non_ssl_media: false
+  remember_me_days: 30
+  feed_worker:
+    main_feeds_pause: 1
+    user_feeds_pause: 5
+    purge_stale_entries: true
+    max_age: 30 # days
+    fetch_not_modified: false
+  switchboard_email: "switchboard@example.org"
+
+development: &development
+  <<: *defaults
+  stub_auth: true
+  title_suffix: "Dashboard (development)"
+  # Full base system path to avatar storage
+  avatar_base_path: "/vagrant/public/system/avatars/"
+  # Full base url to avatar service, omit protocol
+  avatar_base_url: "//profilbilder.malmo.se/"
+  # Full url to default avatar service, omit protocol
+  avatar_default_url: "//profilbilder.malmo.se/default.jpg"
+  assets_url_base: "//assets.malmo.se/internal/v4/"
+
+# local_test is for running your local test cases
+local_test:
+  <<: *development
+
+# Use file from current test server instead of the below
+# Note that this is not your local test environment, it's for the test server
+test:
+  <<: *development
+  title_suffix: "Dashboard (test)"
+
+# Use file from current production server instead of the below
+production:
+  <<: *defaults

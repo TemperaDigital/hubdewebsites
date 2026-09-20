@@ -1,0 +1,16 @@
+.edit {
+  .control-group.api_app_app_token .controls,
+  .token,
+  .secret  {
+    font-family: $monospace;
+  }
+  section.box.show.api-apps {
+    a.btn {
+      float: none;
+    }
+  }
+  .controls.token .warning {
+    margin-top: 1em;
+    font-size: emize(14, 14);
+  }
+}

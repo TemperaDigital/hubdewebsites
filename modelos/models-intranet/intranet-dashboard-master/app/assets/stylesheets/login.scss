@@ -1,0 +1,48 @@
+.login {
+  .wrapper {
+    margin-top: 6em;
+  }
+
+  .column-1 {
+    @include columns(4);
+  }
+  .column-2 {
+    @include columns(8, true);
+  }
+
+  section#feature {
+    h1 {
+      font-size: emize(42);
+      line-height: 1.2;
+      font-weight: normal;
+      margin: -.2em 0 .1em;
+    }
+    p.about {
+      font-size: emize(22);
+      line-height: 1.5;
+      margin-bottom: 1em;
+    }
+
+  }
+
+  section#login {
+    margin-bottom: 2em;
+    input[type="text"],
+    input[type="password"] {
+      margin-bottom: 1em;
+    }
+    input.btn {
+      margin-top: .6em;
+      clear: both;
+    }
+    .login-instructions {
+      margin-top: 2em;
+      padding-top: .5em;
+      border-top: $border;
+      font-style: normal;
+      font-size: emize(15);
+      line-height: 1.4;
+      margin-bottom: .5em;
+    }
+  }
+}

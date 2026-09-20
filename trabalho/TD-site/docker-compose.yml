@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    container_name: temperadigital
+    ports:
+      - "8306:80"
+    restart: unless-stopped

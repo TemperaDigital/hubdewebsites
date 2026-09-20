@@ -1,0 +1,9 @@
+%li
+  = link_to image_tag(@colleagueship.colleague.avatar.url(:tiny_quadrat), alt: ""), user_path(@colleagueship.colleague.username)
+  .text
+    %h2.name= link_to "#{@colleagueship.colleague.first_name} #{@colleagueship.colleague.last_name}", user_path(@colleagueship.colleague.username)
+    %p.status= @colleagueship.colleague.status_message ||= "Jag har ingen status än!"
+    - if @colleagueship.colleague.status_message_updated_at
+      %p.updated_at= "#{distance_of_time_in_words_to_now( @colleagueship.colleague.status_message_updated_at ).humanize()} sen"
+
+  %a.m-icon-close.remove{ href: colleagueship_path(@colleagueship.colleague_id), "data-method" => "delete", "data-remote" => "true", "rel" => "nofollow" }

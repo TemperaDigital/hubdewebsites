@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Helpful Intranet — sites.fguerra.ia.br</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #161b26;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: rgba(148, 163, 184, 0.14);
+    --accent-bright: #ec4899;
+    --font-body: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1100px 480px at 12% -10%, rgba(190,24,93,.12), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px 80px; }
+  header { padding: 56px 0 32px; }
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; border-bottom: 1px dotted var(--border); }
+  .breadcrumb a:hover { color: var(--accent-bright); border-bottom-color: var(--accent-bright); }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin: 0 0 12px;
+  }
+  h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 12px; }
+  .lead { color: var(--text-muted); margin: 0; max-width: 68ch; line-height: 1.6; }
+  .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: .66rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin: 16px 0 0;
+    width: fit-content;
+  }
+  figure {
+    margin: 40px 0 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  figure img { display: block; width: 100%; height: auto; border-radius: 6px; }
+  figcaption {
+    margin-top: 10px;
+    font-size: .82rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: .82rem;
+    line-height: 1.6;
+  }
+  footer code {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="breadcrumb"><a href="/">sites.fguerra.ia.br</a> / modelos / models-intranet / helpful-intranet-master</p>
+    <p class="kicker">Modelos — referência estática</p>
+    <h1>Helpful Intranet (GovIntranetPress)</h1>
+    <p class="lead">
+      Tema de WordPress estilo GOV.UK (2013), com seções de notícias, tarefas, guias, projetos,
+      vagas e blog. Depende do plugin Pods numa versão antiga (API <code>pods_url_variable()</code>,
+      hoje descontinuada) e não traz conteúdo de exemplo — rodar isso de verdade exigiria montar
+      WordPress + MySQL + Pods e cadastrar conteúdo manualmente, com risco real de incompatibilidade.
+    </p>
+    <span class="badge">prints originais do tema — não interativo</span>
+  </header>
+
+  <figure>
+    <img src="govintranetpress/screenshot.png" alt="Home do tema Helpful Intranet — notícias, mais acessados, enquete e forums">
+    <figcaption>Home — notícias, "mais ativos", enquete e forums</figcaption>
+  </figure>
+
+  <figure>
+    <img src="govintranetpress/screenshot-2.png" alt="Página 'How do I' do tema Helpful Intranet — tarefas e guias por categoria">
+    <figcaption>"How do I?" — tarefas e guias organizados por categoria, com busca por tag</figcaption>
+  </figure>
+
+  <footer>
+    <p>
+      Página criada em <code>2026-09-06</code> a partir dos <code>screenshot.png</code>/
+      <code>screenshot-2.png</code> que já vinham no próprio tema (convenção padrão de temas
+      WordPress) — nenhuma instalação foi feita.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

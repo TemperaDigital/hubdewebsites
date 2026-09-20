@@ -1,0 +1,27 @@
+2026-09-06 08:27:30.807 Uvicorn server started on 0.0.0.0:8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.1.153:8501
+  External URL: http://187.64.74.148:8501
+
+2026-09-06 08:28:33.086 Port 8501 is not available
+  Stopping...
+2026-09-06 08:31:12.126 Uvicorn server started on 0.0.0.0:8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.1.153:8501
+  External URL: http://187.64.74.148:8501
+
+  Stopping...
+2026-09-06 08:55:43.907 Uvicorn server started on 0.0.0.0:8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.1.153:8501
+  External URL: http://187.64.74.148:8501
+

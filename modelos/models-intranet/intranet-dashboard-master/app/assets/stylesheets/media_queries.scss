@@ -1,0 +1,395 @@
+@media (max-width: 68em) {
+  body.malmo-masthead-dashboard {
+    min-width: 0;
+  }
+  .login section#feature {
+    h1 {
+      font-size: emize(34);
+    }
+    p.about {
+      font-size: emize(22);
+    }
+  }
+}
+
+@media (max-width: 64em) {
+  .mf-v4.edit {
+    th.url,
+    td.url {
+      display: none;
+    }
+    th.secondary,
+    td.secondary {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 64em) {
+  .group-1 {
+    @include columns(12);
+    .column-1 {
+      @include columns(4);
+      float: left;
+    }
+    .column-2 {
+      @include columns(8, true);
+      float: right;
+    }
+  }
+
+  .column-3 {
+    clear: both;
+    @include columns(12);
+  }
+
+  .login section#feature {
+    h1 {
+      font-size: emize(32);
+    }
+    p.about {
+      font-size: emize(20);
+    }
+  }
+  section.box#shortcuts-tools,
+  section.box#shortcuts-i-want,
+  section.box#shortcuts-support {
+    h1.box-title {
+      margin-bottom: 0;
+    }
+    ul li a {
+      padding-top: .5em;
+      padding-bottom: .5em;
+    }
+  }
+}
+
+@media (max-width: 51em) {
+  body {
+    .wrapper {
+      margin: 0;
+      padding-bottom: 1em;
+    }
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    section.box {
+      margin: 0 0 1em;
+      h1.box-tit {
+        padding-left: .8em;
+      }
+      label.context-menu {
+        right: .6em;
+      }
+    }
+  }
+
+  section.box#colleagues ul.box-content li img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .login {
+    .wrapper {
+      margin-top: 4em;
+    }
+    .column-1 {
+      @include columns(6);
+    }
+    .column-2 {
+      @include columns(6, true);
+    }
+  }
+
+  .mf-v4.edit {
+    section.index,
+    section.show,
+    section.form,
+    nav.admin {
+      @include columns(12);
+    }
+  }
+}
+
+@media (max-width: 46em) {
+  .mf-v4.edit {
+    nav.admin {
+      clear: both;
+    }
+    h1,
+    nav.admin h2 {
+      @include radius(0);
+    }
+    section.form,
+    section.show,
+    section.index,
+    nav.admin {
+      width: 100%;
+      @include radius(0);
+    }
+    div.field {
+      label {
+        clear: both;
+        width: 100%;
+        float: none;
+      }
+      .help {
+        margin-left: 0;
+      }
+    }
+    .avatar-help,
+    .edit_avatar {
+      width: 100%;
+      clear: both;
+    }
+  }
+  .mf-v4 {
+    .form-horizontal {
+      .controls,
+      .actions,
+      .text-only {
+        margin-left: 0;
+        clear: both;
+      }
+      .control-label {
+        width: auto;
+      }
+    }
+    .control-group.text-only {
+      margin-bottom: 1em;
+      .control-label,
+      .controls {
+        padding: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 44em) {
+  body {
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #fff;
+    .wrapper {
+      margin: 0;
+    }
+    &.site-search .wrapper {
+      margin: 0 1.5em;
+    }
+
+    // One column layout
+    .column {
+      float: none;
+      margin-bottom: 0;
+      @include columns(12);
+      &.column-1,
+      &.column-2,
+      &.column-3 {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+      }
+      &.column-2 {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+    }
+
+    section.site-search {
+      .search-and-results {
+        @include columns(12);
+      }
+      section.categories {
+        @include columns(12);
+        li {
+          margin: 1em 0;
+        }
+        li.group {
+          margin-top: 2em;
+        }
+      }
+      .filter {
+        display: block;
+      }
+    }
+
+    section.index,
+    section.show,
+    section.form {
+      @include radius(0);
+      border: 0;
+      margin-bottom: 0;
+    }
+
+    section.announcement.small {
+      :before {
+        @include radius(0);
+      }
+      a {
+        @include radius(0);
+        border-width: 1px 0;
+      }
+    }
+
+    &.malmo-masthead-dashboard {
+      padding: 0;
+      margin-right: 0;
+      margin-left: 0;
+      section.box {
+        border: none;
+        @include radius(0);
+        margin: 0 0 1em;
+        h1.box-title {
+          padding-left: .8em;
+          @include radius(0);
+        }
+        label.context-menu {
+          right: .6em;
+        }
+      }
+    }
+
+    section.box#colleagues ul.box-content li img {
+      width: 46px;
+      height: 46px;
+    }
+
+    section.feeds {
+      .box-content li {
+        .image {
+          width: 90px;
+          min-height: 90px;
+        }
+        .text {
+          h2 {
+            margin: 0;
+            padding: 0;
+          }
+        }
+      }
+    }
+    section.box#feeds-dialog,
+    section.box#my_own  {
+      .box-content li {
+        a {
+          @include clearfix();
+        }
+        img {
+          width: 46px;
+          height: 46px;
+        }
+      }
+    }
+
+    section.box#feeds-feature {
+      img {
+        border: $border;
+      }
+      .crop {
+        @include columns(6);
+        max-width: 12em;
+        max-height: 12em;
+        overflow: visible;
+        margin-bottom: 0;
+        border: 0;
+      }
+      .text {
+        @include columns(6, true);
+        clear: none;
+        h2 {
+          font-family: $serif;
+          font-size: emize(24, 15);
+        }
+      }
+      .more {
+        clear: both;
+        margin-top: -.5em;
+      }
+    }
+
+    section.banner {
+      .crop {
+        @include columns(6);
+        max-width: 12em;
+        max-height: 12em;
+        overflow: visible;
+        margin-bottom: 0;
+        padding-right: emize(10, 12);
+        border: 0;
+      }
+    }
+  }
+
+  .login section#feature {
+    margin: 0 .7em 1em;
+  }
+
+  .show.user {
+    section.vcard {
+     .add-contact {
+        clear: right;
+      }
+      .colleagueship {
+        margin-bottom: .5em;
+      }
+      a.edit span {
+        display: none;
+      }
+    }
+    .employee-column-1,
+    .employee-column-2 {
+      @include columns(12);
+    }
+  }
+
+  section.banner {
+    @include clearfix();
+    .crop {
+      @include columns(6);
+      margin: 0 1.2em 2em;
+    }
+  }
+}
+
+// Force a one column form
+@media (max-width: 40em) {
+  @include form-force-vertical;
+
+  section.box.index.users ul.results li p.note {
+    display: none;
+  }
+}
+
+@media (max-width: 38em) {
+  body section.feeds {
+    .box-content li {
+      .text h2 {
+        font-size: emize(20)
+      }
+      .image {
+        width: 72px;
+        min-height: 72px;
+      }
+      .preamble {
+        display: none;
+      }
+    }
+  }
+
+  // hack to avoid zoom in iOS
+  #status_message,
+  #add_colleague,
+  #q,
+  #username,
+  #password {
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 22em) {
+  // Hack to mask SBK:s label
+  a.close-map {
+    padding-right: 2em;
+    background: #dedede; // SBKs color
+  }
+}

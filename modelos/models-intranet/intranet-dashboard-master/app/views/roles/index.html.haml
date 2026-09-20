@@ -1,0 +1,21 @@
+- title "Roller"
+%section.box.index
+  %h1.box-title= h1
+  %table
+    %thead
+      %tr
+        %th Namn
+        %th.secondary Kategori
+        %th.secondary Vald
+        %th
+    %tbody
+      - @roles.each do |role|
+        %tr
+          %td= link_to role.name, edit_role_path(role)
+          %td.secondary= Role::CATEGORIES[role.category]
+          %td.secondary= role.users.count
+          %td.delete= link_to "Radera", role, method: :delete, data: { confirm: 'Är du säker?' }, class: "btn btn-danger btn-sm"
+
+      %tr
+        %td{ colspan: 3 }
+          .actions= link_to "Lägg till", new_role_path, class: "btn btn-primary"
