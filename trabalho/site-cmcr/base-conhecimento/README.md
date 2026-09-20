@@ -12,6 +12,11 @@ Página de consulta às normas do condomínio: **Regimento Interno**, **Convenç
 - **Resultados separados em dois grupos**: os artigos que citam o termo digitado e os que
   aparecem apenas por termo próximo. Assim ninguém confunde uma menção direta com uma
   aproximação da busca.
+- **Quadros responsivos.** Os cinco quadros usam um formato único de colunas e linhas. Acima
+  de três colunas, no celular cada linha vira um cartão com os campos rotulados, em vez de
+  colunas espremidas ou de uma rolagem lateral que ninguém descobre. O quadro de vagas, com
+  76 linhas, tem campo de filtro: o morador digita o número do apartamento e fica só a linha
+  dele.
 - **Busca cruzada entre os documentos.** A aba escolhe onde procurar, como pedido, mas se o
   outro documento normativo também tratar do assunto, aparece um aviso com a contagem e um
   atalho que troca de documento mantendo o termo digitado.
@@ -73,6 +78,17 @@ confunda com falha de leitura.
   A chave deve estar em minúsculas e sem acentos; os valores podem ter acento.
 - **Novo tema:** acrescente em `DADOS_TEMAS` e inclua o `id` nas `tags` dos artigos pertinentes.
 - **Nova lei:** acrescente em `dados/legislacao.js`.
+
+## Fidelidade x apresentação
+
+A régua adotada: **o texto é fiel ao documento, a apresentação é livre.**
+
+Fiel significa reproduzir o que está escrito, inclusive os erros do original — e inclusive
+os rótulos que o documento dá às colunas dos quadros. A numeração dos itens da tabela de
+horários e a palavra "Fornecedor" no quadro de materiais estão lá porque estão no papel.
+
+Livre significa que layout, cores, ordenação na tela, empilhamento no celular, zebra,
+filtro e tipografia são decisões de quem fez a página, e podem mudar sem cerimônia.
 
 ## Dados de terceiros
 

@@ -1986,7 +1986,8 @@ window.DADOS_CONVENCAO = {
       "95,82"
      ]
     }
-   ]
+   ],
+   "zebra": true
   },
   {
    "id": "vagas",
@@ -2763,7 +2764,9 @@ window.DADOS_CONVENCAO = {
       "Descoberta"
      ]
     }
-   ]
+   ],
+   "zebra": true,
+   "filtro": "Digite o número da sua unidade"
   }
  ],
  "errosDoOriginal": [],

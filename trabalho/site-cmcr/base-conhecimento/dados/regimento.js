@@ -2478,6 +2478,7 @@ window.DADOS_REGIMENTO = {
    "origem": "Art. 2º, inciso XVI",
    "aviso": "Tabela conferida diretamente na imagem da página 5 do documento registrado. A observação do Salão de Festas está incompleta no próprio original, que diz apenas “o som ambiente (Sudema)”, sem o verbo.",
    "colunas": [
+    "Item",
     "Local / Atividade",
     "Dia da semana",
     "Horário"
@@ -2485,6 +2486,7 @@ window.DADOS_REGIMENTO = {
    "linhas": [
     {
      "c": [
+      "1",
       "Salão de Festas",
       "Domingo a quinta-feira",
       "09h às 00h"
@@ -2492,6 +2494,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "c": [
+      "",
       "Salão de Festas",
       "Sexta-feira e sábado",
       "09h às 02h"
@@ -2505,6 +2508,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "c": [
+      "2",
       "Espaço Gourmet / Churrasqueira",
       "Sexta-feira e sábado",
       "09h às 00h"
@@ -2512,6 +2516,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "c": [
+      "",
       "Espaço Gourmet / Churrasqueira",
       "Domingo a quinta-feira",
       "09h às 22h"
@@ -2519,6 +2524,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "c": [
+      "3",
       "Brinquedoteca — Espaço Kids",
       "Sexta-feira e sábado",
       "08h às 02h"
@@ -2526,6 +2532,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "c": [
+      "",
       "Brinquedoteca — Espaço Kids",
       "Domingo a quinta",
       "08h às 00h"
@@ -2533,6 +2540,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "c": [
+      "4",
       "Piscina",
       "Domingo a domingo",
       "08h às 22h"
@@ -2540,6 +2548,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "c": [
+      "5",
       "Academia",
       "Domingo a domingo",
       "24 horas"
@@ -2553,6 +2562,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "c": [
+      "6",
       "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
       "Segunda a sexta-feira",
       "08h às 12h e 13h às 17h"
@@ -2560,6 +2570,7 @@ window.DADOS_REGIMENTO = {
     },
     {
      "c": [
+      "",
       "Mudanças, Reformas nos apartamentos, instalação e montagem de móveis e outros",
       "Sábado",
       "09h às 12h"
@@ -2571,7 +2582,9 @@ window.DADOS_REGIMENTO = {
      ],
      "obs": true
     }
-   ]
+   ],
+   "zebra": true,
+   "agrupaPor": 1
   }
  ],
  "errosDoOriginal": [
