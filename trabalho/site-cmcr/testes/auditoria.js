@@ -29,7 +29,7 @@ const MUTACOES = require('./mutacoes');
   const copia = fs.mkdtempSync(path.join(os.tmpdir(), 'cmcr-mutacao-'));
   fs.cpSync(SITE, copia, {
     recursive: true,
-    filter: function (origem) { return path.basename(origem) !== '_testes'; }
+    filter: function (origem) { return path.basename(origem) !== 'testes'; }
   });
 
   const { servidor, url } = await subir(copia);

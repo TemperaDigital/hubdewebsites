@@ -3,33 +3,29 @@
 Esta pasta não é parte do site. Ela existe para que uma mudança futura não
 quebre a página sem ninguém perceber.
 
-## Por que o nome começa com `_`
+## Esta pasta é pública, e tudo bem
 
-A pasta `sites` inteira é pública na internet, e o nginx **não** bloqueia
-`.js` nem `.md` — os dois estão listados como "não bloqueados, e isso é
-deliberado ou apenas não revisado" no `_LEIA-ME.md` da raiz. Uma pasta
-`testes/` aqui dentro iria ao ar junto com o site.
+A pasta `sites` inteira é servida na internet sem senha, e isto aqui vai
+junto. É deliberado: não há segredo nenhum nos testes, e o dono da pasta
+prefere o material acessível a escondido — a mesma decisão registrada no
+`_LEIA-ME.md` da raiz para a área de cursos.
 
-O prefixo `_` é a convenção que a própria raiz documenta para material que
-não deve sair no ar.
+O que **não** pode entrar aqui é credencial. Chave, token, `.env`, dump de
+banco. Em 05/09/2026 apareceram servidos com 200 uma chave SSH privada,
+credenciais OAuth do Google e três tokens do GitHub, todos por descuido.
+A varredura que a raiz recomenda também vale para cá:
 
-> **Confira isto antes de confiar:** o `_LEIA-ME.md` da raiz descreve a regra
-> como `location ~ ^/_`, que casa apenas com caminhos que começam com `/_` —
-> ou seja, só na raiz do site. Se for esse o texto exato do conf, o caminho
-> `/trabalho/site-cmcr/_testes/` **não** seria bloqueado. O mesmo documento
-> também afirma, em outro trecho, que pastas iniciadas por `_` são recusadas
-> em qualquer lugar. Os dois trechos não podem estar certos ao mesmo tempo.
-> A fonte de verdade é `/DATA/AppData/compose/sites-nginx.conf`, que não dá
-> para ler daqui. Vale conferir com:
->
-> ```bash
-> curl -s -o /dev/null -w '%{http_code}\n' \
->   https://sites.fguerra.ia.br/trabalho/site-cmcr/_testes/LEIA-ME.md
-> ```
->
-> `403` ou `404` está certo. `200` significa que a regra é só da raiz e que
-> esta pasta está pública — nada aqui é sigiloso, mas também não precisa
-> estar no ar.
+```bash
+grep -rniE 'api[_-]?key|secret|token|AIza|sk-|ghp_' . \
+  --include='*.js' --include='*.json' --include='*.md'
+```
+
+Um detalhe do servidor que vale saber, ainda que não afete esta pasta: o
+prefixo `_` que a raiz usa para esconder arquivos **só funciona na raiz**.
+A regra é `location ~ ^/_`, e o `^` ancora no começo do endereço — então
+`/_LEIA-ME.md` é recusado, mas `/trabalho/qualquer/_coisa` não seria. Se um
+dia alguém contar com o underscore para proteger algo em subpasta, vai contar
+com o que não existe. O conserto seria trocar a âncora por `(^|/)_`.
 
 ## Como rodar
 
@@ -39,7 +35,7 @@ dependência deste repositório — o site é estático de propósito e não tem
 
 ```bash
 npm install -g playwright && npx playwright install chromium
-cd trabalho/site-cmcr/_testes
+cd trabalho/site-cmcr/testes
 node rodar.js
 ```
 
