@@ -12,7 +12,12 @@
   var campo = $('#busca');
   var btnLimpar = $('#busca-limpar');
 
+  var DOCS = { regimento: REG, convencao: CONV };
+  var ROTULO = { regimento: 'Regimento', convencao: 'Convenção' };
+
   var estado = { doc: 'regimento', termo: '', tema: null, abertos: {}, verErros: false };
+
+  function docAtivo() { return DOCS[estado.doc] || REG; }
 
   /* ---------- utilidades ---------- */
 
@@ -100,12 +105,13 @@
 
   /* Devolve dois grupos: os artigos que citam o termo digitado ("diretos")
      e os que só aparecem por causa de um sinônimo ("relacionados"). */
-  function buscar() {
+  function buscar(doc) {
+    doc = doc || docAtivo();
     var alvos = expandir(estado.termo);
     var lit = norm(estado.termo).trim();
     var diretos = [], relacionados = [];
 
-    REG.artigos.forEach(function (a) {
+    doc.artigos.forEach(function (a) {
       if (estado.tema && a.tags.indexOf(estado.tema) < 0) return;
       if (!alvos.length) { diretos.push({ art: a, peso: 0 }); return; }
       var hits = lit ? ocorrencias(a.busca, lit).length : 0;
@@ -141,8 +147,9 @@
   /* ---------- renderização ---------- */
 
   function htmlArtigo(art, alvos) {
-    var h = '<article class="art" id="reg-art-' + art.n + '">';
+    var h = '<article class="art" id="' + estado.doc + '-art-' + art.n + '">';
     h += '<span class="art-rot">' + esc(art.rotulo) + '</span>';
+    if (art.avisoTabela) h += '<p class="aviso-tabela">' + esc(art.avisoTabela) + '</p>';
     h += '<div class="art-corpo">';
     art.blocos.forEach(function (b) {
       if (b.caput || b.rotulo) {
@@ -173,7 +180,7 @@
   }
 
   function htmlTabela(id, alvos) {
-    var t = (REG.tabelas || []).filter(function (x) { return x.id === id; })[0];
+    var t = (docAtivo().tabelas || []).filter(function (x) { return x.id === id; })[0];
     if (!t) return '';
     var h = '<div class="tabela-box"><table class="tabela"><caption class="sr-only">' + esc(t.titulo) + '</caption><thead><tr>';
     t.colunas.slice(1).forEach(function (c) { h += '<th scope="col">' + esc(c) + '</th>'; });
@@ -199,83 +206,71 @@
     return '<div class="alerta"><span class="alerta-icone" aria-hidden="true">' + icone + '</span><div>' + html + '</div></div>';
   }
 
-  function viewRegimento() {
-    var h = '<div class="doc-cabeca"><h2>' + esc(REG.titulo) + '</h2>' +
-      '<p class="doc-meta"><span>' + esc(REG.subtitulo) + '</span><span>' + esc(REG.data) +
-      '</span><span>' + REG.artigos.length + ' artigos em ' + REG.capitulos.length + ' capítulos</span></p></div>';
+  function viewDocumento() {
+    var D = docAtivo();
+    var alvos = expandir(estado.termo);
 
-    if (REG.confiabilidade === 'conferido') {
+    var h = '<div class="doc-cabeca"><h2>' + esc(D.titulo) + '</h2>' +
+      '<p class="doc-meta"><span>' + esc(D.subtitulo) + '</span><span>' + esc(D.data) +
+      '</span><span>' + D.artigos.length + ' artigos em ' + D.capitulos.length + ' capítulos</span></p></div>';
+
+    if (D.confiabilidade === 'conferido') {
       h += htmlAlerta('\u2705',
-        '<p><strong>Texto conferido.</strong> Os 88 artigos foram lidos por dois motores de OCR independentes ' +
-        'e, nos pontos em que discordaram, conferidos diretamente na imagem do documento registrado.</p>' +
-        '<p>A redação reproduz o original, inclusive onde o próprio documento tem erro de digitação. ' +
-        '<button class="link-btn" type="button" id="ver-erros">Ver os ' + (REG.errosDoOriginal || []).length +
-        ' pontos em que o original diverge da norma culta</button></p>');
+        '<p><strong>Texto conferido.</strong> Os ' + D.artigos.length + ' artigos foram lidos por dois motores de OCR ' +
+        'independentes e, nos pontos em que discordaram, conferidos diretamente na imagem do documento registrado.</p>' +
+        ((D.errosDoOriginal || []).length
+          ? '<p>A redação reproduz o original, inclusive onde o próprio documento tem erro de digitação. ' +
+            '<button class="link-btn" type="button" id="ver-erros">Ver os ' + D.errosDoOriginal.length +
+            ' pontos em que o original diverge da norma culta</button></p>'
+          : ''));
     } else {
       h += htmlAlerta('\u26a0\ufe0f',
-        '<p><strong>Texto em revisão.</strong> Foi extraído por reconhecimento óptico (OCR) de um PDF escaneado. ' +
-        'A conferência contra o documento registrado em cartório ainda não foi concluída.</p>' +
-        (REG.lacunas.length ? '<p>Pendências conhecidas: ' +
-          REG.lacunas.map(function (l) { return 'Art. ' + l.n + 'º não recuperado'; }).join('; ') +
-          '. Consulte <code>REVISAO-OCR.md</code> para a lista completa.</p>' : ''));
+        '<p><strong>Texto em revisão.</strong> Extraído por reconhecimento óptico (OCR) do documento escaneado. ' +
+        'A conferência página a página ainda não foi concluída.</p>');
     }
 
-    if (estado.verErros && (REG.errosDoOriginal || []).length) {
+    (D.lacunas || []).forEach(function (l) {
+      h += '<p class="lacuna"><strong>' + (l.n ? 'Art. ' + l.n + 'º — texto ausente.' : 'Trecho ausente no escaneamento.') +
+        '</strong> ' + esc(l.motivo) + '</p>';
+    });
+
+    if (estado.verErros && (D.errosDoOriginal || []).length) {
       h += '<div class="erros-orig"><h3>Divergências presentes no documento original</h3>' +
         '<p>Reproduzidas fielmente nesta base. Não são erros de leitura.</p><dl>';
-      REG.errosDoOriginal.forEach(function (e) {
+      D.errosDoOriginal.forEach(function (e) {
         h += '<dt>' + esc(e.onde) + '</dt><dd>' + esc(e.texto) + ' <span>' + esc(e.nota) + '</span></dd>';
       });
       h += '</dl></div>';
     }
 
-    h += '<p class="preambulo">' + destacar(REG.preambulo, expandir(estado.termo)) + '</p>';
+    h += '<p class="preambulo">' + destacar(D.preambulo, alvos) + '</p>';
 
-    REG.capitulos.forEach(function (c) {
-      var aberto = !!estado.abertos['reg-' + c.numero];
+    D.capitulos.forEach(function (c) {
+      var chave = estado.doc + '-' + c.numero;
+      var aberto = !!estado.abertos[chave];
       h += '<section class="cap">';
-      h += '<button class="cap-btn" type="button" data-cap="reg-' + c.numero + '" aria-expanded="' + aberto + '">' +
+      h += '<button class="cap-btn" type="button" data-cap="' + chave + '" aria-expanded="' + aberto + '">' +
         '<span class="cap-num">' + esc(c.numero) + '</span>' +
         '<span class="cap-tit">' + esc(c.titulo) + '</span>' +
         '<span class="cap-cnt">' + c.artigos.length + ' art.</span>' +
-        '<span class="cap-seta" aria-hidden="true">›</span></button>';
+        '<span class="cap-seta" aria-hidden="true">\u203a</span></button>';
       if (aberto) {
         h += '<div class="cap-corpo">';
-        REG.artigos.filter(function (a) { return a.cap === c.numero; })
-          .forEach(function (a) { h += htmlArtigo(a, expandir(estado.termo)); });
-        REG.lacunas.filter(function (l) { return l.cap === c.numero; })
-          .forEach(function (l) { h += '<p class="lacuna"><strong>Art. ' + l.n + 'º — texto ausente.</strong> ' + esc(l.motivo) + '</p>'; });
+        D.artigos.filter(function (a) { return a.cap === c.numero; })
+          .forEach(function (a) { h += htmlArtigo(a, alvos); });
         h += '</div>';
       }
       h += '</section>';
     });
 
-    REG.apendices.forEach(function (ap) {
-      var id = 'reg-ap-' + ap.id, aberto = !!estado.abertos[id];
+    (D.apendices || []).forEach(function (ap) {
+      var id = estado.doc + '-ap-' + ap.id, aberto = !!estado.abertos[id];
       h += '<section class="cap"><button class="cap-btn" type="button" data-cap="' + id + '" aria-expanded="' + aberto + '">' +
-        '<span class="cap-num">' + esc(ap.id) + '</span><span class="cap-tit">Apêndice ' + esc(ap.id) + ' — ' + esc(ap.titulo) + '</span>' +
-        '<span class="cap-cnt"></span><span class="cap-seta" aria-hidden="true">›</span></button>';
+        '<span class="cap-num">' + esc(ap.id) + '</span><span class="cap-tit">Apêndice ' + esc(ap.id) + ' \u2014 ' + esc(ap.titulo) + '</span>' +
+        '<span class="cap-cnt"></span><span class="cap-seta" aria-hidden="true">\u203a</span></button>';
       if (aberto) h += '<div class="cap-corpo"><div class="art"><div class="art-corpo"><p>' +
-        destacar(ap.texto, expandir(estado.termo)) + '</p></div></div></div>';
+        destacar(ap.texto, alvos) + '</p></div></div></div>';
       h += '</section>';
-    });
-    return h;
-  }
-
-  function viewConvencao() {
-    var h = '<div class="doc-cabeca"><h2>' + esc(CONV.titulo) + '</h2>' +
-      '<p class="doc-meta"><span>' + esc(CONV.subtitulo) + '</span><span>' + esc(CONV.data) + '</span></p></div>';
-    h += htmlAlerta('📄', '<p><strong>Texto integral ainda não disponível.</strong> ' + esc(CONV.aviso) + '</p>');
-    h += '<p class="preambulo">' + esc(CONV.preambulo) + '</p>';
-    CONV.capitulos.forEach(function (c) {
-      var faixa = c.artigos.length
-        ? (c.artigos.length === 1 ? 'Art. ' + c.artigos[0] + 'º' : 'Arts. ' + c.artigos[0] + 'º a ' + c.artigos[c.artigos.length - 1] + 'º')
-        : '';
-      h += '<section class="cap"><div class="cap-btn" style="cursor:default">' +
-        '<span class="cap-num">' + esc(c.numero) + '</span>' +
-        '<span class="cap-tit">' + esc(c.titulo) +
-        (c.nota ? '<br><span style="font-weight:400;font-size:.85rem;color:var(--text-muted)">' + esc(c.nota) + '</span>' : '') +
-        '</span><span class="cap-cnt">' + faixa + '</span></div></section>';
     });
     return h;
   }
@@ -298,7 +293,8 @@
   }
 
   function viewResultados() {
-    var r = buscar();
+    var D = docAtivo();
+    var r = buscar(D);
     var alvos = expandir(estado.termo);
     var tema = estado.tema ? TEMAS.filter(function (t) { return t.id === estado.tema; })[0] : null;
     var total = r.diretos.length + r.relacionados.length;
@@ -306,17 +302,31 @@
     var titulo = estado.termo ? '\u201c' + esc(estado.termo) + '\u201d' : (tema ? tema.icone + ' ' + esc(tema.nome) : 'Tudo');
     var h = '<div class="res-cabeca"><h2>' + titulo + '</h2><span class="res-cnt">' +
       (total === 1 ? '1 artigo encontrado' : total + ' artigos encontrados') +
-      ' no Regimento Interno</span></div>';
+      ' em ' + esc(D.titulo) + '</span></div>';
+
+    /* o outro documento normativo também pode tratar do assunto */
+    var outroId = estado.doc === 'regimento' ? 'convencao' : 'regimento';
+    var outro = DOCS[outroId];
+    if (outro && outro.artigos.length) {
+      var rOutro = buscar(outro);
+      var nOutro = rOutro.diretos.length + rOutro.relacionados.length;
+      if (nOutro) {
+        h += '<button class="cruzado" type="button" data-doc-ir="' + outroId + '">' +
+          '<span class="cruzado-sel">' + esc(outro.titulo) + '</span>' +
+          (nOutro === 1 ? ' também trata disso em 1 artigo' : ' também trata disso em ' + nOutro + ' artigos') +
+          '<span class="cruzado-seta" aria-hidden="true">\u2192</span></button>';
+      }
+    }
 
     if (!total) {
       return h + '<div class="vazio"><span class="vazio-icone" aria-hidden="true">\ud83d\udd0d</span>' +
-        '<strong>Nenhum artigo encontrado</strong>' +
-        'Tente outra palavra, ou use um dos temas acima. Lembre-se: o texto da Conven\u00e7\u00e3o ainda n\u00e3o est\u00e1 nesta base.</div>';
+        '<strong>Nenhum artigo encontrado em ' + esc(D.titulo) + '</strong>' +
+        'Tente outra palavra, ou use um dos temas acima.</div>';
     }
 
     function item(a) {
       return '<button class="res-item" type="button" data-ir="' + a.n + '">' +
-        '<span class="res-topo"><span class="res-doc">Regimento</span>' +
+        '<span class="res-topo"><span class="res-doc">' + esc(ROTULO[estado.doc] || '') + '</span>' +
         '<strong>' + esc(a.rotulo) + '</strong>' +
         '<span class="res-cap">Cap. ' + esc(a.cap) + ' \u2014 ' + esc(a.capTitulo) + '</span></span>' +
         '<p class="res-texto">' + destacar(trecho(a, alvos), alvos) + '</p></button>';
@@ -332,7 +342,7 @@
     if (r.relacionados.length) {
       var termos = alvos.slice(1).filter(function (t) { return t !== norm(estado.termo).trim(); }).slice(0, 8);
       h += '<h3 class="grupo-res">Assuntos relacionados <span>' + r.relacionados.length + '</span></h3>' +
-        '<p class="busca-dica" style="margin-top:-8px">Encontrados por termos pr\u00f3ximos: <em>' +
+        '<p class="busca-dica" style="margin-top:-8px">Encontrados por termos próximos: <em>' +
         termos.map(esc).join('</em>, <em>') + '</em></p>';
       h += r.relacionados.map(item).join('');
     }
@@ -346,7 +356,11 @@
   function montarTemas() {
     var box = $('#temas');
     var cont = {};
-    REG.artigos.forEach(function (a) { a.tags.forEach(function (t) { cont[t] = (cont[t] || 0) + 1; }); });
+    [REG, CONV].forEach(function (D) {
+      (D.artigos || []).forEach(function (a) {
+        a.tags.forEach(function (t) { cont[t] = (cont[t] || 0) + 1; });
+      });
+    });
     var lista = TEMAS.filter(function (t) { return cont[t.id]; })
       .sort(function (a, b) { return cont[b.id] - cont[a.id]; });
 
@@ -380,10 +394,9 @@
 
   function render() {
     var buscando = !!(estado.termo.trim() || estado.tema);
-    if (buscando && estado.doc === 'regimento') painel.innerHTML = viewResultados();
-    else if (estado.doc === 'regimento') painel.innerHTML = viewRegimento();
-    else if (estado.doc === 'convencao') painel.innerHTML = viewConvencao();
-    else painel.innerHTML = viewLegislacao();
+    if (estado.doc === 'legislacao') painel.innerHTML = viewLegislacao();
+    else if (buscando) painel.innerHTML = viewResultados();
+    else painel.innerHTML = viewDocumento();
 
     Array.prototype.forEach.call(document.querySelectorAll('.aba'), function (b) {
       b.setAttribute('aria-selected', String(b.dataset.doc === estado.doc));
@@ -394,10 +407,10 @@
 
   function irParaArtigo(n) {
     estado.termo = ''; estado.tema = null; campo.value = '';
-    var art = REG.artigos.filter(function (a) { return a.n === n; })[0];
-    if (art) estado.abertos['reg-' + art.cap] = true;
+    var art = docAtivo().artigos.filter(function (a) { return a.n === n; })[0];
+    if (art) estado.abertos[estado.doc + '-' + art.cap] = true;
     render();
-    var alvo = document.getElementById('reg-art-' + n);
+    var alvo = document.getElementById(estado.doc + '-art-' + n);
     if (alvo) alvo.scrollIntoView({ block: 'center' });
   }
 
@@ -408,7 +421,7 @@
     clearTimeout(timer);
     timer = setTimeout(function () {
       estado.termo = campo.value;
-      if (estado.termo.trim()) estado.doc = 'regimento';
+      if (estado.termo.trim() && estado.doc === 'legislacao') estado.doc = 'regimento';
       render();
     }, 160);
   });
@@ -421,7 +434,7 @@
     var b = e.target.closest('.aba');
     if (!b) return;
     estado.doc = b.dataset.doc;
-    if (estado.doc !== 'regimento') { estado.tema = null; }
+    if (estado.doc === 'legislacao') { estado.tema = null; }
     render();
   });
 
@@ -430,12 +443,19 @@
     if (chip) {
       var t = chip.dataset.tema;
       estado.tema = estado.tema === t ? null : t;
-      estado.doc = 'regimento';
+      if (estado.doc === 'legislacao') estado.doc = 'regimento';
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     if (e.target.id === 'ver-erros') { estado.verErros = !estado.verErros; render(); return; }
+    var cruz = e.target.closest('[data-doc-ir]');
+    if (cruz) {
+      estado.doc = cruz.dataset.docIr;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     var cap = e.target.closest('[data-cap]');
     if (cap) {
       var k = cap.dataset.cap;

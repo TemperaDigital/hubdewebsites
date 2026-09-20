@@ -331,3 +331,19 @@ mark { background: var(--marca-hl); color: inherit; border-radius: 3px; padding:
   .erros-orig dl { grid-template-columns: 1fr; gap: 2px; }
   .erros-orig dt { margin-top: 8px; }
 }
+
+.cruzado {
+  display: flex; align-items: center; gap: 8px; width: 100%; cursor: pointer;
+  padding: 11px 14px; margin: 0 0 16px; border-radius: var(--radius);
+  font: inherit; font-size: .88rem; text-align: left;
+  background: var(--accent-soft); border: 1px solid transparent; color: var(--text);
+}
+.cruzado:hover { border-color: var(--accent); }
+.cruzado-sel { font-weight: 700; color: var(--accent); }
+.cruzado-seta { margin-left: auto; color: var(--accent); font-size: 1.05rem; }
+
+.aviso-tabela {
+  margin: 0 0 9px; padding: 10px 12px; border-radius: 8px;
+  font-family: var(--font); font-size: .82rem; line-height: 1.55;
+  background: var(--alerta-bg); border: 1px dashed var(--alerta-br); color: var(--alerta-tx);
+}

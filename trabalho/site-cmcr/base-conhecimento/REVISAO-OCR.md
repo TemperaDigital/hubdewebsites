@@ -78,14 +78,42 @@ Todas verificadas contra a segunda leitura antes de entrar na base:
 
 ---
 
-## 4. Situação da Convenção
+## 4. Convenção de Condomínio
 
-Continua **pendente**. O arquivo recebido em Word (`Convenção em Word - Resumo.docx`) é um
-resumo com análises e comentários, não a norma, e omite os Arts. 42º a 46º.
+**Situação: publicada, com duas lacunas de escaneamento.**
 
-O PDF da Convenção registrada está no Google Drive (`Convenção Monte Carlo.pdf`, 23 páginas).
-Ele é uma digitalização **sem camada de texto**, então precisa do mesmo tratamento de OCR
-aplicado ao Regimento. O que falta é o arquivo chegar ao ambiente de trabalho — o conector
-do Drive lê o conteúdo já interpretado, e nesse caso não há nada para interpretar.
+O documento recebido é a *Escritura Particular de Convenção do Condomínio Monte Carlo
+Residence*, de junho de 2018, num PDF de 27 páginas (a Convenção começa na página 7; as
+seis primeiras trazem a capa e a rerratificação da declaração de garagem).
 
-Enquanto isso, a aba **Convenção** traz apenas o índice dos capítulos, com aviso explícito.
+O arquivo tinha camada de OCR, mas fraca — perdia artigos inteiros e só reconhecia 3 dos 13
+capítulos. Foi feita a mesma segunda leitura com `tesseract` a 300 dpi, e é ela que
+sustenta o texto publicado. Resultado: **60 artigos em 13 capítulos, sem falhas na
+sequência**.
+
+O resumo em Word recebido antes estava errado em dois pontos que agora se pode corrigir:
+
+- A numeração dos capítulos estava deslocada a partir do IV. O que o resumo chamava de
+  Capítulo V (Da Administração) é o **IV**; a Assembleia Geral é o **V**, e não o VI.
+- O capítulo ausente no resumo é o **IX — Rateio das Contribuições para Despesas**
+  (Arts. 42º a 46º), agora publicado.
+
+Em compensação, dois palpites meus se revelaram errados: os Capítulos **XI — Das
+Finalidades** e **XII — Dos Recursos** têm mesmo esses títulos no original, embora tratem
+de multas e de seguros. Ficam como estão.
+
+### O que falta
+
+| Lacuna | Detalhe |
+|---|---|
+| **Arts. 61º a 67º** | O PDF termina no Art. 60º. Faltam os sete artigos finais e a página de assinaturas e data. Pelo resumo, tratam de alienação e locação (61º), exercício financeiro (62º), modificação da convenção por 2/3 (63º), responsabilidade do condomínio e fiscalização pelo porteiro (64º), foro (65º), casos omissos pela Lei 4.591/1964 (66º) e registro em cartório (67º). **É preciso digitalizar as folhas finais.** |
+| **Tabelas dos Arts. 4º e 6º** | Trazem as áreas das 76 unidades autônomas e a distribuição das 79 vagas de garagem. São quadros, e o OCR não preservou linhas e colunas. O texto corrido desses artigos está legível; os quadros, não. A página avisa isso no próprio artigo. |
+
+### Limpeza aplicada
+
+Além da estruturação em capítulos, artigos, parágrafos e alíneas, foram removidas **13
+rubricas do tabelião** que o OCR capturou no meio de frases (`AÓ`, `Mú`, `Ri)`, `Dri`, `&`
+e semelhantes). São marcas de margem do documento físico, não texto normativo.
+
+A Convenção continua marcada como **em revisão**: ao contrário do Regimento, ainda não
+houve a conferência página a página na imagem.
