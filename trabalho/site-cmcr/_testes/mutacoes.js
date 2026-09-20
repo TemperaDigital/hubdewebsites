@@ -76,6 +76,14 @@ module.exports = [
       return s.replace("h += '<p class=\"preambulo\">' + destacar(D.preambulo, alvos) + '</p>';", '');
     } },
 
+  { nome: 'logotipo exibido acima da resolução do arquivo',
+    arquivo: 'assets/estilo.css',
+    aplicar: function (s) { return s.replace('.marca img { width: 311px;', '.marca img { width: 620px;'); } },
+
+  { nome: 'ícone da aba aponta para arquivo que não existe',
+    arquivo: 'index.html',
+    aplicar: function (s) { return s.replace('assets/favicon-vinho.png', 'assets/favicon-sumido.png'); } },
+
   { nome: 'texto do cartão da base fica ilegível',
     arquivo: 'assets/estilo.css',
     aplicar: function (s) { return s.replace('color: #f0e2e0;', 'color: #7d4a4d;'); } }

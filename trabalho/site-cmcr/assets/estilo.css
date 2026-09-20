@@ -41,7 +41,8 @@ img { max-width: 100%; height: auto; }
 .topo { background: var(--superficie); border-bottom: 1px solid var(--borda); position: sticky; top: 0; z-index: 20; }
 .topo-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 20px; }
 .marca { display: block; flex: none; line-height: 0; }
-.marca img { width: 300px; height: auto; }
+/* 311 e não 300: a arte carrega 28px de margem para a sombra caber */
+.marca img { width: 311px; height: auto; }
 .menu { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: flex-end; }
 .menu a { color: var(--texto-suave); text-decoration: none; font-size: .92rem; font-weight: 500; }
 .menu a:hover { color: var(--vinho); }
@@ -186,7 +187,7 @@ section h2 {
   /* o cabeçalho empilhado ocupa quase metade da tela; melhor não grudar */
   .topo { position: static; }
   .topo-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .marca img { width: 220px; }
+  .marca img { width: 228px; }
   .menu { gap: 14px; justify-content: flex-start; }
   .hero { padding: 54px 0 48px; }
   section { padding: 48px 0; }
