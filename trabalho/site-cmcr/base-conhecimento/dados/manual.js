@@ -2795,27 +2795,32 @@ window.DADOS_MANUAL = {
    "rotulo": "Seção 8",
    "cap": "8",
    "capTitulo": "Autores dos Projetos",
-   "blocos": [],
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "Esta seção do manual é uma lista de contatos de terceiros — nomes, telefones e e-mails de profissionais e fornecedores. Não foi publicada aqui: não serve ao que esta base se propõe, que é a consulta às normas e ao uso do imóvel, e são dados pessoais de gente que não faz parte do condomínio. A lista está no manual impresso, em poder do Síndico.",
+     "itens": []
+    }
+   ],
    "tags": [],
-   "busca": "projeto arquitetonico jailton jales (83) 3576-8949 sondagem do terreno valdez borges soares (concresolo) 3222-0100 · 3241-5944 projeto estrutural flavio roberto xavier de oliveira — crea 160076936-5 (83) 98857-3313 execucao do projeto de combate a incendio diego da silva castro, eng. civil — crea 160.061.528-7 (83) 99912-8841 projeto hidraulico mrm projetos e instalacoes ltda — marcos antonio reis martins (a51773-9) (83) 98802-6582 projeto sanitario mrm projetos e instalacoes ltda — marcos antonio reis martins (a51773-9) (83) 98802-6582 projeto eletrico / telefonico / interfone / tv mrm projetos e instalacoes ltda — marcos antonio reis martins (a51773-9) (83) 98802-6582 ",
-   "subtitulo": "Autores dos Projetos",
-   "tabela": "projetos"
+   "busca": "esta secao do manual e uma lista de contatos de terceiros — nomes, telefones e e-mails de profissionais e fornecedores. nao foi publicada aqui: nao serve ao que esta base se propoe, que e a consulta as normas e ao uso do imovel, e sao dados pessoais de gente que nao faz parte do condominio. a lista esta no manual impresso, em poder do sindico.",
+   "subtitulo": "Autores dos Projetos"
   },
   {
    "n": 34,
    "rotulo": "Seção 9",
    "cap": "9",
    "capTitulo": "Fornecedores e Serviços",
-   "blocos": [],
-   "tags": [
-    "garagem",
-    "piscina",
-    "portaria",
-    "elevador"
+   "blocos": [
+    {
+     "rotulo": null,
+     "caput": "Esta seção do manual é uma lista de contatos de terceiros — nomes, telefones e e-mails de profissionais e fornecedores. Não foi publicada aqui: não serve ao que esta base se propõe, que é a consulta às normas e ao uso do imóvel, e são dados pessoais de gente que não faz parte do condomínio. A lista está no manual impresso, em poder do Síndico.",
+     "itens": []
+    }
    ],
-   "busca": "interfone / telefone / tv / portao eletronico rr eletronicos — jose roberto (83) 98899-4391 · (83) 98728-9316 · (83) 3223-9057 impermeabilizacao maia macedo engenharia (83) 3252-1116 central de gas dpi (83) 3247-8378 · (83) 99981-2561 instalacao de combate a incendio antonio carlos viegas (83) 98810-7189 bancadas, soleiras e divibox de granito cicero targino (83) 99963-0030 elevadores otis (83) 3246-4041 · (83) 3515-8400 · 0800 704 8783 bombas d'agua marquiip (83) 3222-5322 piscina montel piscinas (83) 3227-0080 ",
-   "subtitulo": "Fornecedores e Serviços",
-   "tabela": "servicos"
+   "tags": [],
+   "busca": "esta secao do manual e uma lista de contatos de terceiros — nomes, telefones e e-mails de profissionais e fornecedores. nao foi publicada aqui: nao serve ao que esta base se propoe, que e a consulta as normas e ao uso do imovel, e sao dados pessoais de gente que nao faz parte do condominio. a lista esta no manual impresso, em poder do sindico.",
+   "subtitulo": "Fornecedores e Serviços"
   },
   {
    "n": 35,
@@ -2825,7 +2830,7 @@ window.DADOS_MANUAL = {
    "blocos": [
     {
      "rotulo": null,
-     "caput": "Incorporação e construção: B&C Construções Incorporações e Imobiliária LTDA. Fone/Fax (83) 3246-2254 · bec.contato@hotmail.com · Av. Cônego Mathias Freire, 14, Sala 02, Torre — João Pessoa/PB, CEP 58040-130.",
+     "caput": "Incorporação e construção: B&C Construções Incorporações e Imobiliária Ltda. É a responsável pela garantia do imóvel, nos termos da Seção 6. Os dados de contato constam do manual impresso.",
      "itens": []
     }
    ],
@@ -2836,7 +2841,7 @@ window.DADOS_MANUAL = {
     "funcionarios",
     "seguranca"
    ],
-   "busca": "manta asfaltica denver manta tipo iii 4mm pp n/a denver (83) 3245-3242 zeliajneto@terra.com.br argamassa polimerica argamassa colamais industria e comercio de argamassa ltda (83) 3245-2080 colamais@colamaisargamassa.com.br granitos / marmores granito verde esmeralda · amarelo premium a · preto sao marcos fuji s.a. (83) 99352-2027 marconifirmino@yahoo.com.br revestimento interno / externo porcelanato durato bege esmaltado 50x50 a elizabeth revestimentos (83) 3243-0090 tabajararep@ig.com.br revestimento interno / externo rev. esmaltado cristal branco 05x10 elizabeth revestimentos (83) 3243-0090 tabajararep@ig.com.br revestimento interno / externo rev. esmaltado marrom / branca / preta · 7,5x7,5 onix \"ob\" ceramica atlas (83) 3224-2351 vendas@ceraatlas.com.br argamassa de assentamento e rejuntamento de ceramica interna ac-i · ac-ii flex colamais industria e comercio de argamassa (83) 3245-2080 vendas@colamaisargamassa.com.br concreto estrutural fck 30 mpa supermix (83) 3246-1858 johnson.santos@supermix.com.br perfis e acessorios de aluminio (esquadrias) — — — — forras de madeira / portas kit eco foil curupixa reflorestadores unidos s.a. (54) 3251-2222 comercial@reflorestadoresunidos.com.br fechaduras (portas de entrada) fechadura 892 in ext st255r · fechadura 892 int st255r os327 assa abloy brasil (83) 3224-2351 jatlasjp@hotmail.com equipamentos de prevencao contra incendio equipamentos exigidos pelo corpo de bombeiros conforme normas da abnt prevencao (81) 3419-4888 prevencao@prevencao-pe.com.br loucas sanitarias izy branco deca duratex s.a. (83) 3252-2255 sesb.pb@uol.com.br metais sanitarios spot-cr deca duratex s.a. (83) 3252-2255 sesb.pb@uol.com.br tintas tintas lux tintas lux (83) 3031-2795 contato.contatocr@gmail.com vidro temperado e comum vitrium ind. e com. de vidros ltda (83) 3248-1173 vendas01@vitriumvidros.com.br incorporacao e construcao: b&c construcoes incorporacoes e imobiliaria ltda. fone/fax (83) 3246-2254 · bec.contato@hotmail.com · av. conego mathias freire, 14, sala 02, torre — joao pessoa/pb, cep 58040-130.",
+   "busca": "manta asfaltica denver manta tipo iii 4mm pp n/a denver argamassa polimerica argamassa colamais industria e comercio de argamassa ltda granitos / marmores granito verde esmeralda · amarelo premium a · preto sao marcos fuji s.a. revestimento interno / externo porcelanato durato bege esmaltado 50x50 a elizabeth revestimentos revestimento interno / externo rev. esmaltado cristal branco 05x10 elizabeth revestimentos revestimento interno / externo rev. esmaltado marrom / branca / preta · 7,5x7,5 onix \"ob\" ceramica atlas argamassa de assentamento e rejuntamento de ceramica interna ac-i · ac-ii flex colamais industria e comercio de argamassa concreto estrutural fck 30 mpa supermix perfis e acessorios de aluminio (esquadrias) — — forras de madeira / portas kit eco foil curupixa reflorestadores unidos s.a. fechaduras (portas de entrada) fechadura 892 in ext st255r · fechadura 892 int st255r os327 assa abloy brasil equipamentos de prevencao contra incendio equipamentos exigidos pelo corpo de bombeiros conforme normas da abnt prevencao loucas sanitarias izy branco deca duratex s.a. metais sanitarios spot-cr deca duratex s.a. tintas tintas lux tintas lux vidro temperado e comum vitrium ind. e com. de vidros ltda incorporacao e construcao: b&c construcoes incorporacoes e imobiliaria ltda. e a responsavel pela garantia do imovel, nos termos da secao 6. os dados de contato constam do manual impresso.",
    "subtitulo": "Relação de Fornecedores e Especificações de Materiais",
    "tabela": "materiais"
   }
@@ -2963,227 +2968,76 @@ window.DADOS_MANUAL = {
    ]
   },
   {
-   "id": "projetos",
-   "titulo": "Autores dos projetos",
-   "origem": "Seção 8",
-   "aviso": "Quadro conferido diretamente nas imagens do manual. Os dados são de 2018 e podem estar desatualizados: confirme antes de acionar qualquer fornecedor.",
-   "colunas": [
-    "Projeto",
-    "Responsável",
-    "Telefone"
-   ],
-   "linhas": [
-    {
-     "c": [
-      "Projeto Arquitetônico",
-      "Jailton Jales",
-      "(83) 3576-8949"
-     ]
-    },
-    {
-     "c": [
-      "Sondagem do Terreno",
-      "Valdez Borges Soares (Concresolo)",
-      "3222-0100 · 3241-5944"
-     ]
-    },
-    {
-     "c": [
-      "Projeto Estrutural",
-      "Flavio Roberto Xavier de Oliveira — CREA 160076936-5",
-      "(83) 98857-3313"
-     ]
-    },
-    {
-     "c": [
-      "Execução do Projeto de Combate a Incêndio",
-      "Diego da Silva Castro, Eng. Civil — CREA 160.061.528-7",
-      "(83) 99912-8841"
-     ]
-    },
-    {
-     "c": [
-      "Projeto Hidráulico",
-      "MRM Projetos e Instalações Ltda — Marcos Antonio Reis Martins (A51773-9)",
-      "(83) 98802-6582"
-     ]
-    },
-    {
-     "c": [
-      "Projeto Sanitário",
-      "MRM Projetos e Instalações Ltda — Marcos Antonio Reis Martins (A51773-9)",
-      "(83) 98802-6582"
-     ]
-    },
-    {
-     "c": [
-      "Projeto Elétrico / Telefônico / Interfone / TV",
-      "MRM Projetos e Instalações Ltda — Marcos Antonio Reis Martins (A51773-9)",
-      "(83) 98802-6582"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "servicos",
-   "titulo": "Fornecedores e serviços",
-   "origem": "Seção 9",
-   "aviso": "Quadro conferido diretamente nas imagens do manual. Os dados são de 2018 e podem estar desatualizados: confirme antes de acionar qualquer fornecedor.",
-   "colunas": [
-    "Serviço",
-    "Responsável",
-    "Telefone"
-   ],
-   "linhas": [
-    {
-     "c": [
-      "Interfone / Telefone / TV / Portão Eletrônico",
-      "RR Eletrônicos — José Roberto",
-      "(83) 98899-4391 · (83) 98728-9316 · (83) 3223-9057"
-     ]
-    },
-    {
-     "c": [
-      "Impermeabilização",
-      "Maia Macedo Engenharia",
-      "(83) 3252-1116"
-     ]
-    },
-    {
-     "c": [
-      "Central de Gás",
-      "DPI",
-      "(83) 3247-8378 · (83) 99981-2561"
-     ]
-    },
-    {
-     "c": [
-      "Instalação de Combate a Incêndio",
-      "Antônio Carlos Viegas",
-      "(83) 98810-7189"
-     ]
-    },
-    {
-     "c": [
-      "Bancadas, Soleiras e Divibox de Granito",
-      "Cícero Targino",
-      "(83) 99963-0030"
-     ]
-    },
-    {
-     "c": [
-      "Elevadores",
-      "OTIS",
-      "(83) 3246-4041 · (83) 3515-8400 · 0800 704 8783"
-     ]
-    },
-    {
-     "c": [
-      "Bombas d'Água",
-      "Marquiip",
-      "(83) 3222-5322"
-     ]
-    },
-    {
-     "c": [
-      "Piscina",
-      "Montel Piscinas",
-      "(83) 3227-0080"
-     ]
-    }
-   ]
-  },
-  {
    "id": "materiais",
-   "titulo": "Fornecedores e especificações de materiais",
+   "titulo": "Especificações de materiais",
    "origem": "Seção 10",
-   "aviso": "Quadro conferido diretamente nas imagens do manual. Os dados são de 2018 e podem estar desatualizados: confirme antes de acionar qualquer fornecedor. A referência do material é o dado mais durável deste quadro: serve para repor peça igual em reforma, mesmo que o fornecedor tenha mudado.",
+   "aviso": "Quadro conferido diretamente nas imagens do manual. A referência do material é o dado mais durável daqui: serve para repor peça igual numa reforma, mesmo que o fornecedor tenha mudado. Os telefones e e-mails dos fornecedores constavam do original e não foram publicados; estão no manual impresso.",
    "longa": true,
    "colunas": [
     "Tipo",
     "Modelo / referência",
-    "Fornecedor",
-    "Telefone",
-    "E-mail"
+    "Fabricante"
    ],
    "linhas": [
     {
      "c": [
       "Manta Asfáltica",
       "Denver Manta Tipo III 4mm PP N/A",
-      "Denver",
-      "(83) 3245-3242",
-      "zeliajneto@terra.com.br"
+      "Denver"
      ]
     },
     {
      "c": [
       "Argamassa Polimérica",
       "Argamassa",
-      "Colamais Indústria e Comércio de Argamassa Ltda",
-      "(83) 3245-2080",
-      "colamais@colamaisargamassa.com.br"
+      "Colamais Indústria e Comércio de Argamassa Ltda"
      ]
     },
     {
      "c": [
       "Granitos / Mármores",
       "Granito Verde Esmeralda · Amarelo Premium A · Preto São Marcos",
-      "Fuji S.A.",
-      "(83) 99352-2027",
-      "marconifirmino@yahoo.com.br"
+      "Fuji S.A."
      ]
     },
     {
      "c": [
       "Revestimento Interno / Externo",
       "Porcelanato Durato Bege Esmaltado 50x50 A",
-      "Elizabeth Revestimentos",
-      "(83) 3243-0090",
-      "tabajararep@ig.com.br"
+      "Elizabeth Revestimentos"
      ]
     },
     {
      "c": [
       "Revestimento Interno / Externo",
       "Rev. Esmaltado Cristal Branco 05x10",
-      "Elizabeth Revestimentos",
-      "(83) 3243-0090",
-      "tabajararep@ig.com.br"
+      "Elizabeth Revestimentos"
      ]
     },
     {
      "c": [
       "Revestimento Interno / Externo",
       "Rev. Esmaltado Marrom / branca / preta · 7,5x7,5 Onix \"OB\"",
-      "Cerâmica Atlas",
-      "(83) 3224-2351",
-      "vendas@ceraatlas.com.br"
+      "Cerâmica Atlas"
      ]
     },
     {
      "c": [
       "Argamassa de Assentamento e Rejuntamento de Cerâmica Interna",
       "AC-I · AC-II flex",
-      "Colamais Indústria e Comércio de Argamassa",
-      "(83) 3245-2080",
-      "vendas@colamaisargamassa.com.br"
+      "Colamais Indústria e Comércio de Argamassa"
      ]
     },
     {
      "c": [
       "Concreto Estrutural",
       "Fck 30 MPa",
-      "Supermix",
-      "(83) 3246-1858",
-      "johnson.santos@supermix.com.br"
+      "Supermix"
      ]
     },
     {
      "c": [
       "Perfis e acessórios de alumínio (esquadrias)",
-      "—",
-      "—",
       "—",
       "—"
      ]
@@ -3192,63 +3046,49 @@ window.DADOS_MANUAL = {
      "c": [
       "Forras de madeira / Portas",
       "Kit Eco Foil Curupixa",
-      "Reflorestadores Unidos S.A.",
-      "(54) 3251-2222",
-      "comercial@reflorestadoresunidos.com.br"
+      "Reflorestadores Unidos S.A."
      ]
     },
     {
      "c": [
       "Fechaduras (portas de entrada)",
       "Fechadura 892 In Ext ST255R · Fechadura 892 Int ST255R OS327",
-      "Assa Abloy Brasil",
-      "(83) 3224-2351",
-      "jatlasjp@hotmail.com"
+      "Assa Abloy Brasil"
      ]
     },
     {
      "c": [
       "Equipamentos de Prevenção contra Incêndio",
       "Equipamentos exigidos pelo Corpo de Bombeiros conforme normas da ABNT",
-      "Prevenção",
-      "(81) 3419-4888",
-      "prevencao@prevencao-pe.com.br"
+      "Prevenção"
      ]
     },
     {
      "c": [
       "Louças Sanitárias",
       "Izy Branco Deca",
-      "Duratex S.A.",
-      "(83) 3252-2255",
-      "sesb.pb@uol.com.br"
+      "Duratex S.A."
      ]
     },
     {
      "c": [
       "Metais Sanitários",
       "Spot-CR Deca",
-      "Duratex S.A.",
-      "(83) 3252-2255",
-      "sesb.pb@uol.com.br"
+      "Duratex S.A."
      ]
     },
     {
      "c": [
       "Tintas",
       "Tintas Lux",
-      "Tintas Lux",
-      "(83) 3031-2795",
-      "contato.contatocr@gmail.com"
+      "Tintas Lux"
      ]
     },
     {
      "c": [
       "Vidro",
       "Temperado e comum",
-      "Vitrium Ind. e Com. de Vidros Ltda",
-      "(83) 3248-1173",
-      "vendas01@vitriumvidros.com.br"
+      "Vitrium Ind. e Com. de Vidros Ltda"
      ]
     }
    ]
@@ -3257,5 +3097,5 @@ window.DADOS_MANUAL = {
  "lacunas": [],
  "apendices": [],
  "errosDoOriginal": [],
- "notaConferencia": "O texto foi lido duas vezes de forma independente, a 300 e a 400 dpi e com segmentações diferentes. As duas leituras coincidem em 15 das 16 medidas e prazos e nas 118 negações e proibições — a única diferença estava numa linha do quadro de garantias que a leitura de menor resolução perdeu. Os quatro quadros do manual foram conferidos diretamente nas imagens das páginas, porque o OCR não preserva linhas e colunas."
+ "notaConferencia": "O texto foi lido duas vezes de forma independente, a 300 e a 400 dpi e com segmentações diferentes. As duas leituras coincidem em 15 das 16 medidas e prazos e nas 118 negações e proibições — a única diferença estava numa linha do quadro de garantias que a leitura de menor resolução perdeu. Os quadros foram conferidos diretamente nas imagens das páginas, porque o OCR não preserva linhas e colunas. As listas de contato de terceiros das Seções 8, 9 e 10 não foram publicadas."
 };

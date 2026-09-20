@@ -46,7 +46,7 @@ base-conhecimento/
 ├── dados/
 │   ├── regimento.js      # 88 artigos, 12 capítulos, 2 apêndices, tabela de horários
 │   ├── convencao.js      # 67 artigos, 13 capítulos
-│   ├── manual.js         # 35 seções, 10 partes, quadro de garantias
+│   ├── manual.js         # 35 seções, 10 partes, quadros de garantias e materiais
 │   ├── legislacao.js     # links oficiais comentados
 │   └── temas.js          # temas e dicionário de sinônimos
 ├── REVISAO-OCR.md        # como o texto foi conferido e o que diverge no original
@@ -59,7 +59,7 @@ base-conhecimento/
 |---|---|
 | Regimento Interno | **Completo e conferido.** Os 88 artigos foram lidos por dois motores de OCR independentes e conferidos na imagem nos pontos divergentes — ver `REVISAO-OCR.md`. |
 | Convenção | **Completa: 67 artigos em 13 capítulos**, conferidos por dois motores de OCR. Os quadros dos Arts. 4º e 6º foram lidos na imagem. |
-| Manual do Proprietário | **35 seções em 10 partes.** Não é norma: é o manual de uso e manutenção da Construtora. Os quatro quadros — garantias, projetos, serviços e materiais — foram conferidos nas imagens. |
+| Manual do Proprietário | **35 seções em 10 partes.** Não é norma: é o manual de uso e manutenção da Construtora. Os quadros de garantias e de especificações de materiais foram conferidos nas imagens. As listas de contato de terceiros não são publicadas. |
 | Legislação | 17 links oficiais, conferidos. |
 
 O Regimento reproduz o documento registrado **inclusive onde o próprio original tem erro de
@@ -73,6 +73,19 @@ confunda com falha de leitura.
   A chave deve estar em minúsculas e sem acentos; os valores podem ter acento.
 - **Novo tema:** acrescente em `DADOS_TEMAS` e inclua o `id` nas `tags` dos artigos pertinentes.
 - **Nova lei:** acrescente em `dados/legislacao.js`.
+
+## Dados de terceiros
+
+A base não publica nomes, telefones nem e-mails de pessoas de fora do condomínio. As listas
+de contato das Seções 8, 9 e 10 do Manual ficaram de fora por decisão do condomínio; o que
+permaneceu da Seção 10 é a especificação dos materiais, que diz respeito ao imóvel.
+
+Ao acrescentar conteúdo novo, vale a mesma régua. Para conferir:
+
+```bash
+grep -ohE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' dados/*.js   # deve sair vazio
+grep -ohE '\(?[0-9]{2}\)? ?[0-9]{4,5}-[0-9]{4}' dados/*.js             # deve sair vazio
+```
 
 ## Aviso
 

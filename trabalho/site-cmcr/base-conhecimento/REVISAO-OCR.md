@@ -172,16 +172,24 @@ e reconstruída com os 18 itens, de 3 anos (impermeabilizações e revestimentos
 "defeito aparente" (vistorias de entrega). O texto embaralhado foi removido, já que a tabela
 o substitui integralmente.
 
-### Seções 8, 9 e 10
+### Seções 8, 9 e 10 — contatos não publicados
 
-São tabelas de contatos — autores dos projetos, fornecedores e serviços, e a relação de
-materiais. O OCR não preservou as colunas, então as três foram **conferidas diretamente nas
-imagens das páginas 20, 21 e 22** e transcritas: 7 projetos, 8 serviços e 16 materiais.
+As três seções finais do manual são listas de contato de terceiros: autores dos projetos,
+fornecedores de serviço e fornecedores de material, com nomes, telefones e e-mails de
+profissionais que não fazem parte do condomínio.
 
-O quadro de materiais é o mais útil no dia a dia: a coluna de modelo e referência permite
-repor peça igual numa reforma — o porcelanato, a fechadura, a tinta — mesmo que o
-fornecedor tenha mudado de mãos.
+**Não foram publicadas.** Não servem ao que esta base se propõe — consulta às normas e ao uso
+do imóvel — e são dados pessoais de gente de fora. As Seções 8 e 9 trazem apenas uma nota
+explicando a ausência e apontando o manual impresso, em poder do Síndico.
 
-As três carregam aviso de que **os dados são de 2018**; confirme antes de acionar qualquer
-fornecedor. Como envolvem nomes, telefones e e-mails de terceiros, podem ser removidas a
-qualquer momento se o condomínio preferir não publicá-las.
+Da Seção 10 ficou o que **é sobre o imóvel, e não sobre terceiros**: o quadro de
+especificações, com tipo, modelo/referência e fabricante dos 16 materiais. É o dado mais
+durável do manual — serve para repor peça igual numa reforma, o porcelanato, a fechadura,
+a tinta, mesmo que o fornecedor tenha mudado de mãos. As colunas de telefone e e-mail foram
+retiradas.
+
+A construtora continua nomeada na Seção 10, porque é ela quem responde pela garantia nos
+termos da Seção 6; seus dados de contato, não.
+
+Uma varredura nos quatro arquivos de dados confirma **zero e-mails, zero telefones e zero
+nomes de pessoas físicas** publicados.
