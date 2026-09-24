@@ -350,7 +350,15 @@ seção 8 para o porquê.
 ## 6. Checklist manual, num navegador de verdade
 
 O teste automatizado prova a fiação, não o microfone. Antes de publicar,
-confirmar uma vez à mão, num Chrome ou Edge real:
+confirmar uma vez à mão, num Chrome ou Edge real.
+
+**Precisa de contexto seguro — o dono confirmou testando direto no
+`https://sites.fguerra.ia.br` publicado.** A Web Speech API só aciona
+reconhecimento de voz de verdade em HTTPS ou em `localhost`; aberta como
+arquivo (`file://`) ou num IP simples sem certificado, o navegador recusa
+antes mesmo do clique. Isso não afeta o teste automatizado da seção 4 —
+ele roda em `http://127.0.0.1` e nunca aciona reconhecimento real, só a
+implementação falsa injetada por `page.addInitScript`.
 
 - [ ] O botão aparece no campo vazio, some ao digitar, volta ao limpar.
 - [ ] Clicar pede permissão de microfone (primeira vez) e, autorizado, o
