@@ -666,3 +666,5 @@
   montarTemas();
   render();
 })();
+
+/* teste cache-busting 2026-09-25 09:24:15 */
