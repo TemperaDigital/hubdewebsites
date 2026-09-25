@@ -2,9 +2,14 @@
   "$schema": "https://schema.railpack.com",
   "steps": {
     "versionar-assets-site-cmcr": {
+      "inputs": [
+        { "step": "packages:mise" },
+        { "local": true, "include": ["."] }
+      ],
       "commands": [
         "sh trabalho/site-cmcr/base-conhecimento/versionar-assets.sh"
-      ]
+      ],
+      "deployOutputs": ["."]
     }
   }
 }
