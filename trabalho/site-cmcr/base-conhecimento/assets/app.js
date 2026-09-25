@@ -12,6 +12,12 @@
   var painel = $('#painel');
   var campo = $('#busca');
   var btnLimpar = $('#busca-limpar');
+  var btnVoz = $('#busca-voz');
+  /* Firefox não implementa a Web Speech API — sem isso, suportaVoz fica
+     false e o botão nunca sai do hidden. Não é polyfill nem detecção de
+     navegador por nome; é perguntar ao objeto se ele existe. */
+  var ReconhecimentoDeVoz = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var suportaVoz = !!(ReconhecimentoDeVoz && btnVoz);
 
   var DOCS = { regimento: REG, convencao: CONV, manual: MAN };
   var ROTULO = { regimento: 'Regimento', convencao: 'Convenção', manual: 'Manual' };
@@ -522,6 +528,7 @@
       b.setAttribute('aria-selected', String(b.dataset.doc === estado.doc));
     });
     btnLimpar.hidden = !estado.termo;
+    if (btnVoz) btnVoz.hidden = !suportaVoz || !!estado.termo;
     sincronizarTemas();
   }
 
@@ -556,6 +563,37 @@
   btnLimpar.addEventListener('click', function () {
     campo.value = ''; estado.termo = ''; estado.tema = null; estado.verDoc = false; render(); campo.focus();
   });
+
+  if (suportaVoz) {
+    var reconhecimento = new ReconhecimentoDeVoz();
+    reconhecimento.lang = 'pt-BR';
+    reconhecimento.interimResults = false;
+    reconhecimento.maxAlternatives = 1;
+
+    reconhecimento.addEventListener('result', function (e) {
+      var texto = e.results[0][0].transcript;
+      campo.value = texto;
+      estado.termo = texto;
+      estado.verDoc = false;
+      if (estado.termo.trim() && estado.doc === 'legislacao') estado.doc = 'regimento';
+      render();
+    });
+
+    var pararDeOuvir = function () {
+      btnVoz.classList.remove('ouvindo');
+      btnVoz.setAttribute('aria-label', 'Buscar por voz');
+    };
+    reconhecimento.addEventListener('end', pararDeOuvir);
+    reconhecimento.addEventListener('error', pararDeOuvir);
+
+    btnVoz.addEventListener('click', function () {
+      if (btnVoz.classList.contains('ouvindo')) { reconhecimento.stop(); return; }
+      btnVoz.classList.add('ouvindo');
+      btnVoz.setAttribute('aria-label', 'Ouvindo — toque para parar');
+      try { reconhecimento.start(); }
+      catch (e) { pararDeOuvir(); }
+    });
+  }
 
   $('#abas').addEventListener('click', function (e) {
     var b = e.target.closest('.aba');

@@ -134,5 +134,18 @@ module.exports = [
 
   { nome: 'texto do cartão da base fica ilegível',
     arquivo: 'assets/estilo.css',
-    aplicar: function (s) { return s.replace('color: #f0e2e0;', 'color: #7d4a4d;'); } }
+    aplicar: function (s) { return s.replace('color: #f0e2e0;', 'color: #7d4a4d;'); } },
+
+  { nome: 'botão de voz aparece mesmo sem suporte no navegador',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) {
+      return s.replace('if (btnVoz) btnVoz.hidden = !suportaVoz || !!estado.termo;',
+                       'if (btnVoz) btnVoz.hidden = !!estado.termo;');
+    } },
+
+  { nome: 'clique no botão de voz não preenche mais a busca',
+    arquivo: 'base-conhecimento/assets/app.js',
+    aplicar: function (s) {
+      return s.replace('campo.value = texto;\n      estado.termo = texto;', '');
+    } }
 ];
