@@ -9,7 +9,9 @@
       "commands": [
         "sh trabalho/site-cmcr/base-conhecimento/versionar-assets.sh"
       ],
-      "deployOutputs": ["."]
+      "deployOutputs": [
+        { "include": ["."] }
+      ]
     }
   }
 }
