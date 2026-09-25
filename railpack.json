@@ -1,0 +1,10 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "steps": {
+    "versionar-assets-site-cmcr": {
+      "commands": [
+        "sh trabalho/site-cmcr/base-conhecimento/versionar-assets.sh"
+      ]
+    }
+  }
+}
