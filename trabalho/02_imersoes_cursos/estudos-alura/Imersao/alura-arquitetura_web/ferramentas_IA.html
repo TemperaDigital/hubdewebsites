@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramentas de IA — Qual usar para cada tarefa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --color-blue-universe: #010C53;
+            --color-deep-blue: #011676;
+            --color-tech-blue: #0429BC;
+            --color-dev-blue: #1F53E5;
+            --color-new-black: #0D0D0D;
+            --color-white-snow: #F4F5F6;
+            --color-cyan: #00f0ff;
+            --color-link: #7fb8ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-new-black);
+            background-image: radial-gradient(circle at top, var(--color-deep-blue) 0%, var(--color-blue-universe) 45%, var(--color-new-black) 100%);
+            background-attachment: fixed;
+            color: var(--color-white-snow);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            color: var(--color-link);
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 10px 20px;
+            background: rgba(1, 12, 83, 0.85);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(31, 83, 229, 0.4);
+        }
+
+        .badge {
+            border: 1.5px solid rgba(0, 240, 255, 0.45);
+            color: var(--color-cyan);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .btn-home {
+            color: var(--color-white-snow);
+            background: rgba(31, 83, 229, 0.3);
+            border: 1px solid rgba(31, 83, 229, 0.6);
+            padding: 6px 14px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .btn-home:hover {
+            background: rgba(31, 83, 229, 0.55);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        h1 span {
+            color: #ff8a1f;
+        }
+
+        .intro {
+            max-width: 760px;
+            opacity: 0.85;
+            margin-bottom: 28px;
+        }
+
+        .infografico {
+            margin: 0 auto 36px;
+            max-width: 720px;
+            text-align: center;
+        }
+
+        .infografico img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            display: block;
+        }
+
+        .infografico figcaption {
+            font-size: 0.75rem;
+            opacity: 0.6;
+            margin-top: 8px;
+        }
+
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 36px;
+        }
+
+        .category-nav a {
+            text-decoration: none;
+            color: var(--color-white-snow);
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--cat-color, var(--color-dev-blue));
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .category-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .guia-rapido {
+            background: rgba(1, 12, 83, 0.6);
+            border: 1px solid rgba(31, 83, 229, 0.45);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 48px;
+        }
+
+        .guia-rapido h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 14px;
+        }
+
+        .guia-rapido table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .guia-rapido th,
+        .guia-rapido td {
+            text-align: left;
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            vertical-align: top;
+        }
+
+        .guia-rapido th {
+            color: var(--color-cyan);
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .categoria {
+            margin-bottom: 52px;
+            scroll-margin-top: 70px;
+        }
+
+        .categoria-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-left: 4px solid var(--cat-color);
+            padding-left: 14px;
+            margin-bottom: 18px;
+        }
+
+        .categoria-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .categoria-header p {
+            opacity: 0.7;
+            font-size: 0.88rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--cat-color);
+            border-radius: 10px;
+            padding: 18px;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .card .papel {
+            font-size: 0.86rem;
+            margin-bottom: 8px;
+        }
+
+        .card .papel strong,
+        .card .dica strong {
+            color: var(--color-cyan);
+            font-weight: 600;
+        }
+
+        .card .dica {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-bottom: 14px;
+        }
+
+        .card .acessar {
+            margin-top: auto;
+            align-self: flex-start;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-white-snow);
+            background: var(--cat-color);
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .card .acessar:hover {
+            filter: brightness(1.15);
+        }
+
+        .cat-assistentes { --cat-color: #2ecc9a; }
+        .cat-dev { --cat-color: #e6b800; }
+        .cat-conteudo { --cat-color: #8e6cf0; }
+        .cat-produtividade { --cat-color: #e0405a; }
+        .cat-criatividade { --cat-color: #1fb5e0; }
+        .cat-automacao { --cat-color: #b05cf0; }
+
+        .aviso {
+            font-size: 0.8rem;
+            opacity: 0.65;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        footer {
+            background: var(--color-blue-universe);
+            font-size: 0.75rem;
+            line-height: 1.6;
+            text-align: center;
+            padding: 22px 20px;
+            opacity: 0.9;
+        }
+
+        footer p + p {
+            margin-top: 6px;
+        }
+
+        @media (max-width: 640px) {
+            .guia-rapido {
+                padding: 16px;
+            }
+
+            .guia-rapido table {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <span class="badge">Projeto Imersão Alura · Caderno de Estudos</span>
+        <a class="btn-home" href="index.html">&#8592; Voltar para a página inicial</a>
+    </header>
+
+    <main>
+        <h1>As melhores <span>ferramentas de IA</span> — e qual o papel de cada uma</h1>
+        <p class="intro">
+            Um guia rápido com as ferramentas do infográfico abaixo, organizadas por categoria. Para cada uma: em que ela
+            se sai melhor, uma dica prática de uso e o link para acessar. A ideia não é eleger "a melhor IA", e sim
+            ajudar a escolher a ferramenta certa para cada tipo de tarefa.
+        </p>
+
+        <figure class="infografico">
+            <a href="https://imagens.fguerra.ia.br/logotipos/ferramentas_IA.jpeg" target="_blank" rel="noopener">
+                <img src="https://imagens.fguerra.ia.br/logotipos/ferramentas_IA.jpeg"
+                    alt="Infográfico 'As melhores ferramentas de IA' com seis categorias: assistentes gerais, desenvolvimento, criação de conteúdo, produtividade, criatividade e automação"
+                    loading="lazy">
+            </a>
+            <figcaption>Clique na imagem para abrir em tamanho original.</figcaption>
+        </figure>
+
+        <nav class="category-nav" aria-label="Categorias">
+            <a class="cat-assistentes" href="#assistentes">Assistentes gerais</a>
+            <a class="cat-dev" href="#desenvolvimento">Desenvolvimento e programação</a>
+            <a class="cat-conteudo" href="#conteudo">Criação de conteúdo</a>
+            <a class="cat-produtividade" href="#produtividade">Produtividade</a>
+            <a class="cat-criatividade" href="#criatividade">Criatividade</a>
+            <a class="cat-automacao" href="#automacao">Automação e integração</a>
+        </nav>
+
+        <section class="guia-rapido" aria-labelledby="guia-titulo">
+            <h2 id="guia-titulo">Guia rápido: preciso de... uso qual?</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Eu preciso de...</th>
+                        <th>Comece por</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Escrever, analisar textos longos, raciocinar sobre um problema</td>
+                        <td>Claude, ChatGPT</td>
+                    </tr>
+                    <tr>
+                        <td>Pesquisar algo atual com fontes citadas</td>
+                        <td>Perplexity, Gemini</td>
+                    </tr>
+                    <tr>
+                        <td>Estudar a partir dos meus próprios PDFs e anotações</td>
+                        <td>NotebookLM, Otio AI</td>
+                    </tr>
+                    <tr>
+                        <td>Programar dentro de um projeto de código existente</td>
+                        <td>Cursor, Claude Code</td>
+                    </tr>
+                    <tr>
+                        <td>Criar um app ou site sem programar</td>
+                        <td>Lovable, Base44, Replit</td>
+                    </tr>
+                    <tr>
+                        <td>Montar uma apresentação rápida</td>
+                        <td>Gamma</td>
+                    </tr>
+                    <tr>
+                        <td>Gerar imagem</td>
+                        <td>Midjourney, Canva</td>
+                    </tr>
+                    <tr>
+                        <td>Gerar vídeo a partir de texto</td>
+                        <td>Google Veo, Kling, Runway, Higgsfield</td>
+                    </tr>
+                    <tr>
+                        <td>Vídeo com apresentador (avatar) falando</td>
+                        <td>HeyGen, Synthesia</td>
+                    </tr>
+                    <tr>
+                        <td>Cortes curtos para Reels/Shorts a partir de um vídeo longo</td>
+                        <td>Opus Clip, Descript</td>
+                    </tr>
+                    <tr>
+                        <td>Voz, narração ou música</td>
+                        <td>ElevenLabs (voz), Suno (música)</td>
+                    </tr>
+                    <tr>
+                        <td>Conectar apps e automatizar tarefas repetitivas</td>
+                        <td>Zapier, Make, Lindy AI</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ASSISTENTES GERAIS -->
+        <section class="categoria cat-assistentes" id="assistentes">
+            <div class="categoria-header">
+                <h2>Assistentes gerais</h2>
+                <p>Chatbots de uso amplo: conversar, escrever, resumir, pesquisar e raciocinar.</p>
+            </div>
+            <div class="cards">
+                <article class="card">
+                    <h3>Claude</h3>
+                    <p class="papel"><strong>Melhor para:</strong> textos longos, análise de documentos, escrita
+                        cuidadosa e programação.</p>
+                    <p class="dica"><strong>Dica:</strong> anexe o documento inteiro e peça uma análise com critérios
+                        definidos por você; ele lida bem com contextos grandes.</p>
+                    <a class="acessar" href="https://claude.ai" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>ChatGPT</h3>
+                    <p class="papel"><strong>Melhor para:</strong> o "canivete suíço" do dia a dia: texto, imagem, voz e
+                        análise de planilhas no mesmo lugar.</p>
+                    <p class="dica"><strong>Dica:</strong> use os projetos/GPTs personalizados para guardar instruções
+                        que você repete sempre.</p>
+                    <a class="acessar" href="https://chatgpt.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Perplexity</h3>
+                    <p class="papel"><strong>Melhor para:</strong> pesquisa na web com respostas que citam as fontes.
+                    </p>
+                    <p class="dica"><strong>Dica:</strong> substitui bem uma busca no Google quando você quer a resposta
+                        já resumida — mas abra as fontes para conferir.</p>
+                    <a class="acessar" href="https://www.perplexity.ai" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Gemini</h3>
+                    <p class="papel"><strong>Melhor para:</strong> quem vive no ecossistema Google (Gmail, Docs, Drive,
+                        YouTube).</p>
+                    <p class="dica"><strong>Dica:</strong> peça para ele buscar e resumir e-mails ou arquivos do seu
+                        Drive direto na conversa.</p>
+                    <a class="acessar" href="https://gemini.google.com" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- DESENVOLVIMENTO -->
+        <section class="categoria cat-dev" id="desenvolvimento">
+            <div class="categoria-header">
+                <h2>Desenvolvimento e programação</h2>
+                <p>Do editor de código com IA até a criação de apps inteiros por conversa.</p>
+            </div>
+            <div class="cards">
+                <article class="card">
+                    <h3>Cursor</h3>
+                    <p class="papel"><strong>Melhor para:</strong> programadores — um editor de código (base VS Code)
+                        com IA que entende o projeto todo.</p>
+                    <p class="dica"><strong>Dica:</strong> ideal quando você já tem um repositório e quer editar vários
+                        arquivos de uma vez com contexto.</p>
+                    <a class="acessar" href="https://cursor.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Lovable</h3>
+                    <p class="papel"><strong>Melhor para:</strong> criar apps web completos (com banco de dados e login)
+                        descrevendo em linguagem natural.</p>
+                    <p class="dica"><strong>Dica:</strong> ótimo para validar uma ideia/protótipo rápido; conecte ao
+                        GitHub para não ficar preso à plataforma.</p>
+                    <a class="acessar" href="https://lovable.dev" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Replit</h3>
+                    <p class="papel"><strong>Melhor para:</strong> programar, rodar e publicar direto no navegador, sem
+                        instalar nada.</p>
+                    <p class="dica"><strong>Dica:</strong> bom para aprender e para projetos pequenos que precisam ir ao
+                        ar rápido.</p>
+                    <a class="acessar" href="https://replit.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Base44</h3>
+                    <p class="papel"><strong>Melhor para:</strong> apps internos e ferramentas de negócio criados sem
+                        código.</p>
+                    <p class="dica"><strong>Dica:</strong> descreva o fluxo de trabalho (quem cadastra o quê e quem
+                        aprova) em vez de descrever telas.</p>
+                    <a class="acessar" href="https://base44.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- CRIAÇÃO DE CONTEÚDO -->
+        <section class="categoria cat-conteudo" id="conteudo">
+            <div class="categoria-header">
+                <h2>Criação de conteúdo</h2>
+                <p>Vídeo, avatares, edição, cortes e newsletters.</p>
+            </div>
+            <div class="cards">
+                <article class="card">
+                    <h3>Manus AI</h3>
+                    <p class="papel"><strong>Melhor para:</strong> agente autônomo que executa tarefas de várias etapas
+                        (pesquisar, montar relatório, criar páginas).</p>
+                    <p class="dica"><strong>Dica:</strong> dê um objetivo claro e o formato de entrega esperado; revise o
+                        resultado antes de usar.</p>
+                    <a class="acessar" href="https://manus.im" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>HeyGen</h3>
+                    <p class="papel"><strong>Melhor para:</strong> vídeos com avatar falando e tradução de vídeo com
+                        sincronia labial.</p>
+                    <p class="dica"><strong>Dica:</strong> grave um vídeo seu uma vez e reutilize como avatar para
+                        vídeos curtos de marketing.</p>
+                    <a class="acessar" href="https://www.heygen.com" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Synthesia</h3>
+                    <p class="papel"><strong>Melhor para:</strong> vídeos corporativos e de treinamento com
+                        apresentador virtual.</p>
+                    <p class="dica"><strong>Dica:</strong> muito usado em onboarding e cursos internos — atualizar o
+                        vídeo é só editar o roteiro.</p>
+                    <a class="acessar" href="https://www.synthesia.io" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Descript</h3>
+                    <p class="papel"><strong>Melhor para:</strong> editar vídeo e podcast como se fosse um documento de
+                        texto.</p>
+                    <p class="dica"><strong>Dica:</strong> apague palavras na transcrição e o trecho some do vídeo; use
+                        o removedor de "éé" e pausas.</p>
+                    <a class="acessar" href="https://www.descript.com" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Opus Clip</h3>
+                    <p class="papel"><strong>Melhor para:</strong> transformar vídeos longos em cortes curtos para
+                        Reels, Shorts e TikTok.</p>
+                    <p class="dica"><strong>Dica:</strong> funciona melhor com lives, aulas e entrevistas — revise os
+                        cortes sugeridos antes de postar.</p>
+                    <a class="acessar" href="https://www.opus.pro" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Beehiiv</h3>
+                    <p class="papel"><strong>Melhor para:</strong> criar e crescer uma newsletter, com ajuda de IA na
+                        escrita.</p>
+                    <p class="dica"><strong>Dica:</strong> combine com um assistente geral para rascunhar e use o Beehiiv
+                        para distribuir e medir.</p>
+                    <a class="acessar" href="https://www.beehiiv.com" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- PRODUTIVIDADE -->
+        <section class="categoria cat-produtividade" id="produtividade">
+            <div class="categoria-header">
+                <h2>Produtividade</h2>
+                <p>Escrita, estudo, reuniões, apresentações e e-mail.</p>
+            </div>
+            <div class="cards">
+                <article class="card">
+                    <h3>Grammarly</h3>
+                    <p class="papel"><strong>Melhor para:</strong> revisar gramática, clareza e tom de textos em inglês
+                        enquanto você digita.</p>
+                    <p class="dica"><strong>Dica:</strong> instale a extensão do navegador para corrigir e-mails e
+                        mensagens em qualquer site.</p>
+                    <a class="acessar" href="https://www.grammarly.com" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>NotebookLM</h3>
+                    <p class="papel"><strong>Melhor para:</strong> estudar a partir das suas próprias fontes (PDFs,
+                        sites, vídeos), com respostas citando cada trecho.</p>
+                    <p class="dica"><strong>Dica:</strong> gere o "resumo em áudio" estilo podcast para revisar a matéria
+                        no caminho.</p>
+                    <a class="acessar" href="https://notebooklm.google.com" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Otio AI</h3>
+                    <p class="papel"><strong>Melhor para:</strong> pesquisa acadêmica e profissional — organiza artigos,
+                        links e PDFs e gera resumos e rascunhos.</p>
+                    <p class="dica"><strong>Dica:</strong> separe cada tema em um "Space" para as respostas usarem só as
+                        fontes daquele assunto.</p>
+                    <a class="acessar" href="https://otio.ai" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Gamma</h3>
+                    <p class="papel"><strong>Melhor para:</strong> criar apresentações, documentos e páginas visuais a
+                        partir de um texto ou tópico.</p>
+                    <p class="dica"><strong>Dica:</strong> cole seu roteiro já estruturado em tópicos — o resultado fica
+                        bem melhor do que partir de uma frase.</p>
+                    <a class="acessar" href="https://gamma.app" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Granola</h3>
+                    <p class="papel"><strong>Melhor para:</strong> anotações de reunião — transcreve e completa suas
+                        notas sem precisar de um "bot" na chamada.</p>
+                    <p class="dica"><strong>Dica:</strong> anote só os pontos-chave durante a reunião; a IA preenche o
+                        resto depois.</p>
+                    <a class="acessar" href="https://www.granola.ai" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Superhuman</h3>
+                    <p class="papel"><strong>Melhor para:</strong> quem recebe muito e-mail — caixa de entrada rápida
+                        com respostas e triagem por IA.</p>
+                    <p class="dica"><strong>Dica:</strong> aprenda os atalhos de teclado; é daí que vem a maior parte do
+                        ganho de tempo.</p>
+                    <a class="acessar" href="https://superhuman.com" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Wispr Flow</h3>
+                    <p class="papel"><strong>Melhor para:</strong> ditar texto por voz em qualquer aplicativo, já
+                        formatado e sem vícios de fala.</p>
+                    <p class="dica"><strong>Dica:</strong> ótimo para escrever prompts longos para outras IAs falando
+                        em vez de digitando.</p>
+                    <a class="acessar" href="https://wisprflow.ai" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- CRIATIVIDADE -->
+        <section class="categoria cat-criatividade" id="criatividade">
+            <div class="categoria-header">
+                <h2>Criatividade</h2>
+                <p>Imagem, vídeo, voz, música e design.</p>
+            </div>
+            <div class="cards">
+                <article class="card">
+                    <h3>ElevenLabs</h3>
+                    <p class="papel"><strong>Melhor para:</strong> vozes realistas — narração, dublagem e clonagem de
+                        voz.</p>
+                    <p class="dica"><strong>Dica:</strong> só clone vozes com autorização da pessoa; para narração
+                        genérica use a biblioteca de vozes.</p>
+                    <a class="acessar" href="https://elevenlabs.io" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Suno</h3>
+                    <p class="papel"><strong>Melhor para:</strong> criar músicas completas (letra, voz e arranjo) a
+                        partir de uma descrição.</p>
+                    <p class="dica"><strong>Dica:</strong> descreva gênero, clima e instrumentos; escreva a sua própria
+                        letra para ter mais controle.</p>
+                    <a class="acessar" href="https://suno.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Midjourney</h3>
+                    <p class="papel"><strong>Melhor para:</strong> imagens com qualidade artística e estética marcante.
+                    </p>
+                    <p class="dica"><strong>Dica:</strong> use imagens de referência de estilo para manter uma
+                        identidade visual consistente.</p>
+                    <a class="acessar" href="https://www.midjourney.com" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Runway</h3>
+                    <p class="papel"><strong>Melhor para:</strong> vídeo generativo e edição de vídeo com IA para uso
+                        criativo e profissional.</p>
+                    <p class="dica"><strong>Dica:</strong> gere a partir de uma imagem inicial (image-to-video) para ter
+                        mais controle sobre o resultado.</p>
+                    <a class="acessar" href="https://runwayml.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Kling</h3>
+                    <p class="papel"><strong>Melhor para:</strong> vídeos curtos realistas com movimentos naturais de
+                        pessoas e objetos.</p>
+                    <p class="dica"><strong>Dica:</strong> prompts curtos descrevendo a ação e o movimento de câmera
+                        funcionam melhor.</p>
+                    <a class="acessar" href="https://klingai.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Pika Labs</h3>
+                    <p class="papel"><strong>Melhor para:</strong> vídeos curtos divertidos e efeitos criativos para
+                        redes sociais.</p>
+                    <p class="dica"><strong>Dica:</strong> explore os efeitos prontos para animar fotos em poucos
+                        segundos.</p>
+                    <a class="acessar" href="https://pika.art" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Figma</h3>
+                    <p class="papel"><strong>Melhor para:</strong> design de interfaces (sites e apps) e protótipos, com
+                        recursos de IA.</p>
+                    <p class="dica"><strong>Dica:</strong> ideal para desenhar a tela antes de pedir para uma IA de
+                        código implementar.</p>
+                    <a class="acessar" href="https://www.figma.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Canva</h3>
+                    <p class="papel"><strong>Melhor para:</strong> peças visuais rápidas (posts, banners, apresentações)
+                        para quem não é designer.</p>
+                    <p class="dica"><strong>Dica:</strong> comece por um modelo pronto e use a IA só para ajustar texto e
+                        imagens.</p>
+                    <a class="acessar" href="https://www.canva.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Google Veo</h3>
+                    <p class="papel"><strong>Melhor para:</strong> vídeo generativo de alta qualidade, inclusive com
+                        áudio e som ambiente.</p>
+                    <p class="dica"><strong>Dica:</strong> disponível pelo Gemini e pelo Google Flow; descreva cena,
+                        câmera e som no mesmo prompt.</p>
+                    <a class="acessar" href="https://deepmind.google/models/veo/" target="_blank"
+                        rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Higgsfield</h3>
+                    <p class="papel"><strong>Melhor para:</strong> vídeos com cara de cinema e controle de câmera;
+                        reúne vários modelos de vídeo em um só lugar.</p>
+                    <p class="dica"><strong>Dica:</strong> use para comparar o mesmo prompt em modelos diferentes (Veo,
+                        Kling etc.). <em>No infográfico aparece como "Hippofield".</em></p>
+                    <a class="acessar" href="https://higgsfield.ai" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- AUTOMAÇÃO -->
+        <section class="categoria cat-automacao" id="automacao">
+            <div class="categoria-header">
+                <h2>Automação e integração</h2>
+                <p>Conectar sistemas, criar agentes e automatizar tarefas.</p>
+            </div>
+            <div class="cards">
+                <article class="card">
+                    <h3>Make</h3>
+                    <p class="papel"><strong>Melhor para:</strong> automações visuais mais complexas, com ramificações
+                        e muitos passos.</p>
+                    <p class="dica"><strong>Dica:</strong> geralmente sai mais barato que o Zapier em fluxos com muitas
+                        operações.</p>
+                    <a class="acessar" href="https://www.make.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Zapier</h3>
+                    <p class="papel"><strong>Melhor para:</strong> conectar apps de forma simples ("quando acontecer X,
+                        faça Y") — tem integração com quase tudo.</p>
+                    <p class="dica"><strong>Dica:</strong> descreva a automação em português e deixe a IA do Zapier
+                        montar o fluxo inicial.</p>
+                    <a class="acessar" href="https://zapier.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Lindy AI</h3>
+                    <p class="papel"><strong>Melhor para:</strong> criar "assistentes" de IA que trabalham sozinhos:
+                        responder e-mails, agendar reuniões, qualificar contatos.</p>
+                    <p class="dica"><strong>Dica:</strong> comece com um agente para uma única tarefa repetitiva antes de
+                        encadear vários.</p>
+                    <a class="acessar" href="https://www.lindy.ai" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Claude Code</h3>
+                    <p class="papel"><strong>Melhor para:</strong> agente de programação no terminal — lê o projeto,
+                        edita arquivos, roda comandos e faz commits.</p>
+                    <p class="dica"><strong>Dica:</strong> esta própria página foi criada com ele. Mantenha um arquivo
+                        CLAUDE.md com as regras do seu projeto.</p>
+                    <a class="acessar" href="https://www.anthropic.com/claude-code" target="_blank"
+                        rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Chatbase</h3>
+                    <p class="papel"><strong>Melhor para:</strong> criar um chatbot de atendimento treinado com os
+                        documentos e o site da sua empresa.</p>
+                    <p class="dica"><strong>Dica:</strong> alimente com um FAQ bem escrito — a qualidade das respostas
+                        depende da qualidade do material.</p>
+                    <a class="acessar" href="https://www.chatbase.co" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Openlead</h3>
+                    <p class="papel"><strong>Melhor para:</strong> prospecção B2B — encontrar empresas e contatos
+                        qualificados e montar listas de leads.</p>
+                    <p class="dica"><strong>Dica:</strong> use os filtros de segmento e cargo e integre ao seu CRM;
+                        respeite a LGPD nos contatos. <em>Em set/2026 o site oficial não estava
+                            respondendo — a ferramenta pode ter sido descontinuada.</em></p>
+                    <a class="acessar" href="https://www.openlead.ai" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Notion AI</h3>
+                    <p class="papel"><strong>Melhor para:</strong> perguntar e escrever dentro da sua base de
+                        conhecimento no Notion.</p>
+                    <p class="dica"><strong>Dica:</strong> peça resumos de páginas longas e respostas que buscam em todo
+                        o seu workspace.</p>
+                    <a class="acessar" href="https://www.notion.com/product/ai" target="_blank" rel="noopener">Acessar
+                        &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Apify</h3>
+                    <p class="papel"><strong>Melhor para:</strong> coletar dados de sites (web scraping) com robôs
+                        prontos, sem programar do zero.</p>
+                    <p class="dica"><strong>Dica:</strong> procure na loja de "Actors" antes de criar um robô próprio —
+                        quase sempre já existe um.</p>
+                    <a class="acessar" href="https://apify.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+                <article class="card">
+                    <h3>Clay</h3>
+                    <p class="papel"><strong>Melhor para:</strong> enriquecer planilhas de leads com dados de várias
+                        fontes e personalizar abordagens com IA.</p>
+                    <p class="dica"><strong>Dica:</strong> pense nele como uma planilha em que cada coluna pode ser uma
+                        pesquisa automática.</p>
+                    <a class="acessar" href="https://www.clay.com" target="_blank" rel="noopener">Acessar &#8599;</a>
+                </article>
+            </div>
+        </section>
+
+        <p class="aviso">
+            As indicações de "melhor para" e as dicas são sugestões de uso para estudo, não avaliações oficiais. As
+            ferramentas de IA mudam rápido: recursos, preços e planos gratuitos podem ter mudado desde setembro de 2026
+            — confira sempre no site de cada uma.
+        </p>
+    </main>
+
+    <footer>
+        <p><strong>Caderno de Estudos &mdash; Imersão Alura de Arquitetura Web com IA</strong> &middot; página criada
+            por TemperaDigital.</p>
+        <p>Infográfico "As melhores ferramentas de IA" reproduzido do acervo <a
+                href="https://imagens.fguerra.ia.br/logotipos/ferramentas_IA.jpeg" target="_blank"
+                rel="noopener">imagens.fguerra.ia.br</a>. Nomes e marcas pertencem às suas respectivas empresas.
+            Conteúdo educacional inspirado na <a href="https://www.alura.com.br" target="_blank" rel="noopener">Alura
+                Cursos Online</a>.</p>
+        <p><a href="index.html">&#8592; Voltar para a página inicial</a></p>
+    </footer>
+
+</body>
+
+</html>
