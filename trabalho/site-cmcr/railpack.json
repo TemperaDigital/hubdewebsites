@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "steps": {
+    "versionar-assets": {
+      "inputs": [
+        { "step": "packages:mise" },
+        { "local": true, "include": ["."] }
+      ],
+      "commands": [
+        "sh base-conhecimento/versionar-assets.sh"
+      ],
+      "deployOutputs": [
+        { "include": ["."] }
+      ]
+    }
+  }
+}
